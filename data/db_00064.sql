@@ -1,0 +1,1 @@
+ALTER TABLE `orders` MODIFY `cc_trans_id` varchar(16);

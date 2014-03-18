@@ -1,0 +1,1 @@
+ALTER TABLE `coupons` ADD `all_products` tinyint(1) NOT NULL DEFAULT 0;

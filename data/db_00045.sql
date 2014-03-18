@@ -1,0 +1,1 @@
+ALTER TABLE `config` ADD config_text text NULL;

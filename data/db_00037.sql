@@ -1,0 +1,1 @@
+ALTER TABLE `categories` ADD `view` VARCHAR( 6 ) NOT NULL DEFAULT 'normal';

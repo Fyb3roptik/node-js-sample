@@ -1,0 +1,1 @@
+ALTER TABLE `order_line_items` ADD `final_price` DECIMAL( 15, 2 ) NOT NULL AFTER `unit_price` ;

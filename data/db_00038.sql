@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `sales_note` VARCHAR(90) NULL;

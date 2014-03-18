@@ -1,0 +1,1 @@
+ALTER TABLE `orders` MODIFY COLUMN `sales_rep_id` varchar(4) NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE  `customers` ADD  `username` VARCHAR( 255 ) NOT NULL AFTER  `account_type`

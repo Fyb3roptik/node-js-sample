@@ -1,0 +1,1 @@
+ALTER TABLE `credit_cards` ADD `name` VARCHAR( 128 ) NOT NULL AFTER `customer_id` ;

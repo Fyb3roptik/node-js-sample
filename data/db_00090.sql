@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD INDEX `sales_rep_id` (`sales_rep_id`);

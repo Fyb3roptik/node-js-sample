@@ -1,0 +1,1 @@
+ALTER TABLE `pages` ADD `full_page` TINYINT( 1 ) NOT NULL DEFAULT '0';

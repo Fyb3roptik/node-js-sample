@@ -1,0 +1,29 @@
+#php_flag html_errors On
+#php_flag error_reporting On
+
+Options -Indexes
+RewriteEngine On
+
+RewriteRule ^category/?([^/.]+)?/?$ /category/view/$1 [QSA,L]
+RewriteRule ^myaccount/?$ /account.php [QSA,L]
+RewriteRule ^myaccount/edit/?$ /account/edit/ [QSA,L]
+RewriteRule ^myaccount/history/?$ /orders.php [QSA,L]
+RewriteRule ^plans/?$ /plans/customer_index/ [QSA,L]
+RewriteRule ^myclosets/?$ /wishlist.php [QSA,L]
+RewriteRule ^myclosets/([^/.]+)/?([^/.]+)?/?$ /wishlist.php?action=edit&wishlist=$1 [QSA,L]
+RewriteRule ^logout/?$ /login/logout [QSA,L]
+RewriteRule ^pages/?([^/.]+)?\.html$ /page/view/$1 [QSA,L]
+RewriteRule ^product/?([^/.]+)?/?([^/.]+)?\.html?$ /products.php?action=view_product&product=$1 [QSA,L]
+RewriteRule ^recover_password/?$ /login_password.php?action=recover_password [QSA,L]
+RewriteRule ^reset_password/?$ /login_password.php?action=reset_password [QSA,L]
+RewriteRule ^sales/?$ /sales.php [QSA,L]
+RewriteRule ^myaccount/payment_info/edit/([^/.]+)/? /credit_card/edit/$1 [QSA,L]
+RewriteRule ^denied/?$ /denied.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^admin/(.*)$ admin/router.php?url=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ router.php?url=$1 [QSA,L]

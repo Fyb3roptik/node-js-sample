@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+
+<project name="client.fyberstudios.com" default="main">
+	<property file="config.ini" />
+	<resolvepath propertyName="absolute_path" file="./" />
+
+	<target name="main" depends="script-copy, configure, configure-tests, compass, set-permissions, dbj" />
+
+	<target name="set-permissions">
+		<exec command="chmod 777 public_html/images" dir="./" logoutput="TRUE" />
+		<exec command="chmod 777 public_html/images/av" dir="./" logoutput="TRUE" />
+		<exec command="chmod 777 public_html/images/products" dir="./" logoutput="TRUE" />
+		<exec command="chmod 777 public_html/inc/cache" dir="./" logoutput="TRUE" />
+		<exec command="chmod 775 public_html/pdf" dir="./" logoutput="TRUE" />
+	</target>
+
+	<target name="dbj" depends="configure">
+		<exec command="php dbj.php" dir="scripts/" logoutput="TRUE" />
+	</target>
+
+	<target name="uninstall">
+		<phingcall target="cron-delete" />
+	</target>
+
+	<target name="cron-delete">
+		<delete file="/etc/cron.d/kv-cron" />
+	</target>
+
+	<target name="cron-copy">
+		<delete>
+			<fileset dir="/etc/cron.d/">
+				<include name="kv-cron" />
+			</fileset>
+		</delete>
+		<copy todir="/etc/cron.d/">
+			<filterchain>
+				<replacetokens begintoken="__" endtoken="__">
+					<token key="BUILD" value="${absolute_path}" />
+				</replacetokens>
+			</filterchain>
+			<fileset dir=".">
+				<include name="kv-cron" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compass">
+		<exec command="compass compile" logoutput="TRUE" />
+	</target>
+
+	<target name="script-copy">
+		<delete>
+			<fileset dir="${absolute_path}/scripts/">
+				<include name="*.sh" />
+			</fileset>
+		</delete>
+		<copy todir="${absolute_path}/scripts/">
+			<filterchain>
+				<replacetokens begintoken="__" endtoken="__">
+					<token key="BUILD" value="${absolute_path}" />
+					<token key="BAYNOTE_USER" value="${baynote.user}" />
+					<token key="BAYNOTE_HOST" value="${baynote.host}" />
+					<token key="DIR_XML_DUMP" value="${dir.xml_dump}" />
+					<token key="DIR_XML_DUMP_BACKUP" value="${dir.xml_dump.backup}" />
+				</replacetokens>
+			</filterchain>
+			<fileset dir="./shell_scripts">
+				<include name="*.sh" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="configure-tests">
+		<copy file="${absolute_path}/tests/config.template.xml" tofile="${absolute_path}/tests/config.xml">
+			<filterchain>
+				<replacetokens begintoken="__" endtoken="__">
+					<token key="DIR_PROJECT" value="${absolute_path}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<copy file="${absolute_path}/tests/coverage-config.template.xml" tofile="${absolute_path}/tests/coverage-config.xml">
+			<filterchain>
+				<replacetokens begintoken="__" endtoken="__">
+					<token key="DIR_PROJECT" value="${absolute_path}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+
+	<target name="configure">
+		<exec command="git describe" outputProperty="git-describe" />
+		<touch file="${absolute_path}/public_html/inc/config.php" />
+		<copy file="${absolute_path}/public_html/inc/config.php" tofile="${absolute_path}/public_html/inc/config.backup.php" overwrite="true" />
+		<copy file="${absolute_path}/public_html/inc/config.template.php" tofile="${absolute_path}/public_html/inc/config.php" overwrite="true">
+			<filterchain>
+				<replacetokens begintoken="__" endtoken="__">
+					<token key="DB_HOST" value="${db.host}" />
+					<token key="DB_USER" value="${db.user}" />
+					<token key="DB_PASS" value="${db.pass}" />
+					<token key="DB_NAME" value="${db.name}" />
+					<token key="DIR_ROOT" value="${dir.root}" />
+					<token key="FORCE_SSL" value="${force.ssl}" />
+					<token key="SITE_URL" value="${site.url}" />
+					<token key="SITE_SECURE_URL" value="${site.secure.url}" />
+					<token key="ENCRYPTION_KEY" value="${encryption_key}" />
+					<token key="MAINTANENCE_MODE" value="${maintanence_mode}" />
+					<token key="ENABLE_CACHING" value="${enable_caching}" />
+					<token key="ENABLE_FIREPHP" value="${enable_firephp}" />
+					<token key="GOOGLE_ANALYTICS_CODE" value="${google.analytics_code}" />
+					<token key="BUILD" value="${build.build}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+
+	<target name="test">
+		<exec command="phpunit --configuration tests/config.xml AllTests" dir="${absolute_path}/" logoutput="true" checkreturn="true" />
+	</target>
+
+	<target name="test-coverage">
+		<exec command="phpunit --configuration tests/coverage-config.xml --coverage-clover ${absolute_path}/public_html/coverage.xml --coverage-html ${absolute_path}/public_html/coverage AllTests" dir="${absolute_path}/" logoutput="true" checkreturn="true" />
+	</target>
+
+	<target name="docs">
+		<exec command="doxygen" logoutput="false" checkreturn="true" dir="${absolute_path}/scripts" />
+	</target>
+
+	<target name="rebuild-test-database">
+		<exec command="php tests/scripts/rebuild-database.php" dir="${absolute_path}" logoutput="true" checkreturn="true" />
+	</target>
+
+	<target name="integrate" depends="docs, test-coverage" />
+</project>

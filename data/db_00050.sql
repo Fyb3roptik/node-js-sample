@@ -1,0 +1,1 @@
+ALTER TABLE `order_change_history` ADD `cancel_code` varchar(16) NULL;

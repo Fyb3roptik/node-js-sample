@@ -1,0 +1,313 @@
+body {
+	font-family: Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+input {
+	font-size: 10px;
+}
+
+#footer #build-text {
+	float: right;
+	color: #999;
+}
+
+#report_summary {
+	border: 1px solid #999;
+	background-color: #eee;
+	font-weight: bold;
+	padding: 2px;
+	margin: 5px 0px 5px 0px;
+}
+
+#fudge_factor_form {
+	text-align: center;
+}
+
+	#fudge_factor_form strong {
+		font-size: 48px;
+	}
+
+#product_fudge {
+	width: 300px;
+	height: 150px;
+	font-size: 150px;
+	font-weight: bold;
+	text-align: center;
+}
+
+a img {
+	border: none;
+}
+
+.error {
+	font-weight: bold;
+	color: red;
+}
+
+.field_holder {
+	border: 1px solid #ccc;
+	width: 250px;
+	padding: 4px;
+}
+
+.field_holder .field {
+	margin: 2px;
+}
+
+#selec_holder {
+	margin-left: 275px;
+}
+
+#nav {
+	float: left;
+	width: 175px;
+	border-right: 1px solid #ccc;
+	padding: 0px 5px 0px 0px;
+	height: 100%;
+	margin-bottom: 5px;
+}
+
+	#nav ul {
+		list-style: none;
+		padding: 0px;
+		margin: 0px;
+	}
+
+		#nav ul li {
+			padding: 2px;
+			margin-bottom: 2px;
+			background: #ccc;
+		}
+
+	#nav a {
+		text-decoration: none;
+	}
+
+#stage {
+	margin-left: 185px;
+	margin-bottom: 10px;
+}
+
+#footer {
+	clear: both;
+	text-align: center;
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid #ccc;
+}
+
+#search_crumbs {
+	font-size: 12px;
+}
+
+#pricing_instructions, #attr_instructions {
+	margin-left: 25px;
+	font-size: 12px;
+	background: #ccc;
+	padding: 2px 4px 2px 4px;
+}
+
+.category_list {
+	margin-left: 20px;
+	padding-left: 5px;
+	border-left: 1px solid #ccc;
+	background: #fff;
+}
+
+.cat-placeholder {
+	background: #ddd;
+	border: 1px dashed #999;
+}
+
+.category .category_actions {
+	float: right;
+	font-size: 12px;
+}
+
+#main_category_list {
+	width: 50%;
+}
+
+table#nav_items_table td {
+	padding-left: 5px;
+	padding-right: 10px;
+}
+
+div.column_category {
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin: 5px;
+	font-size: 12px;
+}
+
+table.subcat_table {
+	font-size: 10px;
+	margin-left: 15px;
+}
+
+	table.subcat_table tbody tr.inactive td{
+		color: #999;
+		text-decoration: italic;
+	}
+
+.column_category_list {
+	border: 1px solid #ddd;
+	min-height: 30px;
+}
+
+.subcat_list {
+	margin-left: 20px;
+}
+
+.sortable-cat-placeholder {
+	background: #ddd;
+	border: 2px dashed #999;
+}
+
+.sortable-subcat-placeholder {
+	background: #ddd;
+}
+
+.cat_list a {
+	text-decoration: none;
+}
+
+.cat_list a:hover {
+	text-decoration: underline;
+}
+
+a.subcat_expander {
+	font-size: 12px;
+}
+
+#coupon_error {
+	font-weight: bold;
+	color: red;
+	display: none;
+}
+
+#header {
+	border-bottom: 2px solid #CCC;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+	#header strong {
+		font-size: 18px;
+	}
+
+#method_rate_table tr td input {
+	width: 40%;
+}
+
+div.pk_links {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 10px;
+}
+
+#pqd_table tr td, #pqd tr th {
+	padding: 2px;
+}
+
+#product_table {
+	font-size: 12px;
+}
+
+#quantity_discounts {
+	font-size: 12px;
+}
+
+	#quantity_discounts input {
+		font-size: 12px;
+		width: 50px;
+	}
+
+	#quantity_discounts td {
+		text-align: center;
+	}
+
+#state_table td {
+	padding: 4px;
+}
+
+#state_table tr.selected {
+	background-color: #999;
+}
+
+.pqd_price {
+	text-align: center;
+}
+
+#category_image_preview img {
+	width: 200px;
+}
+
+input.extra_long {
+	width: 700px;
+}
+
+.product_listing th {
+	font-size: 10px;
+}
+
+.product_listing .product_id {
+	width: 75px;
+}
+
+.product_listing .product_image {
+	width: 60px;
+	text-align: center;
+}
+
+.product_listing .catalog_code {
+	width: 100px;
+	text-align: center;
+}
+
+.product_listing .product_quantity {
+	width: 100px;
+	text-align: center;
+}
+
+.product_listing .product_price {
+	width: 100px;
+	text-align: center;
+}
+
+.product_listing .product_subtotal {
+	width: 100px;
+	text-align: center;
+}
+
+.product_listing .landed_cost {
+	width: 50px;
+	text-align: center;
+}
+
+.product_listing .gross_profit {
+	width: 50px;
+	text-align: center;
+}
+
+.product_listing .margin {
+	width: 50px;
+	text-align: center;
+}
+
+.charge_column {
+	float: left;
+	width: 300px;
+	margin: 3px;
+	padding: 4px;
+}
+
+.charge_holder {
+	border: 1px solid #ccc;
+	padding: 4px;
+}
+
+.sortable-holder {
+	background: #ccc;
+}

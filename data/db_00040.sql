@@ -1,0 +1,1 @@
+ALTER TABLE `categories` ADD `long_name` VARCHAR(256) NULL AFTER `name`;

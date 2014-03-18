@@ -1,0 +1,39 @@
+####################################################################
+#								   #
+# Edit and save this file as config.ini then run `phing configure` #
+#								   #
+####################################################################
+
+#mysql configuration info
+db.host = tunnel.pagodabox.com:3307
+db.user = melodee
+db.pass = ot5ZsvfG
+db.name = fyber_client
+
+#path information
+dir.root = /var/www/client.fyberstudios.com/public_html/
+
+#Force SSL
+force.ssl = 0
+
+#what's base url for the site?
+site.url = http://client.fyberstudios.com
+site.secure.url = https://client.fyberstudios.com
+
+page.customer_service = /
+
+#where do we dump the XML stuff?
+dir.xml_dump = /tmp/
+dir.xml_dump.backup = /tmp/
+
+encryption_key = foobar
+
+maintainence_mode = false
+
+#enable caching? (true or false)
+enable_caching = false
+#enable FirePHP? (true or false, false on production servers)
+enable_firephp = false
+
+#google analytics stuff
+google.analytics_code = UA-code

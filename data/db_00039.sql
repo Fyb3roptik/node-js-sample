@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `ship_complete` TINYINT(1) NOT NULL DEFAULT 0;

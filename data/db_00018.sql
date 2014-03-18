@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `type` VARCHAR( 16 ) NOT NULL AFTER `status` ;

@@ -1,0 +1,1 @@
+ALTER TABLE `order_products` ADD `discounted_price` DECIMAL( 15, 2 ) NOT NULL ;

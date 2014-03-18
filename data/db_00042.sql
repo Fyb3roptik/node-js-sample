@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `sales_rep_id` VARCHAR(4) NOT NULL DEFAULT "027" AFTER `customer_id`; 

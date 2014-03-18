@@ -1,0 +1,1 @@
+ALTER TABLE `orders` CHANGE `status` `status` VARCHAR( 16 ) NOT NULL ;

@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `warehouse` varchar(8) NOT NULL DEFAULT "00";

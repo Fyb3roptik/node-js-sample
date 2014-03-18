@@ -1,0 +1,1 @@
+ALTER TABLE `order_change_history` MODIFY `cc_trans_id` varchar(16);

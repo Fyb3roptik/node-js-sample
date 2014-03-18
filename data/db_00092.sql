@@ -1,0 +1,2 @@
+ALTER TABLE `customers` ADD INDEX `name` USING BTREE(`name`)
+, AUTO_INCREMENT = 366181;

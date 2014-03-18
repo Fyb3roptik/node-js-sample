@@ -1,0 +1,1 @@
+ALTER TABLE `administrators` DROP `session_token`;

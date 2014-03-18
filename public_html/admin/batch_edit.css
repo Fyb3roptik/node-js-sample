@@ -1,0 +1,39 @@
+body {
+	font-family: Helvetica, sans-serif;
+}
+
+#product_list {
+	width: 150px;
+	float: left;
+}
+
+	#product_list div {
+		font-size: 12px;
+	}
+
+#batch-stage {
+	float: left;
+	margin-left: 10px;
+}
+
+#example_adjustments {
+	font-size: 12px;
+}
+
+span.helper {
+	font-size: 10px;
+	font-style: italic;
+}
+
+#existing_categories {
+	font-size: 10px;
+}
+
+#select_holder div {
+	margin-left: 16px;
+	padding-top: 3px;
+}
+
+#cat_add_message {
+	display: none;
+}

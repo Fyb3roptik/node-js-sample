@@ -1,0 +1,1 @@
+ALTER TABLE `order_change_history` ADD `syspro` tinyint(1) NOT NULL DEFAULT 0;

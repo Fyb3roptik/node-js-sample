@@ -1,0 +1,39 @@
+FDub Framework
+created by: Nick Wallace
+
+Folder Structure:
+	data/
+		Set of sequential changescripts used to build the schema for the website.
+	
+	public_html/
+		Contains the web root of the project. Point the vhost here.
+
+***INSTALLATION***
+
+Requirements
+
+apache2 php5 mysql-server php5-mcrypt php5-mysql php5-gd php5-imagick php5-xdebug ruby rubygems compass phing
+
+Once those packages are installed please configure config.ini
+
+Run phing configure
+
+Import database - phing dbj
+
+Copy inc/config.template.php to inc/config.php and fill it out
+
+You should be good to go!
+
+***USAGE***
+
+Overall Layout - inc/layouts/default.php
+
+Header - inc/modules/header.php
+
+Footer - inc/modules/footer.php
+
+Javascript Files Include - inc/modules/javascript.php
+
+CSS Files Include - inc/modules/css.php
+
+Main View Files - inc/views/

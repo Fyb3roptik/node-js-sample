@@ -1,0 +1,1 @@
+ALTER TABLE `categories` ADD `image` VARCHAR( 256 ) NOT NULL ;

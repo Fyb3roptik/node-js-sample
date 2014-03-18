@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `freight_account` varchar(32) DEFAULT NULL;

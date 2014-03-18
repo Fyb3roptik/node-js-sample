@@ -1,0 +1,14 @@
+config.ini
+.sass-cache/
+logs/
+uploads/
+bugz/
+keys/
+public_html/screen_scrape.php
+public_html/screen_scrape_script.php
+forums/
+store/
+.buildpath
+.project
+
+.settings/

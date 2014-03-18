@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `quote_expires` TIMESTAMP NOT NULL AFTER `quote_type` ;
