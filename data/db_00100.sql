@@ -1,0 +1,1 @@
+ALTER TABLE  `customers` ADD  `api_key` VARCHAR( 255 ) NOT NULL

@@ -74,10 +74,7 @@ if(true == defined('MAINTANENCE_MODE') && defined($_REQUEST['debug']) && ($_SERV
 //initiate our message stack.
 $MS = new Message_Stack();
 
-$session_token = exists('session_id', $_COOKIE, 0);
-if($session_token == "0" && ($_SERVER['REQUEST_URI'] != "/login" && $_SERVER['REQUEST_URI'] != "/login/processLogin" && $_SERVER['REQUEST_URI'] != "/recover_password" && $_SERVER['REQUEST_URI'] != "/reset_password")) {
-    redirect('/login');
-}
+
 $CUSTOMER = User_Session::tokenFactory($session_token);
 
 if(false == $CUSTOMER->exists() && 0 != $session_token) {
@@ -97,5 +94,5 @@ $XSRF_CHECK = xsrf_check();
 
 //should be configurable probably.
 $VIEW = 'home.php';
-$LAYOUT_TITLE = "Fyberstudios";
+$LAYOUT_TITLE = "Beast Franchise API";
 ?>

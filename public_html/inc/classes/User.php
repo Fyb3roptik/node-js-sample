@@ -95,11 +95,11 @@ abstract class User extends Object {
 	 * @param password Password of the User to be loggedin.
 	 * @return Returns true if successfully logged in, false otherwise.
 	 */
-	public function login($username, $password) {
+	public function login($email, $password) {
 		$login_success = false;
 		$password = trim($password);
 		$class = get_class($this);
-		$C = new $class($username, 'username');
+		$C = new $class($email, 'email');
 		if(true == $C->exists() && passwordify($password, $C->salt) == $C->getPassword()) {
 			$this->_load($C->getID());
 			$this->_loadSession();
