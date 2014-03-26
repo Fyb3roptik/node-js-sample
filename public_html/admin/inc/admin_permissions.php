@@ -1,9 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../inc/classes/Admin_Permission_Register.php';
 
-//Plans Controller
-Admin_Permission_Register::addPermission('Plans_Controller', 'index', 'plans_manage', 'Admin can manage plans.');
-
 //Export permissions
 //Admin_Permission_Register::addPermission('Catalog_Export_Controller', 'index', 'export_products', 'Admin can export products.');
 
@@ -15,8 +12,7 @@ Admin_Permission_Register::addPermission('Plans_Controller', 'index', 'plans_man
 
 //Page and content permissions
 //Admin_Permission_Register::addPermission('Page_Controller', 'index', 'page_manage', 'Admin can manage static pages.');
-Admin_Permission_Register::addPermission('Clubs_Controller', 'index', 'manage_clubs',  'Admin can manage clubs.');
-Admin_Permission_Register::addPermission('Homepage_Controller', 'index', 'edit_home',  'Admin can manage the home page.');
+
 //Admin_Permission_Register::addPermission('Content_Controller', 'editFooter', 'edit_footer', 'Admin can manage the global footer.');
 
 //Global config permissions
@@ -25,6 +21,9 @@ Admin_Permission_Register::addPermission('Homepage_Controller', 'index', 'edit_h
 //Admin_Permission_Register::addPermission('Widget_Controller', 'index', 'manage_widgets', 'Admin can manage widgets (left column content).');
 //Admin_Permission_Register::addPermission('Payment_Terms_Controller', 'index', 'payment_terms', 'Admin can manage payment terms.');
 //Admin_Permission_Register::addPermission('Fudge_Controller', 'index', 'global_product_overhead', 'Admin can manage global product overhead.');
+
+//Player Permissions
+Admin_Permission_Register::addPermission('Player_Controller', 'index', 'player_manage', 'Admin can manage players.');
 
 //User permissions
 Admin_Permission_Register::addPermission('Admin_Controller', 'index', 'admin_manage', 'Admin can manage administrative user accounts.');

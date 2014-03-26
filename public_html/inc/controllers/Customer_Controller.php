@@ -18,71 +18,20 @@ class Customer_Controller extends Controller {
         $customer_name = get_var('customer_name');
 		$customer_id = get_var('customer_id');
         $customer_email = get_var('customer_email');
-        $date_range = array("min" => urldecode(get_var("date_range_min")), "max" => urldecode(get_var("date_range_max")));
+		
+		$customer_sql = "SELECT *
+				FROM customers";
+		
+		$query = db_arr($customer_sql);
         
-        $sort = "name";
-        $dir = "ASC";
-		$new_dir = "DESC";
+        foreach($query as $customer) {
+            $CUSTOMER_LIST[] = new Customer($customer['customer_id']);
+        }
         
-        if($customer_email != "") {
-			$where_clause[] = "email = '".$customer_email."'";
-		}
-		if($customer_name != "") {
-			$where_clause[] = "name LIKE '%".$customer_name."%' OR stage_name LIKE '%".$customer_name."%'";
-		}
-		if($customer_id != "") {
-			$where_clause[] = "customer_id = '".$customer_id."'";
-		}
-		if($date_range["min"] != "" && $date_range["max"] != "") {
-			$where_clause[] = "date_registered >= '" . date("Y-m-d H:i:s", strtotime($date_range['min'])) . "' AND date_registered <= '" . date("Y-m-d H:i:s", strtotime($date_range['max'] . " 11:59:59")) . "'";
-			$sort = "date_registered";
-       		$dir = "DESC";
-			$new_dir = "ASC";
-		}
-		if(false == is_null($where_clause)) {
-			$where = "WHERE ".implode(" OR ", $where_clause);
-		}
-		
-		if(get_var('sort') != "") {
-			$sort = get_var('sort');
-		}
-		
-		if(get_var('dir') != "") {
-			$dir = get_var('dir');
-			if(get_var('dir') == "DESC") {
-				$new_dir = "ASC";
-			}
-		}
-		
-		$customer_sql = "SELECT customer_id
-				FROM `customers` ".$where."
-				ORDER BY ".$sort." ".$dir;
-		$page = get_var('page', 1);
-		$PK = new Page_Killer($customer_sql, 40, $page);
-		$CUSTOMER_LIST = $PK->query();
-		
-		$TOTAL = $PK->getTotalRows();
-		
-		$dj_count_sql = "SELECT count(customer_id) as total FROM customers WHERE user_type = 'dj'";
-		$dj_count = db_arr($dj_count_sql);
-		
-		$singer_count_sql = "SELECT count(customer_id) as total FROM customers WHERE user_type = 'user'";
-		$singer_count = db_arr($singer_count_sql);
-		
-		$total_search_count_sql = "SELECT count(customer_id) as total FROM customers";
-		$total_search_count = db_arr($total_search_count_sql);
-
-		$pk_params = array("sort" => $sort, "dir" => $dir); //add search stuff here probably
-		$PK_LINKS = $PK->getLinks($pk_params);
+        $LAYOUT_TITLE = "Beast Franchise | Manage Customers";
+        $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
 
 		$V->bind('CUSTOMER_LIST', $CUSTOMER_LIST);
-		$V->bind('TOTAL', $total_search_count[0]['total']);
-		$V->bind('TOTAL_SEARCH', $TOTAL);
-		$V->bind('DJS', $dj_count[0]['total']);
-		$V->bind('SINGERS', $singer_count[0]['total']);
-		$V->bind('new_dir', $new_dir);
-		$V->bind('page', $page);
-		$V->bind('PK_LINKS', $PK_LINKS);
 		$V->bind('MS', $MS);
 	}
 
@@ -95,7 +44,6 @@ class Customer_Controller extends Controller {
 		$C = new Customer($customer_id);
 		$V = new View('customer_form.php');
 		$V->bind('C', $C);
-		$V->bind('PLANS', $this->_getPlans($C));
 		$this->_setView($V);
 		$V->bind('MS', $MS);
 	}

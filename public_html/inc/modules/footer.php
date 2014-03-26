@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer>
-    &copy; <?php echo date('Y', time()); ?> Fyberstudios | All Rights Reserved
+    &copy; <?php echo date('Y', time()); ?> Beast Franchise | All Rights Reserved
 </footer>
 <!-- /Footer -->
 <?php

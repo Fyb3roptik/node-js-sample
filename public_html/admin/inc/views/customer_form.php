@@ -1,29 +1,26 @@
-<?php echo $MS->messages('customer_form'); ?>
-<form id="customer_form" action="/admin/customer/process/" method="post">
-	<fieldset>
-		<legend>Customer Details</legend>
-		<input type="hidden" name="customer_id" value="<?php echo $C->ID; ?>" /><br />
-		Name:<br />
-		<input type="text" name="customer[name]" value="<?php echo $C->name; ?>" /><br />
-		Email:<br />
-		<input type="text" name="customer[email]" value="<?php echo $C->email; ?>" /><br />
-		DJ Name:<br />
-		<input type="text" name="username" value="<?php echo $C->username; ?>" /><br />
-		Stage Name:<br />
-		<input type="text" name="customer[stage_name]" value="<?php echo $C->stage_name; ?>" /><br />
-		<br />
-		Plan:<br />
-		<?php echo draw_select('customer[plan_id]', $PLANS, $C->plan_id); ?>
-		<br />
-		<br />
-		<br />
-		<u>Reset Customer's Password:</u>
-        <br />
-		<br />
-		New Password: <input type="password" name="new_password" />
-		<br />
-		Confirm Password: <input type="password" name="confirm_password" />
-		<br />
-		<input type="submit" value="Save Customer" /> or <a href="/admin/customer/">Cancel</a>
-	</fieldset>
-</form>
+<div class="page-header">
+    <h1>Edit Customer</h1>
+</div>
+
+<div class="col-lg-6">
+    <div class="box blue">
+        <div class="box-header">
+            <h2>&nbsp;</h2>
+        </div>
+        <div class="box-content">
+            <form role="form" action="/admin/customer/process" method="post">
+                <input type="hidden" id="customer_id" name="customer_id" value="<?php echo $C->ID; ?>" />
+                <div class="form-group">
+                    <label for="customer[name]">Name</label>
+                    <input type="text" class="form-control" id="customer[name]" name="customer[name]" placeholder="Name" value="<?php echo $C->name; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="customer[email]">Email</label>
+                    <input type="text" class="form-control" id="customer[email]" name="customer[email]" placeholder="Email" value="<?php echo $C->email; ?>">
+                </div>
+                <button class="btn btn-success pull-right">Update</button>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

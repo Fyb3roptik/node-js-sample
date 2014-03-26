@@ -35,7 +35,7 @@ $TP->layout_path = dirname(__FILE__) . '/layouts/';
 $TP->view_path = dirname(__FILE__) . '/views/';
 
 $VIEW = 'home.php';
-$LAYOUT_TITLE = 'KaraokeVibe.com | Admin';
+$LAYOUT_TITLE = 'Beast Franchise | Admin';
 
 $token = exists('admin_token', $_COOKIE, null);
 $ADMIN = User_Session::tokenFactory($token, User::TYPE_ADMIN);

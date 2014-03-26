@@ -298,13 +298,13 @@ function recover_user_password(User $U) {
 
 	$M = new Mailer();
 	$M->addTo($U->email, $U->name);
-	$M->setSubject("Fyberstudios.com Password Recovery");
+	$M->setSubject("Beast Franchise Password Recovery");
     $body .= "<html>";
 	$body .= "<body>";
-	$body .= "Please follow the link below to recover your Fyberstudios.com password.<br /><br />";
+	$body .= "Please follow the link below to recover your Beast Franchise password.<br /><br />";
 	$body .= "<a href='".$link."'>".$link."</a><br /><br />";
 	$body .= "If you didn't request a password reset, you may ignore this message.<br /><br />";
-	$body .= "--<br />This is an automated message from Fyberstudios.com, do not reply.";
+	$body .= "--<br />This is an automated message from Beast Franchise, do not reply.";
     $body .= "</body>";
 	$body .= "</html>";
 	$M->setBody($body);

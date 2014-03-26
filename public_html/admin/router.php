@@ -1,7 +1,6 @@
 <?php
 require_once 'inc/global.php';
 require_once dirname(__FILE__) . '/inc/admin_permissions.php';
-require_once dirname(__FILE__) . '/inc/plans_permissions.php';
 
 
 $route = Router::route(get_var('url'));

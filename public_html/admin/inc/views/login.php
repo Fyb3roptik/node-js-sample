@@ -7,26 +7,16 @@ $(document).ready(function() {
 	<?php echo $MS->messages(); ?>
 </div>
 <form id="admin_login" action="" method="post">
-	<fieldset>
-	<legend>login</legend>
 	<input type="hidden" name="action" value="login" />
-	<table>
-		<tr>
-			<td>email:</td>
-			<td><input type="text" name="email" /></td>
-		</tr>
-		<tr>
-			<td>password:</td>
-			<td><input type="password" name="password" /></td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>
-				<input type="submit" value="login" />
-				<br />
-				<a href="login.php?action=recover_password">Forgot your password?</a>
-			</td>
-		</tr>
-	</table>
-	</fieldset>
+	<div class="form-group">
+    	<label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+	</div>
+	<div class="form-group">
+	    <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+	</div>
+	<button type="submit" class="btn btn-success pull-right">Login</button>
+	<span class="pull-left"><a href="login.php?action=recover_password">Forgot your password?</a></span>
+	<div class="clearfix"></div>
 </form>

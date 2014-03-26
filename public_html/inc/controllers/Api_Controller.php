@@ -3,19 +3,7 @@ require_once 'Controller.php';
 
 class Api_Controller extends Controller {
     
-    /**
-     * Get message for HTTP status code
-     * @param  int         $status
-     * @return string|null
-     */
-    public static function getMessageForCode($status)
-    {
-        if (isset(self::$messages[$status])) {
-            return self::$messages[$status];
-        } else {
-            return null;
-        }
-    }
+    private $_customer;
     
     public function login() {
 		$email = $_REQUEST['email'];
@@ -25,6 +13,10 @@ class Api_Controller extends Controller {
 		
 		if(intval($c->login($email, $password)) > 0) {
 			$token = $c->newToken();
+			
+			// Write new API Key
+			$new_key = $this->_generateKey($c);
+			
 			$c->write();
 			write_user_session_cookie($c);
 			
@@ -34,7 +26,9 @@ class Api_Controller extends Controller {
 			
 			$response['name'] = $c->name;
 			$response['email'] = $c->email;
-			$response['api_key'] = $c->api_key;
+			$response['api_key'] = $new_key;
+			
+			
 			
 			$this->_echoResponse($status_code, $response);
 			exit;
@@ -141,6 +135,72 @@ class Api_Controller extends Controller {
 			//$MS->add('login', "The passwords you entered didn't match.", MS_WARNING);
 			//$registration_errors = true;
 		}
+	}
+	
+	public function getUserData() {
+    	
+    	$this->_authenticate();
+    	
+    	// Write new API Key
+        $new_key = $this->_generateKey($c);
+        
+    	$status_code = 200;
+    	$response['error'] = false;
+    	$response["message"] = "";
+    	$response['name'] = $this->_customer->name;
+    	$response['email'] = $this->_customer->email;
+    	$response['api_key'] = $new_key;
+    	
+    	
+			
+    	$this->_echoResponse($status_code, $response);
+    	exit;
+	}
+	
+	protected function _authenticate() {
+    	
+    	$headers = apache_request_headers();
+    	
+    	// Verifying Authorization Header
+        if (isset($headers['Authorization'])) {
+            $api_key = $headers['Authorization'];
+            
+            $this->_customer = new Customer($api_key, "api_key");
+
+            if(!$this->_customer->exists()) {
+                // api key is not present in users table
+                $response["error"] = true;
+                $response["message"] = "Access Denied. Invalid Api key";
+                $this->_echoResponse(400, $response);
+                exit;
+            }
+        } else {
+            // api key is missing in header
+            $response["error"] = true;
+            $response["message"] = "Api key is misssing";
+            $this->_echoResponse(400, $response);
+            exit;
+        }
+	}
+	
+	protected function _generateKey(Customer $C) {
+    	$new_hash = $this->_generateHash();
+    	
+    	$C->api_key = $new_hash;
+    	$C->write();
+    	
+    	return $new_hash;
+	}
+	
+	protected function _checkAccess($api_key) {
+        
+        $return = false;
+        
+        if($C->api_key == $api_key) {
+            $return = true;
+        }
+        
+        return $return;
 	}
 	
 	protected function _generateHash() {
