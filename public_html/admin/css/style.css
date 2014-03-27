@@ -2788,6 +2788,15 @@ ul.tickets li.ticket .number {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+
+.switch-long {
+    width: 100px;    
+}
+
+.switch-long .switch-input:checked ~ .switch-handle {
+    left: 82px;
+}
+
 .switch-input {
   position: absolute;
   top: 0;

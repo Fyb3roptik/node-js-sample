@@ -25,6 +25,9 @@ require_once dirname(__FILE__) . '/../../inc/classes/Admin_Permission_Register.p
 //Player Permissions
 Admin_Permission_Register::addPermission('Player_Controller', 'index', 'player_manage', 'Admin can manage players.');
 
+//Match Permissions
+Admin_Permission_Register::addPermission('Match_Controller', 'index', 'match_manage', 'Admin can manage matches.');
+
 //User permissions
 Admin_Permission_Register::addPermission('Admin_Controller', 'index', 'admin_manage', 'Admin can manage administrative user accounts.');
 Admin_Permission_Register::addPermission('Admin_Controller', 'dropAdmin', 'drop_admin', 'Admin can delete other administrative user accounts.');

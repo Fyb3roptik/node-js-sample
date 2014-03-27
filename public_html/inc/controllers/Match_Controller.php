@@ -18,14 +18,14 @@ class Match_Controller extends Controller {
         $sql = "SELECT * FROM matches ORDER BY start_date DESC";
         $query = db_arr($sql);
         
-        foreach($query as $player) {
-            $PLAYER_LIST[] = new Player($player['player_id']);
+        foreach($query as $match) {
+            $MATCH_LIST[] = new Match($match['match_id']);
         }
         
-        $LAYOUT_TITLE = "Beast Franchise | Manage Players";
+        $LAYOUT_TITLE = "Beast Franchise | Manage Matches";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
         
-		$V->bind('PLAYER_LIST', $PLAYER_LIST);
+		$V->bind('MATCH_LIST', $MATCH_LIST);
 		$V->bind('MS', $MS);
 	}
 	
@@ -36,12 +36,12 @@ class Match_Controller extends Controller {
 		$this->_configure();
 		$MS = new Message_Stack();
 		$P = new Match();
-		$V = new View('player_form.php');
+		$V = new View('match_form.php');
 		
-		$LAYOUT_TITLE = "Beast Franchise | Add Player";
+		$LAYOUT_TITLE = "Beast Franchise | Add Match";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
 		
-		$V->bind('TITLE', 'Add Player');
+		$V->bind('TITLE', 'Add Match');
 		$V->bind('P', $P);
 		$this->_setView($V);
 		$V->bind('MS', $MS);
@@ -50,27 +50,27 @@ class Match_Controller extends Controller {
 	/**
 	 * Edit an existing player.
 	 */
-	public function edit($player_id) {
+	public function edit($match_id) {
 		$this->_configure();
 		$MS = new Message_Stack();
-		$P = new Player($player_id);
-		$V = new View('player_form.php');
+		$M = new Match($match_id);
+		$V = new View('match_form.php');
 		
-		$LAYOUT_TITLE = "Beast Franchise | Edit Player";
+		$LAYOUT_TITLE = "Beast Franchise | Edit Match";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
 		
-		$V->bind('TITLE', 'Edit ' . $P->first_name . " " . $P->last_name);
-		$V->bind('P', $P);
+		$V->bind('TITLE', 'Edit Match');
+		$V->bind('M', $M);
 		$this->_setView($V);
 		$V->bind('MS', $MS);
 	}
 	
-	public function remove($player_id) {
+	public function remove($match_id) {
 		$this->_configure();
-		$P = new Player($player_id);
-		$P->delete();
+		$M = new Match($match_id);
+		$M->delete();
 		
-		redirect('/admin/player/');
+		redirect('/admin/match/');
 		exit;
 	}
 	
@@ -83,12 +83,24 @@ class Match_Controller extends Controller {
 		$this->_configure();
         $MS = new Message_Stack();
 
-		$P = new Player(post_var('player_id'));
+		$M = new Match(post_var('match_id'));
 		
-		$P->load(post_var('player', array()));
-
-		$P->write();
-        redirect('/admin/player/');
+		$match = post_var('match', array());
+		
+		$match['active'] = post_var('match_active', 0);
+		$match['locked'] = post_var('match_locked', 0);
+		
+		$start_date = post_var('start_date');
+        $start_time = post_var('start_time');
+        
+        $match['start_date'] = strtotime($start_date . " " . $start_time);
+		
+		$M->load($match);
+        
+        
+        
+		$M->write();
+        redirect('/admin/match/');
 		exit;
 	}
     
