@@ -29,6 +29,98 @@ class Player_Controller extends Controller {
 		$V->bind('MS', $MS);
 	}
 	
+	public function available($date) {
+    	$this->_configure();
+		$V = new View('player_available.php');
+		$this->_setView($V);
+		$MS = new Message_Stack();
+        
+        if(!isset($date)) {
+            $date = strtotime(date('m/d/Y', time()));
+        }
+        
+        // Available Players
+        $sql = "SELECT * FROM available_players WHERE date = '{$date}' ORDER BY player_id";
+        $query = db_arr($sql);
+        
+        foreach($query as $player) {
+            $AVAILABLE_PLAYER_LIST[] = new AvailablePlayer($player['available_player_id']);
+        }
+                
+        // Master Player List
+        $sql = "SELECT * FROM players ORDER BY last_name ASC";
+        $query = db_arr($sql);
+        
+        foreach($query as $player) {
+            $PLAYER_LIST[] = new Player($player['player_id']);
+        }
+        
+        // Make lists of id's
+        foreach($AVAILABLE_PLAYER_LIST as $a) {
+            $available_list[] = $a->player_id;
+        }
+        
+        foreach($PLAYER_LIST as $p) {
+            $player_list[] = $p->ID;
+        }
+        
+        // Remove moved players from master list
+        foreach($available_list as $a) {
+            if(($key = array_search($a, $player_list)) !== false) {
+                unset($player_list[$key]);
+            }
+        }
+        
+        // Remake Master List
+        $PLAYER_LIST = array();
+        foreach($player_list as $p) {
+            $PLAYER_LIST[] = new Player($p);
+        }
+        
+        $LAYOUT_TITLE = "Beast Franchise | Available Players List";
+        $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
+        
+        $V->bind('TITLE', 'Available Players');
+        $V->bind('AVAILABLE_PLAYER_LIST', $AVAILABLE_PLAYER_LIST);
+		$V->bind('PLAYER_LIST', $PLAYER_LIST);
+		$V->bind('MS', $MS);
+	}
+	
+	public function saveAvailable() {
+    	$this->_configure();
+    	
+    	$players = json_decode($_REQUEST['players']);
+    	
+    	// Truncate table first
+    	$sql = "TRUNCATE TABLE available_players";
+    	db_query($sql);
+    	
+    	foreach($players as $p) {
+        	$A = new AvailablePlayer($p, "player_id");
+        	
+        	if(!$A->exists()) {
+            	$A->player_id = $p;
+            	$A->date = strtotime(date('m/d/Y', time()));
+            	$A->write();
+            }
+    	}
+    	
+    	echo "Success";
+    	
+    	exit;
+	}
+	
+	public function resetAvailable() {
+    	$this->_configure();
+    	
+    	// Truncate table first
+    	$sql = "TRUNCATE TABLE available_players";
+    	db_query($sql);
+    	
+    	redirect('/admin/player/available/');
+		exit;
+	}
+	
 	/**
 	 * Edit an existing player.
 	 */
