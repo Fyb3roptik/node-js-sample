@@ -1,0 +1,1 @@
+ALTER TABLE  `available_players` ADD  `position` VARCHAR( 255 ) NOT NULL AFTER  `player_id`

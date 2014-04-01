@@ -131,6 +131,7 @@
 					<ul class="nav nav-tabs nav-stacked main-menu">
 					    <li><a href="/admin/"><i class="fa fa-tachometer"></i><span class="hidden-sm"> Dashboard</span></a></li>
 					    <li><a href="/admin/match"><i class="fa fa-gamepad"></i> Manage Matches</a></li>
+					    <li><a href="/admin/team"><i class="fa fa-star"></i> Manage Teams</a></li>
 					    <li>
 					        <a class="dropmenu" href="#"><i class="fa fa-hospital-o"></i><span class="hidden-sm"> Manage Players</span> <span class="label">2</span></a>
 					        <ul>
@@ -143,6 +144,12 @@
 							<ul>
 							    <li><a class="submenu" href="<?php echo LOC_ADMIN_MANAGE; ?>"><i class="fa fa-users"></i><span class="hidden-sm"> Administrators</span></a></li>
                                 <li><a class="submenu" href="/admin/customer/"><i class="fa fa-users"></i><span class="hidden-sm"> Customers</span></a></li>
+							</ul>
+                        </li>
+                        <li>
+							<a class="dropmenu" href="#"><i class="fa fa-gear"></i><span class="hidden-sm"> Manage Settings</span> <span class="label">1</span></a>
+							<ul>
+							    <li><a class="submenu" href="/admin/settings/score/"><i class="fa fa-gear"></i><span class="hidden-sm"> Score Settings</span></a></li>
 							</ul>
                         </li>
 					</ul>

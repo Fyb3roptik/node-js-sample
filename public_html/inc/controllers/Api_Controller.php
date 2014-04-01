@@ -6,10 +6,25 @@ class Api_Controller extends Controller {
     private $_customer;
     
     public function login() {
-		$email = $_REQUEST['email'];
 		
-		$c = new Customer();
-		$password = trim($_REQUEST['password']);
+		if (isset($_POST['email'])) {
+    		$email = $email = trim($_POST['email']);
+		} else {
+		    $postdata = json_decode(file_get_contents("php://input"));
+		    $email = $postdata->email;
+    		
+		}
+		
+		if (isset($_POST['email'])) {
+    		$password = trim($_POST['password']);
+		} else {
+    		$postdata = json_decode(file_get_contents("php://input"));
+		    $password = $postdata->password;
+		}
+		
+        $c = new Customer();
+		
+		
 		
 		if(intval($c->login($email, $password)) > 0) {
 			$token = $c->newToken();

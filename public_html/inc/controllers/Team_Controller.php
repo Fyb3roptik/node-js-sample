@@ -66,11 +66,36 @@ class Team_Controller extends Controller {
 		
 		$LAYOUT_TITLE = "Beast Franchise | Edit Team";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
-		
+        
+        $SP = AvailablePlayer::getSP();
+        $RP = AvailablePlayer::getRP();
+        $CA = AvailablePlayer::getCA();
+        $FB = AvailablePlayer::getFB();
+        $SB = AvailablePlayer::getSB();
+        $TB = AvailablePlayer::getTB();
+        $SS = AvailablePlayer::getSS();
+        $OF = AvailablePlayer::getOF();
+        
+        $SELECTED_PLAYERS = TeamsLineup::getSelectedPlayers($team_id, false, false);
+        $SELECTED_PLAYERS_LIST = TeamsLineup::getSelectedPlayers($team_id, true);
+
 		$V->bind('TITLE', 'Edit Team');
 		$V->bind('T', $T);
 		$V->bind('MATCHES', $MATCHES);
 		$V->bind('CUSTOMERS', $CUSTOMERS);
+		
+		$V->bind('SP', $SP);
+		$V->bind('RP', $RP);
+		$V->bind('CA', $CA);
+		$V->bind('FB', $FB);
+		$V->bind('SB', $SB);
+		$V->bind('TB', $TB);
+		$V->bind('SS', $SS);
+		$V->bind('OF', $OF);
+		
+		$V->bind('SELECTED_PLAYERS', $SELECTED_PLAYERS);
+		$V->bind('SELECTED_PLAYERS_LIST', $SELECTED_PLAYERS_LIST);
+		
 		$this->_setView($V);
 		$V->bind('MS', $MS);
 	}
@@ -92,14 +117,74 @@ class Team_Controller extends Controller {
 	public function process() {
 		$this->_configure();
         $MS = new Message_Stack();
-
-		$T = new Team(post_var('team_id'));
+        
+        $team_id = post_var('team_id');
+        
+		$T = new Team($team_id);
 		        
 		$T->load(post_var('team', array()));
         
 		$T->write();
         redirect('/admin/team/');
 		exit;
+	}
+	
+	public function processTeamPlayers() {
+    	$this->_configure();
+        $MS = new Message_Stack();
+        
+        $team = post_var('team', array());
+
+        $team_id = post_var('team_id');
+        
+        // Get existing team
+        $sql = "SELECT teams_lineup_id FROM teams_lineup WHERE team_id = '{$team_id}'";
+        $results = db_query($sql);
+
+        if($results->num_rows == 0) {
+            $i = 1;
+            foreach($team as $position => $player_id) {
+                
+                // Filter position
+                $position = strtoupper($position);
+                $position = str_replace(array("OF1", "OF2", "OF3"), "OF", $position);
+                
+                $TL = new TeamsLineup();
+                
+                $TL->team_id = $team_id;
+                $TL->player_id = $player_id;
+                $TL->position = $position;
+                
+                if($position != "SP" && $position != "RP") {
+                    $TL->order = $i;
+                    $i++;                    
+                }
+
+                
+                $TL->write();                
+            }
+        }
+        
+        redirect('/admin/team/edit/' . $team_id);
+        exit;
+	}
+	
+	public function saveBattingOrder() {
+    	$this->_configure();
+        $MS = new Message_Stack();
+        
+        $players = json_decode($_REQUEST['players']);
+        
+        $i =1;
+        foreach($players as $p) {
+            $TL = new TeamsLineup($p);
+            $TL->order = $i;
+            $TL->write();
+            $i++;
+        }
+        
+        echo "Success";
+        exit;
 	}
     
     /**

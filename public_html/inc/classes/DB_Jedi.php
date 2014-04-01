@@ -137,6 +137,7 @@ class DB_Jedi {
 					/*new hotness*/
 					$query = db_multi_query($sql);
 					$db_error = db_errno();
+					$errors = false;
 					if($db_error > 0) {
 						//log it and break out!
 						$this->_log("ERROR APPLYING QUERY:\n" . $query . "\n MySQL Said:\n" . db_error());

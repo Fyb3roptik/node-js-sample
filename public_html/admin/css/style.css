@@ -379,6 +379,11 @@ a.navbar-brand:hover {
   margin-top: -6px !important;
   font-size: 13px;
 }
+
+.nav-stacked>li+li {
+    margin-top: 20px !important;
+}
+
 .navbar .nav li.dropdown.open > .dropdown-toggle,
 .navbar .nav li.dropdown.active > .dropdown-toggle,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle {

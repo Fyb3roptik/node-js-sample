@@ -29,7 +29,7 @@ $(function() {
   #sortable1 li, #sortable2 li, #sortable3 li { margin: 5px; padding: 5px; font-size: 1.2em; width: 94%; cursor: move; }
   h2 {color: #333}
   .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
-  </style>
+</style>
 <div class="page-header">
     <h1><?php echo $TITLE; ?></h1>
 </div>

@@ -97,10 +97,12 @@ class Player_Controller extends Controller {
     	
     	foreach($players as $p) {
         	$A = new AvailablePlayer($p, "player_id");
+        	$P = new Player($p);
         	
         	if(!$A->exists()) {
             	$A->player_id = $p;
             	$A->date = strtotime(date('m/d/Y', time()));
+            	$A->position = $P->position;
             	$A->write();
             }
     	}
