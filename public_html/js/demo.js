@@ -1,7 +1,7 @@
 (function() {
   $(document).ready(function() {
     if (localStorage.getItem("content") !== null) {
-      $("#color-settings-body-color").attr("href", localStorage.getItem("content"));
+      //$("#color-settings-body-color").attr("href", localStorage.getItem("content"));
     }
     if ((localStorage.getItem("contrast") !== null) && !$("body").hasClass("contrast-background")) {
       $("body")[0].className = $("body")[0].className.replace(/(^|\s)contrast.*?(\s|$)/g, " ").replace(/\s\s+/g, " ").replace(/(^\s|\s$)/g, "");

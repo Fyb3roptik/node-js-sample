@@ -104,7 +104,18 @@ class Player_Controller extends Controller {
             	$A->date = strtotime(date('m/d/Y', time()));
             	$A->position = $P->position;
             	$A->write();
+            	
             }
+            
+            if($P->dh == 1) {
+            	$ADH = new AvailablePlayer();
+            	
+            	$ADH->player_id = $p;
+                $ADH->date = strtotime(date('m/d/Y', time()));
+                $ADH->position = "DH";
+                
+                $ADH->write();
+        	}
     	}
     	
     	echo "Success";
@@ -176,10 +187,13 @@ class Player_Controller extends Controller {
 	public function process() {
 		$this->_configure();
         $MS = new Message_Stack();
-
+        
 		$P = new Player(post_var('player_id'));
 		
-		$P->load(post_var('player', array()));
+		$player = post_var('player', array());
+		$player['dh'] = post_var('dh', 0);
+		
+		$P->load($player);
 
 		$P->write();
         redirect('/admin/player/');

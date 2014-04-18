@@ -181,6 +181,15 @@ $(function() {
                             <?php endforeach; ?>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="team[dh]">DH</label>
+                        <select class="form-control" id="team[dh]" name="team[dh]">
+                            <option>--DH--</option>
+                            <?php foreach($DH as $P): ?>
+                            <option value="<?php echo $P->ID; ?>" <?php if(in_array($P->ID, $SELECTED_PLAYERS_LIST)): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                     
                     <button class="btn btn-success pull-right">Update</button>
                 </form>

@@ -394,9 +394,21 @@ function get_nav_items($active_only = false) {
 function checkSecureSite($url) {
     if(1 == FORCE_SSL)
 	{
-		if($_SERVER['HTTPS'] != "on") {
-			redirect(SITE_SECURE_URL.$url, $_REQUEST);
+		if((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on") || $_SERVER['HTTP_CF_VISITOR'] != "{\"scheme\":\"https\"}") {
+			redirect(SITE_SECURE_URL.$url);
 		}
 	}
+}
+
+function addOrdinalNumberSuffix($num) {
+    if (!in_array(($num % 100),array(11,12,13))){
+        switch ($num % 10) {
+            // Handle 1st, 2nd, 3rd
+            case 1:  return $num.'st';
+            case 2:  return $num.'nd';
+            case 3:  return $num.'rd';
+        }
+    }
+    return $num.'th';
 }
 ?>

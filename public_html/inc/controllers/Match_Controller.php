@@ -15,12 +15,7 @@ class Match_Controller extends Controller {
 		$this->_setView($V);
 		$MS = new Message_Stack();
 
-        $sql = "SELECT * FROM matches ORDER BY start_date DESC";
-        $query = db_arr($sql);
-        
-        foreach($query as $match) {
-            $MATCH_LIST[] = new Match($match['match_id']);
-        }
+        $MATCH_LIST = Match::getActiveMatches(true);
         
         $LAYOUT_TITLE = "Beast Franchise | Manage Matches";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
@@ -102,6 +97,70 @@ class Match_Controller extends Controller {
 		$M->write();
         redirect('/admin/match/');
 		exit;
+	}
+	
+	public function find() {
+    	$this->_config(true);
+    	$V = new View('find_matches.php');
+    	
+    	$MATCHES = Match::getActiveMatches(true);
+    	
+    	$V->bind('MATCHES', $MATCHES);
+    	
+    	$this->_setView($V);
+	}
+	
+	public function view($match_id) {
+    	$this->_config(true);
+    	$V = new View('view_match.php');
+    	
+    	$MATCH = new Match($match_id);
+    	
+    	$TOTAL_TEAMS = $MATCH->getTotalTeams();
+    	$TEAM_EXISTS = $MATCH->teamExists($this->_user->ID);
+    	
+    	$V->bind('MATCH', $MATCH);
+    	$V->bind('TOTAL_TEAMS', $TOTAL_TEAMS);
+    	$V->bind('TEAM_EXISTS', $TEAM_EXISTS);
+    	
+    	$this->_setView($V);
+	}
+	
+	public function joinMatch($match_id) {
+    	$this->_config(true);
+    	
+    	$TEAM = new Team();
+    	$TEAM->match_id = $match_id;
+    	$TEAM->customer_id = $this->_user->ID;
+    	
+    	$today = strtotime('today');
+		$TEAM->created_date = $today;
+		
+		$TEAM->write();
+		
+		$team_id = db_insert_id();
+		
+		redirect('/team/view/'.$team_id);
+		exit;
+	}
+	
+	private function _config($require_login = false, $user = "") {
+		if(true == $require_login) {
+			$this->_checkPermissions();
+		}
+		$this->_setTemplate(new Template('user.php'));
+		$this->_template->bind('CUSTOMER', $this->_user);
+		$REDIR = sanitize_string(exists('go', $_GET));
+		global $LAYOUT_TITLE;
+		$this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE .= ' | '.$user);
+	}
+	
+	private function _checkPermissions() {
+		if(false == $this->_user->exists()) {
+			$_SESSION['login_redirect'] = $_SERVER['REDIRECT_URL'];
+			$this->redirect(LOC_LOGIN);
+			exit;
+		}
 	}
     
     /**

@@ -6,25 +6,12 @@ class Api_Controller extends Controller {
     private $_customer;
     
     public function login() {
+
+        $email = $email = $_REQUEST['email'];
 		
-		if (isset($_POST['email'])) {
-    		$email = $email = trim($_POST['email']);
-		} else {
-		    $postdata = json_decode(file_get_contents("php://input"));
-		    $email = $postdata->email;
-    		
-		}
-		
-		if (isset($_POST['email'])) {
-    		$password = trim($_POST['password']);
-		} else {
-    		$postdata = json_decode(file_get_contents("php://input"));
-		    $password = $postdata->password;
-		}
+        $password = $_REQUEST['password'];
 		
         $c = new Customer();
-		
-		
 		
 		if(intval($c->login($email, $password)) > 0) {
 			$token = $c->newToken();
@@ -65,8 +52,9 @@ class Api_Controller extends Controller {
 		$email = $_REQUEST['email'];
 		$password = $_REQUEST['password'];
 		$confirm_password = $_REQUEST['confirm_password'];
+		$agreement = $_REQUEST['agreement'];
 		
-		if($name == "" || $email == "" || $password == "" || $confirm_password == "") {
+		if($name == "" || $email == "" || $password == "" || $confirm_password == "" || ($agreement == "" || $agreement == 0)) {
     		$status_code = 200;
 			$response['error'] = true;
 			$response['message'] = "Missing required fields";
@@ -157,7 +145,7 @@ class Api_Controller extends Controller {
     	$this->_authenticate();
     	
     	// Write new API Key
-        $new_key = $this->_generateKey($c);
+        $new_key = $this->_generateKey($this->_customer);
         
     	$status_code = 200;
     	$response['error'] = false;
@@ -172,13 +160,70 @@ class Api_Controller extends Controller {
     	exit;
 	}
 	
+	public function getMatches() {
+	
+    	$this->_authenticate();
+        
+        $MATCH_LIST = Match::getActiveMatches();
+        
+        $matches = array();
+        
+        foreach($MATCH_LIST as $M) {
+            $matches[] = array("match_id" => $M->ID, "name" => $M->name, "start_date" => date("m/d/Y h:i A", $M->start_date), "active" => $M->active, "locked" => $M->locked);
+        }
+        
+        // Write new API Key
+        $new_key = $this->_generateKey($this->_customer);
+        
+        $response['matches'] = $matches;
+        $response['api_key'] = $new_key;
+        
+        $this->_echoResponse(200, $response);
+        exit;
+	}
+	
+	public function getTeams() {
+	
+    	$this->_authenticate();
+        
+        $TEAM_LIST = Team::getMyTeams($this->_customer);
+        
+        $teams = array();
+        
+        foreach($TEAM_LIST as $T) {
+            $teams[] = array("team_id" => $T->ID);
+            
+        }
+        
+        // Write new API Key
+        $new_key = $this->_generateKey($this->_customer);
+        
+        $response['teams'] = $teams;
+        $response['api_key'] = $new_key;
+        
+        $this->_echoResponse(200, $response);
+        exit;
+	}
+	
 	protected function _authenticate() {
     	
     	$headers = apache_request_headers();
-    	
+
     	// Verifying Authorization Header
         if (isset($headers['Authorization'])) {
             $api_key = $headers['Authorization'];
+            
+            $this->_customer = new Customer($api_key, "api_key");
+
+            if(!$this->_customer->exists()) {
+                // api key is not present in users table
+                $response["error"] = true;
+                $response["message"] = "Access Denied. Invalid Api key";
+                $this->_echoResponse(400, $response);
+                exit;
+            }
+        } elseif(isset($headers['authorization'])) {
+            $api_key = $headers['authorization'];
             
             $this->_customer = new Customer($api_key, "api_key");
 

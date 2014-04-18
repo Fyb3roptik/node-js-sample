@@ -74,7 +74,7 @@ if(true == defined('MAINTANENCE_MODE') && defined($_REQUEST['debug']) && ($_SERV
 //initiate our message stack.
 $MS = new Message_Stack();
 
-
+$session_token = exists('session_id', $_COOKIE, 0);
 $CUSTOMER = User_Session::tokenFactory($session_token);
 
 if(false == $CUSTOMER->exists() && 0 != $session_token) {
@@ -93,6 +93,9 @@ FB::log($CUSTOMER, 'Global Customer');
 $XSRF_CHECK = xsrf_check();
 
 //should be configurable probably.
+if($CUSTOMER->exists() && $_SERVER['REQUEST_URI'] == "/") {
+    redirect("/" . $CUSTOMER->username);
+}
 $VIEW = 'home.php';
-$LAYOUT_TITLE = "Beast Franchise API";
+$LAYOUT_TITLE = "Beast Franchise";
 ?>

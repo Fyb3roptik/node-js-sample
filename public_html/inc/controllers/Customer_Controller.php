@@ -120,7 +120,7 @@ class Customer_Controller extends Controller {
 		if(true == $require_login) {
 			$this->_checkPermissions();
 		}
-		$this->_setTemplate(new Template('default.php'));
+		$this->_setTemplate(new Template('user.php'));
 		$this->_template->bind('CUSTOMER', $this->_user);
 		$REDIR = sanitize_string(exists('go', $_GET));
 		global $LAYOUT_TITLE;

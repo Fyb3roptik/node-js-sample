@@ -94,6 +94,17 @@ class AvailablePlayer extends Object {
         
         return $result;
 	}
+	
+	public function getDH() {
+    	$sql = "SELECT player_id FROM available_players WHERE position = 'DH'";
+        $arr = db_arr($sql);
+        
+        foreach($arr as $ap) {
+            $result[] = new Player($ap['player_id']);
+        }
+        
+        return $result;
+	}
 
 }
 ?>

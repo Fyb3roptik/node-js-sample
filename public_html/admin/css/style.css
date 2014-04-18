@@ -4613,6 +4613,21 @@ ul.messagesList li span.date {
   margin-top: 20px;
   float: left;
 }
+
+table.score tbody td.at_bat .btn {
+    margin: 27% 0;
+}
+
+table.score tbody td.at_bat {
+    background-color: transparent;
+    border: none;
+    
+}
+
+.table-bordered {
+    border: none;
+}
+
 /*
 * Author: Łukasz Holeczek
 * Template: SimpliQ - Flat & Responsive Bootstrap Admin Template

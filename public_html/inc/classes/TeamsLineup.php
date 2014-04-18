@@ -33,5 +33,47 @@ class TeamsLineup extends Object {
         return $players;
         
     }
+    
+    public static function getOutfielders($team_id, $players_only = true) {
+        
+        $players = array();
+        
+        $sql = "SELECT teams_lineup_id, player_id FROM teams_lineup WHERE team_id = '{$team_id}' AND position = 'OF' ORDER BY `order` ASC";
+        $results = db_arr($sql);
+        
+        foreach($results as $tl) {
+            $players[] = array("player_id" => $tl['player_id'], "teams_lineup_id" => $tl['teams_lineup_id']);
+        }
+        
+        if($players_only == true) {
+            $players = array();
+            foreach($results as $tl) {
+                $players[] = $tl['player_id'];
+            }
+        }
+
+        return $players;
+    }
+    
+    public static function getDHS($team_id, $players_only = true) {
+        
+        $players = array();
+        
+        $sql = "SELECT teams_lineup_id, player_id FROM teams_lineup WHERE team_id = '{$team_id}' AND position = 'DH' ORDER BY `order` ASC";
+        $results = db_arr($sql);
+        
+        foreach($results as $tl) {
+            $players[] = array("player_id" => $tl['player_id'], "teams_lineup_id" => $tl['teams_lineup_id']);
+        }
+        
+        if($players_only == true) {
+            $players = array();
+            foreach($results as $tl) {
+                $players[] = $tl['player_id'];
+            }
+        }
+
+        return $players;
+    }
 }
 ?>

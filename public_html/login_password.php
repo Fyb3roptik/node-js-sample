@@ -6,6 +6,7 @@ $VIEW = 'login.php';
 checkSecureSite($_SERVER['REQUEST_URI']);
 
 $action = exists('action', $_REQUEST, null);
+
 switch(strtolower($action)) {
 
 	/**
@@ -21,6 +22,7 @@ switch(strtolower($action)) {
 	 * Process the recover password form and email out a new password reset token.
 	 */
 	case 'process_recover_password': {
+		echo "Here";
 		$email = exists('email', $_POST, null);
 		$cust = new Customer($email, 'email');
 		if(true == $cust->exists()) {
@@ -28,7 +30,7 @@ switch(strtolower($action)) {
 			$MS->add('login', "Your password has been sent to your email address.", MS_SUCCESS);
 			redirect(LOC_LOGIN);
 		} else {
-			$MS->add('recover_password', "We couldn't find a customer record matching that email address.<br />Please check your spelling and try again.", MS_WARNING);
+			$MS->add('recover_password', "We couldn't find a customer record matching that email address.<br />Please check your spelling and try again.", MS_ERROR);
 			redirect(LOC_RECOVER_PASSWORD);
 		}
 		break;

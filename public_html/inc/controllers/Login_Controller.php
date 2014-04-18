@@ -8,12 +8,12 @@ class Login_Controller extends Controller {
 	/**
 	 * Message for when login fails.
 	 */
-	const LOGIN_FAIL_MESSAGE = 'If you have an active account with siing.co please click on the "<a href="%s">Forgot Password</a>" link below to reset your password and safely transfer your account history over to our new site. This is a one time requirement for your security.';
+	const LOGIN_FAIL_MESSAGE = 'Login credentials incorrect';
 
 	/**
 	 * Message for when registration fails.
 	 */
-	const REGISTER_FAIL_MESSAGE = 'An account already exists with this email address. If you have an active account with siing.co please click on the "<a href="%s">Forgot Password</a>" link below to reset your password and transfer your account history over to the new site.';
+	const REGISTER_FAIL_MESSAGE = 'An account already exists with this email address. If you have an active account with Beast Franchise please click on the "<a href="%s">Forgot Password</a>" link below to reset your password';
 
 	public function __construct() {
 		$this->_setTemplate(new Template('default.php'));
@@ -21,6 +21,10 @@ class Login_Controller extends Controller {
 
 	public function index() {
 		$this->_loginForm();
+	}
+	
+	public function register() {
+    	$this->_registerForm();
 	}
 
 	private function _loginForm($extra_bindings = array()) {
@@ -36,9 +40,23 @@ class Login_Controller extends Controller {
 			$VIEW->bind($key, $val);
 		}
 	}
+	
+	private function _registerForm($extra_bindings = array()) {
+		$this->_template->bind('CUSTOMER', $this->_user);
+		$REDIR = sanitize_string(exists('go', $_GET));
+		global $LAYOUT_TITLE;
+		$VIEW = new View('register.php');
+		$VIEW->bind('REDIR', $REDIR);
+		$VIEW->bind('MS', new Message_Stack());
+		$this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE .= ' | Registration');
+		$this->_setView($VIEW);
+		foreach($extra_bindings as $key => $val) {
+			$VIEW->bind($key, $val);
+		}
+	}
 
 	public function processLogin() {
-		$username = post_var('username');
+		$username = post_var('email');
 		$customer_type = post_var('customer_type', null);
 		$login_errors = false;
 		$MS = new Message_Stack();
@@ -53,41 +71,47 @@ class Login_Controller extends Controller {
 		} else {
 			//login failed.
 			//TODO: Add message to message stack
-			$MS->add('login', sprintf(self::LOGIN_FAIL_MESSAGE, LOC_RECOVER_PASSWORD), MS_WARNING);
+			$MS->add('login', sprintf(self::LOGIN_FAIL_MESSAGE, LOC_RECOVER_PASSWORD), MS_ERROR);
 			$this->_loginForm(array(
 				'REDIR' => post_var('go'),
 				'LOGIN_EMAIL' => $email));
 		}
 	}
 
-	public function register() {
+	public function processRegister() {
 		//new customer, process them
 		$MS = new Message_Stack();
 		$name = post_var('name');
-		$stage_name = post_var('stage_name');
 		$email = post_var('email');
 		$new_password = trim(post_var('new_password'));
 		$new_password_confirm = trim(post_var('new_password_confirm'));
 		$username = trim(post_var('username'));
-		$user_type = post_var('user_type');
+        $acknowledge = post_var('acknowledge', "unchecked");
+
 		$c = new Customer($email, 'email');
 		$login_location = $this->_getLoginLocation();
 		if($login_location == "") {
-			$login_location = "/plans/";
+			$login_location = "/";
 		}
 		$registration_errors = false;
+		
+		if($acknowledge == "unchecked") {
+            $MS->add('register', "You must agree to the terms", MS_ERROR);
+            $registration_errors = true;
+        }
+       
 		if(true == $c->exists()) {
-			$MS->add('register', sprintf(self::REGISTER_FAIL_MESSAGE, LOC_RECOVER_PASSWORD), MS_WARNING);
+			$MS->add('register', sprintf(self::REGISTER_FAIL_MESSAGE, "/register"), MS_ERROR);
 			$registration_errors = true;
 		}
 
 		if(strlen($new_password) < MIN_PASSWORD_LENGTH && false == $registration_errors) {
-			$MS->add('login', "The password you entered is too short. It must be at least " . MIN_PASSWORD_LENGTH . " characters.", MS_WARNING);
+			$MS->add('register', "The password you entered is too short. It must be at least " . MIN_PASSWORD_LENGTH . " characters.", MS_ERROR);
 			$registration_errors = true;
 		}
 
 		if("" == $name) {
-			$MS->add('login', "You must enter a name to register");
+			$MS->add('register', "You must enter a name to register");
 			$registration_errors = true;
 		}
 
@@ -106,21 +130,19 @@ class Login_Controller extends Controller {
 				if(true == $c->exists()) {
 					//the write, took. Great. "log them in"
 					$c->newToken();
-					$plan_id = Plans::getFreeTimedPlan($c->user_type);
-					$c->plan_id = $plan_id;
 					$c->write();
 					write_user_session_cookie($c);
-					$this->redirect($login_location);
+					$this->redirect("/" . $c->username);
 				}
 			} else {
 				//TODO: add a message to the stack here.
-				$MS->add('login', "The passwords you entered didn't match.", MS_WARNING);
+				$MS->add('register', "The passwords you entered didn't match.", MS_ERROR);
 				$registration_errors = true;
 			}
 		}
 
 		if(true == $registration_errors) {
-			$this->_loginForm(array(
+			$this->_registerForm(array(
 				'REDIR' => post_var('go'),
 				'REGISTRATION_EMAIL' => $email
 			));

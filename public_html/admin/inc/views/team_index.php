@@ -28,6 +28,7 @@ $(document).ready(function() {
         <thead>
             <th>Customer Name</th>
             <th>Match Name</th>
+            <th>Score</th>
             <th>&nbsp;</th>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@ $(document).ready(function() {
                 <tr>
                     <td><a href="/admin/team/edit/<?php echo $TEAM->ID; ?>"><?php echo $C->name; ?></a></td>
                     <td><?php echo $MATCH->name; ?></td>
+                    <td><a href="/admin/team/score/<?php echo $TEAM->ID; ?>">View Score</a></td>
                     <td><a class="btn btn-danger delete" href="/admin/team/remove/<?php echo $TEAM->ID; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>

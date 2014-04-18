@@ -73,12 +73,12 @@
     setCharCounter();
     setMaxLength();
     setValidateForm();
-    $(".box .box-remove").live("click", function(e) {
+    $(document).on("click", ".box .box-remove", function(e) {
       $(this).parents(".box").first().remove();
       e.preventDefault();
       return false;
     });
-    $(".box .box-collapse").live("click", function(e) {
+    $(document).on("click", ".box .box-collapse", function(e) {
       var box;
       box = $(this).parents(".box").first();
       box.toggleClass("box-collapsed");
@@ -90,7 +90,7 @@
         showVerdicts: false
       });
     }
-    $(".check-all").live("click", function(e) {
+    $(document).on("click", ".check-all", function(e) {
       return $(this).parents("table:eq(0)").find(".only-checkbox :checkbox").attr("checked", this.checked);
     });
     if (jQuery().tabdrop) {

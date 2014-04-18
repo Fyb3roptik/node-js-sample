@@ -1,16 +1,20 @@
+<?php
+if($M->start_date) {
+    $start_date = intval($M->start_date);
+} else { 
+    $start_date = time();
+}
+?>
+
 <script type="text/javascript">
 $(document).ready(function(){
     /* ---------- Datapicker ---------- */
 	$('.date-picker').datepicker();
 	
 	/* ---------- Timepicker for Bootstrap ---------- */
-	$('#timepicker1').timepicker();
+	$('#timepicker1').timepicker('setTime', '<?php echo date('h:i A', $start_date); ?>');
 });
 </script>
-
-<?php
-(isset($M->start_date)) ? $start_date = $M->start_date : $start_date = time();
-?>
 
 <div class="page-header">
     <h1><?php echo $TITLE; ?></h1>
@@ -40,7 +44,7 @@ $(document).ready(function(){
                     <div class="controls">
     					<div class="input-group col-sm-4 bootstrap-timepicker">
     						<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-    						<input type="text" class="form-control timepicker" name="start_time" id="timepicker1" value="<?php echo date('h:i A', $start_date); ?>">
+    						<input type="text" class="form-control timepicker" name="start_time" id="timepicker1" value="">
     					</div>	
     				</div>
                 </div>

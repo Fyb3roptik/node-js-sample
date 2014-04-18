@@ -1,0 +1,1 @@
+ALTER TABLE  `teams_lineup` ADD  `inning_data` TEXT NOT NULL

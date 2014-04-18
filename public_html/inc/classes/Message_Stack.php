@@ -3,7 +3,7 @@
 define('MS_NORMAL', 'normal', false);
 define('MS_SUCCESS', 'success', false);
 define('MS_WARNING', 'warning', false);
-define('MS_ERROR', 'error', false);
+define('MS_ERROR', 'danger', false);
 
 /**
  * Class that acts as a global place for stacking messages.
@@ -54,7 +54,7 @@ class Message_Stack {
 
 		$message_string = null;
 		foreach($message_list as $i => $msg) {
-			$message_string .= '<div class="' . $msg['level'] . '">' . $msg['message'] . '</div>';
+			$message_string .= '<div class="alert alert-' . $msg['level'] . '">' . $msg['message'] . '</div>';
 		}
 
 		$this->_flush($type);

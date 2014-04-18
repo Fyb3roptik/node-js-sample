@@ -4324,6 +4324,22 @@ ul.dynatree-container {
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   background-color: #cdd2d2; }
 
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+	border: 1px solid #dddddd;
+	background: #f6f6f6 url(../img/ui-bg_highlight-soft_100_f6f6f6_1x100.png) 50% 50% repeat-x;
+	font-weight: bold;
+	color: #0073ea;
+}
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-state-default a:visited {
+	color: #0073ea;
+	text-decoration: none;
+}
+
+
 .ui-slider .ui-slider-range {
   background-color: #2b2d30; }
 

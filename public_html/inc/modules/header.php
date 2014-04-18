@@ -19,11 +19,11 @@ global $CUSTOMER;
           <a class="navbar-brand" href="/">Beast Franchise</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <?php if($CUSTOMER->exists()): ?>
-            <li class="active"><a href="/<?php echo $CUSTOMER->username; ?>">My Page</a></li>
-            <?php endif; ?>
-          </ul>
+            <div class="navbar-right">
+                <a href="/login" class="btn btn-success btn-nav">Login</a>
+                <a href="/register" class="btn btn-primary btn-nav">Register</a>
+            </div>
+          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </div>

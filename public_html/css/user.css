@@ -12,6 +12,19 @@
   .no-mg-t-xs {
     margin-top: 0 !important; } }
 
+body {
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-name: fontfix;
+    -webkit-animation-duration: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes fontfix {
+    from { opacity: 1; }
+    to   { opacity: 1; }
+}
+
 .no-mg-t {
   margin-top: 0 !important; }
 
@@ -31,3 +44,38 @@
 
 .wysihtml5-sandbox {
   box-sizing: border-box; }
+
+.batting_number {
+    margin-top: 9px;
+}
+
+span.batting_num {
+    display: inline-block;
+    margin: 18px 0 13px 0;
+}
+
+#main-nav-bg {
+    background: url('/img/nav_bg.png') repeat;
+}
+
+header .navbar {
+    padding: 0;
+}
+
+header .navbar .navbar-brand {
+    line-height: 38px;
+}
+
+table.score tbody td.at_bat .btn {
+    margin: 27% 0;
+}
+
+table.score tbody td.at_bat {
+    background-color: transparent;
+    border: none;
+    
+}
+
+.table-bordered {
+    border: none;
+}

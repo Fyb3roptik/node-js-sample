@@ -36,6 +36,10 @@
                         <option value="OF" <?php if($P->position == "OF"): ?>selected<?php endif; ?>>OF</option>
                     </select>
                 </div>
+                <div class="form-group checkbox">
+                    <label for="dh">Player can DH</label>
+                    <input type="checkbox" name="dh" id="dh" value="1" <?php if($P->dh == 1): ?>checked<?php endif; ?> />
+                </div>
                 <button class="btn btn-success pull-right">Update</button>
             </form>
             <div class="clearfix"></div>

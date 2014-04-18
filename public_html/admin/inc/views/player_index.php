@@ -45,7 +45,7 @@ $(document).ready(function() {
                     <td><a href="/admin/player/edit/<?php echo $PLAYER->ID; ?>"><?php echo $PLAYER->mlb_id; ?></a></td>
                     <td><?php echo $PLAYER->first_name; ?></td>
                     <td><?php echo $PLAYER->last_name; ?></td>
-                    <td><?php echo $PLAYER->position; ?></td>
+                    <td><?php echo $PLAYER->position; ?><?php if($PLAYER->dh == 1): ?> / DH<?php endif; ?></td>
                     <td><a class="btn btn-danger delete" href="/admin/player/remove/<?php echo $PLAYER->ID; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>

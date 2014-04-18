@@ -1,0 +1,1 @@
+ALTER TABLE  `teams` ADD  `created_date` INT NOT NULL

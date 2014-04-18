@@ -9,8 +9,8 @@ class Mailer {
 
 	public function __construct() {
 		$this->_mailer = new PHPMailer();
-		$this->_mailer->AddReplyTo('do-not-reply@siing.co', 'siing.co');
-		$this->_mailer->SetFrom('do-not-reply@siing.co', 'siing.co');
+		$this->_mailer->AddReplyTo('do-not-reply@beastfranchise.com', 'Beast Franchise');
+		$this->_mailer->SetFrom('do-not-reply@beastfranchise.com', 'Beast Franchise');
 	}
 
 	public function addTo($to_email, $to_name = null) {

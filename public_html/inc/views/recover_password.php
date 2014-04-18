@@ -7,7 +7,7 @@
     <div class="col-lg-6 col-sm-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Fyberstudios Recover Password</h3>
+                <h3 class="panel-title">Beast Franchise Recover Password</h3>
             </div>
             <div class="panel-body">
                 <form role="form" action="" method="post">

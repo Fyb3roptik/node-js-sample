@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="/css/main.css">
 
         <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        
     	<?php require_once 'modules/javascript.php'; ?>
     	<?php require_once 'modules/meta_tags.php'; ?>
     	<?php require_once 'modules/css.php'; ?>
