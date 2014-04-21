@@ -8,7 +8,7 @@ $teams = array();
 $cache->delete("teams");
 
 // Fetch todays teams
-$sql = "SELECT * FROM teams WHERE created_date >= '".strtotime('yesterday')."'";
+$sql = "SELECT * FROM teams WHERE created_date = '".strtotime('today')."'";
 
 $results = db_arr($sql);
 

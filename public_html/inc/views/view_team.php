@@ -33,7 +33,7 @@ $(function() {
 </style>
 
 <div class='col-xs-12'>
-<?php if($MATCH->locked == "0"): ?>
+<?php if($MATCH->locked == "0" && $CUSTOMER->ID == $TEAM->customer_id): ?>
     <div class='page-header page-header-with-buttons'>
         <h1 class='pull-left'>
           <i class='icon-star'></i>
@@ -195,15 +195,78 @@ $(function() {
     <script type="text/javascript">
     $(document).ready(function() {
         setInterval('window.location.reload()', 120000);
+        
+        $("a.popup").click(function() {
+            //window.open("/chat", "Beast Chat", "status=1, height=300, width=600, resizable=1, toolbar=no, location=no");
+        });
     });
     </script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <script type="text/javascript" src="/flash/config.js"></script>
+    <?php $U = new Customer($TEAM->customer_id); ?>
     <div class='page-header page-header-with-buttons'>
         <h1 class='pull-left'>
           <i class='icon-play'></i>
-          <span>My Team for <?php echo $MATCH->name; ?> Scoring</span>
+          <span><?php echo $U->username; ?>'s Team for <?php echo $MATCH->name; ?> Scoring</span>
         </h1>
     </div>
     
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="box bordered-box purple-border">
+                <div class="box-header purple-background">
+                    <div class="title">Leaderboard</div>
+                </div>
+                <div class="box-content box-no-padding">
+                    <div class="responsive-table">
+                        <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                            <thead>
+                                <tr>
+                                    <th>Place</th>
+                                    <th>User</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($LEADERBOARD as $k => $T): ?>
+                                <?php $CUST = new Customer($T->customer_id); ?>
+                                <?php $CUST_TEAM = new Team(); ?>
+                                    <tr>
+                                        <td><?php echo addOrdinalNumberSuffix(($k + 1)); ?></td>
+                                        <td><a href="/team/view/<?php echo $T->ID; ?>"><?php echo $CUST->username; ?></a></td>
+                                        <td><?php echo $T->score; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-2">
+            <div class='row box box-transparent'>
+                
+                <div class='col-xs-12 col-sm-12'>
+                  <div class='box-quick-link purple-background'>
+                    <a href='/chat' target="_blank">
+                      <div class='header'>
+                        <div class='icon-comment'></div>
+                      </div>
+                      <div class='content'>Open Beast Chat</div>
+                    </a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-4">
+            <h2>Outs: <?php echo $SCORE['outs']; ?></h2>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-6">
             <span class="label label-success">First Base</span>
@@ -214,51 +277,58 @@ $(function() {
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-10 col-sm-8">
            <div class="box bordered-box purple-border">
                 <div class="box-header purple-background">
                     <div class="title">Lineup Scores</div>
                 </div>
                 <div class="box-content">
                     <div class="responsive-table">
-                        <table class="table table-striped table-bordered table-hover score">
-                            <thead>
-                                <th>Player</th>
-                                <th>Game Stats</th>
-                                <th>Score</th>
-                            </thead>
-                            <tbody>
-                                <?php foreach($TEAM_LIST as $key => $lineup): ?>
-                                    <?php if($lineup['order'] > 0): ?>
-                                        <?php $P = new Player($lineup['player_id']); $mlb_id = $P->mlb_id; ?>
-                                        <tr <?php if($SCORE['bases'][$mlb_id]['base'] == 1): ?>class="success"<?php elseif($SCORE['bases'][$mlb_id]['base'] == 2): ?>class="warning"<?php elseif($SCORE['bases'][$mlb_id]['base'] == 3): ?>class="danger"<?php endif; ?>>
-                                            <td><?php echo $P->first_name . " " . $P->last_name; ?></td>
-                                            <td>
-                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'] as $stat): ?>
-                                                <span class="label label-primary"><?php echo $stat ." "; ?></span>&nbsp;
-                                                <?php endforeach; ?>
-                                            </td>
-                                            <td><?php if(isset($SCORE['scores'][$mlb_id]['score'])): ?><?php echo $SCORE['scores'][$mlb_id]['score']; ?><?php else: ?>0<?php endif; ?></td>
-                                            <td class="at_bat"><?php if($AT_BAT['player_id'] == $P->ID && $SCORE['done']['final_done'] == false): ?><button class="btn btn-xs disabled btn-primary">At Bat</button><?php endif; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </tbody>
-                            <tfoot>
-                                <th><?php if($SCORE['done']['final_done'] == true): ?>FINAL Score<?php else: ?>Total Score<?php endif; ?></th>
-                                <th></th>
-                                <th><?php echo $total; ?></th>
-                            </tfoot>
-                        </table>
+                        <div class="responsive-table">
+                            <table class="table table-striped table-bordered table-hover score">
+                                <thead>
+                                    <th>Player</th>
+                                    <th>Game Stats</th>
+                                    <th>Score</th>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($TEAM_LIST as $key => $lineup): ?>
+                                        <?php if($lineup['order'] > 0): ?>
+                                            <?php $P = new Player($lineup['player_id']); $mlb_id = $P->mlb_id; ?>
+                                            <tr <?php if($SCORE['bases'][$mlb_id]['base'] == 1): ?>class="success"<?php elseif($SCORE['bases'][$mlb_id]['base'] == 2): ?>class="warning"<?php elseif($SCORE['bases'][$mlb_id]['base'] == 3): ?>class="danger"<?php endif; ?>>
+                                                <td><?php echo $P->first_name . " " . $P->last_name; ?></td>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'] as $stat): ?>
+                                                    <span class="label label-primary"><?php echo $stat ." "; ?></span>&nbsp;
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <td><?php if(isset($SCORE['scores'][$mlb_id]['score'])): ?><?php echo $SCORE['scores'][$mlb_id]['score']; ?><?php else: ?>0<?php endif; ?></td>
+                                                <td class="at_bat"><?php if($AT_BAT['player_id'] == $P->ID && $SCORE['done']['final_done'] == false): ?><button class="btn btn-xs disabled btn-primary">At Bat</button><?php endif; ?></td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                                <tfoot>
+                                    <th><?php if($SCORE['done']['final_done'] == true): ?>FINAL Score<?php else: ?>Total Score<?php endif; ?></th>
+                                    <th></th>
+                                    <th><?php echo $total; ?></th>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
            </div>
         </div>
         
-        <div class="col-lg-4">
+        <div class="col-md-2 visible-lg">
             <div class="box bordered-box banana-border">
                 <div class="box-header banana-background">
                     <div class="title">Situation Points</div>
+                    <div class="actions">
+                        <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+                        </a>
+                        </a>
+                    </div>
                 </div>
                 <div class="box-content box-no-padding">
                     <div class="responsive-table">
@@ -306,39 +376,10 @@ $(function() {
                                     <td>RBI</td>
                                     <td>3 Points</td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-lg-10">
-            <div class="box bordered-box purple-border">
-                <div class="box-header purple-background">
-                    <div class="title">Leaderboard</div>
-                </div>
-                <div class="box-content box-no-padding">
-                    <div class="responsive-table">
-                        <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
-                            <thead>
                                 <tr>
-                                    <th>Place</th>
-                                    <th>User</th>
-                                    <th>Score</th>
+                                    <td>SB</td>
+                                    <td>2 Points</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($LEADERBOARD as $k => $T): ?>
-                                <?php $CUST = new Customer($T->customer_id); ?>
-                                    <tr>
-                                        <td><?php echo addOrdinalNumberSuffix(($k + 1)); ?></td>
-                                        <td><?php echo $CUST->name; ?></td>
-                                        <td><?php echo $T->score; ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

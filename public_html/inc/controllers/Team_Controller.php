@@ -297,8 +297,15 @@ class Team_Controller extends Controller {
         $SCORE = Team::getScore($team_id);
         $AT_BAT = $TEAM_LIST[$SCORE['at_bat']];
         
-        $LEADERBOARD = Team::getLeaderboard($MATCH);
+        // Update Leaderboards
+        $TEAMS = Team::getAllTeams($MATCH->ID);
         
+        foreach($TEAMS as $T) {
+            $score = Team::getScore($T->ID);
+            $T->getTotal($score);
+        }
+        
+        $LEADERBOARD = Team::getLeaderboard($MATCH);
         
         $total = $TEAM->getTotal($SCORE);
         
@@ -326,6 +333,7 @@ class Team_Controller extends Controller {
 		$V->bind('OFS', $OFS);
 		$V->bind('DHS', $DHS);
 		$V->bind('LEADERBOARD', $LEADERBOARD);
+		$V->bind('CUSTOMER', $this->_user);
     	
     	$this->_setView($V);
 	}

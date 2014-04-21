@@ -7,8 +7,13 @@ class Team extends Object {
 	protected $_table = 'teams';
 	protected $_table_id = 'team_id';
 	
-	public static function getAllTeams() {
-    	$sql = "SELECT * FROM teams ORDER BY team_id DESC LIMIT 1000";
+	public static function getAllTeams($match_id = false) {
+    	$match = "";
+    	if($match_id != false) {
+        	$match = "WHERE match_id = '{$match_id}'";
+    	}
+    	
+    	$sql = "SELECT * FROM teams {$match} ORDER BY team_id DESC LIMIT 1000";
         $query = db_arr($sql);
         
         foreach($query as $team) {
@@ -61,9 +66,11 @@ class Team extends Object {
             // Update the database
             foreach($lineup as $l) {
                 $TL = new TeamsLineup($l['teams_lineup_id']);
-                $TL->score = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
-                $TL->inning_data = implode(",", $score['scores'][$team_id][$l['mlb_player_id']]['at_bat_stat']);
-                $TL->write();
+                if(isset($score['scores'][$team_id][$l['mlb_player_id']]['score']) && $score['scores'][$team_id][$l['mlb_player_id']]['score'] > 0) {
+                    $TL->score = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
+                    $TL->inning_data = implode(",", $score['scores'][$team_id][$l['mlb_player_id']]['at_bat_stat']);
+                    $TL->write();
+                }
             }
             
             
@@ -93,11 +100,14 @@ class Team extends Object {
         }
         
         // Write it to database
-        $this->score = $total;
-        $this->write();
-        
-        return $total;
-        
+        if($total > $this->score) {
+            $this->score = $total;
+            $this->write();
+            
+            return $total;
+        } else {
+            return $this->score;
+        }        
     }
     
     public function getLeaderboard(Match $M) {

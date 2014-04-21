@@ -1,4 +1,8 @@
-<!-- Example row of columns -->
+<div class="row">
+    <div class="col-lg-9">
+        <center><img class="img-responsive" src="" /></center>
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-12">
         <h3>The First and Only Daily Fantasy Baseball Game where you set your batting order.</h3>

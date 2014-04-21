@@ -8,6 +8,12 @@ if($url[1] == "") {
 	$url[1] = "view";
 }
 
+if(is_file($url[0] . ".php")) {
+    include_once($url[0] . ".php");
+    exit;
+}
+
+
 FB::log($route, 'Route');
 
 $customer_sentry = new Customer_Sentry($CUSTOMER);
