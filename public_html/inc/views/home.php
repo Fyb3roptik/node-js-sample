@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-9">
-        <center><img class="img-responsive" src="" /></center>
+
     </div>
 </div>
 <div class="row">
