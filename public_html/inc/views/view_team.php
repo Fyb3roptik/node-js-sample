@@ -251,9 +251,23 @@ $(function() {
                   <div class='box-quick-link purple-background'>
                     <a href='/chat' target="_blank">
                       <div class='header'>
-                        <div class='icon-comment'></div>
+                        <div class='icon-comments'></div>
                       </div>
                       <div class='content'>Open Beast Chat</div>
+                    </a>
+                  </div>
+                </div>
+            </div>
+            
+            <div class='row box box-transparent'>
+                
+                <div class='col-xs-12 col-sm-12'>
+                  <div class='box-quick-link banana-background'>
+                    <a href='/img/BeastFranchiseRules.pdf' target="_blank">
+                      <div class='header'>
+                        <div class='icon-edit'></div>
+                      </div>
+                      <div class='content'>View Game Rules</div>
                     </a>
                   </div>
                 </div>
