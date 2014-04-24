@@ -92,14 +92,12 @@ class Match_Controller extends Controller {
 		
 		$M->load($match);
         
-        
-        
 		$M->write();
 		
 		
 		// If match is locked, then lets add the teams to memory!
 		if($match['locked'] == 1) {
-    		$this->_putTeams();
+    		$this->_putTeams(post_var('match_id'));
 		}
 		
         redirect('/admin/match/');
@@ -151,7 +149,7 @@ class Match_Controller extends Controller {
 		exit;
 	}
 	
-	private function _putTeams() {
+	private function _putTeams($match_id) {
     	$cache = new Cache();
         $teams = array();
         
@@ -159,7 +157,7 @@ class Match_Controller extends Controller {
         $cache->delete("teams");
         
         // Fetch todays teams
-        $sql = "SELECT * FROM teams WHERE created_date = '".strtotime('today')."'";
+        $sql = "SELECT * FROM teams WHERE match_id = '{$match_id}'";
         
         $results = db_arr($sql);
         
