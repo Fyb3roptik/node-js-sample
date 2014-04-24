@@ -312,9 +312,9 @@ $(function() {
                                             <tr <?php if($SCORE['bases'][$mlb_id]['base'] == 1): ?>class="success"<?php elseif($SCORE['bases'][$mlb_id]['base'] == 2): ?>class="warning"<?php elseif($SCORE['bases'][$mlb_id]['base'] == 3): ?>class="danger"<?php endif; ?>>
                                                 <td><?php echo $P->first_name . " " . $P->last_name; ?></td>
                                                 <td>
-                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'] as $stat): ?>
+                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'] as $stat): ?>
                                                     <span class="label label-primary"><?php echo $stat ." "; ?></span>&nbsp;
-                                                    <?php endforeach; ?>
+                                                <?php endforeach; ?>
                                                 </td>
                                                 <td><?php if(isset($SCORE['scores'][$mlb_id]['score'])): ?><?php echo $SCORE['scores'][$mlb_id]['score']; ?><?php else: ?>0<?php endif; ?></td>
                                                 <td class="at_bat"><?php if($AT_BAT['player_id'] == $P->ID && $SCORE['done']['final_done'] == false): ?><button class="btn btn-xs disabled btn-primary">At Bat</button><?php endif; ?></td>

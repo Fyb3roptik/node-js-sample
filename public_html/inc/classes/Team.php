@@ -57,7 +57,7 @@ class Team extends Object {
         
         $score = $memcache->get('scores');
 
-        if($score['done_batting'][$team_id]['final_done'] == false) {
+        if(isset($score['done_batting'][$team_id]['final_done']) && $score['done_batting'][$team_id]['final_done'] == false) {
             
             $T = new Team($team_id);
             
@@ -81,11 +81,21 @@ class Team extends Object {
             $final['done'] = $score['done_batting'][$team_id];
         } else {
             
+            $T = new Team($team_id);
+            
+            $lineup = $T->getTeamLineupById(false);
+            
+            foreach($lineup as $l) {
+                $TL = new TeamsLineup($l['teams_lineup_id']);
+                $final['scores'][$l['mlb_player_id']]['score'] = $TL->score;
+                $final['scores'][$l['mlb_player_id']]['at_bat_stat'] = explode(",", $TL->inning_data);
+            }
+            
+            $final['done'] = true;
+            $final['outs'] = 0;
             
             
         }
-        
-        
         
         return $final;
         
