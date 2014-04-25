@@ -53,9 +53,12 @@ class Match_Controller extends Controller {
 		
 		$LAYOUT_TITLE = "Beast Franchise | Edit Match";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
+        
+        $MATCH_TEAMS = explode(",", $M->match_teams);
 		
 		$V->bind('TITLE', 'Edit Match');
 		$V->bind('M', $M);
+		$V->bind('MATCH_TEAMS', $MATCH_TEAMS);
 		$this->_setView($V);
 		$V->bind('MS', $MS);
 	}
@@ -89,6 +92,8 @@ class Match_Controller extends Controller {
         $start_time = post_var('start_time');
         
         $match['start_date'] = strtotime($start_date . " " . $start_time);
+        
+        $match['match_teams'] = implode(",", post_var('match_teams', array()));
 		
 		$M->load($match);
         

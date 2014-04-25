@@ -278,13 +278,13 @@ class Team_Controller extends Controller {
     	
     	$MATCH = new Match($TEAM->match_id);
     	
-        $CA = Player::getCA();
-        $FB = Player::getFB();
-        $SB = Player::getSB();
-        $TB = Player::getTB();
-        $SS = Player::getSS();
-        $OF = Player::getOF();
-        $DH = Player::getDH();
+        $CA = Player::getCA($MATCH->match_teams);
+        $FB = Player::getFB($MATCH->match_teams);
+        $SB = Player::getSB($MATCH->match_teams);
+        $TB = Player::getTB($MATCH->match_teams);
+        $SS = Player::getSS($MATCH->match_teams);
+        $OF = Player::getOF($MATCH->match_teams);
+        $DH = Player::getDH($MATCH->match_teams);
 
         $SELECTED_PLAYERS = TeamsLineup::getSelectedPlayers($team_id, false, false);
         $SELECTED_PLAYERS_LIST = TeamsLineup::getSelectedPlayers($team_id, true);

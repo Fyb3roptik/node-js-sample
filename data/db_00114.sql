@@ -1,0 +1,1 @@
+ALTER TABLE  `matches` ADD  `match_teams` TEXT NOT NULL

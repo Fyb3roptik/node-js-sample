@@ -49,6 +49,101 @@ $(document).ready(function(){
     				</div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label">Active Teams for Match</label>
+                    <div class="controls">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Angels", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Angels"> Angels
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Astros", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Astros"> Astros
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Athletics", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Athletics"> Athletics
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Blue Jays", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Blue Jays"> Blue Jays
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Braves", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Braves"> Braves
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Brewers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Brewers"> Brewers
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Cardinals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Cardinals"> Cardinals
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Cubs", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Cubs"> Cubs
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Diamondbacks", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Diamondbacks"> Diamondbacks
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Dodgers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Dodgers"> Dodgers
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Giants", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Giants"> Giants
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Indians", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Indians"> Indians
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Mariners", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Mariners"> Mariners
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Marlins", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Marlins"> Marlins
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Mets", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Mets"> Mets
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Nationals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Nationals"> Nationals
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Orioles", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Orioles"> Orioles
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Padres", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Padres"> Padres
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Phillies", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Phillies"> Phillies
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Pirates", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Pirates"> Pirates
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Rangers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rangers"> Rangers
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Rays", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rays"> Rays
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Red Sox", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Red Sox"> Red Sox
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Reds", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Reds"> Reds
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Rockies", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rockies"> Rockies
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Royals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Royals"> Royals
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Tigers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Tigers"> Tigers
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Twins", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Twins"> Twins
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("White Sox", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="White Sox"> White Sox
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Yankees", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Yankees"> Yankees
+                        </label>
+					</div>
+                </div>
+                <div class="form-group">
                     
                     <div class="controls">
                         <div class="col-lg-3 pull-left">
