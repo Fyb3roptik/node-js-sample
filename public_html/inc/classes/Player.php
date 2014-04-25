@@ -42,13 +42,13 @@ class Player extends Object {
         if($teams != "") {
             $teams_arr = explode(",", $teams);
             
-            $team_where = " AND ";
+            $team_where = " AND (";
             foreach($teams_arr as $team) {
                 
                 $last = end($teams_arr);
                 
                 if($last == $team) {
-                    $team_where .= "player_team = '{$team}'";
+                    $team_where .= "player_team = '{$team}')";
                 } else {
                     $team_where .= "player_team = '{$team}' OR ";   
                 }
@@ -71,13 +71,13 @@ class Player extends Object {
         if($teams != "") {
             $teams_arr = explode(",", $teams);
             
-            $team_where = " AND ";
+            $team_where = " AND (";
             foreach($teams_arr as $team) {
                 
                 $last = end($teams_arr);
                 
                 if($last == $team) {
-                    $team_where .= "player_team = '{$team}'";
+                    $team_where .= "player_team = '{$team}')";
                 } else {
                     $team_where .= "player_team = '{$team}' OR ";   
                 }
@@ -100,13 +100,13 @@ class Player extends Object {
         if($teams != "") {
             $teams_arr = explode(",", $teams);
             
-            $team_where = " AND ";
+            $team_where = " AND (";
             foreach($teams_arr as $team) {
                 
                 $last = end($teams_arr);
                 
                 if($last == $team) {
-                    $team_where .= "player_team = '{$team}'";
+                    $team_where .= "player_team = '{$team}')";
                 } else {
                     $team_where .= "player_team = '{$team}' OR ";   
                 }
@@ -129,13 +129,13 @@ class Player extends Object {
         if($teams != "") {
             $teams_arr = explode(",", $teams);
             
-            $team_where = " AND ";
+            $team_where = " AND (";
             foreach($teams_arr as $team) {
                 
                 $last = end($teams_arr);
                 
                 if($last == $team) {
-                    $team_where .= "player_team = '{$team}'";
+                    $team_where .= "player_team = '{$team}')";
                 } else {
                     $team_where .= "player_team = '{$team}' OR ";   
                 }
@@ -158,13 +158,13 @@ class Player extends Object {
         if($teams != "") {
             $teams_arr = explode(",", $teams);
             
-            $team_where = " AND ";
+            $team_where = " AND (";
             foreach($teams_arr as $team) {
                 
                 $last = end($teams_arr);
                 
                 if($last == $team) {
-                    $team_where .= "player_team = '{$team}'";
+                    $team_where .= "player_team = '{$team}')";
                 } else {
                     $team_where .= "player_team = '{$team}' OR ";   
                 }
@@ -187,13 +187,13 @@ class Player extends Object {
         if($teams != "") {
             $teams_arr = explode(",", $teams);
             
-            $team_where = " AND ";
+            $team_where = " AND (";
             foreach($teams_arr as $team) {
                 
                 $last = end($teams_arr);
                 
                 if($last == $team) {
-                    $team_where .= "player_team = '{$team}'";
+                    $team_where .= "player_team = '{$team}')";
                 } else {
                     $team_where .= "player_team = '{$team}' OR ";   
                 }
