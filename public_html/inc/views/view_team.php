@@ -1,5 +1,5 @@
 <script>
-$(function() {
+$(document).ready(function() {
     $( "ul.droptrue" ).sortable({
       connectWith: "ul",
       placeholder: "ui-state-highlight"
@@ -22,6 +22,124 @@ $(function() {
                 window.setTimeout(function() { $("#message").fadeOut(); }, 3000);
             }
         });
+    });
+    
+    // Remove options from dropdowns
+    $("#team\\[c\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_c = this.value;
+    }).change(function() {
+        $('#team\\[dh\\] option[value='+previous_c+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_c = this.value;
+        $('#team\\[dh\\] option[value='+val+']').attr('disabled','disabled');
+    });
+    $("#team\\[1b\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_1b = this.value;
+    }).change(function() {
+        $('#team\\[dh\\] option[value='+previous_1b+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_1b = this.value;
+        $('#team\\[dh\\] option[value='+val+']').attr('disabled','disabled');
+    });
+    $("#team\\[2b\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_2b = this.value;
+    }).change(function() {
+        $('#team\\[dh\\] option[value='+previous_2b+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_2b = this.value;
+        $('#team\\[dh\\] option[value='+val+']').attr('disabled','disabled');
+    });
+    $("#team\\[3b\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_3b = this.value;
+    }).change(function() {
+        $('#team\\[dh\\] option[value='+previous_3b+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_3b = this.value;
+        $('#team\\[dh\\] option[value='+val+']').attr('disabled','disabled');
+    });
+    $("#team\\[ss\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_ss = this.value;
+    }).change(function() {
+        $('#team\\[dh\\] option[value='+previous_ss+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_ss = this.value;
+        $('#team\\[dh\\] option[value='+val+']').attr('disabled','disabled');
+    });
+    $("#team\\[of1\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_of1 = this.value;
+    }).change(function() {
+        $('#team\\[dh\\] option[value='+previous_of1+']').removeAttr('disabled');
+        $('#team\\[of2\\] option[value='+previous_of1+']').removeAttr('disabled');
+        $('#team\\[of3\\] option[value='+previous_of1+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_of1 = this.value;
+        $('#team\\[dh\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of2\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of3\\] option[value='+val+']').attr('disabled','disabled');
+    });
+    $("#team\\[of2\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_of2 = this.value;
+    }).change(function() {
+        $('#team\\[dh\\] option[value='+previous_of2+']').removeAttr('disabled');
+        $('#team\\[of1\\] option[value='+previous_of2+']').removeAttr('disabled');
+        $('#team\\[of3\\] option[value='+previous_of2+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_of2 = this.value;
+        $('#team\\[dh\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of1\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of3\\] option[value='+val+']').attr('disabled','disabled');
+    });
+    $("#team\\[of3\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_of3 = this.value;
+    }).change(function() {
+        $('#team\\[dh\\] option[value='+previous_of3+']').removeAttr('disabled');
+        $('#team\\[of1\\] option[value='+previous_of3+']').removeAttr('disabled');
+        $('#team\\[of2\\] option[value='+previous_of3+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_of3 = this.value;
+        $('#team\\[dh\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of1\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of2\\] option[value='+val+']').attr('disabled','disabled');
+    });
+    $("#team\\[dh\\]").one('focus', function () {
+        // Store the current value on focus and on change
+        previous_dh = this.value;
+    }).change(function() {
+        $('#team\\[c\\] option[value='+previous_dh+']').removeAttr('disabled');
+        $('#team\\[1b\\] option[value='+previous_dh+']').removeAttr('disabled');
+        $('#team\\[2b\\] option[value='+previous_dh+']').removeAttr('disabled');
+        $('#team\\[3b\\] option[value='+previous_dh+']').removeAttr('disabled');
+        $('#team\\[ss\\] option[value='+previous_dh+']').removeAttr('disabled');
+        $('#team\\[of1\\] option[value='+previous_dh+']').removeAttr('disabled');
+        $('#team\\[of2\\] option[value='+previous_dh+']').removeAttr('disabled');
+        $('#team\\[of3\\] option[value='+previous_dh+']').removeAttr('disabled');
+        
+        var val = $(this).val();
+        previous_dh = this.value;
+        $('#team\\[c\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[1b\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[2b\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[3b\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[ss\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of1\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of2\\] option[value='+val+']').attr('disabled','disabled');
+        $('#team\\[of3\\] option[value='+val+']').attr('disabled','disabled');
     });
 });
 </script>
@@ -97,7 +215,7 @@ $(function() {
                         </div>
                         <div class="form-group">
                             <label for="team[ss]">SS</label>
-                            <select class="form-control" id="team[ss]" name="team[ss]">
+                            <select class="form-control team_ss" id="team[ss]" name="team[ss]">
                                 <option>--SS--</option>
                                 <?php foreach($SS as $P): ?>
                                 <option value="<?php echo $P->ID; ?>" <?php if(in_array($P->ID, $SELECTED_PLAYERS_LIST)): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
@@ -134,7 +252,7 @@ $(function() {
                         </div>
                         <div class="form-group">
                             <label for="team[dh]">DH</label>
-                            <select class="form-control" id="team[dh]" name="team[dh]">
+                            <select class="form-control team_dh" id="team[dh]" name="team[dh]">
                                 <option>--DH--</option>
                                 <?php foreach($DH as $P): ?>
                                 <option value="<?php echo $P->ID; ?>" <?php if(in_array($DHS[0], $SELECTED_PLAYERS_LIST) && $DHS[0] == $P->ID): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
