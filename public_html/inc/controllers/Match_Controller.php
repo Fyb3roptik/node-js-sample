@@ -15,7 +15,7 @@ class Match_Controller extends Controller {
 		$this->_setView($V);
 		$MS = new Message_Stack();
 
-        $MATCH_LIST = Match::getActiveMatches(true);
+        $MATCH_LIST = Match::getAllMatches();
         
         $LAYOUT_TITLE = "Beast Franchise | Manage Matches";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);

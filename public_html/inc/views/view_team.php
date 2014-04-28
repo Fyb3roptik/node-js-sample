@@ -409,18 +409,55 @@ $(document).ready(function() {
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-sm-8">
+        <div class="col-md-10 col-sm-12">
            <div class="box bordered-box purple-border">
                 <div class="box-header purple-background">
-                    <div class="title">Lineup Scores</div>
+                    <div class="title">Box Scores</div>
                 </div>
                 <div class="box-content">
                     <div class="responsive-table">
                         <div class="responsive-table">
                             <table class="table table-striped table-bordered table-hover score">
                                 <thead>
+                                    <th></th>
                                     <th>Player</th>
-                                    <th>Game Stats</th>
+                                    
+                                    <?php if($BAT_COUNT >= 1): ?>
+                                    <th>1st At Bat</th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 2): ?>
+                                    <th>2nd At Bat</th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 3): ?>
+                                    <th>3rd At Bat</th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 4): ?>
+                                    <th>4th At Bat</th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 5): ?>
+                                    <th>5th At Bat</th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 6): ?>
+                                    <th>6th At Bat</th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 7): ?>
+                                    <th>7th At Bat</th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 8): ?>
+                                    <th>8th At Bat</th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 9): ?>
+                                    <th>9th At Bat</th>
+                                    <?php endif; ?>
+                                    
                                     <th>Score</th>
                                 </thead>
                                 <tbody>
@@ -428,21 +465,135 @@ $(document).ready(function() {
                                         <?php if($lineup['order'] > 0): ?>
                                             <?php $P = new Player($lineup['player_id']); $mlb_id = $P->mlb_id; ?>
                                             <tr <?php if($SCORE['bases'][$mlb_id]['base'] == 1): ?>class="success"<?php elseif($SCORE['bases'][$mlb_id]['base'] == 2): ?>class="warning"<?php elseif($SCORE['bases'][$mlb_id]['base'] == 3): ?>class="danger"<?php endif; ?>>
+                                                
+                                                <?php if($AT_BAT['player_id'] == $P->ID && $SCORE['done']['final_done'] == false): ?>
+                                                <td class="at_bat"><button class="btn btn-xs disabled btn-primary">At Bat</button></td>
+                                                <?php else: ?>
+                                                <td></td>
+                                                <?php endif; ?>
+                                                
                                                 <td><?php echo $P->first_name . " " . $P->last_name; ?></td>
+                                                
+                                                <?php if($BAT_COUNT >= 1): ?>
                                                 <td>
-                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'] as $stat): ?>
-                                                    <span class="label label-primary"><?php echo $stat ." "; ?></span>&nbsp;
-                                                <?php endforeach; ?>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][0] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
                                                 </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($BAT_COUNT >= 2): ?>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][1] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($BAT_COUNT >= 3): ?>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][2] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($BAT_COUNT >= 4): ?>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][3] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($BAT_COUNT >= 5): ?>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][4] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($BAT_COUNT >= 6): ?>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][5] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($BAT_COUNT >= 7): ?>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][6] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($BAT_COUNT >= 8): ?>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][7] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php if($BAT_COUNT >= 9): ?>
+                                                <td>
+                                                    <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][8] as $at_bat_stat): ?>
+                                                        <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endif; ?>
+                                                
+                                                <?php //foreach($SCORE['scores'][$mlb_id]['at_bat_stat'] as $stat): ?>
+                                                    
+                                                <?php //endforeach; ?>
                                                 <td><?php if(isset($SCORE['scores'][$mlb_id]['score'])): ?><?php echo $SCORE['scores'][$mlb_id]['score']; ?><?php else: ?>0<?php endif; ?></td>
-                                                <td class="at_bat"><?php if($AT_BAT['player_id'] == $P->ID && $SCORE['done']['final_done'] == false): ?><button class="btn btn-xs disabled btn-primary">At Bat</button><?php endif; ?></td>
                                             </tr>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </tbody>
                                 <tfoot>
-                                    <th><?php if($SCORE['done']['final_done'] == true): ?>FINAL Score<?php else: ?>Total Score<?php endif; ?></th>
                                     <th></th>
+                                    <th><?php if($SCORE['done']['final_done'] == true): ?>FINAL Score<?php else: ?>Total Score<?php endif; ?></th>
+                                    
+                                    <?php if($BAT_COUNT >= 1): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 2): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 3): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 4): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 5): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 6): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 7): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 8): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($BAT_COUNT >= 9): ?>
+                                    <th></th>
+                                    <?php endif; ?>
+                                    
                                     <th><?php echo $total; ?></th>
                                 </tfoot>
                             </table>
@@ -452,7 +603,7 @@ $(document).ready(function() {
            </div>
         </div>
         
-        <div class="col-md-2 visible-lg">
+        <div class="col-md-2 col-lg-2 visible-lg">
             <div class="box bordered-box banana-border">
                 <div class="box-header banana-background">
                     <div class="title">Situation Points</div>
@@ -474,43 +625,43 @@ $(document).ready(function() {
                             <tbody>
                                 <tr>
                                     <td>Single</td>
-                                    <td>2 Points</td>
+                                    <td>2</td>
                                 </tr>
                                 <tr>
                                     <td>Double</td>
-                                    <td>4 Points</td>
+                                    <td>4</td>
                                 </tr>
                                 <tr>
                                     <td>Triple</td>
-                                    <td>6 Points</td>
+                                    <td>6</td>
                                 </tr>
                                 <tr>
                                     <td>Homerun</td>
-                                    <td>9 Points</td>
+                                    <td>9</td>
                                 </tr>
                                 <tr>
                                     <td>Walk</td>
-                                    <td>1 Points</td>
+                                    <td>1</td>
                                 </tr>
                                 <tr>
                                     <td>Hit By Pitch</td>
-                                    <td>1 Points</td>
+                                    <td>1</td>
                                 </tr>
                                 <tr>
                                     <td>Strikeout</td>
-                                    <td>-0.5 Points</td>
+                                    <td>-0.5</td>
                                 </tr>
                                 <tr>
                                     <td>Run</td>
-                                    <td>3 Points</td>
+                                    <td>3</td>
                                 </tr>
                                 <tr>
                                     <td>RBI</td>
-                                    <td>3 Points</td>
+                                    <td>3</td>
                                 </tr>
                                 <tr>
                                     <td>SB</td>
-                                    <td>2 Points</td>
+                                    <td>2</td>
                                 </tr>
                             </tbody>
                         </table>

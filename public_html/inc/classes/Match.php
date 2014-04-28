@@ -29,6 +29,22 @@ class Match extends Object {
     	
 	}
 	
+	public static function getAllMatches() {
+    	
+    	$MATCHES = array();
+    	
+    	$sql = "SELECT match_id FROM matches ORDER BY match_id DESC";
+    	
+    	$arr = db_arr($sql);
+    	
+    	foreach($arr as $match) {
+        	$MATCHES[] = new Match($match['match_id']);
+    	}
+    	
+    	return $MATCHES;
+    	
+	}
+	
 	public function getTotalTeams() {
     	$count = "";
     	

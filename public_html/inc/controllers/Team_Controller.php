@@ -296,7 +296,7 @@ class Team_Controller extends Controller {
         $TEAM_LIST = $TEAM->getTeamLineupById(false);
         $SCORE = Team::getScore($team_id);
         $AT_BAT = $TEAM_LIST[$SCORE['at_bat']];
-        
+
         // Update Leaderboards
         $TEAMS = Team::getAllTeams($MATCH->ID);
         
@@ -304,6 +304,16 @@ class Team_Controller extends Controller {
             $score = Team::getScore($T->ID);
             $T->getTotal($score);
         }
+        
+        foreach($TEAM_LIST as $key => $lineup) {
+            $P = new Player($lineup['player_id']); 
+            $mlb_id = $P->mlb_id;
+            
+            $at_bat_count[] = count($SCORE['scores'][$mlb_id]['at_bat_stat']);
+        }
+        rsort($at_bat_count);
+        
+        $BAT_COUNT = $at_bat_count[0];
         
         $LEADERBOARD = Team::getLeaderboard($MATCH);
         
@@ -316,6 +326,7 @@ class Team_Controller extends Controller {
 		$V->bind('SCORE', $SCORE);
 		$V->bind('total', $total);
 		$V->bind('AT_BAT', $AT_BAT);
+		$V->bind('BAT_COUNT', $BAT_COUNT);
 
     	$V->bind('TEAM', $TEAM);
     	$V->bind('MATCH', $MATCH);

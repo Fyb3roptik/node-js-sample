@@ -68,7 +68,7 @@ class Team extends Object {
                 $TL = new TeamsLineup($l['teams_lineup_id']);
                 if(isset($score['scores'][$team_id][$l['mlb_player_id']]['score']) && $score['scores'][$team_id][$l['mlb_player_id']]['score'] > 0) {
                     $TL->score = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
-                    $TL->inning_data = implode(",", $score['scores'][$team_id][$l['mlb_player_id']]['at_bat_stat']);
+                    $TL->inning_data = http_build_query($score['scores'][$team_id][$l['mlb_player_id']]['at_bat_stat']);
                     $TL->write();
                 }
             }
@@ -88,7 +88,7 @@ class Team extends Object {
             foreach($lineup as $l) {
                 $TL = new TeamsLineup($l['teams_lineup_id']);
                 $final['scores'][$l['mlb_player_id']]['score'] = $TL->score;
-                $final['scores'][$l['mlb_player_id']]['at_bat_stat'] = explode(",", $TL->inning_data);
+                parse_str(htmlspecialchars_decode(htmlspecialchars_decode(urldecode($TL->inning_data))), $final['scores'][$l['mlb_player_id']]['at_bat_stat']);
             }
             
             $final['done'] = true;
