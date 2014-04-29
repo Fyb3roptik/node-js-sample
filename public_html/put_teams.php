@@ -9,7 +9,10 @@ $cache->delete("teams");
 
 // Fetch todays teams
 $sql = "SELECT * FROM teams WHERE created_date = '".strtotime('today')."'";
-//$sql = "SELECT * FROM teams WHERE team_id = '82'";
+
+if(isset($_REQUEST['team_id'])) {
+    $sql = "SELECT * FROM teams WHERE team_id = '{$_REQUEST['team_id']}'";  
+}
 
 $results = db_arr($sql);
 
