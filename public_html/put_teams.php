@@ -4,6 +4,7 @@ require_once("inc/global.php");
 $cache = new Cache();
 $teams = array();
 
+
 // Clear cache for today
 $cache->delete("teams");
 
