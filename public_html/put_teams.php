@@ -14,6 +14,10 @@ if(isset($_REQUEST['team_id'])) {
     $sql = "SELECT * FROM teams WHERE team_id = '{$_REQUEST['team_id']}'";  
 }
 
+if(isset($_REQUEST['match_id'])) {
+    $sql = "SELECT * FROM teams WHERE match_id = '{$_REQUEST['match_id']}'";
+}
+
 $results = db_arr($sql);
 
 foreach($results as $team) {
