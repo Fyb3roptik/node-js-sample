@@ -8,13 +8,7 @@
 $(document).ready(function() {
     $("#match_table").dataTable({
         "iDisplayLength": 25,
-        "aoColumns": [
-            null,
-            null,
-            { "asSorting": [ "asc" ] },
-            null,
-            null
-        ]
+        "aaSorting": [[1, 'desc']]
     });
     
     $('a.delete').click(function(event){
