@@ -23,7 +23,7 @@ $results = db_arr($sql);
 
 foreach($results as $team) {
     $T = new Team($team['team_id']);
-    
+
     $teams[$team['team_id']] = $T->getTeamLineupById();
 }
 
