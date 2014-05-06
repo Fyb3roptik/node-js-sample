@@ -72,7 +72,15 @@ class Match_Controller extends Controller {
 		exit;
 	}
 	
-	
+	public function deleteTeams() {
+    	$this->_configure();
+        $MS = new Message_Stack();
+        
+        $this->_deleteTeams();
+        $MS->add('match', "Deleted Team Cache", MS_SUCCESS);
+        redirect('/admin/match/');
+        exit;
+	}
 
 	/**
 	 * Process customer data and save it.
@@ -98,7 +106,6 @@ class Match_Controller extends Controller {
 		$M->load($match);
         
 		$M->write();
-		
 		
 		// If match is locked, then lets add the teams to memory!
 		if($match['locked'] == 1) {
@@ -154,12 +161,18 @@ class Match_Controller extends Controller {
 		exit;
 	}
 	
+	private function _deleteTeams() {
+    	// Clear cache for today
+        $cache = new Cache();
+        $cache->delete("teams");
+	}
+	
 	private function _putTeams($match_id) {
     	$cache = new Cache();
         $teams = array();
         
-        // Clear cache for today
-        $cache->delete("teams");
+        // Fetch the existing data
+        $teams = $cache->get('teams');
         
         // Fetch todays teams
         $sql = "SELECT * FROM teams WHERE match_id = '{$match_id}'";

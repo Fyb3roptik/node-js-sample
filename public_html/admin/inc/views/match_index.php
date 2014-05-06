@@ -23,13 +23,20 @@ $(document).ready(function() {
         }
         
     });
+    
+    $('a.delete-cache').click(function(event){
+        if(!confirm('Are you sure you want to delete team cache? This is dangerous if matches are already live!!!!!')){
+            event.preventDefault();
+        }
+        
+    });
 });
 </script>
-
+<?php echo $MS->messages('match'); ?>
 <div class="page-header">
     <h1>Manage Matches</h1>
 </div>
-<p><a class="btn btn-success" href="/admin/match/add">Add Match</a></p>
+<p><a class="btn btn-success" href="/admin/match/add">Add Match</a> <a class="btn btn-danger delete-cache" href="/admin/match/deleteTeams">Delete Team Cache</a></p>
 <div class="col-lg-12">
     <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped table-hover" id="match_table">
         <thead>
