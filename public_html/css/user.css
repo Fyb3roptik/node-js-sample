@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'Beast Font'; /*a name to be used later*/
+    src: url('/fonts/beast.ttf'); /*URL to font*/
+}
 @media (max-width: 767px) {
   .text-center-xs {
     text-align: center; } }
@@ -18,11 +22,55 @@ body {
     -webkit-animation-duration: 0.1s;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-timing-function: linear;
+    background: url('/img/home_bg.png') repeat;
 }
 
 @-webkit-keyframes fontfix {
     from { opacity: 1; }
     to   { opacity: 1; }
+}
+
+.tooltip.top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-top-color: #555A92;
+  border-width: 5px 5px 0;
+}
+.tooltip.left .tooltip-arrow {
+  top: 50%;
+  right: 0;
+  margin-top: -5px;
+  border-left-color: #555A92;
+  border-width: 5px 0 5px 5px;
+}
+.tooltip.right .tooltip-arrow {
+  top: 50%;
+  left: 0;
+  margin-top: -5px;
+  border-right-color: #555A92;
+  border-width: 5px 5px 5px 0;
+}
+.tooltip.bottom .tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom-color: #555A92;
+  border-width: 0 5px 5px;
+}
+.tooltip-inner {
+  color: #CCD0FF;
+  background: #555A92;
+  border: solid 1px #555A92;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.logo {
+    font-family: 'Beast Font';
+    color: #FFF;
+    font-size: 3.5em;
+    margin-top: -3%;
 }
 
 .no-mg-t {
@@ -58,12 +106,87 @@ span.batting_num {
     background: url('/img/nav_bg.png') repeat;
 }
 
+#main-nav {
+    top: 40px;
+    z-index: 1000;
+}
+
+.contrast-purple header .navbar {
+    background-color: transparent;
+    color: #555A92;
+}
+
+header .navbar .toggle-nav {
+    margin-left: 0;
+    padding: 10px 16px;
+    margin-top: 0;
+}
+
 header .navbar {
     padding: 0;
 }
 
 header .navbar .navbar-brand {
     line-height: 38px;
+}
+
+#main-nav .navigation > .nav > li > a:after {
+    border-right: none;
+}
+
+header .navbar > .nav > li {
+    border-left: 1px solid #555A92;
+}
+
+header .navbar > .nav > li > a {
+    color: #555A92;
+}
+
+header .navbar > .nav > li > a:hover {
+    color: #555A92;
+}
+
+header .navbar .user-menu .dropdown-toggle img {
+    border: 2px solid #555A92;
+}
+
+header .navbar > .nav > li.dropdown > .dropdown-toggle .caret {
+    border-top-color: #555A92;
+    border-bottom-color: #555A92;
+}
+
+header .navbar > .nav > li.dropdown:hover > .dropdown-toggle .caret {
+    border-top-color: #555A92;
+    border-bottom-color: #555A92;
+}
+
+header .navbar > .nav > li.dropdown.open > .dropdown-toggle {
+    color: #555A92;
+}
+
+#content {
+    background: transparent;
+}
+
+.page-header {
+    background: #555A92;
+}
+
+.page-header h1 {
+    color: #CCD0FF;
+}
+
+.contrast-purple .page-header h1 [class^="icon-"] {
+    color: #CCD0FF;
+}
+
+.table {
+    background: #FFF;
+}
+
+.table thead {
+    background: #555A92;
+    color: #CCD0FF;
 }
 
 table.score tbody td.at_bat .btn {
@@ -73,6 +196,60 @@ table.score tbody td.at_bat .btn {
 table.score tbody td.at_bat {
     background-color: transparent;
     border: none;
-    
+}
+
+table.table-horizontal thead {
+   float: left; 
+}
+
+.table-horizontal thead > tr > th {
+    border-bottom: none;
+}
+
+.table-horizontal thead > tr > th > span.label {
+    padding: 20px 14px;
+    margin-top: 3px;
+    display: block;
+}
+
+table.table-horizontal thead th {
+   display: block;
+}
+
+table.table-horizontal tbody {
+   float: left;
+   width: 87%; 
+}
+
+table.table-horizontal tbody td {
+   width: 1%;
+   border: 1px solid #9195a1;
+}
+
+table.table-horizontal tbody td.empty {
+    border: none;
+}
+
+.shield {
+    background-image: url('/img/shield.svg');
+    width: 80px;
+    height: 80px;
+    color: #CCD0FF;
+    font-size: 10px;
+}
+
+.shield p {
+    padding-top: 1px;
+}
+
+.shield hr {
+    background-color: #CCD0FF;
+    width: 60%;
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid #CCD0FF;
+    margin: 1em 0; 
+    padding: 0;
 }
 

@@ -67,8 +67,8 @@ require_once 'functions.php';
 
 require_once 'routes.php';
 
-if(true == defined('MAINTANENCE_MODE') && defined($_REQUEST['debug']) && ($_SERVER['REQUEST_URI'] != "/")) {
-	redirect('/');
+if(true == defined('MAINTENANCE_MODE') && ($_SERVER['REQUEST_URI'] != "/maintenance")) {
+	redirect('/maintenance');
 }
 
 //initiate our message stack.

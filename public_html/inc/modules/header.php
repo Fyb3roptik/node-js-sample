@@ -16,7 +16,9 @@ global $CUSTOMER;
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Beast Franchise</a>
+          <a class="navbar-brand" href="/">
+              <div class="logo">BEAST FRANCHISE &trade;</div>
+          </a>
         </div>
         <div class="navbar-collapse collapse">
             <div class="navbar-right">

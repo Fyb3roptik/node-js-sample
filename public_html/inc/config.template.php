@@ -21,7 +21,7 @@ define('SITE_SECURE_URL', '__SITE_SECURE_URL__', true);
 
 define('ENCRYPTION_KEY', '__ENCRYPTION_KEY__', false);
 
-define('MAINTANENCE_MODE', '__MAINTANENCE_MODE__', false);
+define('MAINTENANCE_MODE', '__MAINTENANCE_MODE__', false);
 
 define('GOOGLE_ANALYTICS_CODE', '__GOOGLE_ANALYTICS_CODE__', true);
 

@@ -27,7 +27,7 @@ try {
 	}
 	$D->dispatch();
 } catch(Dispatcher_Permission_Exception $e) {
-	redirect('/denied/');
+	redirect('/denied');
 } catch(Controller_Not_Found_Exception $e) {
 	//otherwise, try to find a DJ
 	$C = new Customer($url[0], 'username');
@@ -39,6 +39,8 @@ try {
 			$D->setSentry($customer_sentry);
 		}
 		$D->dispatch();
+	} else {
+    	redirect('/404');
 	}
 }
 ?>

@@ -28,7 +28,7 @@ dir.xml_dump.backup = /tmp/
 
 encryption_key = foobar
 
-maintainence_mode = false
+maintenance_mode = false
 
 #enable caching? (true or false)
 enable_caching = false

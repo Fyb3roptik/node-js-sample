@@ -1,15 +1,39 @@
+@font-face {
+    font-family: 'Beast Font'; /*a name to be used later*/
+    src: url('/fonts/beast.ttf'); /*URL to font*/
+}
 
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+body {
+    background: url('/img/home_bg.png') repeat;
+}
 
 .btn-nav {
     margin-top: 8px !important;
 }
 
+.logo {
+    font-family: 'Beast Font';
+    color: #FFF;
+    font-size: 3.5em;
+    margin-top: 1%;
+}
 
+.navbar {
+    min-height: 80px;
+}
 
+.navbar-inverse {
+    background-image: none;
+    background: #555A92;
+}
+
+.navbar-right {
+    margin-top: 1%;
+}
+
+.top-row {
+    margin-top: 3%;
+}
 
 
 

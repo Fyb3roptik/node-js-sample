@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer>
-    &copy; <?php echo date('Y', time()); ?> Beast Franchise | All Rights Reserved
+    &copy; <?php echo date('Y', time()); ?> Beast Fantasy Sports Inc | All Rights Reserved
 </footer>
 <!-- /Footer -->
 <?php
