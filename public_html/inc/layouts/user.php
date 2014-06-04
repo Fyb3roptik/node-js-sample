@@ -13,6 +13,7 @@
         <link href='/img/meta_icons/apple-touch-icon-72x72.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
         <link href='/img/meta_icons/apple-touch-icon-114x114.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
         <link href='/img/meta_icons/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
+        <link href='//fonts.googleapis.com/css?family=Cinzel:400,900' rel='stylesheet' type='text/css'>
         <!-- / START - page related stylesheets [optional] -->
         <link href="/css/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
         <link href="/css/plugins/fullcalendar/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
@@ -35,45 +36,45 @@
     	<?php require_once 'modules/meta_tags.php'; ?>
     	<?php require_once 'modules/css.php'; ?>
     </head>
-    <body class='contrast-purple '>
+    <body class='contrast-purple main-nav-closed'>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
     <?php require_once 'modules/header_user.php'; ?>
-
+    
+    <div class="clearfix"></div>
+    
+    <div class="row">
+        <nav>
+            <div class='navigation'>
+              <ul class='nav'>
+                <li <?php if(strtolower($_SERVER['REQUEST_URI']) == "/".strtolower($CUSTOMER->username)): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
+                  <a href='/<?php echo $CUSTOMER->username; ?>'>
+                    <span>Dashboard</span>
+                  </a>
+                </li>
+                
+                <li <?php if($_SERVER['REQUEST_URI'] == "/match/find/"): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
+                  <a href='/match/find/'>
+                    <span>Find Matches</span>
+                  </a>
+                </li>
+                
+                <li <?php if($_SERVER['REQUEST_URI'] == "/team/find/"): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
+                  <a href='/team/find/'>
+                    <span>My Teams</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+    </div>
+    
     <div id='wrapper'>
-      <div id='main-nav-bg'></div>
-      <nav id='main-nav'>
-        <div class='navigation'>
-          <ul class='nav nav-stacked'>
-            
-            <li <?php if($_SERVER['REQUEST_URI'] == "/".$CUSTOMER->username): ?>class="active"<?php endif; ?>>
-              <a href='/<?php echo $CUSTOMER->username; ?>'>
-                <i class='icon-dashboard'></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-            
-            <li <?php if($_SERVER['REQUEST_URI'] == "/match/find/"): ?>class="active"<?php endif; ?>>
-              <a href='/match/find/'>
-                <i class='icon-gamepad'></i>
-                <span>Find Matches</span>
-              </a>
-            </li>
-            
-            <li <?php if($_SERVER['REQUEST_URI'] == "/team/find/"): ?>class="active"<?php endif; ?>>
-              <a href='/team/find/'>
-                <i class='icon-star'></i>
-                <span>My Teams</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      
       <section id='content'>
-        <div class='container'>
+        <div class='container'>            
             <div class='row' id='content-wrapper'>
+                
                 <?php require_once VIEW_HANDLER; ?>
             </div>
         
@@ -81,7 +82,7 @@
                 <div class='footer-wrapper'>
                   <div class='row'>
                     <div class='col-sm-6 text'>
-                      Copyright &copy; <?php echo date('Y', time()); ?> Beast Franchise
+                      Copyright &copy; <?php echo date('Y', time()); ?> Beast Fantasy Sports Inc | All Rights Reserved
                     </div>
                   </div>
                 </div>

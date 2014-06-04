@@ -1,6 +1,10 @@
 <?php echo $MS->messages(); ?>
 
-<div class="row-fluid">
+<div class="page-header">
+    <h3>Beast Franchise Login</h3>
+</div>
+
+<div class="row">
     <div class="col-lg-6 col-sm-6">
         <div class="panel panel-primary">
             <div class="panel-heading">

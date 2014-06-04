@@ -109,17 +109,27 @@ class Customer_Controller extends Controller {
 	
 	public function view($username) {
 		$this->_config(false, $username);
-		$DJ = new Customer($username, "username");
+		$C = new Customer($username, "username");
 		$V = new View('view_customer.php');
-		$V->bind('DJ', $DJ);
+		
+		$MATCHES = Match::getActiveMatches(true);
+    	
+    	$V->bind('MATCHES', $MATCHES);
+		
+		$V->bind('C', $C);
 		$V->bind('CUSTOMER', $this->_user);
 		$this->_setView($V);
 	}
 	
-	private function _config($require_login = false, $user = "") {
+	private function _config($require_login = false, $user = "", $set_redirect = true) {
 		if(true == $require_login) {
-			$this->_checkPermissions();
+			$this->_checkPermissions($set_redirect);
 		}
+		
+		if(false == $require_login && true == $set_redirect) {
+    		$this->_setRedirect();
+		}
+		
 		$this->_setTemplate(new Template('user.php'));
 		$this->_template->bind('CUSTOMER', $this->_user);
 		$REDIR = sanitize_string(exists('go', $_GET));
@@ -127,12 +137,18 @@ class Customer_Controller extends Controller {
 		$this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE .= ' | '.$user);
 	}
 	
-	private function _checkPermissions() {
+	private function _checkPermissions($set_redirect = true) {
 		if(false == $this->_user->exists()) {
-			$_SESSION['login_redirect'] = $_SERVER['REDIRECT_URL'];
+			if($set_redirect == true) {
+			    $_SESSION['login_redirect'] = current_page_url();
+            }
 			$this->redirect(LOC_LOGIN);
 			exit;
 		}
+	}
+	
+	private function _setRedirect() {
+    	$_SESSION['login_redirect'] = current_page_url();
 	}
 
 	/**

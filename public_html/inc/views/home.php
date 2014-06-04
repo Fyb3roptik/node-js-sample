@@ -1,17 +1,12 @@
-<div class="row">
-    <div class="col-lg-9">
-
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
+<div class="row top-row">
+    <div class="col-lg-12 col-sm-12">
         <h3>The First and Only Daily Fantasy Baseball Game where you set your batting order.</h3>
         <h4>You are the GM. You are the Coach. You are the Legend</h4>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-sm-12">
         <div class="page-header">
             <h3>Step 1</h3>
         </div>
@@ -21,7 +16,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-sm-12">
         <div class="page-header">
             <h3>Step 2</h3>
         </div>
@@ -31,7 +26,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-sm-12">
         <div class="page-header">
             <h3>Step 3</h3>
         </div>

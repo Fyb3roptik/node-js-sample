@@ -1,11 +1,11 @@
 <header>
   <nav class='navbar navbar-default'>
-    <a class='toggle-nav btn pull-left' href='#'>
-      <i class='icon-reorder'></i>
-    </a>
+    <div class="pull-left logo">
+        <img src="/img/claws_white.png" /> <span class="logoText">Beast Franchise <span class="tm">&trade;</span></span>
+    </div>
     <ul class='nav'>
-      <li>
-        <a href="#">RULES</a>
+      <li class="first">
+        <a class="pull-left" href="#"><i class="pull-left glyphicon glyphicon-book"></i>&nbsp;&nbsp;RULES</a>
       </li>
       <li class='dropdown user-menu'>
         <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
@@ -22,10 +22,17 @@
           </li>
           <li class='divider'></li>
           <li>
-            <a href='/logout'>
-              <i class='icon-signout'></i>
-              Sign out
-            </a>
+            <?php if($CUSTOMER->exists()): ?>
+                <a href='/logout'>
+                  <i class='icon-signout'></i>
+                  Logout
+                </a>
+            <?php else: ?>
+                <a href='/login'>
+                  <i class='icon-signin'></i>
+                  Login
+                </a>
+            <?php endif; ?>
           </li>
         </ul>
       </li>

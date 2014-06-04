@@ -271,7 +271,7 @@ class Team_Controller extends Controller {
 	}
 	
 	public function view($team_id) {
-    	$this->_config(true);
+    	$this->_config(false);
     	$V = new View('view_team.php');
     	
     	$TEAM = new Team($team_id);
@@ -295,7 +295,10 @@ class Team_Controller extends Controller {
         $TEAM = new Team($team_id);
         $TEAM_LIST = $TEAM->getTeamLineupById(false);
         $SCORE = Team::getScore($team_id);
+        
         $AT_BAT = $TEAM_LIST[$SCORE['at_bat']];
+        
+        $GAMES = $TEAM->getGames();
 
         // Update Leaderboards
         $TEAMS = Team::getAllTeams($MATCH->ID);
@@ -312,7 +315,7 @@ class Team_Controller extends Controller {
             $at_bat_count[] = count($SCORE['scores'][$mlb_id]['at_bat_stat']);
         }
         rsort($at_bat_count);
-        
+
         $BAT_COUNT = $at_bat_count[0];
         
         $LEADERBOARD = Team::getLeaderboard($MATCH);
@@ -344,6 +347,8 @@ class Team_Controller extends Controller {
 		$V->bind('OFS', $OFS);
 		$V->bind('DHS', $DHS);
 		$V->bind('LEADERBOARD', $LEADERBOARD);
+		$V->bind('GAMES', $GAMES);
+		$V->bind('team_id', $team_id);
 		$V->bind('CUSTOMER', $this->_user);
     	
     	$this->_setView($V);
@@ -360,10 +365,24 @@ class Team_Controller extends Controller {
     	$this->_setView($V);
 	}
 	
-	private function _config($require_login = false, $user = "") {
+	public function getScores($team_id) {
+    	$this->_config(true, "", false);
+    	
+    	$SCORE = Team::getScoreJSON($team_id);
+    	
+    	return $SCORE;
+    	exit;
+	}
+	
+	private function _config($require_login = false, $user = "", $set_redirect = true) {
 		if(true == $require_login) {
-			$this->_checkPermissions();
+			$this->_checkPermissions($set_redirect);
 		}
+		
+		if(false == $require_login && true == $set_redirect) {
+    		$this->_setRedirect();
+		}
+		
 		$this->_setTemplate(new Template('user.php'));
 		$this->_template->bind('CUSTOMER', $this->_user);
 		$REDIR = sanitize_string(exists('go', $_GET));
@@ -371,12 +390,18 @@ class Team_Controller extends Controller {
 		$this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE .= ' | '.$user);
 	}
 	
-	private function _checkPermissions() {
+	private function _checkPermissions($set_redirect = true) {
 		if(false == $this->_user->exists()) {
-			$_SESSION['login_redirect'] = $_SERVER['REDIRECT_URL'];
+			if($set_redirect == true) {
+			    $_SESSION['login_redirect'] = current_page_url();
+            }
 			$this->redirect(LOC_LOGIN);
 			exit;
 		}
+	}
+	
+	private function _setRedirect() {
+    	$_SESSION['login_redirect'] = current_page_url();
 	}
     
     /**

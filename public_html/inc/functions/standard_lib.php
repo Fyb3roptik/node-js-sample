@@ -394,7 +394,7 @@ function get_nav_items($active_only = false) {
 function checkSecureSite($url) {
     if(1 == FORCE_SSL)
 	{
-		if((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on") || $_SERVER['HTTP_CF_VISITOR'] != "{\"scheme\":\"https\"}") {
+		if((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on") || (isset($_SERVER['HTTP_CF_VISITOR']) && $_SERVER['HTTP_CF_VISITOR'] != "{\"scheme\":\"https\"}")) {
 			redirect(SITE_SECURE_URL.$url);
 		}
 	}

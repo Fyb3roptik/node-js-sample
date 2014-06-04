@@ -72,6 +72,14 @@ class Match extends Object {
     	
     	return $return;
 	}
+	
+	public function getPrizePool($total_entrents = 0) {
+    	$prize_pool = "";
+    	
+    	$prize_pool = ($total_entrents * $this->entry_fee) * floatval("0." . $this->prize_pool);
+    	
+    	return number_format($prize_pool, 2);
+	}
 
 }
 ?>

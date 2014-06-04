@@ -14,7 +14,7 @@ body {
 .logo {
     font-family: 'Beast Font';
     color: #FFF;
-    font-size: 3.5em;
+    font-size: 1.4em;
     margin-top: 1%;
 }
 
@@ -32,10 +32,31 @@ body {
 }
 
 .top-row {
-    margin-top: 3%;
+    margin-top: 18%;
 }
 
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
 
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) { ... }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { ... }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .logo {
+        font-family: 'Beast Font';
+        color: #FFF;
+        font-size: 3.5em;
+        margin-top: 1%;
+    }
+    
+    .top-row {
+        margin-top: 3%;
+    }
+}
 
 
 

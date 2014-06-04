@@ -13,6 +13,10 @@ $(document).ready(function(){
 	
 	/* ---------- Timepicker for Bootstrap ---------- */
 	$('#timepicker1').timepicker('setTime', '<?php echo date('h:i A', $start_date); ?>');
+	
+	$("#selectAll").click(function () {
+    	$(this).closest('div').find('input:checkbox').prop('checked', this.checked);
+	});
 });
 </script>
 
@@ -49,7 +53,28 @@ $(document).ready(function(){
     				</div>
                 </div>
                 <div class="form-group">
+                    <label for="entry_fee">Entry Fee</label>
+                    <div class="controls">
+    					<div class="input-group col-sm-4">
+    						<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+    						<input type="text" class="form-control" name="match[entry_fee]" id="entry_fee" value="<?php echo $M->entry_fee; ?>">
+    					</div>	
+    				</div>
+                </div>
+                <?php $TOTAL = $M->getTotalTeams(); ?>
+                <div class="form-group">
+                    <label for="prize_pool">Prize Pool - <i><strong>$<?php echo $M->getPrizePool($TOTAL); ?></strong></i></label>
+                    <div class="controls">
+    					<div class="input-group col-sm-4">
+    						<input type="text" class="form-control" name="match[prize_pool]" id="prize_pool" value="<?php echo $M->prize_pool; ?>">
+    						<span class="input-group-addon"><i><strong>%</strong></i></span>
+    					</div>
+    				</div>
+                </div>
+                <div class="form-group">
                     <label class="control-label">Active Teams for Match</label>
+                    <br />
+                    <input type="checkbox" id="selectAll" /> <label for="selectAll">Select All</label>
                     <div class="controls">
                         <label class="checkbox-inline">
                             <input type="checkbox" name="match_teams[]" <?php if(in_array("Angels", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Angels"> Angels

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="160%" height="480px" viewBox="0 0 640 480" enable-background="new 0 0 640 480" xml:space="preserve">
+<title>Epic Baseball field</title>
+<g>
+	<title></title>
+	<path id="svg_2" fill="#1E003F" stroke="#68CCE4" d="M284.813,77.262C150.911,78.049,98.828,210.096,98.828,210.096
+		l162.563,165.158c-7.223,11.771-4.818,27.383,6.203,36.409c12.019,9.84,29.7,8.104,39.492-3.87
+		c7.882-9.642,8.234-22.979,1.807-32.947L470.911,211.95C470.91,211.948,411.34,76.521,284.813,77.262L284.813,77.262z
+		 M379.279,251.373c0,0-4.438,6.184-4.769,15.996c-0.317,9.498,5.298,17.49,5.298,17.49l-79.871,81.254
+		c-9.17-5.658-20.633-5.494-29.509,0.026l-81.127-84.131c0,0,6.758-10.204,5.742-17.332c-1.016-7.129-5.643-15.638-5.643-15.638
+		l79.684-80.093c0,0,4.329,5.646,14.753,5.782c10.414,0.142,14.585-4.318,14.585-4.318L379.279,251.373z"/>
+	<g id="svg_3">
+	</g>
+	    <rect id="base4" x="277.999" y="145.5" transform="matrix(-0.6562 -0.7546 0.7546 -0.6562 358.1211 700.6202)" fill="#FFFFFF" stroke="#68CCE4" width="18" height="17"/>
+	    
+	    <rect id="base3" x="169" y="254" transform="matrix(-0.6562 -0.7546 0.7546 -0.6562 94.6704 573.6237)" fill="#FFFFFF" stroke="#68CCE4" width="18" height="17"/>
+	
+		<rect id="base2" x="277.999" y="145.5" transform="matrix(-0.6562 -0.7546 0.7546 -0.6562 359.1211 471.6202)" fill="#FFFFFF" stroke="#68CCE4" width="18" height="17"/>
+	
+		<rect id="base1" data-toggle="tooltip" data-placement="top" title="" x="385.964" y="254.504" transform="matrix(-0.6562 -0.7546 0.7546 -0.6562 455.6704 733.6237)" fill="#FFFFFF" stroke="#68CCE4" width="18" height="17.001"/>
+</g>
+<image overflow="visible" width="1600" height="1555" xlink:href="/img/Claw_Marks.png"  transform="matrix(0.0869 0 0 0.0869 213.4995 178.0854)">
+</image>
+<circle id="out1" fill="#eee" stroke="#000" stroke-miterlimit="10" cx="262.5" cy="319.5" r="8"/>
+<circle id="out2" fill="#eee" stroke="#000" stroke-miterlimit="10" cx="262.5" cy="339.5" r="8"/>
+<text x="273.5" y="337.5" font-family="sans-serif" font-size="24px" fill="#1E003F" stroke="black">Outs</text>
+</svg>

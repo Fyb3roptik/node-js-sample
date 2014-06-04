@@ -30,14 +30,14 @@ class Match_Controller extends Controller {
 	public function add() {
 		$this->_configure();
 		$MS = new Message_Stack();
-		$P = new Match();
+		$M = new Match();
 		$V = new View('match_form.php');
 		
 		$LAYOUT_TITLE = "Beast Franchise | Add Match";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
 		
 		$V->bind('TITLE', 'Add Match');
-		$V->bind('P', $P);
+		$V->bind('M', $M);
 		$this->_setView($V);
 		$V->bind('MS', $MS);
 	}
@@ -123,6 +123,10 @@ class Match_Controller extends Controller {
     	$MATCHES = Match::getActiveMatches(true);
     	
     	$V->bind('MATCHES', $MATCHES);
+    	$V->bind('CUSTOMER', $this->_user);
+    	
+    	$LAYOUT_TITLE = "Beast Franchise | Find Match";
+        $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
     	
     	$this->_setView($V);
 	}
@@ -188,10 +192,15 @@ class Match_Controller extends Controller {
         $cache->set("teams", $teams, 0, 0);
 	}
 	
-	private function _config($require_login = false, $user = "") {
+	private function _config($require_login = false, $user = "", $set_redirect = true) {
 		if(true == $require_login) {
-			$this->_checkPermissions();
+			$this->_checkPermissions($set_redirect);
 		}
+		
+		if(false == $require_login && true == $set_redirect) {
+    		$this->_setRedirect();
+		}
+		
 		$this->_setTemplate(new Template('user.php'));
 		$this->_template->bind('CUSTOMER', $this->_user);
 		$REDIR = sanitize_string(exists('go', $_GET));
@@ -199,12 +208,18 @@ class Match_Controller extends Controller {
 		$this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE .= ' | '.$user);
 	}
 	
-	private function _checkPermissions() {
+	private function _checkPermissions($set_redirect = true) {
 		if(false == $this->_user->exists()) {
-			$_SESSION['login_redirect'] = $_SERVER['REDIRECT_URL'];
+			if($set_redirect == true) {
+			    $_SESSION['login_redirect'] = current_page_url();
+            }
 			$this->redirect(LOC_LOGIN);
 			exit;
 		}
+	}
+	
+	private function _setRedirect() {
+    	$_SESSION['login_redirect'] = current_page_url();
 	}
     
     /**

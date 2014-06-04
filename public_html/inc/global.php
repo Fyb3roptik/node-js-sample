@@ -62,12 +62,13 @@ try {
 	<center><h1>whoops!</h1><p><strong>Could not connect to database:</strong></p><p><?php echo mysqli_connect_error(); ?></p>
 	<?php exit;
 }
+require_once 'root_functions.php';
 require_once 'defines.php';
 require_once 'functions.php';
 
 require_once 'routes.php';
 
-if(true == defined('MAINTENANCE_MODE') && ($_SERVER['REQUEST_URI'] != "/maintenance")) {
+if(true === MAINTENANCE_MODE && $_SERVER['REQUEST_URI'] != "/maintenance") {
 	redirect('/maintenance');
 }
 

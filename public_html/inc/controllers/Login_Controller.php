@@ -178,11 +178,8 @@ class Login_Controller extends Controller {
 			'product_list' => $product_list_page,
 			'plan_page' => '/myaccount/#Plan'
 		);
-		
+
 		$login_location = LOC_HOME;
-		if($CUSTOMER->user_type == "dj") {
-			$login_location = '/'.$CUSTOMER->username;
-		}
 		
 		if(false == is_null($login_redirect)) {
 			$login_location = $login_redirect;

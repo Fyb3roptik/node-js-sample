@@ -13,8 +13,10 @@
     max-width: 100%; } }
 
 @media (max-width: 767px) {
-  .no-mg-t-xs {
-    margin-top: 0 !important; } }
+    .no-mg-t-xs {
+        margin-top: 0 !important; 
+    }    
+}
 
 body {
     -webkit-animation-delay: 0.1s;
@@ -67,10 +69,26 @@ body {
 }
 
 .logo {
-    font-family: 'Beast Font';
+    font-family: 'Beast Font', 'Cinzel', serif;
     color: #FFF;
-    font-size: 3.5em;
-    margin-top: -3%;
+    font-size: 1.5em;
+    margin-left: 3%;
+    margin-top: -7px;
+    font-weight: bold;
+}
+
+.logo > img {
+    margin-top: -3px;
+}
+
+.logoText {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tm {
+    font-weight: normal;
+    font-size: .7em;
 }
 
 .no-mg-t {
@@ -102,6 +120,12 @@ span.batting_num {
     margin: 18px 0 13px 0;
 }
 
+nav {
+    padding-left: 4%;
+    margin-bottom: 3%;
+    border-bottom: 1px solid #DDD;
+}
+
 #main-nav-bg {
     background: url('/img/nav_bg.png') repeat;
 }
@@ -111,8 +135,16 @@ span.batting_num {
     z-index: 1000;
 }
 
+.nav > li:hover {
+    border-bottom: 2px solid #555A92
+}
+
+.nav > li.active {
+    border-bottom: 2px solid #555A92
+}
+
 .contrast-purple header .navbar {
-    background-color: transparent;
+    background-color: #1e033d;
     color: #555A92;
 }
 
@@ -134,11 +166,19 @@ header .navbar .navbar-brand {
     border-right: none;
 }
 
+header .navbar > .nav > li.first {
+    border-left: none;
+}
+
 header .navbar > .nav > li {
     border-left: 1px solid #555A92;
 }
 
 header .navbar > .nav > li > a {
+    color: #FFF;
+}
+
+header .navbar > .nav > li > a > i {
     color: #555A92;
 }
 
@@ -147,12 +187,24 @@ header .navbar > .nav > li > a:hover {
 }
 
 header .navbar .user-menu .dropdown-toggle img {
+    border: 2px solid #FFF;
+}
+
+header .navbar .user-menu:hover .dropdown-toggle img {
     border: 2px solid #555A92;
 }
 
+header .navbar > .nav > li.dropdown > .dropdown-toggle .user-name {
+    color: #FFF;
+}
+
+header .navbar > .nav > li.dropdown:hover > .dropdown-toggle .user-name {
+    color: #555A92;
+}
+
 header .navbar > .nav > li.dropdown > .dropdown-toggle .caret {
-    border-top-color: #555A92;
-    border-bottom-color: #555A92;
+    border-top-color: #FFF;
+    border-bottom-color: #FFF;
 }
 
 header .navbar > .nav > li.dropdown:hover > .dropdown-toggle .caret {
@@ -184,6 +236,11 @@ header .navbar > .nav > li.dropdown.open > .dropdown-toggle {
     background: #FFF;
 }
 
+.table-bordered-bottom > tbody > tr > td {
+    border-bottom: 1px solid #ddd;
+    border-top: none;
+}
+
 .table thead {
     background: #555A92;
     color: #CCD0FF;
@@ -199,7 +256,9 @@ table.score tbody td.at_bat {
 }
 
 table.table-horizontal thead {
-   float: left; 
+   float: left;
+   margin-top: 8px;
+   margin-right: 11px;
 }
 
 .table-horizontal thead > tr > th {
@@ -230,16 +289,22 @@ table.table-horizontal tbody td.empty {
     border: none;
 }
 
+.sitPoints {
+    background: transparent;
+}
+
 .shield {
     background-image: url('/img/shield.svg');
-    width: 80px;
-    height: 80px;
+    width: 77px;
+    height: 90px;
     color: #CCD0FF;
-    font-size: 10px;
+    font-size: 12px;
+    margin-left: 3%;
 }
 
 .shield p {
     padding-top: 1px;
+    margin-top: -4px;
 }
 
 .shield hr {
@@ -251,5 +316,46 @@ table.table-horizontal tbody td.empty {
     border-top: 1px solid #CCD0FF;
     margin: 1em 0; 
     padding: 0;
+}
+
+.alert-icon {
+    font-size: 38px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.alert p {
+    font-size: 18px;
+}
+
+.field-margin {
+    padding: 0 !important;
+    margin-left: -18% !important;
+}
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) { ... }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { ... }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .logo {
+        font-family: 'Beast Font', 'Cinzel', serif;
+        color: #FFF;
+        font-size: 2.5em;
+        margin-left: 3%;
+        margin-top: -7px;
+        font-weight: bold;
+    }
+    
+    .field-margin {
+        padding: 0 !important;
+        margin-left: -7% !important;
+    }
 }
 

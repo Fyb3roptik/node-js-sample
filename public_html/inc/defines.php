@@ -30,7 +30,7 @@ define('LOC_SALES_LOGIN_RESET_PASSWORD', '/sales_login.php?action=recover_passwo
 define('LOC_WISHLIST', '/myclosets/', false);
 define('LOC_FAQ', 'faq.php', false);
 
-define('LOC_CUST_FROM', $_SERVER['HTTP_REFERER'], false);
+define('LOC_CUST_FROM', current_page_url(), false);
 
 define('MIN_PASSWORD_LENGTH', 6, false); //minimum password length
 
