@@ -1,5 +1,75 @@
 <script>
 $(document).ready(function() {
+    $(".lineup").click(function() {
+    
+        var position = $(this).attr('id');
+        var team_id = $("#team_id").val();
+        
+        var params = { "position": position }
+        
+        $.get("/team/getAvailablePlayers/" + team_id, params, function(data) {
+            var data = $.parseJSON(data);
+            
+            $("#player_select_table tbody").html("");
+            
+            var current = [ parseInt($("#team_CA").val()), parseInt($("#team_FB").val()), parseInt($("#team_SB").val()), parseInt($("#team_TB").val()), parseInt($("#team_SS").val()), parseInt($("#team_OF1").val()), parseInt($("#team_OF2").val()), parseInt($("#team_OF3").val()), parseInt($("#team_DH").val()) ];
+
+            for(i=0; i < data.length; i++) {
+                if($.inArray(data[i]['player_id'], current) === -1) { 
+                    $("#player_select_table tbody").append("<tr><td>"+ ((typeof data[i]['is_home'] == 'Object' && data[i]['is_home'] == true) ? "@" : "") + data[i]['player_team'] +"</td><td>"+ data[i]['player'] +"</td><td>"+ ((typeof data[i]['is_home'] != 'undefined' && data[i]['is_home'] == false) ? "@" : "") + data[i]['sp_team'] +"</td><td>"+ data[i]['sp'] +"</td><td><button id=\""+ data[i]['player_id'] +"-"+ data[i]['position_original'] +"\" class=\"btn btn-info selectPlayer\">Select</button></td></tr>");
+                } else {
+                    $("#player_select_table tbody").append("<tr class=\"hide\"><td>"+ ((typeof data[i]['is_home'] == 'Object' && data[i]['is_home'] == true) ? "@" : "") + data[i]['player_team'] +"</td><td>"+ data[i]['player'] +"</td><td>"+ ((typeof data[i]['is_home'] != 'undefined' && data[i]['is_home'] == false) ? "@" : "") + data[i]['sp_team'] +"</td><td>"+ data[i]['sp'] +"</td><td><button id=\""+ data[i]['player_id'] +"-"+ data[i]['position_original'] +"\" class=\"btn btn-info selectPlayer\">Select</button></td></tr>");
+                }
+            }
+            
+            return false;
+            
+        });
+        
+        $("#player_select").removeClass("hide");
+        $("#player_select").addClass("fadeIn");
+        
+        return false;
+    });
+    
+    $("#player_select_table tbody").on('click', '.selectPlayer', function() {
+        var id_pos = $(this).attr('id').split('-');
+        
+        var player_id = id_pos[0];
+        var position = id_pos[1];
+        var player_name = $(this).parent().parent().children(':eq(1)').html();
+        var position_name = "";
+        
+        if(position == "CA") {
+            position_name = "Catcher";
+        } else if(position == "FB") {
+            position_name = "1st Base";
+        } else if(position == "SB") {
+            position_name = "2nd Base";
+        } else if(position == "TB") {
+            position_name = "3rd Base";
+        } else if(position == "SS") {
+            position_name = "Short Stop";
+        } else if(position == "OF1" || position == "OF2" || position == "OF3") {
+            position_name = "Outfielder";
+        } else if(position == "DH") {
+            position_name = "DH";
+        }
+        
+        $("#player_select_table tbody > tr").each(function() {
+            if($(this).hasClass("hide")) {
+                $(this).removeClass("hide");
+            }
+        });
+        
+        $(this).parent().parent().addClass("hide");
+        
+        $("#team_"+position).val(player_id);
+        $("#"+position).html(player_name + " - " + position_name);
+        
+        
+    });
+    
     $( "ul.droptrue" ).sortable({
       connectWith: "ul",
       placeholder: "ui-state-highlight"
@@ -159,7 +229,7 @@ $(document).ready(function() {
     </div>
     
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-2">
             <div class="box blue">
                 <div class="box-header">
                     <h2>Lineup</h2>
@@ -169,132 +239,197 @@ $(document).ready(function() {
                         <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
                         
                         <div class="form-group">
-                            <label for="team[c]">C</label>
-                            <select class="form-control" id="team[c]" name="team[c]">
-                                <option>--C--</option>
-                                <?php foreach($CA as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($P->ID, $SELECTED_PLAYERS_LIST)): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "C"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="CA"><?php echo $P->first_name . " " . $P->last_name; ?> - Catcher</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="CA">Select Starting Catcher</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[c]" id="team_CA" value="<?php echo $P->ID; ?>" />
                         </div>
                         <div class="form-group">
-                            <label for="team[1b]">1B</label>
-                            <select class="form-control" id="team[1b]" name="team[1b]">
-                                <option>--1B--</option>
-                                <?php foreach($FB as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($P->ID, $SELECTED_PLAYERS_LIST)): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "1B"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="FB"><?php echo $P->first_name . " " . $P->last_name; ?> - 1st Base</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="FB">Select Starting 1st Base</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[1b]" id="team_FB" value="<?php echo $P->ID; ?>" />
                         </div>
                         <div class="form-group">
-                            <label for="team[2b]">2B</label>
-                            <select class="form-control" id="team[2b]" name="team[2b]">
-                                <option>--2B--</option>
-                                <?php foreach($SB as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($P->ID, $SELECTED_PLAYERS_LIST)): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "2B"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="SB"><?php echo $P->first_name . " " . $P->last_name; ?> - 2nd Base</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="SB">Select Starting 2nd Base</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[2b]" id="team_SB" value="<?php echo $P->ID; ?>" />
                         </div>
                         <div class="form-group">
-                            <label for="team[3b]">3B</label>
-                            <select class="form-control" id="team[3b]" name="team[3b]">
-                                <option>--3B--</option>
-                                <?php foreach($TB as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($P->ID, $SELECTED_PLAYERS_LIST)): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "3B"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="TB"><?php echo $P->first_name . " " . $P->last_name; ?> - 3rd Base</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="TB">Select Starting 3rd Base</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[3b]" id="team_TB" value="<?php echo $P->ID; ?>" />
                         </div>
                         <div class="form-group">
-                            <label for="team[ss]">SS</label>
-                            <select class="form-control team_ss" id="team[ss]" name="team[ss]">
-                                <option>--SS--</option>
-                                <?php foreach($SS as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($P->ID, $SELECTED_PLAYERS_LIST)): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "SS"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="SS"><?php echo $P->first_name . " " . $P->last_name; ?> - Short Stop</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="SS">Select Starting Short Stop</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[ss]" id="team_SS" value="<?php echo $P->ID; ?>" />
                         </div>
                         <div class="form-group">
-                            <label for="team[of1]">OF</label>
-                            <select class="form-control" id="team[of1]" name="team[of1]">
-                                <option>--OF--</option>
-                                <?php foreach($OF as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($OFS[0], $SELECTED_PLAYERS_LIST) && $OFS[0] == $P->ID): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "OF1"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="OF1"><?php echo $P->first_name . " " . $P->last_name; ?> - Outfielder</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="OF1">Select Starting Outfielder</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[of1]" id="team_OF1" value="<?php echo $P->ID; ?>" />
                         </div>
 
                         <div class="form-group">
-                            <label for="team[of2]">OF</label>
-                            <select class="form-control" id="team[of2]" name="team[of2]">
-                                <option>--OF--</option>
-                                <?php foreach($OF as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($OFS[1], $SELECTED_PLAYERS_LIST) && $OFS[1] == $P->ID): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "OF2"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="OF2"><?php echo $P->first_name . " " . $P->last_name; ?> - Outfielder</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="OF2">Select Starting Outfielder</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[of2]" id="team_OF2" value="<?php echo $P->ID; ?>" />
                         </div>
                         <div class="form-group">
-                            <label for="team[of3]">OF</label>
-                            <select class="form-control" id="team[of3]" name="team[of3]">
-                                <option>--OF--</option>
-                                <?php foreach($OF as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($OFS[2], $SELECTED_PLAYERS_LIST) && $OFS[2] == $P->ID): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                            <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "OF3"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="OF3"><?php echo $P->first_name . " " . $P->last_name; ?> - Outfielder</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="OF3">Select Starting Outfielder</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[of3]" id="team_OF3" value="<?php echo $P->ID; ?>" />
                         </div>
                         <div class="form-group">
-                            <label for="team[dh]">DH</label>
-                            <select class="form-control team_dh" id="team[dh]" name="team[dh]">
-                                <option>--DH--</option>
-                                <?php foreach($DH as $P): ?>
-                                <option value="<?php echo $P->ID; ?>" <?php if(in_array($DHS[0], $SELECTED_PLAYERS_LIST) && $DHS[0] == $P->ID): ?>selected<?php endif; ?>><?php echo $P->first_name . " " . $P->last_name; ?></option>
+                           <?php if(!empty($SELECTED_PLAYERS)): ?>
+                                <?php foreach($SELECTED_PLAYERS as $key => $info): ?>
+                                <?php $TEAM_LINEUP = new TeamsLineup($info['teams_lineup_id']); ?>
+                                    <?php if($TEAM_LINEUP->position == "DH"): ?>
+                                        <?php $P = new Player($TEAM_LINEUP->player_id); ?>
+                                        <button class="btn btn-info lineup" id="DH"><?php echo $P->first_name . " " . $P->last_name; ?> - DH</button>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            </select>
+                            <?php else: ?>
+                                <button class="btn btn-info lineup" id="DH">Select Starting DH</button>
+                            <?php endif; ?>
+                            <input type="hidden" name="team[dh]" id="team_DH" value="<?php echo $P->ID; ?>" />
                         </div>
                         
-                        <button class="btn btn-success pull-right">Update</button>
+                        <button class="btn btn-success pull-right">Save</button>
                     </form>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
         
-        <div class="col-lg-6">
+        <div class="col-lg-5">
+            <div class="box blue">
+                <div class="box-header">
+                    <h2>Player Select</h2>
+                </div>
+                <div class="box-content hide" id="player_select">
+                    <table id="player_select_table" class="table table-hover table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Player</th>
+                                <th>vs</th>
+                                <th>Starting Pitcher</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="col-lg-5 <?php if(empty($SELECTED_PLAYERS)): ?>hide<?php endif; ?>">
             <div class="box blue">
                 <div class="box-header">
                     <h2>Batting Order</h2>
                 </div>
                 <div class="box-content">
-                    <?php if(!empty($SELECTED_PLAYERS)): ?>
-                            <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
-                            <div class="form-group">
-                                <div class="pull-left col-lg-1">
-                                    <h2><span class="label label-info batting_num">1</span></h2>
-                                    <h2><span class="label label-info batting_num">2</span></h2>
-                                    <h2><span class="label label-info batting_num">3</span></h2>
-                                    <h2><span class="label label-info batting_num">4</span></h2>
-                                    <h2><span class="label label-info batting_num">5</span></h2>
-                                    <h2><span class="label label-info batting_num">6</span></h2>
-                                    <h2><span class="label label-info batting_num">7</span></h2>
-                                    <h2><span class="label label-info batting_num">8</span></h2>
-                                    <h2><span class="label label-info batting_num">9</span></h2>
-                                </div>
-                                <div class="col-lg-11">
-                                    <ul id="sortable1" class="droptrue pull-left">
-                                        <?php foreach($SELECTED_PLAYERS as $k => $SP): ?>
-                                            <?php $P = new Player($SP['player_id']); ?>
-                                            <li class="ui-state-default" id="<?php echo $SP['teams_lineup_id']; ?>"><?php echo $P->first_name . " " . $P->last_name; ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <br />
-                            <button class="btn btn-success pull-right" id="saveBattingOrder">Update</button>
-                    <?php else: ?>
-                        <div class="alert alert-warning">
-                            <p>Please set your lineup</p>
+                    
+                    <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
+                    <div class="form-group">
+                        <div class="pull-left col-lg-1">
+                            <h2><span class="label label-info batting_num">1</span></h2>
+                            <h2><span class="label label-info batting_num">2</span></h2>
+                            <h2><span class="label label-info batting_num">3</span></h2>
+                            <h2><span class="label label-info batting_num">4</span></h2>
+                            <h2><span class="label label-info batting_num">5</span></h2>
+                            <h2><span class="label label-info batting_num">6</span></h2>
+                            <h2><span class="label label-info batting_num">7</span></h2>
+                            <h2><span class="label label-info batting_num">8</span></h2>
+                            <h2><span class="label label-info batting_num">9</span></h2>
                         </div>
-                    <?php endif; ?>
+                        <div class="col-lg-11">
+                            <ul id="sortable1" class="droptrue pull-left">
+                                <?php foreach($SELECTED_PLAYERS as $k => $SP): ?>
+                                    <?php $P = new Player($SP['player_id']); ?>
+                                    <li class="ui-state-default" id="<?php echo $SP['teams_lineup_id']; ?>"><?php echo $P->first_name . " " . $P->last_name; ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <button class="btn btn-success pull-right" id="saveBattingOrder">Save</button>
+                    
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -360,7 +495,7 @@ $(document).ready(function() {
     
     <?php if(!empty($GAMES)): ?>
     <div class="row">
-        <div class="col-lg-offset-1 col-lg-12">
+        <div class="col-lg-12">
             <?php foreach($GAMES as $game): ?>
             <div class="shield pull-left">
                 <p><center><?php echo $game['away_team_abbr'] . " " . $game['away_score']; ?> <hr /> <?php echo $game['home_team_abbr'] . " " . $game['home_score']; ?></center></p>
@@ -380,7 +515,7 @@ $(document).ready(function() {
                 </div>
                 <div class="box-content">
                     <div class="table-responsive">
-                        <table class="table table-bordered-bottom table-hover score">
+                        <table id="box_score" class="table table-bordered-bottom table-hover score">
                             <thead>
                                 <th>Player</th>
                                 <?php if($BAT_COUNT >= 1): ?>
@@ -723,6 +858,7 @@ $(window).load(function() {
     
     var interval = 1000 * 60 * 1;
     
+    <?php if($MATCH->locked == "1"): ?>
     setInterval(function() {
         $.getJSON("/team/getScores/<?php echo $team_id; ?>", function(data) {
             
@@ -829,7 +965,46 @@ $(window).load(function() {
                 }
             }
             
+            // Box Score
+            $("table#box_score thead").find('tr').each(function() {
+                var count = $("table#box_score thead").find('tr:first th').length;
+                
+                /*if(count > 1 && count <= 6){
+                    var at_bat = "";
+                    
+                    var child = count - 1;
+                    
+                    if(count == 2) {
+                        at_bat = child + "st";
+                    }
+                    
+                    if(count == 3) {
+                        at_bat = child + "nd";
+                    }
+                    
+                    if(count == 4) {
+                        at_bat = child + "rd";
+                    }
+                    
+                    if(count > 4) {
+                        at_bat = child + "th";
+                    }
+                   
+                    $(this).find('th:nth-child(' + child + ')').after('<th>' + at_bat + ' At Bat</th>');
+                    
+                    $("table#box_score tbody").find('tr').each(function() {
+                        $(this).find('td:nth-child(' + child + ')').after('<td>0</td>');
+                    });
+                    
+                    $("table#box_score tfoot").find('tr').each(function() {
+                        $(this).find('th:nth-child(' + child + ')').after('<th></th>');
+                    });
+                }*/
+            });
+            
         });
     }, 10000);
+    
+    <?php endif; ?>
 });
 </script>

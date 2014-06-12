@@ -300,6 +300,7 @@ table.table-horizontal tbody td.empty {
     color: #CCD0FF;
     font-size: 12px;
     margin-left: 3%;
+    margin-top: 15px;
 }
 
 .shield p {

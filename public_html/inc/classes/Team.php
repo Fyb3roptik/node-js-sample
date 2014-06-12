@@ -46,7 +46,7 @@ class Team extends Object {
         
         foreach($results as $r) {
             $player = new Player($r['player_id']);
-            $lineup[] = array("teams_lineup_id" => $r['teams_lineup_id'], "team_id" => $r['team_id'], "player_id" => $r['player_id'], "mlb_player_id" => $player->mlb_id, "order" => $r['order'], "position" => $r['position'], "score" => $r['score']);
+            $lineup[] = array("teams_lineup_id" => $r['teams_lineup_id'], "team_id" => $r['team_id'], "player_id" => $r['player_id'], "mlb_player_id" => $player->mlb_id, "player_team" =>  $player->player_team, "order" => $r['order'], "position" => $r['position'], "score" => $r['score']);
         }
         return $lineup;
     }
@@ -173,14 +173,14 @@ class Team extends Object {
         }
         
         // Write it to database
-        if($total > $this->score) {
+        if($SCORE['done'] != true) {
             $this->score = $total;
             $this->write();
             
             return $total;
-        } else {
+        }  else {
             return $this->score;
-        }        
+        }      
     }
     
     public function getLeaderboard(Match $M) {

@@ -212,7 +212,7 @@ class Team_Controller extends Controller {
             
             // Filter position
             $position = strtoupper($position);
-            $position = str_replace(array("OF1", "OF2", "OF3"), "OF", $position);
+            //$position = str_replace(array("OF1", "OF2", "OF3"), "OF", $position);
             
             $TL = new TeamsLineup();
             
@@ -371,6 +371,66 @@ class Team_Controller extends Controller {
     	$SCORE = Team::getScoreJSON($team_id);
     	
     	return $SCORE;
+    	exit;
+	}
+	
+	public function getAvailablePlayers($team_id) {
+    	$this->_config(true, "", false);
+    	
+    	$position_original = request_var('position');
+    	
+    	if($position_original == "OF1" || $position_original == "OF2" || $position_original == "OF3") {
+        	$position = "OF";
+    	} else {
+        	$position = $position_original;
+    	}
+    	
+    	$TEAM = new Team($team_id);
+    	
+    	$MATCH = new Match($TEAM->match_id);
+    	
+    	$GAMES = $TEAM->getGames();
+    	
+    	$function = "get" . $position;
+    	
+    	$PLAYERS = Player::$function($MATCH->match_teams);
+    	
+    	foreach($PLAYERS AS $k => $player) {
+        	foreach($GAMES as $game => $info) {
+            	if(in_array($player->player_team, $info)) {
+                    $key = array_search($player->player_team, $info);
+                    $players_team = $GAMES[$game][$key . "_abbr"];
+
+                    $player_final[$k]['is_home'] = "";
+                    
+                    if($key == "home_team") {
+                        $is_home = true;
+                        $sps_team = "away_team_abbr";
+                        $sps = "away_pitcher";
+                    } else {
+                        $is_home = false;
+                        $sps_team = "home_team_abbr";
+                        $sps = "home_pitcher";
+                    }
+                    
+                    $sp_team = $GAMES[$game][$sps_team];
+                    $sp = $GAMES[$game][$sps];
+                }
+        	}
+        	
+        	$player_final[$k]['player_id'] = $player->ID;
+        	$player_final[$k]['position'] = $position;
+        	$player_final[$k]['position_original'] = $position_original;
+        	$player_final[$k]['player_team'] = $players_team;
+        	$player_final[$k]['player'] = $player->first_name . " " . $player->last_name;
+        	$player_final[$k]['sp_team'] = $sp_team;
+        	$player_final[$k]['sp'] = $sp;
+        	$player_final[$k]['is_home'] = $is_home;
+        	
+    	}
+    	
+    	return json_encode($player_final);
+    	
     	exit;
 	}
 	
