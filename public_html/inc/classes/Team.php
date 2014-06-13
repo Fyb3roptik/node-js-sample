@@ -119,6 +119,28 @@ class Team extends Object {
                     $TL->inning_data = http_build_query($score['scores'][$team_id][$l['mlb_player_id']]['at_bat_stat']);
                     $TL->write();
                 }
+                
+                $P = new Player($l['player_id']); 
+                $mlb_id = $P->mlb_id;
+                $at_bat_count[] = count($score['scores'][$team_id][$mlb_id]['at_bat_stat']);
+                $at_bat_count_int = count($score['scores'][$team_id][$mlb_id]['at_bat_stat']);
+                
+                $mlb_id = $P->mlb_id;
+                
+                foreach($score['scores'][$team_id][$mlb_id]['at_bat_stat'] as $k => $at_bat_stat) {
+                    $final['box_score'][$k +1][] = $at_bat_stat[0];
+                }
+                
+                $final['player_score'][] = $score['scores'][$team_id][$mlb_id]['score'];
+            }
+            
+            rsort($at_bat_count);
+            
+            $final['bat_count'] = $at_bat_count[0];
+            $final['score_total'] = 0;
+            
+            foreach($final['player_score'] as $s) {
+                $final['score_total'] += $s;
             }
             
             $AT_BAT_P = new Player($lineup[$score['at_bat'][$team_id]]['player_id']);
@@ -130,8 +152,9 @@ class Team extends Object {
                     $bases[$score['bases'][$team_id][$player_id]['base']][] = $BASES_P->first_name . " " . $BASES_P->last_name;
                 }
             }
-        
+
             $final['scores'] = $score['scores'][$team_id];
+
             $final['bases'] = $bases;
             $final['outs'] = $score['outs'][$team_id];
             
@@ -140,7 +163,7 @@ class Team extends Object {
             } else {
                 $final['at_bat'] = "";
             }
-            
+
             $final['done'] = $score['done_batting'][$team_id];
             
         } else {

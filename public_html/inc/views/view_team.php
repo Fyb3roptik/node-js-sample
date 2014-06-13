@@ -967,39 +967,80 @@ $(window).load(function() {
             
             // Box Score
             $("table#box_score thead").find('tr').each(function() {
+                            
+                var bat_count = data['bat_count'];
+                
                 var count = $("table#box_score thead").find('tr:first th').length;
                 
-                /*if(count > 1 && count <= 6){
+                if(bat_count >= 1 && bat_count <= 6){
                     var at_bat = "";
                     
-                    var child = count - 1;
+                    var child = bat_count;
                     
-                    if(count == 2) {
+                    if(bat_count == 1 && count == 2) {
                         at_bat = child + "st";
                     }
                     
-                    if(count == 3) {
+                    if(bat_count == 2) {
                         at_bat = child + "nd";
                     }
                     
-                    if(count == 4) {
+                    if(bat_count == 3) {
                         at_bat = child + "rd";
                     }
                     
-                    if(count > 4) {
+                    if(bat_count > 3) {
                         at_bat = child + "th";
                     }
-                   
-                    $(this).find('th:nth-child(' + child + ')').after('<th>' + at_bat + ' At Bat</th>');
                     
-                    $("table#box_score tbody").find('tr').each(function() {
-                        $(this).find('td:nth-child(' + child + ')').after('<td>0</td>');
-                    });
+                    if(count - 1 == bat_count) {
+                        $(this).find('th:nth-child(' + child + ')').after('<th>' + at_bat + ' At Bat</th>');
+                    }
                     
-                    $("table#box_score tfoot").find('tr').each(function() {
-                        $(this).find('th:nth-child(' + child + ')').after('<th></th>');
-                    });
-                }*/
+                    if(count - 1 == bat_count) {
+                        $("table#box_score tbody").find('tr').each(function(k, v) {
+                            if(typeof data['box_score'][child][k] != 'undefined') {
+                                
+                                // Update Box Score
+                                $(this).find('td').eq(child - 1).after('<td><span class="label label-primary">' + data['box_score'][child][k] + '</span></td>');
+                                
+                                // Update Score
+                                $(this).find('td:last').text(data['player_score'][k]);
+                                
+                                // Update Total
+                                $("table#box_score tfoot").find('th:last').html(data['score_total']);
+                            } else {
+                                 $(this).find('td').eq(child - 1).after('<td></td>');
+                            }
+                        });
+                    }
+                    
+                    if(count - 1 > bat_count) {
+                        $("table#box_score tbody").find('tr').each(function(k, v) {
+                            if(typeof data['box_score'][child][k] != 'undefined') {
+                                if($(this).find('td').eq(child).text() != data['box_score'][child][k]) {
+                                    
+                                    // Update Box Score
+                                    $(this).find('td').eq(child).html('<td><span class="label label-primary">' + data['box_score'][child][k] + '</span></td>');
+
+                                    // Update Score
+                                    $(this).find('td:last').text(data['player_score'][k]);
+                                    
+                                    // Update Total
+                                    $("table#box_score tfoot").find('th:last').html(data['score_total']);
+                                }
+                            }
+                        });
+                    }
+                    
+                    if(count - 1 == bat_count) {
+                        $("table#box_score tfoot").find('tr').each(function() {
+                            $(this).find('th:nth-child(' + child + ')').after('<th></th>');
+                        });
+                    }
+                    
+                    
+                }
             });
             
         });

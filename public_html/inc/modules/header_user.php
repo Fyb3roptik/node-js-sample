@@ -5,7 +5,7 @@
     </div>
     <ul class='nav'>
       <li class="first">
-        <a class="pull-left" href="#"><i class="pull-left glyphicon glyphicon-book"></i>&nbsp;&nbsp;RULES</a>
+        <a class="pull-left" href="/img/BeastFranchiseRules.pdf" target="_blank"><i class="pull-left glyphicon glyphicon-book"></i>&nbsp;&nbsp;RULES</a>
       </li>
       <li class='dropdown user-menu'>
         <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
