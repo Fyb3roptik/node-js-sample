@@ -134,12 +134,16 @@ class Team extends Object {
                 $final['player_score'][] = $score['scores'][$team_id][$mlb_id]['score'];
             }
             
+            
             rsort($at_bat_count);
             
             $final['bat_count'] = $at_bat_count[0];
             $final['score_total'] = 0;
             
-            foreach($final['player_score'] as $s) {
+            foreach($final['player_score'] as $k => $s) {
+                if(is_null($s) || $s == null) {
+                    $final['player_score'][$k] = 0;
+                }
                 $final['score_total'] += $s;
             }
             
