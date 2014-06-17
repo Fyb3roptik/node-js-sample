@@ -1044,7 +1044,7 @@ $(window).load(function() {
             });
             
         });
-    }, interval);
+    }, 10000);
     
     <?php endif; ?>
 });
