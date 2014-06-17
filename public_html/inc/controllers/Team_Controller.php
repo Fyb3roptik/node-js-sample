@@ -278,6 +278,17 @@ class Team_Controller extends Controller {
     	
     	$MATCH = new Match($TEAM->match_id);
     	
+    	// Lock the match if it isn't locked and start time has been reached
+    	if(time() > $MATCH->start_date && $MATCH->locked == 0) {
+        	$MATCH->locked = 1;
+        	$MATCH->write();
+        	
+        	// Setup Cache for teams
+        	$this->_putTeams($MATCH->ID);
+        	
+        	$MATCH = new Match($TEAM->match_id);
+    	}
+    	
         $CA = Player::getCA($MATCH->match_teams);
         $FB = Player::getFB($MATCH->match_teams);
         $SB = Player::getSB($MATCH->match_teams);
@@ -432,6 +443,27 @@ class Team_Controller extends Controller {
     	return json_encode($player_final);
     	
     	exit;
+	}
+	
+	private function _putTeams($match_id) {
+    	$cache = new Cache();
+        $teams = array();
+        
+        // Fetch the existing data
+        $teams = $cache->get('teams');
+        
+        // Fetch todays teams
+        $sql = "SELECT * FROM teams WHERE match_id = '{$match_id}'";
+        
+        $results = db_arr($sql);
+        
+        foreach($results as $team) {
+            $T = new Team($team['team_id']);
+            
+            $teams[$team['team_id']] = $T->getTeamLineupById();
+        }
+        
+        $cache->set("teams", $teams, 0, 0);
 	}
 	
 	private function _config($require_login = false, $user = "", $set_redirect = true) {
