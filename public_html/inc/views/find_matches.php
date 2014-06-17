@@ -15,6 +15,7 @@
                                 <th>ENTRY FEE</th>
                                 <th>PRIZE POOL</th>
                                 <th>ENTRIES</th>
+                                <th>START TIME</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -27,6 +28,7 @@
                                 <td><?php if($M->entry_fee > 0): ?>$<?php echo $M->entry_fee; ?><?php else: ?>Free<?php endif; ?></td>
                                 <td>$<?php echo $M->getPrizePool($TOTAL); ?></td>
                                 <td><?php echo $TOTAL; ?></td>
+                                <td><?php echo date("g:i A T", $M->start_date); ?></td>
                                 <td>
                                     <?php $team_exists = $M->teamExists($CUSTOMER->ID); ?>
                                     <?php if($team_exists['check'] == true): ?>

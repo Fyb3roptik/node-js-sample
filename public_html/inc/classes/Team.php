@@ -71,6 +71,22 @@ class Team extends Object {
                     $TL->inning_data = http_build_query($score['scores'][$team_id][$l['mlb_player_id']]['at_bat_stat']);
                     $TL->write();
                 }
+                
+                $final['player_score'][] = $score['scores'][$team_id][$mlb_id]['score'];
+            }
+            
+            $final['score_total'] = 0;
+            
+            foreach($final['player_score'] as $k => $s) {
+                if(is_null($s) || $s == null) {
+                    $final['player_score'][$k] = 0;
+                }
+                $final['score_total'] += $s;
+            }
+            
+            if($final['score_total'] > $T->score) {
+                $T->score = $final['score_total'];
+                $T->write();
             }
             
             $final['scores'] = $score['scores'][$team_id];
