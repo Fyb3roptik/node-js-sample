@@ -65,7 +65,10 @@ $(document).ready(function() {
         $(this).parent().parent().addClass("hide");
         
         $("#team_"+position).val(player_id);
-        $("#"+position).html(player_name + " - " + position_name);
+        $("#"+position).removeClass('btn-danger').addClass('btn-info').html(player_name + " - " + position_name);
+        
+        $("#player_select").addClass("hide");
+        $("#player_select").removeClass('fadeIn').addClass("fadeOut");
         
         
     });
@@ -248,7 +251,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="CA">Select Starting Catcher</button>
+                                <button class="btn btn-danger lineup" id="CA">Select Starting Catcher</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[c]" id="team_CA" value="<?php echo $P->ID; ?>" />
                         </div>
@@ -262,7 +265,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="FB">Select Starting 1st Base</button>
+                                <button class="btn btn-danger lineup" id="FB">Select Starting 1st Base</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[1b]" id="team_FB" value="<?php echo $P->ID; ?>" />
                         </div>
@@ -276,7 +279,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="SB">Select Starting 2nd Base</button>
+                                <button class="btn btn-danger lineup" id="SB">Select Starting 2nd Base</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[2b]" id="team_SB" value="<?php echo $P->ID; ?>" />
                         </div>
@@ -290,7 +293,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="TB">Select Starting 3rd Base</button>
+                                <button class="btn btn-danger lineup" id="TB">Select Starting 3rd Base</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[3b]" id="team_TB" value="<?php echo $P->ID; ?>" />
                         </div>
@@ -304,7 +307,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="SS">Select Starting Short Stop</button>
+                                <button class="btn btn-danger lineup" id="SS">Select Starting Short Stop</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[ss]" id="team_SS" value="<?php echo $P->ID; ?>" />
                         </div>
@@ -318,7 +321,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="OF1">Select Starting Outfielder</button>
+                                <button class="btn btn-danger lineup" id="OF1">Select Starting Outfielder</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[of1]" id="team_OF1" value="<?php echo $P->ID; ?>" />
                         </div>
@@ -333,7 +336,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="OF2">Select Starting Outfielder</button>
+                                <button class="btn btn-danger lineup" id="OF2">Select Starting Outfielder</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[of2]" id="team_OF2" value="<?php echo $P->ID; ?>" />
                         </div>
@@ -347,7 +350,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="OF3">Select Starting Outfielder</button>
+                                <button class="btn btn-danger lineup" id="OF3">Select Starting Outfielder</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[of3]" id="team_OF3" value="<?php echo $P->ID; ?>" />
                         </div>
@@ -361,7 +364,7 @@ $(document).ready(function() {
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <button class="btn btn-info lineup" id="DH">Select Starting DH</button>
+                                <button class="btn btn-danger lineup" id="DH">Select Starting DH</button>
                             <?php endif; ?>
                             <input type="hidden" name="team[dh]" id="team_DH" value="<?php echo $P->ID; ?>" />
                         </div>
