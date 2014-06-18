@@ -411,8 +411,6 @@ class Team_Controller extends Controller {
             	if(in_array($player->player_team, $info)) {
                     $key = array_search($player->player_team, $info);
                     $players_team = $GAMES[$game][$key . "_abbr"];
-
-                    $player_final[$k]['is_home'] = "";
                     
                     if($key == "home_team") {
                         $is_home = true;
@@ -426,17 +424,23 @@ class Team_Controller extends Controller {
                     
                     $sp_team = $GAMES[$game][$sps_team];
                     $sp = $GAMES[$game][$sps];
+                    
+                    $LINEUP = new Lineup();
+                    $LIST = $LINEUP->getCurrentLineups($players_team);
+                    $player_name = $player->first_name . " " . $player->last_name;
                 }
         	}
-        	
-        	$player_final[$k]['player_id'] = $player->ID;
-        	$player_final[$k]['position'] = $position;
-        	$player_final[$k]['position_original'] = $position_original;
-        	$player_final[$k]['player_team'] = $players_team;
-        	$player_final[$k]['player'] = $player->first_name . " " . $player->last_name;
-        	$player_final[$k]['sp_team'] = $sp_team;
-        	$player_final[$k]['sp'] = $sp;
-        	$player_final[$k]['is_home'] = $is_home;
+  
+            if(in_array($player_name, $LIST)) {
+            	$player_final[$k]['player_id'] = $player->ID;
+            	$player_final[$k]['position'] = $position;
+            	$player_final[$k]['position_original'] = $position_original;
+            	$player_final[$k]['player_team'] = $players_team;
+            	$player_final[$k]['player'] = $player->first_name . " " . $player->last_name;
+            	$player_final[$k]['sp_team'] = $sp_team;
+            	$player_final[$k]['sp'] = $sp;
+            	$player_final[$k]['is_home'] = $is_home;
+            }
         	
     	}
     	
