@@ -22,13 +22,13 @@ $(document).ready(function() {
                 }
             }
             
+            $("#player_select").removeClass("hide");
+            $("#player_select").addClass("fadeIn");
+            
             return false;
             
         });
-        
-        $("#player_select").removeClass("hide");
-        $("#player_select").addClass("fadeIn");
-        
+
         return false;
     });
     
