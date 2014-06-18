@@ -87,6 +87,8 @@ class Team extends Object {
             if($final['score_total'] > $T->score) {
                 $T->score = $final['score_total'];
                 $T->write();
+                
+                $T = new Team($team_id);
             }
             
             $final['scores'] = $score['scores'][$team_id];
@@ -161,6 +163,13 @@ class Team extends Object {
                     $final['player_score'][$k] = 0;
                 }
                 $final['score_total'] += $s;
+            }
+            
+            if($final['score_total'] > $T->score) {
+                $T->score = $final['score_total'];
+                $T->write();
+                
+                $T = new Team($team_id);
             }
             
             $AT_BAT_P = new Player($lineup[$score['at_bat'][$team_id]]['player_id']);
