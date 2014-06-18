@@ -440,11 +440,15 @@ class Team_Controller extends Controller {
             	$player_final[$k]['sp_team'] = $sp_team;
             	$player_final[$k]['sp'] = $sp;
             	$player_final[$k]['is_home'] = $is_home;
+            	
+            	if(is_null($player_final[$k]['sp'])) {
+                	$player_final[$k]['sp'] = "Unknown";
+            	}
             }
         	
     	}
     	
-    	return json_encode($player_final);
+    	return json_encode(array_values($player_final));
     	
     	exit;
 	}
