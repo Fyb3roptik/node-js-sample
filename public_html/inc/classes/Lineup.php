@@ -6,7 +6,6 @@ class Lineup {
     
     public function getCurrentLineups($team) {
         
-        //$team_abbr = getCity($team);
         $html = $this->_fetchHtml($this->fetch_url . $team);
         $parsed = strip_tags($this->_parseHtml($html));
         $ex = explode("(", $parsed);

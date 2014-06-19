@@ -2,6 +2,9 @@
 $(document).ready(function() {
     $(".lineup").click(function() {
     
+        $("#loading").removeClass("hide");
+        $("#player_select").addClass("hide");
+    
         var position = $(this).attr('id');
         var team_id = $("#team_id").val();
         
@@ -13,17 +16,30 @@ $(document).ready(function() {
             $("#player_select_table tbody").html("");
             
             var current = [ parseInt($("#team_CA").val()), parseInt($("#team_FB").val()), parseInt($("#team_SB").val()), parseInt($("#team_TB").val()), parseInt($("#team_SS").val()), parseInt($("#team_OF1").val()), parseInt($("#team_OF2").val()), parseInt($("#team_OF3").val()), parseInt($("#team_DH").val()) ];
-
-            for(i=0; i < data.length; i++) {
-                if($.inArray(data[i]['player_id'], current) === -1) { 
-                    $("#player_select_table tbody").append("<tr><td>"+ ((typeof data[i]['is_home'] == 'Object' && data[i]['is_home'] == true) ? "@" : "") + data[i]['player_team'] +"</td><td>"+ data[i]['player'] +"</td><td>"+ ((typeof data[i]['is_home'] != 'undefined' && data[i]['is_home'] == false) ? "@" : "") + data[i]['sp_team'] +"</td><td>"+ data[i]['sp'] +"</td><td><button id=\""+ data[i]['player_id'] +"-"+ data[i]['position_original'] +"\" class=\"btn btn-info selectPlayer\">Select</button></td></tr>");
-                } else {
-                    $("#player_select_table tbody").append("<tr class=\"hide\"><td>"+ ((typeof data[i]['is_home'] == 'Object' && data[i]['is_home'] == true) ? "@" : "") + data[i]['player_team'] +"</td><td>"+ data[i]['player'] +"</td><td>"+ ((typeof data[i]['is_home'] != 'undefined' && data[i]['is_home'] == false) ? "@" : "") + data[i]['sp_team'] +"</td><td>"+ data[i]['sp'] +"</td><td><button id=\""+ data[i]['player_id'] +"-"+ data[i]['position_original'] +"\" class=\"btn btn-info selectPlayer\">Select</button></td></tr>");
-                }
-            }
             
-            $("#player_select").removeClass("hide");
-            $("#player_select").addClass("fadeIn");
+            console.log(data);
+            
+            if(data == "None") {
+                $("#player_none").html('<span class="text-danger">No Players Found Yet. Check Back Later</span>');
+                
+                $("#loading").addClass("hide");
+                $("#player_select").addClass("hide");
+                $("#player_none").removeClass("hide");
+                $("#player_none").addClass("fadeIn");
+            } else {
+                for(i=0; i < data.length; i++) {
+                    if($.inArray(data[i]['player_id'], current) === -1) { 
+                        $("#player_select_table tbody").append("<tr><td>"+ ((typeof data[i]['is_home'] == 'Object' && data[i]['is_home'] == true) ? "@" : "") + data[i]['player_team'] +"</td><td>"+ data[i]['player'] +"</td><td>"+ ((typeof data[i]['is_home'] != 'undefined' && data[i]['is_home'] == false) ? "@" : "") + data[i]['sp_team'] +"</td><td>"+ data[i]['sp'] +"</td><td><button id=\""+ data[i]['player_id'] +"-"+ data[i]['position_original'] +"\" class=\"btn btn-info selectPlayer\">Select</button></td></tr>");
+                    } else {
+                        $("#player_select_table tbody").append("<tr class=\"hide\"><td>"+ ((typeof data[i]['is_home'] == 'Object' && data[i]['is_home'] == true) ? "@" : "") + data[i]['player_team'] +"</td><td>"+ data[i]['player'] +"</td><td>"+ ((typeof data[i]['is_home'] != 'undefined' && data[i]['is_home'] == false) ? "@" : "") + data[i]['sp_team'] +"</td><td>"+ data[i]['sp'] +"</td><td><button id=\""+ data[i]['player_id'] +"-"+ data[i]['position_original'] +"\" class=\"btn btn-info selectPlayer\">Select</button></td></tr>");
+                    }
+                }
+                
+                $("#loading").addClass("hide");
+                $("#player_none").addClass("hide");
+                $("#player_select").removeClass("hide");
+                $("#player_select").addClass("fadeIn");
+            }
             
             return false;
             
@@ -228,6 +244,10 @@ $(document).ready(function() {
     <div class="row">
         <div class="col-lg-9">
             <div id="message" style="display:none;"></div>
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Lineups only pull players that are listed as active. If a player you want is not listed, please come back after their lineups are set and they are showing as playing today.</strong>
+            </div>
         </div>
     </div>
     
@@ -380,6 +400,16 @@ $(document).ready(function() {
             <div class="box blue">
                 <div class="box-header">
                     <h2>Player Select</h2>
+                </div>
+                <div class="box-content hide" id="loading">
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="">Loading Players</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-content hide" id="player_none">
+                
                 </div>
                 <div class="box-content hide" id="player_select">
                     <table id="player_select_table" class="table table-hover table-striped table-bordered">

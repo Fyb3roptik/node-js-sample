@@ -425,8 +425,10 @@ class Team_Controller extends Controller {
                     $sp_team = $GAMES[$game][$sps_team];
                     $sp = $GAMES[$game][$sps];
                     
-                    $LINEUP = new Lineup();
-                    $LIST = $LINEUP->getCurrentLineups($players_team);
+                    $memcache = new Cache();
+                    
+                    $LINEUP = $memcache->get('lineups');
+                    $LIST = $LINEUP[$players_team];
                     $player_name = $player->first_name . " " . $player->last_name;
                 }
         	}
@@ -446,6 +448,11 @@ class Team_Controller extends Controller {
             	}
             }
         	
+    	}
+    	
+    	if(is_null($player_final)) {
+        	$player_final = "None";
+        	return json_encode($player_final);
     	}
     	
     	return json_encode(array_values($player_final));

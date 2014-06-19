@@ -11,7 +11,7 @@
 <!-- / jQuery UI Touch Punch -->
 <script src="/js/plugins/jquery_ui_touch_punch/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
 <!-- / bootstrap [required] -->
-<script src="/js/bootstrap/bootstrap.js" type="text/javascript"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <!-- / modernizr -->
 <script src="/js/plugins/modernizr/modernizr.min.js" type="text/javascript"></script>
 <!-- / retina -->
