@@ -192,6 +192,7 @@ class Player_Controller extends Controller {
 		
 		$player = post_var('player', array());
 		$player['dh'] = post_var('dh', 0);
+		$player['active'] = post_var('active', 0);
 		
 		$P->load($player);
 
