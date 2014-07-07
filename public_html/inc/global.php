@@ -68,7 +68,7 @@ require_once 'functions.php';
 
 require_once 'routes.php';
 
-if(true === MAINTENANCE_MODE && $_SERVER['REQUEST_URI'] != "/maintenance") {
+if(true == MAINTENANCE_MODE && $_SERVER['REQUEST_URI'] != "/maintenance") {
 	redirect('/maintenance');
 }
 
