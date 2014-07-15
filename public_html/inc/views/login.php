@@ -21,7 +21,7 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <span class="pull-left"><a href="/recover_password">Forgot Password</a></span>
-                    <button type="submit" class="btn btn-primary pull-right">Login</button>
+                    <button type="submit" class="btn btn-purple pull-right">Login</button>
                 </form>
             </div>
         </div>

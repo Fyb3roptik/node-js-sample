@@ -32,6 +32,18 @@ body {
     to   { opacity: 1; }
 }
 
+.row {
+    margin-right:0px;
+}
+
+.field-bg {
+    background:url("https://ui.bamstatic.com/fedapp/gameday/gdapp/mlb/v1.0.0/assets/img/stadiums/night/10.jpg") no-repeat;
+    height: 445px;
+    width: 1160px;
+    max-width: 100%;
+    opacity: 0.6;
+}
+
 .tooltip.top .tooltip-arrow {
   bottom: 0;
   left: 50%;
@@ -266,7 +278,7 @@ table.table-horizontal thead {
 }
 
 .table-horizontal thead > tr > th > span.label {
-    padding: 20px 14px;
+    padding: 20px 12px;
     margin-top: 3px;
     display: block;
 }
@@ -291,6 +303,13 @@ table.table-horizontal tbody td.empty {
 
 .sitPoints {
     background: transparent;
+}
+
+.svg {
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .shield {
@@ -330,7 +349,6 @@ table.table-horizontal tbody td.empty {
 }
 
 .field-margin {
-    padding: 0 !important;
     margin-left: -18% !important;
 }
 
@@ -355,8 +373,8 @@ table.table-horizontal tbody td.empty {
     }
     
     .field-margin {
-        padding: 0 !important;
-        margin-left: -7% !important;
+        
+        margin-left: 0 !important;
     }
 }
 

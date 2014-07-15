@@ -84,7 +84,7 @@ class Team extends Object {
                 $final['score_total'] += $s;
             }
             
-            if($final['score_total'] > $T->score) {
+            if($final['score_total'] != 0) {
                 $T->score = $final['score_total'];
                 $T->write();
                 
@@ -126,11 +126,12 @@ class Team extends Object {
         if(isset($score['done_batting'][$team_id]['final_done']) && $score['done_batting'][$team_id]['final_done'] == false) {
             
             $T = new Team($team_id);
+            $M = new Match($T->match_id);
             
             $lineup = $T->getTeamLineupById(false);
 
             // Update the database
-            foreach($lineup as $l) {
+            foreach($lineup as $key => $l) {
                 $TL = new TeamsLineup($l['teams_lineup_id']);
                 if(isset($score['scores'][$team_id][$l['mlb_player_id']]['score']) && $score['scores'][$team_id][$l['mlb_player_id']]['score'] > 0) {
                     $TL->score = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
@@ -145,9 +146,7 @@ class Team extends Object {
                 
                 $mlb_id = $P->mlb_id;
                 
-                foreach($score['scores'][$team_id][$mlb_id]['at_bat_stat'] as $k => $at_bat_stat) {
-                    $final['box_score'][$k +1][] = $at_bat_stat[0];
-                }
+                $final['box_score'][$key] = $score['scores'][$team_id][$mlb_id]['at_bat_stat'];
                 
                 $final['player_score'][] = $score['scores'][$team_id][$mlb_id]['score'];
             }
@@ -165,12 +164,23 @@ class Team extends Object {
                 $final['score_total'] += $s;
             }
             
-            if($final['score_total'] > $T->score) {
+            if($final['score_total'] != 0) {
                 $T->score = $final['score_total'];
                 $T->write();
                 
                 $T = new Team($team_id);
             }
+            
+            $leaderboard = $T->getLeaderboard($M);
+            
+            $leader = array();
+                        
+            foreach($leaderboard as $l) {
+                $C = new Customer($l->customer_id);
+                $leader[] = array("user" => $C->username, "score" => $l->score, "team_id" => $l->ID); 
+            }
+            
+            $final['leaderboard'] = $leader;
             
             $AT_BAT_P = new Player($lineup[$score['at_bat'][$team_id]]['player_id']);
             

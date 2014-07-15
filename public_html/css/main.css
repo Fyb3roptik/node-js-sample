@@ -35,6 +35,27 @@ body {
     margin-top: 18%;
 }
 
+.panel-primary {
+    border-color: #555A92;
+}
+
+.panel-primary .panel-heading {
+    background: #555A92;
+    border-color: #555A92;
+}
+
+.btn-purple {
+    background: #555A92;
+    border-color: #555A92;
+    color: #FFF;
+}
+
+.btn-purple:hover, .btn-purple:active {
+    background: #393e6f;
+    border-color: #555A92;
+    color: #FFF;
+}
+
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 

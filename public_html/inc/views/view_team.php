@@ -485,7 +485,7 @@ $(document).ready(function() {
         <div class="col-lg-3 col-md-3 col-sm-3">
            <div class="box bordered-box purple-border">
                 <div class="box-header purple-background">
-                    <div class="title">LINE UP</div>
+                    <div class="title">LINEUP</div>
                 </div>
                 <div class="box-content">
                     <div class="responsive-table">
@@ -521,14 +521,15 @@ $(document).ready(function() {
            </div>
         </div>
         
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 field-margin">
+        <div class="col-lg-3 col-md-4 col-sm-12 hidden-xs field-margin">
             <img class="svg" src="/img/field.svg" />
         </div>
+        <div class="clearfix"></div>
     </div>
     
     <?php if(!empty($GAMES)): ?>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 hidden-xs">
             <?php foreach($GAMES as $game): ?>
             <div class="shield pull-left">
                 <p><center><?php echo $game['away_team_abbr'] . " " . $game['away_score']; ?> <hr /> <?php echo $game['home_team_abbr'] . " " . $game['home_score']; ?></center></p>
@@ -544,7 +545,11 @@ $(document).ready(function() {
         <div class="col-lg-8 col-md-8 col-sm-8">
            <div class="box bordered-box purple-border">
                 <div class="box-header purple-background">
-                    <div class="title">BOX SCORES</div>
+                    <div class="title pull-left">BOX SCORES</div>
+                    <div class="pull-right">
+                        <span class="label label-primary">Situation</span>
+                        <span class="label label-danger">3rd Out</span>
+                    </div>
                 </div>
                 <div class="box-content">
                     <div class="table-responsive">
@@ -571,22 +576,6 @@ $(document).ready(function() {
                                 <th>5th At Bat</th>
                                 <?php endif; ?>
                                 
-                                <?php if($BAT_COUNT >= 6): ?>
-                                <th>6th At Bat</th>
-                                <?php endif; ?>
-                                
-                                <?php if($BAT_COUNT >= 7): ?>
-                                <th>7th At Bat</th>
-                                <?php endif; ?>
-                                
-                                <?php if($BAT_COUNT >= 8): ?>
-                                <th>8th At Bat</th>
-                                <?php endif; ?>
-                                
-                                <?php if($BAT_COUNT >= 9): ?>
-                                <th>9th At Bat</th>
-                                <?php endif; ?>
-                                
                                 <th>Score</th>
                             </thead>
                             <tbody>
@@ -601,7 +590,7 @@ $(document).ready(function() {
                                             <?php if($BAT_COUNT >= 1): ?>
                                             <td>
                                                 <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][0] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <span class="label <?php if(isset($SCORE['scores'][$mlb_id]['at_bat_stat']['third_out'][0])): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat; ?></span><br />
                                                 <?php endforeach; ?>
                                             </td>
                                             <?php endif; ?>
@@ -609,7 +598,7 @@ $(document).ready(function() {
                                             <?php if($BAT_COUNT >= 2): ?>
                                             <td>
                                                 <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][1] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <span class="label <?php if(isset($SCORE['scores'][$mlb_id]['at_bat_stat']['third_out'][1])): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat; ?></span><br />
                                                 <?php endforeach; ?>
                                             </td>
                                             <?php endif; ?>
@@ -617,7 +606,7 @@ $(document).ready(function() {
                                             <?php if($BAT_COUNT >= 3): ?>
                                             <td>
                                                 <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][2] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <span class="label <?php if(isset($SCORE['scores'][$mlb_id]['at_bat_stat']['third_out'][2])): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat; ?></span><br />
                                                 <?php endforeach; ?>
                                             </td>
                                             <?php endif; ?>
@@ -625,7 +614,7 @@ $(document).ready(function() {
                                             <?php if($BAT_COUNT >= 4): ?>
                                             <td>
                                                 <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][3] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <span class="label <?php if(isset($SCORE['scores'][$mlb_id]['at_bat_stat']['third_out'][3])): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat; ?></span><br />
                                                 <?php endforeach; ?>
                                             </td>
                                             <?php endif; ?>
@@ -633,46 +622,11 @@ $(document).ready(function() {
                                             <?php if($BAT_COUNT >= 5): ?>
                                             <td>
                                                 <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][4] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
+                                                    <span class="label <?php if(isset($SCORE['scores'][$mlb_id]['at_bat_stat']['third_out'][4])): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat; ?></span><br />
                                                 <?php endforeach; ?>
                                             </td>
                                             <?php endif; ?>
                                             
-                                            <?php if($BAT_COUNT >= 6): ?>
-                                            <td>
-                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][5] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
-                                                <?php endforeach; ?>
-                                            </td>
-                                            <?php endif; ?>
-                                            
-                                            <?php if($BAT_COUNT >= 7): ?>
-                                            <td>
-                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][6] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
-                                                <?php endforeach; ?>
-                                            </td>
-                                            <?php endif; ?>
-                                            
-                                            <?php if($BAT_COUNT >= 8): ?>
-                                            <td>
-                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][7] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
-                                                <?php endforeach; ?>
-                                            </td>
-                                            <?php endif; ?>
-                                            
-                                            <?php if($BAT_COUNT >= 9): ?>
-                                            <td>
-                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][8] as $at_bat_stat): ?>
-                                                    <span class="label label-primary"><?php echo $at_bat_stat; ?></span><br />
-                                                <?php endforeach; ?>
-                                            </td>
-                                            <?php endif; ?>
-                                            
-                                            <?php //foreach($SCORE['scores'][$mlb_id]['at_bat_stat'] as $stat): ?>
-                                                
-                                            <?php //endforeach; ?>
                                             <td><?php if(isset($SCORE['scores'][$mlb_id]['score'])): ?><?php echo $SCORE['scores'][$mlb_id]['score']; ?><?php else: ?>0<?php endif; ?></td>
                                         </tr>
                                     <?php endif; ?>
@@ -700,23 +654,6 @@ $(document).ready(function() {
                                 <?php if($BAT_COUNT >= 5): ?>
                                 <th></th>
                                 <?php endif; ?>
-                                
-                                <?php if($BAT_COUNT >= 6): ?>
-                                <th></th>
-                                <?php endif; ?>
-                                
-                                <?php if($BAT_COUNT >= 7): ?>
-                                <th></th>
-                                <?php endif; ?>
-                                
-                                <?php if($BAT_COUNT >= 8): ?>
-                                <th></th>
-                                <?php endif; ?>
-                                
-                                <?php if($BAT_COUNT >= 9): ?>
-                                <th></th>
-                                <?php endif; ?>
-                                
                                 <th><?php echo $total; ?></th>
                             </tfoot>
                         </table>
@@ -725,14 +662,14 @@ $(document).ready(function() {
            </div>
         </div>
         
-        <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="col-lg-3 col-md-4 col-sm-4">
             <div class="box bordered-box purple-border">
                 <div class="box-header purple-background">
                     <div class="title">LEADERBOARD</div>
                 </div>
                 <div class="box-content box-no-padding">
                     <div class="responsive-table">
-                        <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                        <table id="leaderboard" class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
                             <thead>
                                 <tr>
                                     <th>Place</th>
@@ -894,7 +831,7 @@ $(window).load(function() {
     <?php if($MATCH->locked == "1"): ?>
     setInterval(function() {
         $.getJSON("/team/getScores/<?php echo $team_id; ?>", function(data) {
-            
+            //console.log(data);
             // At Bat
             var at_bat = data['at_bat'];
             if('undefined' !== typeof at_bat && at_bat != "") {
@@ -931,16 +868,15 @@ $(window).load(function() {
             
             // On Bases
             var bases = data['bases'];
-            if(typeof bases[1] == 'undefined') {
+            if(typeof bases[1] != 'object') {
                 $('#base1').css({ fill: "#FFF" });               
                 
                 $("#base1").attr('data-original-title', "").tooltip('fixTitle').tooltip('hide');
             }
-            if(typeof bases[1] != 'undefined') {
+            if(typeof bases[1] == 'object') {
                 $('#base1').css({ fill: "#F1C40F" });
-                
-                var base_names = bases[1].join(",");
-                
+
+                var base_names = bases[1][0];
                 var currentBase1 = $("#base1").attr('data-original-title');
                 
                 if(currentBase1 != base_names) {
@@ -954,14 +890,14 @@ $(window).load(function() {
                 }
             }
             
-            if(typeof bases[2] == 'undefined') {
+            if(typeof bases[2] != 'object') {
                 $('#base2').css({ fill: "#FFF" });
                 $("#base2").attr('data-original-title', "").tooltip('fixTitle').tooltip('hide');
             }
-            if(typeof bases[2] != 'undefined') {
+            if(typeof bases[2] == 'object') {
                 $('#base2').css({ fill: "#F1C40F" });
                 
-                var base_names = bases[2].join(",");
+                var base_names = bases[2][0];
                 
                 var currentBase2 = $("#base2").attr('data-original-title');
                 
@@ -976,14 +912,14 @@ $(window).load(function() {
                 }
             }
             
-            if(typeof bases[3] == 'undefined') {
+            if(typeof bases[3] != 'object') {
                 $('#base3').css({ fill: "#FFF" });
                 $("#base3").attr('data-original-title', "").tooltip('fixTitle').tooltip('hide');
             }
-            if(typeof bases[3] != 'undefined') {
+            if(typeof bases[3] == 'object') {
                 $('#base3').css({ fill: "#F1C40F" });
                 
-                var base_names = bases[3].join(",");
+                var base_names = bases[3][0];
                 
                 var currentBase3 = $("#base3").attr('data-original-title');
                 
@@ -999,43 +935,62 @@ $(window).load(function() {
             }
             
             // Box Score
-            $("table#box_score thead").find('tr').each(function() {
+            /*$("table#box_score thead").find('tr').each(function() {
                             
                 var bat_count = data['bat_count'];
                 
-                var count = $("table#box_score thead").find('tr:first th').length;
+                if(bat_count > 5) {
+                    bat_count = 5;
+                }
                 
-                if(bat_count >= 1 && bat_count <= 6){
+                var count = $("table#box_score thead").find('tr:first th').length;             
+                if(bat_count >= 1 && bat_count <= 5){
                     var at_bat = "";
                     
-                    var child = bat_count;
+                    var child = count - 1;
                     
-                    if(bat_count == 1 && count == 2) {
+                    if((child == 1 && count == 2) || (count == 2 && count < bat_count)) {
                         at_bat = child + "st";
                     }
                     
-                    if(bat_count == 2) {
+                    if((child == 2) || (count == 3 && count < bat_count)) {
                         at_bat = child + "nd";
                     }
                     
-                    if(bat_count == 3) {
+                    if((child == 3) || (count == 4 && count < bat_count)) {
                         at_bat = child + "rd";
                     }
                     
-                    if(bat_count > 3) {
+                    if((child > 3) || (count >= 5 && count < bat_count)) {
                         at_bat = child + "th";
                     }
                     
-                    if(count - 1 == bat_count) {
-                        $(this).find('th:nth-child(' + child + ')').after('<th>' + at_bat + ' At Bat</th>');
+                    if(count - 1 <= bat_count) {
+                    
+                        $(this).find('th:nth-child(' + (count - 1) + ')').after('<th>' + at_bat + ' At Bat</th>');
                     }
                     
-                    if(count - 1 == bat_count) {
+                    if(count - 1 <= bat_count) {
                         $("table#box_score tbody").find('tr').each(function(k, v) {
-                            if(typeof data['box_score'][child][k] != 'undefined') {
+                            
+                            if(typeof data['box_score'][child][k] == 'object') {
                                 
                                 // Update Box Score
-                                $(this).find('td').eq(child - 1).after('<td><span class="label label-primary">' + data['box_score'][child][k] + '</span></td>');
+                                for(i=0; i < Object.keys(data['box_score'][child][k]).length; i++) {
+                                    if(Object.keys(data['box_score'][child][k]).length > 1) {                                    
+                                        if(i == 0) {
+                                            $(this).find('td').eq(child - 1).after('<td><span class="label label-primary">' + data['box_score'][child][k][i] + '</span><br />');
+                                        } else {
+                                            $(this).find('td').eq(child).after().append('<span class="label label-primary">' + data['box_score'][child][k][i] + '</span><br />');
+                                        }
+                                        
+                                        if(i + 1 == Object.keys(data['box_score'][child][k]).length) {
+                                            $(this).find('td').eq(child).after().append('</td>');
+                                        }
+                                    } else {
+                                        $(this).find('td').eq(child - 1).after('<td><span class="label label-primary">' + data['box_score'][child][k][i] + '</span><br /></td>');
+                                    }
+                                }
                                 
                                 // Update Score
                                 $(this).find('td:last').text(data['player_score'][k]);
@@ -1066,7 +1021,7 @@ $(window).load(function() {
                         });
                     }
                     
-                    if(count - 1 == bat_count) {
+                    if(count - 1 <= bat_count) {
                         $("table#box_score tfoot").find('tr').each(function() {
                             $(this).find('th:nth-child(' + child + ')').after('<th></th>');
                         });
@@ -1074,7 +1029,15 @@ $(window).load(function() {
                     
                     
                 }
-            });
+            });*/
+            
+            //Leaderboard
+            var leaderboard = data['leaderboard'];
+            for(i=0; i < leaderboard.length; i++) {
+                var tr = $("table#leaderboard tbody").find('tr').eq(i);
+                tr.find('td').eq(1).html('<a href="/team/view/'+leaderboard[i]["team_id"]+'">'+leaderboard[i]["user"]+'</a>');
+                tr.find('td').eq(2).html(leaderboard[i]['score']);
+            }
             
         });
     }, 10000);

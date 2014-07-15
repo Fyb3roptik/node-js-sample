@@ -377,7 +377,7 @@ class Team_Controller extends Controller {
 	}
 	
 	public function getScores($team_id) {
-    	$this->_config(true, "", false);
+    	$this->_config(false, "", false);
     	
     	$SCORE = Team::getScoreJSON($team_id);
     	
@@ -423,7 +423,7 @@ class Team_Controller extends Controller {
                     }
                     
                     $sp_team = $GAMES[$game][$sps_team];
-                    $sp = $GAMES[$game][$sps];
+                    $sp = stripslashes($GAMES[$game][$sps]);
                     
                     $memcache = new Cache();
                     

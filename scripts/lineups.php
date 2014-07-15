@@ -13,4 +13,5 @@ foreach($cities as $team => $city) {
 $cache->delete('lineups');
 $cache->set('lineups', $LIST, 0, 0);
 
+var_dump($cache->get('lineups'));
 ?>
