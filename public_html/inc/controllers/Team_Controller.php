@@ -428,7 +428,6 @@ class Team_Controller extends Controller {
                     $memcache = new Cache();
                     
                     $LINEUP = $memcache->get('lineups');
-                    //var_dump($LINEUP);
                     $LIST = $LINEUP[$players_team];
                     $player_name = $player->first_name . " " . $player->last_name;
                 }
