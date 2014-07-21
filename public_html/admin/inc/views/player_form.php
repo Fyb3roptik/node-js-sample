@@ -48,7 +48,7 @@
                         <option value="Brewers" <?php if($P->player_team == "Brewers"): ?>selected<?php endif; ?>>Brewers</option>
                         <option value="Cardinals" <?php if($P->player_team == "Cardinals"): ?>selected<?php endif; ?>>Cardinals</option>
                         <option value="Cubs" <?php if($P->player_team == "Cubs"): ?>selected<?php endif; ?>>Cubs</option>
-                        <option value="Diamondbacks" <?php if($P->player_team == "Diamondbacks"): ?>selected<?php endif; ?>>Diamondbacks</option>
+                        <option value="Diamondbacks" <?php if($P->player_team == "D-backs"): ?>selected<?php endif; ?>>D-backs</option>
                         <option value="Dodgers" <?php if($P->player_team == "Dodgers"): ?>selected<?php endif; ?>>Dodgers</option>
                         <option value="Giants" <?php if($P->player_team == "Giants"): ?>selected<?php endif; ?>>Giants</option>
                         <option value="Indians" <?php if($P->player_team == "Indians"): ?>selected<?php endif; ?>>Indians</option>

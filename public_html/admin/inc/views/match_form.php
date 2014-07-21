@@ -101,7 +101,7 @@ $(document).ready(function(){
                             <input type="checkbox" name="match_teams[]" <?php if(in_array("Cubs", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Cubs"> Cubs
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Diamondbacks", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Diamondbacks"> Diamondbacks
+                            <input type="checkbox" name="match_teams[]" <?php if(in_array("D-backs", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="D-backs"> D-backs
                         </label>
                         <label class="checkbox-inline">
                             <input type="checkbox" name="match_teams[]" <?php if(in_array("Dodgers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Dodgers"> Dodgers

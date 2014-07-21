@@ -405,7 +405,7 @@ class Team_Controller extends Controller {
     	$function = "get" . $position;
     	
     	$PLAYERS = Player::$function($MATCH->match_teams);
-    	
+
     	foreach($PLAYERS AS $k => $player) {
         	foreach($GAMES as $game => $info) {
             	if(in_array($player->player_team, $info)) {
@@ -428,6 +428,7 @@ class Team_Controller extends Controller {
                     $memcache = new Cache();
                     
                     $LINEUP = $memcache->get('lineups');
+                    //var_dump($LINEUP);
                     $LIST = $LINEUP[$players_team];
                     $player_name = $player->first_name . " " . $player->last_name;
                 }

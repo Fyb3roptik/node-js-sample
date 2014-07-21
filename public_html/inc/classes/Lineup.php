@@ -18,7 +18,7 @@ class Lineup {
     }
     
     public function getCity($team_name) {
-        $teams = array("Angels" => "LAA", "Diamondbacks" => "ARI", "Braves" => "ATL", "Orioles" => "BAL", "Red Sox" => "BOS", "Cubs" => "CHC", "White Sox" => "CWS", "Reds" => "CIN", "Indians" => "CLE", "Rockies" => "COL", "Tigers" => "DET", "Marlins" => "MIA", "Astros" => "HOU", "Royals" => "KC", "Dodgers" => "LAD", "Brewers" => "MIL", "Twins" => "MIN", "Mets" => "NYM", "Yankees" => "NYY", "Athletics" => "OAK", "Phillies" => "PHI", "Pirates" => "PIT", "Padres" => "SD", "Giants" => "SF", "Mariners" => "SEA", "Cardinals" => "STL", "Rays" => "TB", "Rangers" => "TEX", "Blue Jays" => "TOR", "Nationals" => "WSH");
+        $teams = array("Angels" => "LAA", "D-backs" => "ARI", "Braves" => "ATL", "Orioles" => "BAL", "Red Sox" => "BOS", "Cubs" => "CHC", "White Sox" => "CWS", "Reds" => "CIN", "Indians" => "CLE", "Rockies" => "COL", "Tigers" => "DET", "Marlins" => "MIA", "Astros" => "HOU", "Royals" => "KC", "Dodgers" => "LAD", "Brewers" => "MIL", "Twins" => "MIN", "Mets" => "NYM", "Yankees" => "NYY", "Athletics" => "OAK", "Phillies" => "PHI", "Pirates" => "PIT", "Padres" => "SD", "Giants" => "SF", "Mariners" => "SEA", "Cardinals" => "STL", "Rays" => "TB", "Rangers" => "TEX", "Blue Jays" => "TOR", "Nationals" => "WSH");
         
         return $teams[$team_name];
     }
