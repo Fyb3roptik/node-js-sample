@@ -4,9 +4,13 @@
         <img src="/img/claws_white.png" /> <span class="logoText">Beast Franchise <span class="tm">&trade;</span></span>
     </div>
     <ul class='nav'>
+      <li class="balance">
+        <span class='user-name'>Current Balance: <span class="text-success"><?php echo '$' . number_format(bcdiv(floatval($CUSTOMER->funds), 100, 2), 2); ?></span></span>
+      </li>  
       <li class="first">
         <a class="pull-left" href="/img/BeastFranchiseRules.pdf" target="_blank"><i class="pull-left glyphicon glyphicon-book"></i>&nbsp;&nbsp;RULES</a>
       </li>
+      
       <li class='dropdown user-menu'>
         <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
           <img width="23" height="23" alt="<?php echo $CUSTOMER->name; ?>" src="<?php echo get_gravatar($CUSTOMER->email, "23"); ?>" />
@@ -23,6 +27,10 @@
           <li class='divider'></li>
           <li>
             <?php if($CUSTOMER->exists()): ?>
+                <a href='/<?php echo $CUSTOMER->username; ?>/settings'>
+                  <i class='icon-dollar'></i>
+                  Account Settings
+                </a>
                 <a href='/logout'>
                   <i class='icon-signout'></i>
                   Logout

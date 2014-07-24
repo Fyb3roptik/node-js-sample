@@ -37,3 +37,9 @@ enable_firephp = false
 
 #google analytics stuff
 google.analytics_code = UA-code
+
+#Stripe Info
+stripe.test.key = 
+stripe.live.key = 
+stripe.test.secret = 
+stripe.live.secret = 

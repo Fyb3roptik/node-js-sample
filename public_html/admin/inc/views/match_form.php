@@ -61,13 +61,22 @@ $(document).ready(function(){
     					</div>	
     				</div>
                 </div>
+                <div class="form-group">
+                    <label for="max_entrants">Max Extrants</label>
+                    <div class="controls">
+    					<div class="input-group col-sm-4">
+    						<span class="input-group-addon"><i class="fa fa-users"></i></span>
+    						<input type="text" class="form-control" name="match[max_entrants]" id="max_entrants" value="<?php echo $M->max_entrants; ?>">
+    					</div>	
+    				</div>
+                </div>
                 <?php $TOTAL = $M->getTotalTeams(); ?>
                 <div class="form-group">
                     <label for="prize_pool">Prize Pool - <i><strong>$<?php echo $M->getPrizePool($TOTAL); ?></strong></i></label>
                     <div class="controls">
     					<div class="input-group col-sm-4">
+        					<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
     						<input type="text" class="form-control" name="match[prize_pool]" id="prize_pool" value="<?php echo $M->prize_pool; ?>">
-    						<span class="input-group-addon"><i><strong>%</strong></i></span>
     					</div>
     				</div>
                 </div>

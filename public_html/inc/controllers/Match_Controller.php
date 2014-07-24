@@ -119,16 +119,23 @@ class Match_Controller extends Controller {
 	public function find() {
     	$this->_config(true);
     	$V = new View('find_matches.php');
+    	$MS = new Message_Stack();
     	
     	$MATCHES = Match::getActiveMatches(true);
     	
+    	$memcache = new Cache();
+    	
+    	$GAMES = $memcache->get('games');
+    	
     	$V->bind('MATCHES', $MATCHES);
+    	$V->bind('GAMES', $GAMES);
     	$V->bind('CUSTOMER', $this->_user);
     	
     	$LAYOUT_TITLE = "Beast Franchise | Find Match";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
     	
     	$this->_setView($V);
+    	$V->bind('MS', $MS);
 	}
 	
 	public function view($match_id) {
@@ -149,19 +156,45 @@ class Match_Controller extends Controller {
 	
 	public function joinMatch($match_id) {
     	$this->_config(true);
+    	$MS = new Message_Stack();
     	
-    	$TEAM = new Team();
-    	$TEAM->match_id = $match_id;
-    	$TEAM->customer_id = $this->_user->ID;
+    	$M = new Match($match_id);
     	
-    	$today = strtotime('today');
-		$TEAM->created_date = $today;
+    	if($M->getTotalTeams() < $M->max_entrants || $M->max_entrants == -1) {
+    	    
+    	    if($this->_user->funds >= $M->entry_fee) {
+    	        
+    	        $this->_user->funds -= $M->entry_fee;
+    	        $this->_user->write();
+    	        
+    	        $this->_user = new Customer($this->_user->ID);
+    	        
+            	$TEAM = new Team();
+            	$TEAM->match_id = $match_id;
+            	$TEAM->customer_id = $this->_user->ID;
+            	
+            	$today = strtotime('today');
+        		$TEAM->created_date = $today;
+        		
+        		$TEAM->write();
+        		
+        		$team_id = db_insert_id();
+        		
+        		redirect('/team/view/'.$team_id);
+        		
+            } else {
+                
+                $MS->add('/'.$this->_user->username.'/settings', "Not Enough Funds", MS_ERROR);
+                redirect('/'.$this->_user->username.'/settings');
+                
+            }
+        } else {
+            
+            $MS->add('/match/find', "Match Full", MS_ERROR);
+            redirect('/match/find');
+            
+        }
 		
-		$TEAM->write();
-		
-		$team_id = db_insert_id();
-		
-		redirect('/team/view/'.$team_id);
 		exit;
 	}
 	

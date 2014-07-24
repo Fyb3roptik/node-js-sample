@@ -107,6 +107,10 @@
 					<token key="ENABLE_CACHING" value="${enable_caching}" />
 					<token key="ENABLE_FIREPHP" value="${enable_firephp}" />
 					<token key="GOOGLE_ANALYTICS_CODE" value="${google.analytics_code}" />
+					<token key="STRIPE_TEST_KEY" value="${stripe.test.key}" />
+					<token key="STRIPE_LIVE_KEY" value="${stripe.live.key}" />
+					<token key="STRIPE_TEST_SECRET" value="${stripe.test.secret}" />
+					<token key="STRIPE_LIVE_SECRET" value="${stripe.live.secret}" />
 					<token key="BUILD" value="${build.build}" />
 				</replacetokens>
 			</filterchain>

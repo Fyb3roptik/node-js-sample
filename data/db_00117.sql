@@ -1,0 +1,1 @@
+ALTER TABLE `matches` ADD `max_entrants` INT NOT NULL DEFAULT '0';

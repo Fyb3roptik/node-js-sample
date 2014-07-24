@@ -25,5 +25,10 @@ define('MAINTENANCE_MODE', '__MAINTENANCE_MODE__', false);
 
 define('GOOGLE_ANALYTICS_CODE', '__GOOGLE_ANALYTICS_CODE__', true);
 
+define('STRIPE_TEST_KEY', '__STRIPE_TEST_KEY__', true);
+define('STRIPE_LIVE_KEY', '__STRIPE_LIVE_KEY__', true);
+define('STRIPE_TEST_SECRET', '__STRIPE_TEST_SECRET__', true);
+define('STRIPE_LIVE_SECRET', '__STRIPE_LIVE_SECRET__', true);
+
 define('BUILD', '__BUILD__', false);
 ?>

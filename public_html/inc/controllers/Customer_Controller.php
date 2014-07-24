@@ -1,5 +1,6 @@
 <?php
 require_once 'Controller.php';
+require_once dirname(__FILE__) . '/../classes/Stripe/Stripe.php';
 
 /**
  * Controller for Customers and what not.
@@ -113,12 +114,62 @@ class Customer_Controller extends Controller {
 		$V = new View('view_customer.php');
 		
 		$MATCHES = Match::getActiveMatches(true);
+		
+		$memcache = new Cache();
+        
+        $GAMES = $memcache->get('games');
     	
     	$V->bind('MATCHES', $MATCHES);
+    	$V->bind('GAMES', $GAMES);
 		
 		$V->bind('C', $C);
 		$V->bind('CUSTOMER', $this->_user);
 		$this->_setView($V);
+	}
+	
+	public function settings($username) {
+		$this->_config(true, $username);
+		$MS = new Message_Stack();
+		$C = new Customer($username, "username");
+		$V = new View('customer_settings.php');
+		
+		
+		
+		$V->bind('C', $C);
+		$V->bind('MS', $MS);
+		$V->bind('CUSTOMER', $this->_user);
+		$this->_setView($V);
+	}
+	
+	public function addFunds($username) {
+		$this->_config(true, $username);
+		$C = new Customer($username, "username");
+		
+        Stripe::setApiKey(STRIPE_TEST_SECRET);
+        
+        $token = post_var('stripeToken');
+        $amount = post_var('amount');
+        
+        try {
+            $charge = Stripe_Charge::create(array(
+              "amount" => $amount,
+              "currency" => "usd",
+              "card" => $token,
+              "description" => "Beast Franchise Adding Funds")
+            );
+
+            if($charge->paid == true) {
+                $C->funds += $amount;
+                $C->write();
+                $C = new Customer($username, "username");
+            }
+        } catch(Stripe_CardError $e) {
+            
+        }
+        
+        redirect("/" . $username . "/settings");
+        
+        exit;
 	}
 	
 	private function _config($require_login = false, $user = "", $set_redirect = true) {

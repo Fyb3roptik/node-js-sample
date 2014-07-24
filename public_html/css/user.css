@@ -182,6 +182,17 @@ header .navbar > .nav > li.first {
     border-left: none;
 }
 
+header .navbar > .nav > li.balance {
+    border-left: none;
+    margin: 6px 45px;
+    font-size: 1.3em;
+    color: #FFF;
+}
+
+header .navbar > .nav > li.balance:hover {
+    border-bottom: none;
+}
+
 header .navbar > .nav > li {
     border-left: 1px solid #555A92;
 }

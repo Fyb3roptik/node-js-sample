@@ -17,7 +17,7 @@ class Match extends Object {
         	$locked_check = " AND locked = '0'";
     	}
     	
-    	$sql = "SELECT match_id FROM matches WHERE start_date >= '".strtotime('today')."' AND active = '1' {$locked_check} ORDER BY match_id DESC";
+    	$sql = "SELECT match_id FROM matches WHERE start_date >= '".time()."' AND active = '1' {$locked_check} ORDER BY match_id DESC";
     	
     	$arr = db_arr($sql);
     	
@@ -76,7 +76,11 @@ class Match extends Object {
 	public function getPrizePool($total_entrents = 0) {
     	$prize_pool = "";
     	
-    	$prize_pool = ($total_entrents * $this->entry_fee) * floatval("0." . $this->prize_pool);
+    	$prize_pool = ($total_entrents * $this->entry_fee) - floatval($this->prize_pool);
+    	
+    	if($prize_pool < 0) {
+        	$prize_pool = 0;
+    	}
     	
     	return number_format($prize_pool, 2);
 	}
