@@ -231,11 +231,11 @@ class Team extends Object {
         // Get Total
         $total = 0;
         foreach($SCORE['scores'] as $player_id => $score) {
-            $total = floatval($total + $score['score']);
+            $total += $score['score'];
         }
-        
+
         // Write it to database
-        if($SCORE['done'] != true) {
+        if($SCORE['done']['final_done'] != true) {
             $this->score = $total;
             $this->write();
             
@@ -251,8 +251,13 @@ class Team extends Object {
         $sql = "SELECT team_id FROM teams WHERE match_id = '".$M->ID."' ORDER BY score DESC";
         $results = db_arr($sql);
         
-        foreach($results as $r) {
+        foreach($results as $r) {          
             $leaders[] = new Team($r['team_id']);
+        }
+        
+        foreach($leaders as $k => $T) {
+            $T->place = $k + 1;
+            $T->write();
         }
         
         return $leaders;

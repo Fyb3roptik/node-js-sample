@@ -683,7 +683,7 @@ $(document).ready(function() {
                                 <?php $CUST_TEAM = new Team(); ?>
                                     <tr>
                                         <td><?php echo addOrdinalNumberSuffix(($k + 1)); ?></td>
-                                        <td><a href="/team/view/<?php echo $T->ID; ?>"><?php echo $CUST->username; ?></a></td>
+                                        <td><?php if($CUST->ID == "366190"): ?><span class="label label-info">Inventor</span>&nbsp;&nbsp;&nbsp;<?php elseif($CUST->ID == "366181"): ?><span class="label label-info">Architect</span>&nbsp;&nbsp;&nbsp;<?php endif; ?><a href="/team/view/<?php echo $T->ID; ?>"><?php echo $CUST->username; ?></a></td>
                                         <td><?php echo $T->score; ?></td>
                                     </tr>
                                 <?php endforeach; ?>

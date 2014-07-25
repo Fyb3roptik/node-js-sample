@@ -160,39 +160,41 @@ class Match_Controller extends Controller {
     	
     	$M = new Match($match_id);
     	
-    	if($M->getTotalTeams() < $M->max_entrants || $M->max_entrants == -1) {
-    	    
-    	    if($this->_user->funds >= $M->entry_fee) {
-    	        
-    	        $this->_user->funds -= $M->entry_fee;
-    	        $this->_user->write();
-    	        
-    	        $this->_user = new Customer($this->_user->ID);
-    	        
-            	$TEAM = new Team();
-            	$TEAM->match_id = $match_id;
-            	$TEAM->customer_id = $this->_user->ID;
-            	
-            	$today = strtotime('today');
-        		$TEAM->created_date = $today;
-        		
-        		$TEAM->write();
-        		
-        		$team_id = db_insert_id();
-        		
-        		redirect('/team/view/'.$team_id);
-        		
+    	if($M->locked == 0) {
+        	if($M->getTotalTeams() < $M->max_entrants || $M->max_entrants == -1) {
+        	    
+        	    if($this->_user->funds >= $M->entry_fee) {
+        	        
+        	        $this->_user->funds -= $M->entry_fee;
+        	        $this->_user->write();
+        	        
+        	        $this->_user = new Customer($this->_user->ID);
+        	        
+                	$TEAM = new Team();
+                	$TEAM->match_id = $match_id;
+                	$TEAM->customer_id = $this->_user->ID;
+                	
+                	$today = strtotime('today');
+            		$TEAM->created_date = $today;
+            		
+            		$TEAM->write();
+            		
+            		$team_id = db_insert_id();
+            		
+            		redirect('/team/view/'.$team_id);
+            		
+                } else {
+                    
+                    $MS->add('/'.$this->_user->username.'/settings', "Not Enough Funds", MS_ERROR);
+                    redirect('/'.$this->_user->username.'/settings');
+                    
+                }
             } else {
                 
-                $MS->add('/'.$this->_user->username.'/settings', "Not Enough Funds", MS_ERROR);
-                redirect('/'.$this->_user->username.'/settings');
+                $MS->add('/match/find', "Match Full", MS_ERROR);
+                redirect('/match/find');
                 
             }
-        } else {
-            
-            $MS->add('/match/find', "Match Full", MS_ERROR);
-            redirect('/match/find');
-            
         }
 		
 		exit;

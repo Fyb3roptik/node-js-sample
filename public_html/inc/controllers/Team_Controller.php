@@ -333,6 +333,8 @@ class Team_Controller extends Controller {
         
         $total = $TEAM->getTotal($SCORE);
         
+        $TEAM = new Team($team_id);
+        
         $LAYOUT_TITLE = "Beast Franchise | My Team";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
         

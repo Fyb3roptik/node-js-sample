@@ -1,0 +1,1 @@
+ALTER TABLE `teams` ADD `place` INT NOT NULL DEFAULT '0';

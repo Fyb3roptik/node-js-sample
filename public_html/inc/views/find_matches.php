@@ -25,13 +25,18 @@
                         <tbody>
                             <?php foreach($MATCHES as $M): ?>
                             <?php $TOTAL = $M->getTotalTeams(); ?>
-                            <?php $team_exists = $M->teamExists($CUSTOMER->ID); ?>
+                            <?php 
+                                $team_exists = $M->teamExists($CUSTOMER->ID); 
+                                $teams_arr = explode(",", $M->match_teams);
+                            ?>
                                 <?php if(($M->max_entrants != -1 && ($team_exists['check'] == true || $M->getTotalTeams() < $M->max_entrants)) || ($M->max_entrants == -1)): ?>
                                 <tr>
                                     <td><?php echo $M->name; ?></td>
                                     <td>
                                         <?php foreach($GAMES as $game): ?>
-                                            <h5><?php echo $game['away_team']; ?> @ <?php echo $game['home_team']; ?></h5>
+                                            <?php if(in_array($game['home_team'], $teams_arr)): ?>
+                                                <h5><?php echo $game['away_team']; ?> @ <?php echo $game['home_team']; ?></h5>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </td>
                                     <td><?php echo $M->getTotalTeams(); ?></td>

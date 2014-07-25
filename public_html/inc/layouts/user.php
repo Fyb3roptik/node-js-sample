@@ -21,6 +21,7 @@
         <!-- / END - page related stylesheets [optional] -->
         <!-- / bootstrap [required] -->
         <link href="/css/bootstrap/bootstrap.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- / theme file [required] -->
         <link href="/css/dark-theme.css" media="all" id="color-settings-body-color" rel="stylesheet" type="text/css" />
         <!-- / coloring file [optional] (if you are going to use custom contrast color) -->

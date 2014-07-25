@@ -141,11 +141,77 @@ class Customer_Controller extends Controller {
 		$this->_setView($V);
 	}
 	
+	public function checkRouting() {
+    	$this->_config(true, $username);
+    	
+    	$routing = get_var('rt');
+    	
+    	$url = "https://www.routingnumbers.info/api/data.json?rn=" . $routing;
+    	
+    	$get = file_get_contents($url);
+    	
+    	$obj = json_decode($get);
+    	
+    	if($routing == 110000000) {
+        	return "STRIPE Test Routing";
+    	} else {
+        	return $obj->customer_name;
+    	}
+    	
+    	exit;
+	}
+	
+	public function withdrawFunds($username) {
+    	$this->_config(true, $username);
+    	$MS = new Message_Stack();
+		$C = new Customer($username, "username");
+		
+		Stripe::setApiKey(STRIPE_TEST_SECRET);
+		
+		$token = get_var('stripeToken');
+		$amount = get_var('amount');
+
+		// Create a Recipient
+        $recipient = Stripe_Recipient::create(array(
+          "name" => $C->name,
+          "type" => "individual",
+          "bank_account" => $token,
+          "email" => $C->email)
+        );
+        
+        $recipient_id = $recipient->id;
+        
+        $transfer = Stripe_Transfer::create(array(
+          "amount" => $amount, // amount in cents
+          "currency" => "usd",
+          "recipient" => $recipient_id,
+          "bank_account" => $recipient->token,
+          "statement_description" => "Beast Franchise Withdraw")
+        );
+        
+        if($transfer->status == "pending" || $transfer->status == "paid") {
+            $C->funds -= $amount;
+            $C->write();
+            
+            $C = new Customer($C->ID);
+            
+            $MS->add('/'.$C->username.'/settings', "$" . $amount / 100 . " has been withdrawn. Please allow 2-3 business days for the funds to reach your bank account.", MS_SUCCESS);
+        }
+        
+        if($transfer->status == "failed") {
+            $MS->add('/'.$C->username.'/settings', "Transfer Failed", MS_ERROR);
+        }
+        
+        redirect('/'.$C->username.'/settings');
+        
+        exit;
+	}
+	
 	public function addFunds($username) {
 		$this->_config(true, $username);
 		$C = new Customer($username, "username");
 		
-        Stripe::setApiKey(STRIPE_TEST_SECRET);
+        Stripe::setApiKey(STRIPE_LIVE_SECRET);
         
         $token = post_var('stripeToken');
         $amount = post_var('amount');

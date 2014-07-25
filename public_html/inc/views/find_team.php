@@ -1,23 +1,41 @@
-<div class='col-xs-12'>    
+<div class='col-lg-12 col-sm-12'>    
     <div class="row">
-        <div class="col-lg-12 col-sm-12">
-    <?php foreach($TEAM_LIST as $T): ?>
-        <?php if($T->created_date >= strtotime('today')): ?>
-            <?php $MATCH = new Match($T->match_id); ?>
-            <div class='row box box-transparent'>
-                <div class='col-xs-12 col-sm-12'>
-                  <div class='box-quick-link purple-background'>
-                    <a href='/team/view/<?php echo $T->ID; ?>'>
-                      <div class='header'>
-                        <div class='icon-star'></div>
-                      </div>
-                      <div class='content'><?php echo $MATCH->name; ?></div>
-                    </a>
-                  </div>
-                </div>                        
+        <div class="box bordered-box purple-border">
+            <div class="box-content">
+                <table class="table table-hover table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>CONTEST</th>
+                            <th>ENTRY FEE</th>
+                            <th>PRIZE POOL</th>
+                            <th>ENTRIES</th>
+                            <th>Date</th>
+                            <th>OUTCOME</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($TEAM_LIST as $T): ?>
+                            <?php if($T->created_date >= strtotime('today')): ?>
+                                <?php $M = new Match($T->match_id); ?>
+                                <?php $TOTAL = $M->getTotalTeams(); ?>
+                                <?php $team_exists = $M->teamExists($CUSTOMER->ID); ?>
+                                    <tr>
+                                        <td><?php echo $M->name; ?></td>
+                                        <td><?php if($M->entry_fee > 0): ?>$<?php echo $M->entry_fee; ?><?php else: ?>Free<?php endif; ?></td>
+                                        <td>$<?php echo $M->getPrizePool($TOTAL); ?></td>
+                                        <td><?php echo $TOTAL; ?></td>
+                                        <td><?php echo date("m/d/Y g:i A T", $M->start_date); ?></td>
+                                        <td></td>
+                                        <td>
+                                            <a href="/team/view/<?php echo $T->ID; ?>" class="btn btn-info">View My Team</button>  
+                                        </td>
+                                    </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
-        <?php endif;?>
-    <?php endforeach; ?>
         </div>
     </div>
     
@@ -30,22 +48,42 @@
     
     <div class="row">
         <div class="col-lg-12 col-sm-12">
-    <?php foreach($TEAM_LIST as $T): ?>
-        <?php if($T->created_date < strtotime('today')): ?>
-            <?php $MATCH = new Match($T->match_id); ?>
-            <div class='row box box-transparent'>
-                <div class='col-xs-12 col-sm-12'>
-                  <div class='box-quick-link purple-background'>
-                    <a href='/team/view/<?php echo $T->ID; ?>'>
-                      <div class='header'>
-                        <div class='icon-star'></div>
-                      </div>
-                      <div class='content'><?php echo $MATCH->name; ?> <?php echo date("m/d/Y", $T->created_date); ?></div>
-                    </a>
-                  </div>
-                </div>                        
+            <div class="box bordered-box purple-border">
+                <div class="box-content">
+                    <table class="table table-hover table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>CONTEST</th>
+                                <th>ENTRY FEE</th>
+                                <th>PRIZE POOL</th>
+                                <th>ENTRIES</th>
+                                <th>Date</th>
+                                <th>OUTCOME</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($TEAM_LIST as $T): ?>
+                                <?php if($T->created_date < strtotime('today')): ?>
+                                    <?php $M = new Match($T->match_id); ?>
+                                    <?php $TOTAL = $M->getTotalTeams(); ?>
+                                    <?php $team_exists = $M->teamExists($CUSTOMER->ID); ?>
+                                        <tr>
+                                            <td><?php echo $M->name; ?></td>
+                                            <td><?php if($M->entry_fee > 0): ?>$<?php echo $M->entry_fee; ?><?php else: ?>Free<?php endif; ?></td>
+                                            <td>$<?php echo $M->getPrizePool($TOTAL); ?></td>
+                                            <td><?php echo $TOTAL; ?></td>
+                                            <td><?php echo date("m/d/Y g:i A T", $M->start_date); ?></td>
+                                            <td></td>
+                                            <td>
+                                                <a href="/team/view/<?php echo $T->ID; ?>" class="btn btn-info">View My Team</button>  
+                                            </td>
+                                        </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        <?php endif;?>
-    <?php endforeach; ?>
         </div>
-    </div>
+</div>

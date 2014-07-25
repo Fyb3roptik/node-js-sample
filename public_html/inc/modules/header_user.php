@@ -4,9 +4,11 @@
         <img src="/img/claws_white.png" /> <span class="logoText">Beast Franchise <span class="tm">&trade;</span></span>
     </div>
     <ul class='nav'>
+      <?php if($CUSTOMER->exists()): ?>  
       <li class="balance">
-        <span class='user-name'>Current Balance: <span class="text-success"><?php echo '$' . number_format(bcdiv(floatval($CUSTOMER->funds), 100, 2), 2); ?></span></span>
-      </li>  
+        <span class='user-name'>Current Balance: <span class="text-success"><a class="text-success" href="/<?php echo $CUSTOMER->username; ?>/settings"><?php echo '$' . number_format(bcdiv(floatval($CUSTOMER->funds), 100, 2), 2); ?></a></span></span>
+      </li>
+      <?php endif; ?>
       <li class="first">
         <a class="pull-left" href="/img/BeastFranchiseRules.pdf" target="_blank"><i class="pull-left glyphicon glyphicon-book"></i>&nbsp;&nbsp;RULES</a>
       </li>
