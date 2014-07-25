@@ -72,11 +72,11 @@ $(document).ready(function(){
                 </div>
                 <?php $TOTAL = $M->getTotalTeams(); ?>
                 <div class="form-group">
-                    <label for="prize_pool">Prize Pool - <i><strong>$<?php echo $M->getPrizePool($TOTAL); ?></strong></i></label>
+                    <label for="match_fee">Match Fee - <i><strong>$<?php echo $M->getPrizePool($TOTAL); ?></strong></i></label>
                     <div class="controls">
     					<div class="input-group col-sm-4">
         					<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-    						<input type="text" class="form-control" name="match[prize_pool]" id="prize_pool" value="<?php echo $M->prize_pool; ?>">
+    						<input type="text" class="form-control" name="match[match_fee]" id="match_fee" value="<?php echo $M->match_fee; ?>">
     					</div>
     				</div>
                 </div>

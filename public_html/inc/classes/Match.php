@@ -79,15 +79,15 @@ class Match extends Object {
 	}
 	
 	public function getPrizePool($total_entrents = 0) {
-    	$prize_pool = "";
+    	$match_fee = "";
     	
-    	$prize_pool = ($total_entrents * $this->entry_fee) - floatval($this->prize_pool);
+    	$match_fee = ($total_entrents * $this->entry_fee) - floatval($this->match_fee);
     	
-    	if($prize_pool < 0) {
-        	$prize_pool = 0;
+    	if($match_fee < 0) {
+        	$match_fee = 0;
     	}
     	
-    	return number_format($prize_pool, 2);
+    	return number_format($match_fee, 2);
 	}
 
 }

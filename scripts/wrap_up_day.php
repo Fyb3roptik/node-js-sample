@@ -12,7 +12,7 @@ foreach($MATCHES as $match) {
         $winner = Team::getAllTeams($match->ID, true);
         
         //Determine Prize Money
-        $prize = (($match->entry_fee * $match->getTotalTeams()) - $match->prize_pool) * 100;
+        $prize = (($match->entry_fee * $match->getTotalTeams()) - $match->match_fee) * 100;
 
         //Give em ze money Lebowski
         $C = new Customer($winner[0]->customer_id);
