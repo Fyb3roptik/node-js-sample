@@ -13,7 +13,7 @@
                             <tr>
                                 <th>CONTEST</th>
                                 <th>MLB GAMES</th>
-                                <th>SIZE</th>
+                                <th>PLAYERS</th>
                                 <th>MAX ENTRANTS</th>
                                 <th>ENTRY FEE</th>
                                 <th>PRIZE POOL</th>
