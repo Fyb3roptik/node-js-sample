@@ -248,6 +248,10 @@ $(document).ready(function() {
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong>Lineups only pull players that are listed as active. If a player you want is not listed, please come back after their lineups are set and they are showing as playing today.</strong>
             </div>
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Match starts at <?php echo date("g:i A T", $MATCH->start_date); ?> PT</strong>
+            </div>
         </div>
     </div>
     
