@@ -34,4 +34,13 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-lg-12 col-sm-12">
+        <div class="page-header">
+            <h3>Video Tutorial</h3>
+        </div>
+        <iframe src="//player.vimeo.com/video/101363592?color=7537b1" width="1280" height="720" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/101363592">Beast Franchise tutorial</a> from <a href="http://vimeo.com/fyberstudios">Fyb3roptik</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+    </div>
+</div>
+
 <hr>
