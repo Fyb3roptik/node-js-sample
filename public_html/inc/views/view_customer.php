@@ -24,6 +24,10 @@
                         <tbody>
                             <?php foreach($MATCHES as $M): ?>
                             <?php $TOTAL = $M->getTotalTeams(); ?>
+                            <?php 
+                                $team_exists = $M->teamExists($CUSTOMER->ID); 
+                                $teams_arr = explode(",", $M->match_teams);
+                            ?>
                                 <?php if(($M->max_entrants != -1 && ($team_exists['check'] == true || $M->getTotalTeams() < $M->max_entrants)) || ($M->max_entrants == -1)): ?>
                                 <tr>
                                     <td><?php echo $M->name; ?></td>
@@ -41,7 +45,6 @@
                                     <td><?php echo $TOTAL; ?></td>
                                     <td><?php echo date("g:i A T", $M->start_date); ?></td>
                                     <td>
-                                        <?php $team_exists = $M->teamExists($CUSTOMER->ID); ?>
                                         <?php if($team_exists['check'] == true): ?>
                                             <a href="/team/view/<?php echo $team_exists['team_id']; ?>" class="btn btn-info">View My Team</button>
                                         <?php else: ?>
