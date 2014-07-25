@@ -146,6 +146,38 @@
     <?php endif; ?>
 </div>
 
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">          
+        <div class='box'>
+            <div class='box-header purple-background'>
+              <div class='title'>
+                  My Info
+              </div>
+            </div>
+            
+            <div class='box-content'>
+                <form role="form" action="/<?php echo $CUSTOMER->username; ?>/updateInfo" method="post">
+                    <input type="hidden" id="customer_id" name="customer_id" value="<?php echo $CUSTOMER->ID; ?>" />
+                    <div class="form-group">
+                        <label for="customer[name]">Name</label>
+                        <input type="text" class="form-control" id="customer[name]" name="customer[name]" placeholder="Name" value="<?php echo $CUSTOMER->name; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer[email]">Email</label>
+                        <input type="text" class="form-control" id="customer[email]" name="customer[email]" placeholder="Email" value="<?php echo $CUSTOMER->email; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer[username]">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo $CUSTOMER->username; ?>">
+                    </div>
+                    <button class="btn btn-success pull-right">Update</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
 function stripeResponseHandler(status, response) {

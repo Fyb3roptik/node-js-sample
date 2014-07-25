@@ -141,6 +141,32 @@ class Customer_Controller extends Controller {
 		$this->_setView($V);
 	}
 	
+	public function updateInfo($username) {
+    	$this->_config(true, $username);
+		$MS = new Message_Stack();
+		
+		$C = new Customer(post_var('customer_id'));
+		$C->load(post_var('customer', array()));
+		
+		$error = false;
+		if(post_var('username') != "") {
+			$C->username = post_var('username');
+		} else {
+			$error = true;
+			$MS->add('/'.$C->username.'/settings', "Username CANNOT be blank", MS_ERROR);
+		}
+		
+		if($error == false) {
+    		$MS->add('/'.$C->username.'/settings', "Information Updated", MS_SUCCESS);
+		}
+		
+		$C->write();
+		
+		redirect('/'.$C->username.'/settings');
+		
+		exit;
+	}
+	
 	public function checkRouting() {
     	$this->_config(true, $username);
     	
