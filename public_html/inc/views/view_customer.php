@@ -1,12 +1,13 @@
 <div class='col-md-12 col-sm-12 col-xs-12'>    
     <div class='row'>
         <div class="col-md-offset-1 col-md-8 col-sm-12 col-xs-12">
+            <?php if($C->ID == $CUSTOMER->ID): ?>
             <div class="box bordered-box purple-border">
                 <div class="box-header purple-background">
                     <div class="title">TODAY'S MATCHES</div>
                 </div>
                 <div class="box-content table-responsive">
-                    <?php if(!empty($MATCHES)): ?>
+                    <?php if(!empty($MATCHES) && $C->ID == $CUSTOMER->ID): ?>
                     <table class="table table-hover table-striped table-bordered">
                         <thead>
                             <tr>
@@ -61,6 +62,7 @@
                     <?php endif; ?>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
