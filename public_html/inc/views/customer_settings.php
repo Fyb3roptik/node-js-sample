@@ -159,12 +159,12 @@
                 <form role="form" action="/<?php echo $CUSTOMER->username; ?>/updateInfo" method="post">
                     <input type="hidden" id="customer_id" name="customer_id" value="<?php echo $CUSTOMER->ID; ?>" />
                     <div class="form-group">
-                        <label for="customer[name]">Name</label>
-                        <input type="text" class="form-control" id="customer[name]" name="customer[name]" placeholder="Name" value="<?php echo $CUSTOMER->name; ?>">
+                        <label for="customer[name]">Name (This needs to be your full legal name for Withdrawal Purposes. We keep the name Private)</label>
+                        <input type="text" class="form-control" id="customer[name]" name="customer[name]" placeholder="Full Legal Name (Remains Private)" value="<?php echo $CUSTOMER->name; ?>">
                     </div>
                     <div class="form-group">
                         <label for="customer[email]">Email</label>
-                        <input type="text" class="form-control" id="customer[email]" name="customer[email]" placeholder="Email" value="<?php echo $CUSTOMER->email; ?>">
+                        <input type="text" class="form-control" id="customer[email]" name="customer[email]" placeholder="Email Address" value="<?php echo $CUSTOMER->email; ?>">
                     </div>
                     <div class="form-group">
                         <label for="customer[username]">Username</label>
