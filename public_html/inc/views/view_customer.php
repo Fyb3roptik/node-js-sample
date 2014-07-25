@@ -29,13 +29,15 @@
                                     <td><?php echo $M->name; ?></td>
                                     <td>
                                         <?php foreach($GAMES as $game): ?>
-                                            <h5><?php echo $game['away_team']; ?> @ <?php echo $game['home_team']; ?></h5>
+                                            <?php if(in_array($game['home_team'], $teams_arr)): ?>
+                                                <h5><?php echo $game['away_team']; ?> @ <?php echo $game['home_team']; ?></h5>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </td>
                                     <td><?php echo $M->getTotalTeams(); ?></td>
                                     <td><?php if($M->max_entrants != -1): ?><?php echo $M->max_entrants; ?><?php else: ?>Unlimited<?php endif; ?></td>
                                     <td><?php if($M->entry_fee > 0): ?>$<?php echo $M->entry_fee; ?><?php else: ?>Free<?php endif; ?></td>
-                                    <td>$<?php echo $M->getPrizePool($TOTAL); ?></td>
+                                    <td>$<?php echo $M->getPrizePool($M->max_entrants); ?></td>
                                     <td><?php echo $TOTAL; ?></td>
                                     <td><?php echo date("g:i A T", $M->start_date); ?></td>
                                     <td>

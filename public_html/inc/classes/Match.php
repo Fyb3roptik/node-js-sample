@@ -82,7 +82,7 @@ class Match extends Object {
     	$match_fee = "";
     	
     	$match_fee = ($total_entrents * $this->entry_fee) - floatval($this->match_fee);
-    	
+
     	if($match_fee < 0) {
         	$match_fee = 0;
     	}
