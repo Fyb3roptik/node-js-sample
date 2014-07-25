@@ -8,8 +8,8 @@
     <div class="col-lg-6">
         <form role="form" action="/login/processRegister" method="post">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                <label for="name">Name (This needs to be your full legal name for Withdrawal Purposes. We keep the name Private)</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Full Legal Name (Remains Private)">
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
