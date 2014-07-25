@@ -165,7 +165,8 @@ class Match_Controller extends Controller {
         	    
         	    if($this->_user->funds >= $M->entry_fee) {
         	        
-        	        $this->_user->funds -= $M->entry_fee;
+        	        $this->_user->funds -= ($M->entry_fee * 100);
+
         	        $this->_user->write();
         	        
         	        $this->_user = new Customer($this->_user->ID);
