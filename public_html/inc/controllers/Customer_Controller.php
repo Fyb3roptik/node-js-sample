@@ -166,7 +166,7 @@ class Customer_Controller extends Controller {
     	$MS = new Message_Stack();
 		$C = new Customer($username, "username");
 		
-		Stripe::setApiKey(STRIPE_TEST_SECRET);
+		Stripe::setApiKey(STRIPE_LIVE_SECRET);
 		
 		$token = get_var('stripeToken');
 		$amount = get_var('amount');

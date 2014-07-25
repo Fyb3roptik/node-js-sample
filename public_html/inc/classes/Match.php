@@ -7,7 +7,7 @@ class Match extends Object {
 	protected $_table = 'matches';
 	protected $_table_id = 'match_id';
 	
-	public static function getActiveMatches($locked = false) {
+	public static function getActiveMatches($locked = false, $start_date = true) {
     	
     	$MATCHES = array();
     	
@@ -17,7 +17,12 @@ class Match extends Object {
         	$locked_check = " AND locked = '0'";
     	}
     	
-    	$sql = "SELECT match_id FROM matches WHERE start_date >= '".time()."' AND active = '1' {$locked_check} ORDER BY match_id DESC";
+    	$start_check = "";
+    	if($start_date == true) {
+        	$start_check = "AND start_date >= '".time()."'";
+    	}
+    	
+    	$sql = "SELECT match_id FROM matches WHERE active = '1' {$start_check} {$locked_check} ORDER BY match_id DESC";
     	
     	$arr = db_arr($sql);
     	

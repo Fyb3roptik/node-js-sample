@@ -7,13 +7,20 @@ class Team extends Object {
 	protected $_table = 'teams';
 	protected $_table_id = 'team_id';
 	
-	public static function getAllTeams($match_id = false) {
+	public static function getAllTeams($match_id = false, $winner = false) {
     	$match = "";
     	if($match_id != false) {
         	$match = "WHERE match_id = '{$match_id}'";
     	}
     	
-    	$sql = "SELECT * FROM teams {$match} ORDER BY team_id DESC LIMIT 1000";
+    	$order_by = "team_id DESC";
+    	$limit = "1000";
+    	if($winner == true) {
+        	$order_by = "place ASC";
+        	$limit = "1";
+    	}
+    	
+    	$sql = "SELECT * FROM teams {$match} ORDER BY {$order_by} LIMIT {$limit}";
         $query = db_arr($sql);
         
         foreach($query as $team) {
