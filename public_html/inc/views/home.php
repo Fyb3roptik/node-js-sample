@@ -15,10 +15,11 @@
   </div>
 </div>
 
+<center>
 <div class="row top-row">
     <div class="col-lg-12 col-sm-12">
-        <h3>BEAST FRANCHISE:</h3>
-        <h3>THE DAILY BASEBALL GM EXPERIENCE</h3>
+        <h1>BEAST FRANCHISE:</h1>
+        <h1>THE DAILY BASEBALL GM EXPERIENCE</h1>
         <iframe src="//player.vimeo.com/video/101148785?color=7537b1" width="1280" height="720" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/101148785">BEAST FRANCHISE: Daily Fantasy Baseball GM Experience</a></p>
     </div>
 </div>
@@ -26,7 +27,7 @@
 <div class="row">
     <div class="col-lg-12 col-sm-12">
         <div class="page-header">
-            <h3>Step 1 - THE GM EXPERIENCE</h3>
+            <h1>Step 1 - THE GM EXPERIENCE</h1>
         </div>
         <h4>You are the General Manager as you select your ultimate BEAST SQUAD.</h4>
         <h4>No Salary Cap, pick the Players you want at each position.</h4>
@@ -36,7 +37,7 @@
 <div class="row">
     <div class="col-lg-12 col-sm-12">
         <div class="page-header">
-            <h3>Step 2 - THE COACH EXPERIENCE</h3>
+            <h1>Step 2 - THE COACH EXPERIENCE</h1>
         </div>
         <h4>You are now in the coaches office.  You examine your roster and put together your BEAST BATTING ORDER (1-9).</h4>
         <h4>Just like real baseball, every 3 Outs the bases clear. Your leadoff hitter can be a player playing at 4:00pm, and you will not know his next move until the 7:00pm game where your #2 hitter is waiting.  <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Watch the Tutorial to learn more</button></h4>
@@ -46,12 +47,12 @@
 <div class="row">
     <div class="col-lg-12 col-sm-12">
         <div class="page-header">
-            <h3>Step 3 - THE OWNER EXPERIENCE</h3>
+            <h1>Step 3 - THE OWNER EXPERIENCE</h1>
         </div>
         <h4>Watch your BEAST FRANCHISE Fantasy Baseball team destroy the competition.</h4>
         <h4>Compete for Daily Prizes.</h4>
-        <h4>Free to Enter or play in a Cash games to win money and start your empire.</h4>
+        <h4>Free to Enter or play in a Cash game to win money and start your empire.</h4>
     </div>
 </div>
-
+</center>
 <hr>

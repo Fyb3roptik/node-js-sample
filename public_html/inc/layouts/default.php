@@ -18,6 +18,7 @@
                 padding-bottom: 20px;
             }
         </style>
+        <link href='//fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/css/main.css">
 

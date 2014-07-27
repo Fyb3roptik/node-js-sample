@@ -5,6 +5,7 @@
 
 body {
     background: url('/img/home_bg.png') repeat;
+    font-family: 'Pontano Sans', sans-serif;
 }
 
 .btn-nav {
@@ -54,6 +55,10 @@ body {
     background: #393e6f;
     border-color: #555A92;
     color: #FFF;
+}
+
+h4 {
+    line-height: 3;
 }
 
 /* Extra small devices (phones, less than 768px) */
