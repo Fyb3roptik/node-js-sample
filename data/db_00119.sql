@@ -1,1 +1,1 @@
-ALTER TABLE `matches` CHANGE `prize_pool` `match_fee` INT;
+ALTER TABLE `matches` CHANGE `prize_pool` `match_fee` FLOAT;
