@@ -120,6 +120,7 @@ class Login_Controller extends Controller {
 				//we're good to go on the password front.
 				$c->setName($name);
 				$c->stage_name = $stage_name;
+				$c->funds = 150;
 				$c->setEmail($email);
 				$c->setPassword($new_password);
 				if($username != "") {
