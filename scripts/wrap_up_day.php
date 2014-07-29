@@ -17,7 +17,7 @@ foreach($MATCHES as $match) {
         //Give em ze money Lebowski
         $C = new Customer($winner[0]->customer_id);
         $C->funds += $prize;
-        //$C->write();
+        $C->write();
         
     }
     

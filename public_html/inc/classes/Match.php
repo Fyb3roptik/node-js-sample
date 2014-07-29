@@ -20,6 +20,8 @@ class Match extends Object {
     	$start_check = "";
     	if($start_date == true) {
         	$start_check = "AND start_date >= '".time()."'";
+    	} else {
+        	$start_check = "AND start_date < '".time()."'";
     	}
     	
     	$sql = "SELECT match_id FROM matches WHERE active = '1' {$start_check} {$locked_check} ORDER BY match_id DESC";
