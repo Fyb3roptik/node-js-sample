@@ -10,6 +10,10 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <meta property="og:title" content="Beast Franchise"/>
+        <meta property="og:image" content="<?php echo SITE_URL; ?>/img/Claw_Marks.png"/>
+        <meta property="og:url" content="<?php echo SITE_URL; ?>" />
+        
         <link href='//d1359auewlqy3z.cloudfront.net/wp-content/uploads/SH.png' rel='shortcut icon' type='image/x-icon'>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <style>

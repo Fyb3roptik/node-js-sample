@@ -237,7 +237,7 @@ class Api_Controller extends Controller {
         } else {
             // api key is missing in header
             $response["error"] = true;
-            $response["message"] = "Api key is misssing";
+            $response["message"] = "Api key is missing";
             $this->_echoResponse(400, $response);
             exit;
         }
