@@ -261,7 +261,6 @@ class Match_Controller extends Controller {
 	}
 	
 	public function getMatchPriceInfo($match_price_id) {
-    	$this->_config(true);
     	$MP = new Match_Price($match_price_id);
     	
     	$data['id'] = $MP->ID;

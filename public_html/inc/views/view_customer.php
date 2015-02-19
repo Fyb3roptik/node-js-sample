@@ -1,44 +1,57 @@
 <div class='col-md-12 col-sm-12 col-xs-12'>    
     <div class='row'>
         <?php if($C->ID == $CUSTOMER->ID): ?>
-        <div class="col-md-offset-1 col-md-5 col-sm-12 col-xs-12">
-            <div class="box bordered-box purple-border">
-                <div class="box-header purple-background">
-                    <div class="title"><i class="fa fa-trophy"></i> LEAGUES</div>
+            <?php if($Season_Started == true || SITE_DEV == 1): ?>
+                <div class="col-md-offset-1 col-md-5 col-sm-12 col-xs-12">
+                    <div class="box bordered-box purple-border">
+                        <div class="box-header purple-background">
+                            <div class="title"><i class="fa fa-trophy"></i> LEAGUES</div>
+                        </div>
+                        <div class="box-content">
+                            <a href="#" class="btn btn-primary pull-left">CREATE A LEAGUE</a>
+                            <a href="#" class="btn btn-success pull-right">FIND A LEAGUE</a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="box-content">
-                    <a href="#" class="btn btn-primary pull-left">CREATE A LEAGUE</a>
-                    <a href="#" class="btn btn-success pull-right">FIND A LEAGUE</a>
-                    <div class="clearfix"></div>
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    <div class="box bordered-box purple-border">
+                        <div class="box-header purple-background">
+                            <div class="title"><i class="fa fa-search"></i> FIND A MATCH</div>
+                        </div>
+                        <div class="box-content">
+                            <?php if(!empty($MATCHES)): ?>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <th>Match Name</th>
+                                    <th>Status</th>
+                                </thead>
+                                <?php foreach($MATCHES as $M): ?>
+                                    <tr class="info">
+                                        <td><?php echo $M->name; ?></td>
+                                        <td><span class="text-info">Pending...</span></tr>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                            <?php endif; ?>
+                            <a href="#" class="btn btn-primary pull-left" data-toggle="modal" data-target="#createMatchModal">CREATE A MATCH</a>
+                            <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#findMatchModal">FIND A MATCH</a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-5 col-sm-12 col-xs-12">
-            <div class="box bordered-box purple-border">
-                <div class="box-header purple-background">
-                    <div class="title"><i class="fa fa-search"></i> FIND A MATCH</div>
+            <?php else: ?>
+                <div class="col-md-offset-2 col-md-7 col-sm-12 col-xs-12">
+                    <div class="box bordered-box purple-border">
+                        <div class="box-header purple-background">
+                            <div class="title"></div>
+                        </div>
+                        <div class="box-content">
+                            <h1 class="text-purple">MLB Season has not started yet! Please come back on opening day!</h1>
+                        </div>
+                    </div>
                 </div>
-                <div class="box-content">
-                    <?php if(!empty($MATCHES)): ?>
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <th>Match Name</th>
-                            <th>Status</th>
-                        </thead>
-                        <?php foreach($MATCHES as $M): ?>
-                            <tr class="info">
-                                <td><?php echo $M->name; ?></td>
-                                <td><span class="text-info">Pending...</span></tr>
-                            </tr>
-                        <?php endforeach; ?>
-                    </table>
-                    <?php endif; ?>
-                    <a href="#" class="btn btn-primary pull-left" data-toggle="modal" data-target="#createMatchModal">CREATE A MATCH</a>
-                    <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#findMatchModal">FIND A MATCH</a>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 </div>
@@ -71,9 +84,10 @@
                     						</div>
                     					</div>
                     					<div class="offer-content">
-                    						<h3 class="lead"><?php echo money_format("$%i", $MP->price); ?></h3>
+                    						<h3 class="lead text-success"><?php echo money_format("$%i", $MP->price); ?></h3>
+                    						<h4>Head-to-Head</h4>
                     						<p>
-                    							<strong><?php echo money_format("$%i", $MP->prize); ?></strong> Prize <?php if($MP->promotion_eligible == 1): ?><span class="label label-danger">10K Eligible</span><?php endif; ?>
+                    							<strong class="text-success"><?php echo money_format("$%i", $MP->prize); ?></strong> Prize <?php if($MP->promotion_eligible == 1): ?><span class="label label-danger">10K Eligible</span><?php endif; ?>
                     						</p>
                     					</div>
                     				</div>

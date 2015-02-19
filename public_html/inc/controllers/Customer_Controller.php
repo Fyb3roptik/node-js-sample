@@ -115,9 +115,11 @@ class Customer_Controller extends Controller {
 		
     	$MATCH_PRICES = Match_Price::getPrices();
     	$MATCHES = Match::getActiveMatchesForMe($this->_user->ID);
+    	$Season_Started = Date_Settings::hasSeasonStarted();
     	
     	$V->bind('MATCH_PRICES', $MATCH_PRICES);
     	$V->bind('MATCHES', $MATCHES);
+    	$V->bind('Season_Started', $Season_Started);
 		
 		$V->bind('C', $C);
 		$V->bind('CUSTOMER', $this->_user);

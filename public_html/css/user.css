@@ -477,8 +477,9 @@ table.table-horizontal tbody td.empty {
 	transform:rotate(30deg);
 }	
 .offer-content{
-	padding:0 20px 10px;
+	padding: 30px 0 10px;
 	min-height: 129px;
+	text-align: center;
 }
 
 /* Extra small devices (phones, less than 768px) */
