@@ -6,8 +6,6 @@ $VIEW = 'login.php';
 
 $action = exists('action', $_REQUEST, null);
 
-FB::log($action, "Action");
-
 switch(strtolower($action)) {
 	case 'reset_password': {
 		$VIEW = 'reset_password_form.php';

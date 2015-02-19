@@ -19,6 +19,7 @@ force.ssl = 0
 #what's base url for the site?
 site.url = http://client.fyberstudios.com
 site.secure.url = https://client.fyberstudios.com
+site.dev.mode = 0
 
 page.customer_service = /
 

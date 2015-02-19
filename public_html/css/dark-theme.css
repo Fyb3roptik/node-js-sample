@@ -2294,7 +2294,8 @@ body {
     .box .box-header.purple-background {
       color: white; }
       .box .box-header.purple-background .title {
-        color: white; }
+        color: white;
+        text-shadow: 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000 }
       .box .box-header.purple-background .actions .btn-link {
         color: white; }
         .box .box-header.purple-background .actions .btn-link:hover {
@@ -4625,7 +4626,9 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
   color: #555A92 !important; }
 
 .purple-background {
-  background-color: #555A92 !important; }
+    background-color: #555A92 !important;
+    background-image: url(http://www.transparenttextures.com/patterns/always-grey.png) !important;
+}
 
 .purple-border {
   border-color: #555A92 !important; }

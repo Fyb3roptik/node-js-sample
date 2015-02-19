@@ -36,6 +36,24 @@ class Match extends Object {
     	
 	}
 	
+	public static function getActiveMatchesForMe($customer_id) {
+    	
+    	$MATCHES = array();
+    	
+    	$sql = "SELECT matches.match_id FROM matches INNER JOIN teams ON matches.match_id = teams.match_id WHERE matches.active = '1' AND teams.customer_id = '{$customer_id}' ORDER BY match_id DESC";
+    	
+    	$arr = db_arr($sql);
+    	
+    	if(!empty($arr)) {
+        	foreach($arr as $match) {
+            	$MATCHES[] = new Match($match['match_id']);
+        	}
+        }
+        
+    	return $MATCHES;
+    	
+	}
+	
 	public static function getAllMatches() {
     	
     	$MATCHES = array();

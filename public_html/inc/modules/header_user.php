@@ -1,7 +1,7 @@
 <header>
   <nav class='navbar navbar-default'>
     <div class="pull-left logo">
-        <img src="/img/claws_white.png" /> <span class="logoText">Beast Franchise <span class="tm">&trade;</span></span>
+        <img src="/img/beast_franchise.png" width="150" height="100%" />
     </div>
     <ul class='nav'>
       <?php if($CUSTOMER->exists()): ?>  

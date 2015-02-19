@@ -113,14 +113,11 @@ class Customer_Controller extends Controller {
 		$C = new Customer($username, "username");
 		$V = new View('view_customer.php');
 		
-		$MATCHES = Match::getActiveMatches(true);
-		
-		$memcache = new Cache();
-        
-        $GAMES = $memcache->get('games');
+    	$MATCH_PRICES = Match_Price::getPrices();
+    	$MATCHES = Match::getActiveMatchesForMe($this->_user->ID);
     	
+    	$V->bind('MATCH_PRICES', $MATCH_PRICES);
     	$V->bind('MATCHES', $MATCHES);
-    	$V->bind('GAMES', $GAMES);
 		
 		$V->bind('C', $C);
 		$V->bind('CUSTOMER', $this->_user);
@@ -261,6 +258,21 @@ class Customer_Controller extends Controller {
         
         redirect("/" . $username . "/settings");
         
+        exit;
+	}
+	
+	public function getUsernames() {
+        $usernames = array();
+        $q = get_var('q');
+        
+        $sql = "SELECT username FROM customers WHERE username LIKE '%{$q}%'";
+        $names = db_arr($sql);
+        
+        foreach($names as $name) {
+            $usernames[] = $name['username'];
+        }
+        
+        echo json_encode($usernames);
         exit;
 	}
 	

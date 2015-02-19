@@ -45,7 +45,7 @@ if(true == $ADMIN->exists()) {
 	setcookie('admin_token', $token, $expires, '/admin/', $_SERVER['SERVER_NAME']);
 }
 
-if((false == $ADMIN->exists() && LOC_LOGIN != $_SERVER['PHP_SELF']) || false == is_a($ADMIN, 'Admin')) {
+if((false == $ADMIN->exists() && LOC_LOGIN != $_SERVER['REQUEST_URI']) || false == is_a($ADMIN, 'Admin')) {
 	redirect(LOC_LOGIN);
 }
 

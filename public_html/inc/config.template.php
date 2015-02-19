@@ -18,6 +18,7 @@ define('FORCE_SSL', '__FORCE_SSL__', true);
 //DO NOT add a trailing slash (http://siing.co instead of http://siing.co/)
 define('SITE_URL', '__SITE_URL__', true);
 define('SITE_SECURE_URL', '__SITE_SECURE_URL__', true);
+define('SITE_DEV', '__SITE_DEV__', true);
 
 define('ENCRYPTION_KEY', '__ENCRYPTION_KEY__', false);
 

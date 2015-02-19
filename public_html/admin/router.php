@@ -5,7 +5,6 @@ require_once dirname(__FILE__) . '/inc/admin_permissions.php';
 
 $route = Router::route(get_var('url'));
 FB::log($route, 'Route');
-
 $admin_sentry = new Admin_Sentry($ADMIN);
 
 try {

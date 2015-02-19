@@ -138,6 +138,65 @@ class Match_Controller extends Controller {
     	$V->bind('MS', $MS);
 	}
 	
+	public function createMatch() {
+    	$this->_config(true);
+    	$MS = new Message_Stack();
+    	
+    	$match = post_var('matchPrice');
+    	$opponent = post_var('opponent');
+    	$friend_username = post_var('friend_username');
+    	$friend_email = post_var('friend_email');
+    	
+    	switch($opponent) {
+        	case "random":
+        	    
+        	    break;
+        	    
+            case "friend":
+                
+                if($friend_username) {
+                    $Opponent = new Customer($friend_username, 'username');
+
+                    if($Opponent->exists()) {
+                        $MP = new Match_Price($match);
+                        $M = new Match();
+                        $M->start_date = strtotime("Today");
+                        $M->active = 1;
+                        $M->entry_fee = $MP->price;
+                        $M->max_entrants = 2;
+                        $M->name = $this->_user->username . " vs " . $friend_username;
+                        $M->match_fee = $MP->profit;
+                        
+                        $M->write();
+                        
+                        // Create team for creator
+                        $M = new Match(db_insert_id());
+                        $T = new Team();
+                        $T->customer_id = $this->_user->ID;
+                        $T->match_id = $M->ID;
+                        $T->created_date = strtotime("Today");
+                        $T->accepted = 1;
+                        
+                        $T->write();
+                        
+                        // Create team for invited
+                        $T = new Team();
+                        $T->customer_id = $Opponent->ID;
+                        $T->match_id = $M->ID;
+                        $T->created_date = strtotime("Today");
+                        $T->accepted = 0;
+                        
+                        $T->write();
+                        
+                        redirect("/");
+                    }
+                }
+                
+                break;
+    	}
+    	
+	}
+	
 	public function view($match_id) {
     	$this->_config(true);
     	$V = new View('view_match.php');
@@ -199,6 +258,21 @@ class Match_Controller extends Controller {
         }
 		
 		exit;
+	}
+	
+	public function getMatchPriceInfo($match_price_id) {
+    	$this->_config(true);
+    	$MP = new Match_Price($match_price_id);
+    	
+    	$data['id'] = $MP->ID;
+    	$data['price'] = money_format("%i", $MP->price);
+    	$data['profit'] = money_format("%i", $MP->profit);
+    	$data['prize'] = money_format("%i", $MP->prize);
+    	$data['promotion_eligible'] = $MP->promotion_eligible;
+    	$data['active'] = $MP->active;
+    	
+    	echo json_encode($data);
+    	exit;
 	}
 	
 	private function _deleteTeams() {

@@ -102,6 +102,7 @@
 					<token key="FORCE_SSL" value="${force.ssl}" />
 					<token key="SITE_URL" value="${site.url}" />
 					<token key="SITE_SECURE_URL" value="${site.secure.url}" />
+					<token key="SITE_DEV" value="${site.dev.mode}" />
 					<token key="ENCRYPTION_KEY" value="${encryption_key}" />
 					<token key="MAINTENANCE_MODE" value="${maintenance_mode}" />
 					<token key="ENABLE_CACHING" value="${enable_caching}" />

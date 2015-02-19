@@ -1,0 +1,1 @@
+ALTER TABLE `teams` ADD `accepted` TINYINT NOT NULL DEFAULT '0';

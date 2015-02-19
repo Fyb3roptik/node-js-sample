@@ -86,94 +86,94 @@ $(document).ready(function(){
                     <input type="checkbox" id="selectAll" /> <label for="selectAll">Select All</label>
                     <div class="controls">
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Angels", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Angels"> Angels
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Angels", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Angels"> Angels
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Astros", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Astros"> Astros
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Astros", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Astros"> Astros
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Athletics", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Athletics"> Athletics
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Athletics", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Athletics"> Athletics
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Blue Jays", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Blue Jays"> Blue Jays
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Blue Jays", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Blue Jays"> Blue Jays
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Braves", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Braves"> Braves
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Braves", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Braves"> Braves
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Brewers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Brewers"> Brewers
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Brewers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Brewers"> Brewers
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Cardinals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Cardinals"> Cardinals
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Cardinals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Cardinals"> Cardinals
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Cubs", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Cubs"> Cubs
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Cubs", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Cubs"> Cubs
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("D-backs", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="D-backs"> D-backs
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("D-backs", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="D-backs"> D-backs
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Dodgers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Dodgers"> Dodgers
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Dodgers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Dodgers"> Dodgers
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Giants", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Giants"> Giants
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Giants", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Giants"> Giants
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Indians", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Indians"> Indians
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Indians", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Indians"> Indians
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Mariners", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Mariners"> Mariners
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Mariners", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Mariners"> Mariners
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Marlins", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Marlins"> Marlins
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Marlins", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Marlins"> Marlins
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Mets", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Mets"> Mets
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Mets", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Mets"> Mets
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Nationals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Nationals"> Nationals
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Nationals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Nationals"> Nationals
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Orioles", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Orioles"> Orioles
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Orioles", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Orioles"> Orioles
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Padres", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Padres"> Padres
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Padres", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Padres"> Padres
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Phillies", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Phillies"> Phillies
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Phillies", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Phillies"> Phillies
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Pirates", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Pirates"> Pirates
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Pirates", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Pirates"> Pirates
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Rangers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rangers"> Rangers
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Rangers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rangers"> Rangers
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Rays", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rays"> Rays
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Rays", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rays"> Rays
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Red Sox", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Red Sox"> Red Sox
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Red Sox", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Red Sox"> Red Sox
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Reds", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Reds"> Reds
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Reds", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Reds"> Reds
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Rockies", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rockies"> Rockies
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Rockies", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Rockies"> Rockies
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Royals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Royals"> Royals
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Royals", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Royals"> Royals
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Tigers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Tigers"> Tigers
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Tigers", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Tigers"> Tigers
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Twins", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Twins"> Twins
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Twins", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Twins"> Twins
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("White Sox", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="White Sox"> White Sox
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("White Sox", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="White Sox"> White Sox
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="match_teams[]" <?php if(in_array("Yankees", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Yankees"> Yankees
+                            <input type="checkbox" name="match_teams[]" <?php if(isset($MATCH_TEAMS) && in_array("Yankees", $MATCH_TEAMS)): ?>checked<?php endif; ?> value="Yankees"> Yankees
                         </label>
 					</div>
                 </div>

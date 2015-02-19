@@ -15,7 +15,7 @@
 	<!-- end: Mobile Specific -->
 	
 	<!-- start: CSS -->
-	<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/admin/css/style.css" rel="stylesheet">
 	<link href="/admin/css/retina.min.css" rel="stylesheet">
 	<!-- end: CSS -->
@@ -59,7 +59,7 @@
 		
 	<![endif]-->
 	<script src="/admin/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="/admin/js/bootstrap.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	
 		
 	
@@ -98,7 +98,6 @@
 			      <span class="icon-bar"></span>
 			</button>
 			<a id="main-menu-toggle" class="hidden-xs open"><i class="fa fa-bars"></i></a>		
-				<a class="navbar-brand col-lg-2 col-sm-1 col-xs-12" href="index.html"><img class="img-responsive" src="/img/logo.png" /></a>
             <!-- start: Header Menu -->
 			<div class="nav-no-collapse header-nav">
 				<ul class="nav navbar-nav pull-right">
@@ -128,9 +127,17 @@
 		<div class="row">
 		    <div id="sidebar-left" class="col-lg-2 col-sm-1">
     		    <div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+        		    <a href="/admin"><img src="/img/beast_franchise.png" /></a>
+        		    <div class="cleaefix"></div>
 					<ul class="nav nav-tabs nav-stacked main-menu">
 					    <li><a href="/admin/"><i class="fa fa-tachometer"></i><span class="hidden-sm"> Dashboard</span></a></li>
-					    <li><a href="/admin/match"><i class="fa fa-gamepad"></i> Manage Matches</a></li>
+					    <li>
+					        <a class="dropmenu" href="#"><i class="fa fa-gamepad"></i><span class="hidden-sm"> Manage Matches</span> <span class="label">2</span></a>
+							<ul>
+        					    <li><a class="submenu" href="/admin/match"><i class="fa fa-gamepad"></i> Manage Individual Matches</a></li>
+        					    <li><a class="submenu" href="/admin/settings/matchPrice/"><i class="fa fa-dollar"></i><span class="hidden-sm"> Match Price Settings</span></a></li>
+							</ul>
+                        </li>
 					    <li><a href="/admin/team"><i class="fa fa-star"></i> Manage Teams</a></li>
 					    <li>
 					        <a class="dropmenu" href="#"><i class="fa fa-hospital-o"></i><span class="hidden-sm"> Manage Players</span> <span class="label">2</span></a>
@@ -149,7 +156,7 @@
                         <li>
 							<a class="dropmenu" href="#"><i class="fa fa-gear"></i><span class="hidden-sm"> Manage Settings</span> <span class="label">1</span></a>
 							<ul>
-							    <li><a class="submenu" href="/admin/settings/score/"><i class="fa fa-gear"></i><span class="hidden-sm"> Score Settings</span></a></li>
+							    <li><a class="submenu" href="/admin/settings/score/"><i class="fa fa-sort-numeric-asc"></i><span class="hidden-sm"> Score Settings</span></a></li>
 							</ul>
                         </li>
 					</ul>

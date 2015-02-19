@@ -1,17 +1,17 @@
 <?php /* INCLUDE ANY <script> tags here. */ ?>
 <!-- / jquery [required] -->
-<script src="/js/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="//code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <!-- / jquery mobile (for touch events) -->
 <script src="/js/jquery/jquery.mobile.custom.min.js" type="text/javascript"></script>
 <!-- / jquery migrate (for compatibility with new jquery) [required] -->
 <!--<script src="/js/jquery/jquery-migrate.min.js" type="text/javascript"></script>-->
 <!-- / jquery ui -->
-<script src="/js/jquery/jquery-ui.min.js" type="text/javascript"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js" type="text/javascript"></script>
 <!-- / jQuery UI Touch Punch -->
 <script src="/js/plugins/jquery_ui_touch_punch/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
 <!-- / bootstrap [required] -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- / modernizr -->
 <script src="/js/plugins/modernizr/modernizr.min.js" type="text/javascript"></script>
 <!-- / retina -->
