@@ -21,7 +21,7 @@ foreach($MATCHES as $match) {
         
     }
     
-    $match->active = 0;
+    $match->active = 2;
     $match->write();
 }
 
