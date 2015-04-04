@@ -1,12 +1,12 @@
 <header>
   <nav class='navbar navbar-default'>
     <div class="pull-left logo">
-        <img src="/img/beast_franchise.png" width="150" height="100%" />
+        <a href-"/"><img src="/img/beast_franchise.png" width="150" height="100%" /></a>
     </div>
     <ul class='nav'>
       <?php if($CUSTOMER->exists()): ?>  
       <li class="balance">
-        <span class='user-name'>Current Balance: <span class="text-success"><a class="text-success" href="/<?php echo $CUSTOMER->username; ?>/settings"><?php echo '$' . number_format(bcdiv(floatval($CUSTOMER->funds), 100, 2), 2); ?></a></span></span>
+        <span class='user-name'>Current Balance: <span class="text-success"><a class="text-success user_balance" href="/<?php echo $CUSTOMER->username; ?>/settings"><?php echo '$' . number_format(bcdiv(floatval($CUSTOMER->funds), 100, 2), 2); ?></a></span></span>
       </li>
       <?php endif; ?>
       <li class="first">

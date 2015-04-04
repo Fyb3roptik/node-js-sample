@@ -454,7 +454,8 @@
 .contrast-purple .box .box-header.contrast-background .actions .btn-link:hover {
   color: #555A92 !important; }
 .contrast-purple.contrast-background, .contrast-purple .contrast-background {
-  background: #555A92 !important; }
+  background-color: #1e033d !important;
+  background-image: url(http://www.transparenttextures.com/patterns/fabric-of-squares.png); }
 .contrast-purple .text-contrast, .contrast-purple .contrast {
   color: #555A92 !important; }
 .contrast-purple .contrast-border {

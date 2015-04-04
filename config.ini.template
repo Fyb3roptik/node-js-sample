@@ -44,3 +44,8 @@ stripe.test.key =
 stripe.live.key = 
 stripe.test.secret = 
 stripe.live.secret = 
+
+# PROMO FTP
+ftp.host = 
+ftp.user = 
+ftp.password =

@@ -271,53 +271,70 @@ class Team_Controller extends Controller {
 	}
 	
 	public function view($team_id) {
-    	$this->_config(false);
-    	$V = new View('view_team.php');
-    	
-    	$TEAM = new Team($team_id);
-    	
-    	$MATCH = new Match($TEAM->match_id);
-    	
-    	// Lock the match if it isn't locked and start time has been reached
-    	if(time() > $MATCH->start_date && $MATCH->locked == 0) {
-        	$MATCH->locked = 1;
-        	$MATCH->write();
-        	
-        	// Setup Cache for teams
-        	$this->_putTeams($MATCH->ID);
-        	
-        	$MATCH = new Match($TEAM->match_id);
-    	}
-    	
-        $CA = Player::getCA($MATCH->match_teams);
-        $FB = Player::getFB($MATCH->match_teams);
-        $SB = Player::getSB($MATCH->match_teams);
-        $TB = Player::getTB($MATCH->match_teams);
-        $SS = Player::getSS($MATCH->match_teams);
-        $OF = Player::getOF($MATCH->match_teams);
-        $DH = Player::getDH($MATCH->match_teams);
+  	$TEAM = new Team($team_id);
+  	$GAMES = $TEAM->getGames();
+  	$GAMES_INFO = $TEAM->getGamesInfo();
 
-        $SELECTED_PLAYERS = TeamsLineup::getSelectedPlayers($team_id, false, false);
-        $SELECTED_PLAYERS_LIST = TeamsLineup::getSelectedPlayers($team_id, true);
-        
-        $OFS = TeamsLineup::getOutfielders($team_id);
-        $DHS = TeamsLineup::getDHS($team_id);
-        
-        $TEAM = new Team($team_id);
-        $TEAM_LIST = $TEAM->getTeamLineupById(false);
-        $SCORE = Team::getScore($team_id);
-        
+  	$this->_config(false, true, $GAMES);
+  	$V = new View('view_team.php');
+  	
+  	$TEAM = new Team($team_id);
+  	
+  	$MATCH = new Match($TEAM->match_id);
+  	
+  	$cache = new Cache();
+  	
+  	// Set Game Times with teams
+  	$GAME_TIMES = $cache->get('game_times');
+
+  	// Lock the match if it isn't locked and start time has been reached
+  	if(time() > $MATCH->start_date && $MATCH->locked == 0) {
+      	$MATCH->locked = 1;
+      	$MATCH->write();
+      	
+      	// Setup Cache for teams
+      	$this->_putTeams($MATCH->ID);
+      	
+      	$MATCH = new Match($TEAM->match_id);
+  	}
+    	
+    
+
+    $SELECTED_PLAYERS = TeamsLineup::getSelectedPlayers($team_id, false, false);
+    $SELECTED_PLAYERS_LIST = TeamsLineup::getSelectedPlayers($team_id, true);
+    
+    $OFS = TeamsLineup::getOutfielders($team_id);
+    $DHS = TeamsLineup::getDHS($team_id);
+    
+    $TEAM_LIST = $TEAM->getTeamLineupById(false);
+    
+    $LINEUP = $cache->get('lineups');
+    
+    if($MATCH->locked == 0) {
+      $CA = Player::getCA($MATCH->match_teams);
+      $FB = Player::getFB($MATCH->match_teams);
+      $SB = Player::getSB($MATCH->match_teams);
+      $TB = Player::getTB($MATCH->match_teams);
+      $SS = Player::getSS($MATCH->match_teams);
+      $OF = Player::getOF($MATCH->match_teams);
+      $DH = Player::getDH($MATCH->match_teams);
+    }
+    
+    if($MATCH->locked == 1) {
+      $SCORE = Team::getScore($team_id);
+      
+      // Update Leaderboards
+      $TEAMS = Team::getAllTeams($MATCH->ID);
+    
+      foreach($TEAMS as $T) {
+          $score = Team::getScore($T->ID);
+          $T->getTotal($score);
+      }
+      
+      
+      
+      if(!empty($TEAM_LIST)) {
         $AT_BAT = $TEAM_LIST[$SCORE['at_bat']];
-        
-        $GAMES = $TEAM->getGames();
-
-        // Update Leaderboards
-        $TEAMS = Team::getAllTeams($MATCH->ID);
-        
-        foreach($TEAMS as $T) {
-            $score = Team::getScore($T->ID);
-            $T->getTotal($score);
-        }
         
         foreach($TEAM_LIST as $key => $lineup) {
             $P = new Player($lineup['player_id']); 
@@ -326,26 +343,31 @@ class Team_Controller extends Controller {
             $at_bat_count[] = count($SCORE['scores'][$mlb_id]['at_bat_stat']);
         }
         rsort($at_bat_count);
-
+        
         $BAT_COUNT = $at_bat_count[0];
         
-        $LEADERBOARD = Team::getLeaderboard($MATCH);
-        
-        $total = $TEAM->getTotal($SCORE);
-        
-        $TEAM = new Team($team_id);
-        
-        $LAYOUT_TITLE = "Beast Franchise | My Team";
-        $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
+        $V->bind('BAT_COUNT', $BAT_COUNT);
+      }
+      
+      
+      $LEADERBOARD = Team::getLeaderboard($MATCH);
+      
+      $total = $TEAM->getTotal($SCORE);
+    }
+
+    $LAYOUT_TITLE = "Beast Franchise | My Team";
+    $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
         
 		$V->bind('TEAM_LIST', $TEAM_LIST);
+		$V->bind('LINEUP', $LINEUP);
 		$V->bind('SCORE', $SCORE);
 		$V->bind('total', $total);
 		$V->bind('AT_BAT', $AT_BAT);
-		$V->bind('BAT_COUNT', $BAT_COUNT);
+		
+		$V->bind('GAME_TIMES', $GAME_TIMES);
 
-    	$V->bind('TEAM', $TEAM);
-    	$V->bind('MATCH', $MATCH);
+    $V->bind('TEAM', $TEAM);
+    $V->bind('MATCH', $MATCH);
     	
 		$V->bind('CA', $CA);
 		$V->bind('FB', $FB);
@@ -361,10 +383,11 @@ class Team_Controller extends Controller {
 		$V->bind('DHS', $DHS);
 		$V->bind('LEADERBOARD', $LEADERBOARD);
 		$V->bind('GAMES', $GAMES);
+		$V->bind('GAMES_INFO', $GAMES_INFO);
 		$V->bind('team_id', $team_id);
 		$V->bind('CUSTOMER', $this->_user);
     	
-    	$this->_setView($V);
+    $this->_setView($V);
 	}
 	
 	public function find() {
@@ -385,6 +408,63 @@ class Team_Controller extends Controller {
     	
     	return $SCORE;
     	exit;
+	}
+	
+	public function getPlayerInfo($player_id) {
+  	$this->_config(true, "", false);
+  	
+  	$GAMES = Team::getGames();
+  	
+  	$player = new Player($player_id);
+
+  	foreach($GAMES as $game => $info) {
+    	
+    	if(in_array($player->player_team, $info)) {
+            $key = array_search($player->player_team, $info);
+            $players_team = $GAMES[$game][$key . "_abbr"];
+            
+            if($key == "home_team") {
+                $is_home = true;
+                $sps_team = "away_team_abbr";
+                $sps = "away_pitcher";
+            } else {
+                $is_home = false;
+                $sps_team = "home_team_abbr";
+                $sps = "home_pitcher";
+            }
+            
+            $sp_team = $GAMES[$game][$sps_team];
+            $sp = stripslashes($GAMES[$game][$sps]);
+            
+            $memcache = new Cache();
+            
+            $LINEUP = $memcache->get('lineups');
+            $LIST = $LINEUP[$players_team];
+            $player_name = $player->first_name . " " . $player->last_name;
+        }
+  	}
+    
+    $player_final['player_id'] = $player->ID;
+    $player_final['mlb_id'] = $player->mlb_id;
+  	$player_final['player_team'] = $players_team;
+  	$player_final['player'] = $player->first_name . " " . $player->last_name;
+  	$player_final['sp_team'] = $sp_team;
+  	$player_final['sp'] = $sp;
+  	$player_final['is_home'] = $is_home;
+    
+    if(in_array($player_name, $LIST)) {
+    	$player_final['confirmed'] = true;
+    } else {
+    	$player_final['confirmed'] = false;
+    }
+    
+    if(is_null($player_final['sp'])) {
+      	$player_final['sp'] = "Unknown";
+  	}
+  	
+  	return json_encode($player_final);
+    	
+    exit;
 	}
 	
 	public function getAvailablePlayers($team_id) {
@@ -444,6 +524,21 @@ class Team_Controller extends Controller {
             	$player_final[$k]['sp_team'] = $sp_team;
             	$player_final[$k]['sp'] = $sp;
             	$player_final[$k]['is_home'] = $is_home;
+            	$player_final[$k]['confirmed'] = true;
+            	
+            	if(is_null($player_final[$k]['sp'])) {
+                	$player_final[$k]['sp'] = "Unknown";
+            	}
+            } else {
+              $player_final[$k]['player_id'] = $player->ID;
+            	$player_final[$k]['position'] = $position;
+            	$player_final[$k]['position_original'] = $position_original;
+            	$player_final[$k]['player_team'] = $players_team;
+            	$player_final[$k]['player'] = $player->first_name . " " . $player->last_name;
+            	$player_final[$k]['sp_team'] = $sp_team;
+            	$player_final[$k]['sp'] = $sp;
+            	$player_final[$k]['is_home'] = $is_home;
+            	$player_final[$k]['confirmed'] = false;
             	
             	if(is_null($player_final[$k]['sp'])) {
                 	$player_final[$k]['sp'] = "Unknown";
@@ -483,7 +578,7 @@ class Team_Controller extends Controller {
         $cache->set("teams", $teams, 0, 0);
 	}
 	
-	private function _config($require_login = false, $user = "", $set_redirect = true) {
+	private function _config($require_login = false, $set_redirect = true, $GAMES = array()) {
 		if(true == $require_login) {
 			$this->_checkPermissions($set_redirect);
 		}
@@ -494,6 +589,7 @@ class Team_Controller extends Controller {
 		
 		$this->_setTemplate(new Template('user.php'));
 		$this->_template->bind('CUSTOMER', $this->_user);
+		$this->_template->bind('GAMES', $GAMES);
 		$REDIR = sanitize_string(exists('go', $_GET));
 		global $LAYOUT_TITLE;
 		$this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE .= ' | '.$user);

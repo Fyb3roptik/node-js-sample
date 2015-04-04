@@ -1,31 +1,20 @@
-<?php
-$nav_file = 'modules/category_nav.php';
-$phone_in_header = false; //so jank, my apologies
-if(true == isset($NAV_FILE) || false == is_null($NAV_FILE)) {
-	$nav_file = $NAV_FILE;
-	$phone_in_header = true;
-}
-global $CUSTOMER;
-
-?>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid" id="navfluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">
-              <div class="logo">BEAST FRANCHISE &trade;</div>
-          </a>
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#beast-nav">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="navbar-collapse collapse" id="beast-nav">
-            <div class="navbar-right">
-                <a href="/login" class="btn btn-success btn-nav">Login</a>
-                <a href="/register" class="btn btn-primary btn-nav">Register</a>
-            </div>
-            <div class="clearfix"></div>
-        </div><!--/.navbar-collapse -->
+<nav class="navbar navbar-inverse navbar-fixed-top bfHeaderNew">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand bfLogoNew" href="/"><img width="180" src="/img/beast_franchise.png"></a>
     </div>
+    <div id="navbar" class="navbar-collapse collapse">
+     
+       
+        <a href="/login" class="btn btn-primary header-btn">Login</a>
+        <a href="/register" class="btn btn-success header-btn">Register</a>
+      
+    </div><!--/.navbar-collapse -->
+  </div>
 </nav>

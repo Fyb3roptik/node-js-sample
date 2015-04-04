@@ -142,10 +142,12 @@ class Match_Controller extends Controller {
     	$this->_config(true);
     	$MS = new Message_Stack();
     	
-    	$match = post_var('matchPrice');
+    	$match_price_id = post_var('match_price_id');
     	$opponent = post_var('opponent');
     	$friend_username = post_var('friend_username');
     	$friend_email = post_var('friend_email');
+    	$match_time = post_var('match_time');
+    	$match_teams = post_var('match_teams');
     	
     	switch($opponent) {
         	case "random":
@@ -158,14 +160,16 @@ class Match_Controller extends Controller {
                     $Opponent = new Customer($friend_username, 'username');
 
                     if($Opponent->exists()) {
-                        $MP = new Match_Price($match);
+                        $MP = new Match_Price($match_price_id);
                         $M = new Match();
-                        $M->start_date = strtotime("Today");
+                        $M->start_date = $match_time;
                         $M->active = 1;
                         $M->entry_fee = $MP->price;
                         $M->max_entrants = 2;
                         $M->name = $this->_user->username . " vs " . $friend_username;
                         $M->match_fee = $MP->profit;
+                        $M->match_teams = $match_teams;
+                        $M->match_price_id = $MP->ID;
                         
                         $M->write();
                         
@@ -187,6 +191,24 @@ class Match_Controller extends Controller {
                         $T->accepted = 0;
                         
                         $T->write();
+                        
+                        $Mail = new Mailer();
+                    	$Mail->addTo($Opponent->email, $Opponent->name);
+                    	$Mail->setSubject("Beast Franchise " . $this->_user->username . " wants to play a game");
+                        $body .= "<html>";
+                    	$body .= "<body>";
+                    	$body .= $this->_user->username . " has challenged you to a match!<br /><br />";
+                    	$body .= "Click the link below to Accept the challenge!<br /><br />";
+                    	$body .= "<a href='".SITE_URL."/" . $Opponent->username . "'>Go to my dashboard!</a><br /><br />";
+                    	$body .= "--------------<br />This is an automated message from Beast Franchise, do not reply.";
+                        $body .= "</body>";
+                    	$body .= "</html>";
+                    	$Mail->setBody($body);
+                    	try {
+                    		$Mail->send();
+                    	} catch(Exception $e) {
+                    		//do nothing!
+                    	}
                         
                         redirect("/");
                     }
@@ -271,6 +293,61 @@ class Match_Controller extends Controller {
     	$data['active'] = $MP->active;
     	
     	echo json_encode($data);
+    	exit;
+	}
+	
+	public function accept() {
+    	
+    	$match_id = post_var('match_id');
+    	$opponent_id = post_var('opponent_id');
+    	
+    	$sql = "SELECT team_id FROM teams WHERE match_id = '{$match_id}' AND customer_id = '".$this->_user->ID."' LIMIT 1";
+    	$team_id = db_arr($sql);
+    	
+    	$T = new Team($team_id[0]['team_id']);
+    	$T->accepted = 1;
+    	$T->write();
+    	
+    	$Opponent = new Customer($opponent_id);
+    	
+    	$M = new Match($match_id);
+    	$MP = new Match_Price($M->match_price_id);
+    	$team_id = $M->teamExists($opponent_id);
+    	$OPPONENT_TEAM = new Team($team_id['team_id']);
+    	
+    	// Take the money out!
+      $C = new Customer($this->_user->ID);
+      $C->funds -= ($MP->price * 100);
+      $C->write();
+      
+      $C = new Customer($C->ID);
+      
+      $Opponent->funds -= ($MP->price * 100);
+      $Opponent->write();
+      
+      $Opponent = new Customer($Opponent->ID);
+      
+    	$Mail = new Mailer();
+    	$Mail->addTo($Opponent->email, $Opponent->name);
+    	$Mail->setSubject("Beast Franchise " . $this->_user->username . " accepted your challenge!");
+        $body .= "<html>";
+    	$body .= "<body>";
+    	$body .= $this->_user->username . " accepted your challenge!<br /><br />";
+    	$body .= "Click the link below to Set your lineup!<br /><br />";
+    	$body .= "<a href='".SITE_URL."/team/view/" . $OPPONENT_TEAM->ID . "'>Set my Lineup!</a><br /><br />";
+    	$body .= "--------------<br />This is an automated message from Beast Franchise, do not reply.";
+        $body .= "</body>";
+    	$body .= "</html>";
+    	$Mail->setBody($body);
+    	try {
+    		$Mail->send();
+    	} catch(Exception $e) {
+    		//do nothing!
+    	}
+    	
+    	$return['status'] = "accepted";
+    	$return['newPrice'] = money_format("$%i", ($C->funds / 100));
+    	return json_encode($return);
     	exit;
 	}
 	

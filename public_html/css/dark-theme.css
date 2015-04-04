@@ -1514,6 +1514,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Montserrat;
   font-weight: 400;
   color: black; }
+  
+.box-header h2 {
+  color: #FFF;
+}
 
 h1 {
   font-size: 28px; }
@@ -2207,7 +2211,9 @@ body {
       overflow: hidden; } }
 
 #content-wrapper {
-  padding-bottom: 20px; }
+    padding-bottom: 20px; 
+    margin: 0 10px;
+}
 
 #content {
   margin-left: 251px;
@@ -2229,7 +2235,7 @@ body {
 
 #footer {
   color: #52555a;
-  text-shadow: 1px 1px 1px white;
+  font-weight: bold;
   text-align: center;
   border-top: 1px solid #eeeeee; }
   #footer .footer-wrapper {
@@ -4591,7 +4597,8 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 
 .text-info {
   color: #555A92 !important; }
-
+.footer-wrapper .text-info {
+  color: #3E4489 !important; }
 .text-muted {
   color: #999999 !important; }
 
@@ -4626,8 +4633,8 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
   color: #555A92 !important; }
 
 .purple-background {
-    background-color: #555A92 !important;
-    background-image: url(http://www.transparenttextures.com/patterns/always-grey.png) !important;
+    background-color: #250b42 !important;
+    background-image: url(http://www.transparenttextures.com/patterns/fabric-of-squares.png) !important;
 }
 
 .purple-border {
@@ -4791,7 +4798,7 @@ a.dropdown-toggle {
       background-color: #e6e6e6; }
 
 a, a:hover, .btn-link, .btn-link:hover, .btn-link:focus {
-  color: black;
+  color: white;
   text-shadow: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -4802,6 +4809,10 @@ a, a:hover, .btn-link, .btn-link:hover, .btn-link:focus {
     box-shadow: none; }
   a.disabled:hover, a[disabled]:hover, a:hover.disabled:hover, a:hover[disabled]:hover, .btn-link.disabled:hover, .btn-link[disabled]:hover, .btn-link:hover.disabled:hover, .btn-link:hover[disabled]:hover, .btn-link:focus.disabled:hover, .btn-link:focus[disabled]:hover {
     background-color: #e6e6e6; }
+
+#leaderboard a, a:hover {
+  color: #000;
+}
 
 .btn-link:focus, .btn-link, .btn-link:hover, .btn-link:active {
   background-color: transparent;

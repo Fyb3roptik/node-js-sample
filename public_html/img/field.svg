@@ -26,5 +26,5 @@
 </image>
 <circle id="out1" fill="#eee" stroke="#000" stroke-miterlimit="10" cx="262.5" cy="319.5" r="8"/>
 <circle id="out2" fill="#eee" stroke="#000" stroke-miterlimit="10" cx="262.5" cy="339.5" r="8"/>
-<text x="273.5" y="337.5" font-family="sans-serif" font-size="24px" fill="#1E003F" stroke="black">Outs</text>
+<text x="273.5" y="337.5" font-family="sans-serif" font-size="24px" fill="#FFFFFF" stroke="white">Outs</text>
 </svg>

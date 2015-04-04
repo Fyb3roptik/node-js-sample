@@ -21,13 +21,13 @@ class Team extends Object {
     	}
     	
     	$sql = "SELECT * FROM teams {$match} ORDER BY {$order_by} LIMIT {$limit}";
-        $query = db_arr($sql);
-        
-        foreach($query as $team) {
-            $TEAM_LIST[] = new Team($team['team_id']);
-        }
-        
-        return $TEAM_LIST;
+      $query = db_arr($sql);
+      
+      foreach($query as $team) {
+          $TEAM_LIST[] = new Team($team['team_id']);
+      }
+      
+      return $TEAM_LIST;
 	}
 
     public static function getMyTeams(Customer $C) {
@@ -51,10 +51,13 @@ class Team extends Object {
         $sql = "SELECT * FROM teams_lineup WHERE team_id = '" . $this->ID . "' {$pitchers} ORDER BY `order` ASC";
         $results = db_arr($sql);
         
-        foreach($results as $r) {
-            $player = new Player($r['player_id']);
-            $lineup[] = array("teams_lineup_id" => $r['teams_lineup_id'], "team_id" => $r['team_id'], "player_id" => $r['player_id'], "mlb_player_id" => $player->mlb_id, "player_team" =>  $player->player_team, "order" => $r['order'], "position" => $r['position'], "score" => $r['score']);
+        if(!is_null($results)) {
+          foreach($results as $r) {
+              $player = new Player($r['player_id']);
+              $lineup[] = array("teams_lineup_id" => $r['teams_lineup_id'], "team_id" => $r['team_id'], "player_id" => $r['player_id'], "mlb_player_id" => $player->mlb_id, "player_team" =>  $player->player_team, "order" => $r['order'], "position" => $r['position'], "score" => $r['score']);
+          }
         }
+        
         return $lineup;
     }
     
@@ -64,33 +67,51 @@ class Team extends Object {
         
         $score = $memcache->get('scores');
 
-        if(isset($score['done_batting'][$team_id]['final_done']) && $score['done_batting'][$team_id]['final_done'] == false) {
+        $final_done = 0;
+        if(!empty($score['done_batting'][$team_id])) {
+          foreach($score['done_batting'][$team_id] as $v) {
+            if($v === true) {
+              $final_done++;
+            }
+          }
+        }
+        
+        $T = new Team($team_id);
+        $M = new Match($T->match_id);
+
+        if($M->active == 1) {
+
+            $T->inning_data = base64_encode(serialize($score['scores'][$team_id]));
+            $T->write();
             
             $T = new Team($team_id);
             
             $lineup = $T->getTeamLineupById(false);
 
             // Update the database
-            foreach($lineup as $l) {
-                $TL = new TeamsLineup($l['teams_lineup_id']);
-                if(isset($score['scores'][$team_id][$l['mlb_player_id']]['score']) && $score['scores'][$team_id][$l['mlb_player_id']]['score'] > 0) {
-                    $TL->score = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
-                    $TL->inning_data = http_build_query($score['scores'][$team_id][$l['mlb_player_id']]['at_bat_stat']);
-                    $TL->write();
-                }
-                
-                $final['player_score'][] = $score['scores'][$team_id][$mlb_id]['score'];
+            if(!empty($lineup)) {
+              foreach($lineup as $l) {
+                  $TL = new TeamsLineup($l['teams_lineup_id']);
+                  if(isset($score['scores'][$team_id][$l['mlb_player_id']]['score']) && $score['scores'][$team_id][$l['mlb_player_id']]['score'] > 0) {
+                      $TL->score = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
+                      $TL->write();
+                  }
+                  
+                  $final['player_score'][] = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
+              }
             }
             
-            $final['score_total'] = 0;
             
+            
+            $final['score_total'] = 0;
+                        
             foreach($final['player_score'] as $k => $s) {
                 if(is_null($s) || $s == null) {
                     $final['player_score'][$k] = 0;
                 }
                 $final['score_total'] += $s;
             }
-            
+
             if($final['score_total'] != 0) {
                 $T->score = $final['score_total'];
                 $T->write();
@@ -103,17 +124,40 @@ class Team extends Object {
             $final['outs'] = $score['outs'][$team_id];
             $final['at_bat'] = $score['at_bat'][$team_id];
             $final['done'] = $score['done_batting'][$team_id];
-        } else {
-            
+        } else if($M->active == 2) {
+
             $T = new Team($team_id);
-            
+            $score = unserialize(base64_decode($T->inning_data));
+
             $lineup = $T->getTeamLineupById(false);
             
-            foreach($lineup as $l) {
-                $TL = new TeamsLineup($l['teams_lineup_id']);
-                $final['scores'][$l['mlb_player_id']]['score'] = $TL->score;
-                parse_str(htmlspecialchars_decode(htmlspecialchars_decode(urldecode($TL->inning_data))), $final['scores'][$l['mlb_player_id']]['at_bat_stat']);
+            // Update the database
+            if(!empty($lineup)) {
+              foreach($lineup as $l) {
+                  $TL = new TeamsLineup($l['teams_lineup_id']);
+                  if(isset($score['scores'][$team_id][$l['mlb_player_id']]['score']) && $score['scores'][$team_id][$l['mlb_player_id']]['score'] > 0) {
+                      $TL->score = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
+                  }
+                  
+                  $final['player_score'][] = $score[$mlb_id]['score'];
+              }
             }
+            
+            
+            
+            $final['score_total'] = 0;
+            
+            foreach($final['player_score'] as $k => $s) {
+                if(is_null($s) || $s == null) {
+                    $final['player_score'][$k] = 0;
+                }
+                $final['score_total'] += $s;
+            }
+            
+            $final['scores'] = $score;
+            
+            $final['bases'] = array();
+            $final['at_bat'] = array();
             
             $final['done'] = true;
             $final['outs'] = 0;
@@ -130,10 +174,24 @@ class Team extends Object {
         
         $score = $memcache->get('scores');
 
-        if(isset($score['done_batting'][$team_id]['final_done']) && $score['done_batting'][$team_id]['final_done'] == false) {
+        $final_done = 0;
+        if(!empty($score['done_batting'][$team_id])) {
+          foreach($score['done_batting'][$team_id] as $v) {
+            if($v === true) {
+              $final_done++;
+            }
+          }
+        }
+        
+        $T = new Team($team_id);
+        $M = new Match($T->match_id);
+
+        if($M->active == 1) {
+            
+            $T->inning_data = base64_encode(serialize($score['scores'][$team_id]));
+            $T->write();
             
             $T = new Team($team_id);
-            $M = new Match($T->match_id);
             
             $lineup = $T->getTeamLineupById(false);
 
@@ -142,7 +200,6 @@ class Team extends Object {
                 $TL = new TeamsLineup($l['teams_lineup_id']);
                 if(isset($score['scores'][$team_id][$l['mlb_player_id']]['score']) && $score['scores'][$team_id][$l['mlb_player_id']]['score'] > 0) {
                     $TL->score = $score['scores'][$team_id][$l['mlb_player_id']]['score'];
-                    $TL->inning_data = http_build_query($score['scores'][$team_id][$l['mlb_player_id']]['at_bat_stat']);
                     $TL->write();
                 }
                 
@@ -184,7 +241,7 @@ class Team extends Object {
                         
             foreach($leaderboard as $l) {
                 $C = new Customer($l->customer_id);
-                $leader[] = array("user" => $C->username, "score" => $l->score, "team_id" => $l->ID); 
+                $leader[] = array("user" => $C->username, "score" => $l->score, "team_id" => $l->ID, "customer_id" => $C->ID); 
             }
             
             $final['leaderboard'] = $leader;
@@ -193,11 +250,14 @@ class Team extends Object {
             
             $bases = array();
             if(!empty($score['bases'][$team_id])) {
-                foreach($score['bases'][$team_id] as $player_id => $base) {
+                foreach($score['bases'][$team_id] as $base => $players) {
+                  foreach($players as $player_id) {
                     $BASES_P = new Player($player_id, "mlb_id");
-                    $bases[$score['bases'][$team_id][$player_id]['base']][] = $BASES_P->first_name . " " . $BASES_P->last_name;
+                    $bases[$base][] = $BASES_P->first_name . " " . $BASES_P->last_name;
+                  }
                 }
             }
+            
 
             $final['scores'] = $score['scores'][$team_id];
 
@@ -244,11 +304,10 @@ class Team extends Object {
         // Write it to database
         if($SCORE['done']['final_done'] != true) {
             $this->score = $total;
-            $this->write();
             
             return $total;
         }  else {
-            return $this->score;
+            //return $this->score;
         }      
     }
     
@@ -270,11 +329,15 @@ class Team extends Object {
         return $leaders;
     }
     
-    public function getGames() {
+    public static function getGames() {
         $memcache = new Cache();
-        
         $games = $memcache->get('games');
-        
+        return $games;
+    }
+    
+    public static function getGamesInfo() {
+        $memcache = new Cache();
+        $games = $memcache->get('games_info');
         return $games;
     }
 }

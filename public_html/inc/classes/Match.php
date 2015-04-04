@@ -109,6 +109,54 @@ class Match extends Object {
     	
     	return number_format($match_fee, 2);
 	}
+	
+	public function getMyStatus($customer_id) {
+    	$status = "";
+    	
+    	$sql = "SELECT accepted FROM teams WHERE match_id = '".$this->ID."' AND customer_id = '{$customer_id}'";
+    	$arr = db_arr($sql);
+    	
+    	return $arr[0]['accepted'];
+	}
+	
+	public function getOpponent($match_id, $customer_id) {
+        $return = array();
+        
+    	$sql = "SELECT customer_id FROM teams WHERE match_id = '{$match_id}' AND customer_id != '{$customer_id}'";
+    	$arr = db_arr($sql);
+    	
+    	$return = new Customer($arr[0]['customer_id']);
+    	return $return;
+	}
+	
+	public function getStatus() {
+    	$status = "";
+    	$accepted = 0;
+    	
+    	$sql = "SELECT accepted FROM teams WHERE match_id = '" . $this->ID . "'";
+    	$arr = db_arr($sql);
+    	
+    	foreach($arr as $accept) {
+        	$accepted += $accept['accepted'];
+    	}
+    	
+    	switch($accepted) {
+        	case 1:
+        	    $status = "Pending";
+        	    break;
+        	    
+            case 2:
+                $status = "Accepted";
+                break;
+                
+            case 3:
+                $status = "Declined";
+                break;
+        	    
+    	}
+    	
+    	return $status;
+	}
 
 }
 ?>

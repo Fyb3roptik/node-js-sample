@@ -15,7 +15,7 @@
 	<!-- end: Mobile Specific -->
 	
 	<!-- start: CSS -->
-	<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/admin/css/style.css" rel="stylesheet">
 	<link href="/admin/css/retina.min.css" rel="stylesheet">
 	<!-- end: CSS -->
@@ -39,13 +39,12 @@
 			      <span class="icon-bar"></span>
 			      <span class="icon-bar"></span>
 			</button>
-			<a id="main-menu-toggle" class="hidden-xs open"><i class="fa fa-bars"></i></a>		
-				<a class="navbar-brand col-lg-2 col-sm-1 col-xs-12" href="index.html"><img class="img-responsive" src="/img/logo.png" /></a>
+			<a id="main-menu-toggle" class="hidden-xs open"><i class="fa fa-bars"></i></a>
         </div>
     </header>
 	<div class="container">
 		<div class="row">
-		    <div id="sidebar-left" class="col-lg-2 col-sm-1">&nbsp;</div>
+		    <div id="sidebar-left" class="col-lg-2 col-sm-1"><a href="/admin"><img src="/img/beast_franchise.png" /></a></div>
 		    <div id="content" class="col-lg-10 col-sm-11">
                 <div class="row">
                     <div class="col-lg-4 col-lg-offset-4">
@@ -92,7 +91,7 @@
 		
 	<![endif]-->
 	<script src="/admin/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="/admin/js/bootstrap.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	
 		
 	

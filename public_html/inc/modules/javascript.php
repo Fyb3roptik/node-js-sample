@@ -1,7 +1,7 @@
 <?php /* INCLUDE ANY <script> tags here. */ ?>
 <!-- / jquery [required] -->
 <script src="//code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
 <!-- / jquery mobile (for touch events) -->
 <script src="/js/jquery/jquery.mobile.custom.min.js" type="text/javascript"></script>
 <!-- / jquery migrate (for compatibility with new jquery) [required] -->

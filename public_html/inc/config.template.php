@@ -31,5 +31,9 @@ define('STRIPE_LIVE_KEY', '__STRIPE_LIVE_KEY__', true);
 define('STRIPE_TEST_SECRET', '__STRIPE_TEST_SECRET__', true);
 define('STRIPE_LIVE_SECRET', '__STRIPE_LIVE_SECRET__', true);
 
+define('FTP_HOST', '__FTP_HOST__', true);
+define('FTP_USER', '__FTP_USER__', true);
+define('FTP_PASSWORD', '__FTP_PASSWORD__', true);
+
 define('BUILD', '__BUILD__', false);
 ?>

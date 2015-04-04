@@ -290,9 +290,7 @@ function recover_user_password(User $U) {
 	db_perform('user_password_tokens', $token_data, SQL_INSERT);
 	$link = SITE_SECURE_URL . '/reset_password/?token=' . $password_token;
 
-	if(User::TYPE_SALES == $U->getUserType()) {
-		$link = SITE_SECURE_URL . '/sales_login.php?token=' . $password_token . '&action=reset_password';
-	} elseif(User::TYPE_ADMIN == $U->getUserType()) {
+	if(User::TYPE_ADMIN == $U->getUserType()) {
 		$link = SITE_SECURE_URL . '/admin/login.php?action=reset_password&token=' . $password_token;
 	}
 

@@ -196,7 +196,7 @@ class Login_Controller extends Controller {
 		$c = User_Session::tokenFactory($token);
 		$c->logout();
 		unset($_COOKIE['session_id']);
-		$this->redirect($login_location);
+		$this->redirect("/");
 		break;
 	}
 }

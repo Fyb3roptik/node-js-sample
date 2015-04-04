@@ -31,8 +31,6 @@
                                 <div class='text-purple icon-time align-right'></div>
                             </div>
                         </div>
-                        
-                        <div class="clearfix"></div>
 
                         <div class="col-sm-12">
                             <?php if($TEAM_EXISTS['check'] == false): ?>
@@ -45,9 +43,8 @@
                                 <a href="/team/view/<?php echo $TEAM_EXISTS['team_id']; ?>" class="btn btn-lg btn-block btn-info"><div class="icon-eye-open"></div> View My Team</a>
                             <?php endif; ?>
                         </div>
-                        
-                        
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>

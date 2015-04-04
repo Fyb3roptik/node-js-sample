@@ -112,6 +112,9 @@
 					<token key="STRIPE_LIVE_KEY" value="${stripe.live.key}" />
 					<token key="STRIPE_TEST_SECRET" value="${stripe.test.secret}" />
 					<token key="STRIPE_LIVE_SECRET" value="${stripe.live.secret}" />
+					<token key="FTP_HOST" value="${ftp.host}" />
+					<token key="FTP_USER" value="${ftp.user}" />
+					<token key="FTP_PASSWORD" value="${ftp.password}" />
 					<token key="BUILD" value="${build.build}" />
 				</replacetokens>
 			</filterchain>

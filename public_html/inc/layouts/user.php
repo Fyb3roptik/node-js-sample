@@ -65,7 +65,7 @@
     <footer id='footer'>
         <div class='footer-wrapper'>
           <div class='row'>
-            <div class='col-sm-6 text'>
+            <div class='col-sm-6 text text-info'>
               Copyright &copy; <?php echo date('Y', time()); ?> Beast Fantasy Sports Inc | All Rights Reserved
             </div>
           </div>

@@ -3,11 +3,12 @@
 class Lineup {
 
     public $fetch_url = "http://www.baseballpress.com/team-lineups/";
+    public $time_url = "http://www.baseballpress.com/lineups/";
     
     public function getCurrentLineups($team) {
         
         $html = $this->_fetchHtml($this->fetch_url . $team);
-        $parsed = strip_tags($this->_parseHtml($html));
+        $parsed = strip_tags($this->_parseLineupHtml($html));
         $ex = explode("(", $parsed);
         foreach($ex as $e) {
             $lineup[] = substr(trim(strchr($e, ".")), 2);
@@ -37,7 +38,7 @@ class Lineup {
         return $innerHTML;
     }
     
-    private function _parseHtml($html) {
+    private function _parseLineupHtml($html) {
         
         $doc = new DOMDocument();
         $doc->loadHTML($html);

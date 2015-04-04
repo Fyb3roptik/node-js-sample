@@ -117,10 +117,49 @@ class Customer_Controller extends Controller {
     	$MATCHES = Match::getActiveMatchesForMe($this->_user->ID);
     	$Season_Started = Date_Settings::hasSeasonStarted();
     	
+    	$cache = new Cache();
+    	
+    	
+    	// Set Game Times with teams
+    	$GAME_TIMES = $cache->get('game_times');
+    	
+    	$game_times = array();
+    	
+    	foreach($GAME_TIMES as $time => $teams) {
+      	$unixtime = strtotime(date("m/d/Y", time()) . " " . $time);
+      	$cutoff_time = strtotime(date("m/d/Y", time()) . " 4:00 PM");
+      	
+      	if($unixtime < $cutoff_time) {
+        	$times['early'][] = $unixtime;
+      	} else {
+        	$times['late'][] = $unixtime;
+      	}
+      	
+      }
+      
+      sort($times['early']);
+      sort($times['late']);
+      
+    	foreach($GAME_TIMES as $time => $teams) {
+      	$unixtime = strtotime(date("m/d/Y", time()) . " " . $time);
+      	$cutoff_time = strtotime(date("m/d/Y", time()) . " 4:00 PM");
+
+      	foreach($teams['teams'] as $team) {
+          if($unixtime < $cutoff_time) {
+          	$game_times['early'][$times['early'][0]][] = $team;
+        	}	else {
+          	$game_times['late'][$times['late'][0]][] = $team;
+        	}
+        	
+        	$game_times['all'][$times['early'][0]][] = $team;
+      	}
+    	}
+    	
     	$V->bind('MATCH_PRICES', $MATCH_PRICES);
     	$V->bind('MATCHES', $MATCHES);
     	$V->bind('Season_Started', $Season_Started);
-		
+      $V->bind('GAME_TIMES', $game_times);
+      
 		$V->bind('C', $C);
 		$V->bind('CUSTOMER', $this->_user);
 		$this->_setView($V);
@@ -275,6 +314,23 @@ class Customer_Controller extends Controller {
         }
         
         echo json_encode($usernames);
+        exit;
+	}
+	
+	public function checkUsername() {
+        $usernames = array();
+        $username = get_var('username');
+        
+        $sql = "SELECT username FROM customers WHERE username = '{$username}'";
+        $query = db_query($sql);
+        
+        $return['user_exists'] = false;
+        
+        if($query->num_rows > 0) {
+          $return['user_exists'] = true;
+        }
+        
+        echo json_encode($return);
         exit;
 	}
 	
