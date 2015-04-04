@@ -52,7 +52,7 @@
           <iframe src="https://player.vimeo.com/video/124081239" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
           <p>Learn How to Play BEAST FRANCHISE</p>
           <p>Taught by Kenny Lofton</p>
-          <a class="btn btn-primary btn-lg jumbotronBtn" href="#" role="button">Register Now</a>
+          <a class="btn btn-primary btn-lg jumbotronBtn" href="/register" role="button">Register Now</a>
         </div>
       </div>
     <?php endif; ?>
