@@ -19,7 +19,7 @@
     
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     
-    <link href='http://fonts.googleapis.com/css?family=Gravitas+One' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Gravitas+One' rel='stylesheet' type='text/css'>
     
     <!-- Custom styles for this template -->
     <link href="/css/style.css" rel="stylesheet">
