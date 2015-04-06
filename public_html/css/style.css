@@ -30,6 +30,9 @@ body {
 	margin-right: 5px;
 		
 }
+.companies img {
+  margin-left: 5%;
+}
 .header-text {
   font-family: 'BeastWars';
   color: #ffc43b !important;

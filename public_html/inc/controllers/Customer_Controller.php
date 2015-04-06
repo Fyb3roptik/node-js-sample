@@ -119,46 +119,15 @@ class Customer_Controller extends Controller {
     	
     	$cache = new Cache();
     	
-    	
-    	// Set Game Times with teams
-    	$GAME_TIMES = $cache->get('game_times');
-    	
-    	$game_times = array();
-    	
-    	foreach($GAME_TIMES as $time => $teams) {
-      	$unixtime = strtotime(date("m/d/Y", time()) . " " . $time);
-      	$cutoff_time = strtotime(date("m/d/Y", time()) . " 4:00 PM");
-      	
-      	if($unixtime < $cutoff_time) {
-        	$times['early'][] = $unixtime;
-      	} else {
-        	$times['late'][] = $unixtime;
-      	}
-      	
-      }
-      
-      sort($times['early']);
-      sort($times['late']);
-      
-    	foreach($GAME_TIMES as $time => $teams) {
-      	$unixtime = strtotime(date("m/d/Y", time()) . " " . $time);
-      	$cutoff_time = strtotime(date("m/d/Y", time()) . " 4:00 PM");
+      $GAME_TIMES = Match::getGameTimes();
+          	
+    	$LOBBY = Match::getLobby();
 
-      	foreach($teams['teams'] as $team) {
-          if($unixtime < $cutoff_time) {
-          	$game_times['early'][$times['early'][0]][] = $team;
-        	}	else {
-          	$game_times['late'][$times['late'][0]][] = $team;
-        	}
-        	
-        	$game_times['all'][$times['early'][0]][] = $team;
-      	}
-    	}
-    	
     	$V->bind('MATCH_PRICES', $MATCH_PRICES);
     	$V->bind('MATCHES', $MATCHES);
     	$V->bind('Season_Started', $Season_Started);
       $V->bind('GAME_TIMES', $game_times);
+      $V->bind('LOBBY', $LOBBY);
       
 		$V->bind('C', $C);
 		$V->bind('CUSTOMER', $this->_user);

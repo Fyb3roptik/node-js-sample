@@ -133,6 +133,9 @@ class Match extends Object {
     	$status = "";
     	$accepted = 0;
     	
+    	$sql = "SELECT count(team_id) as total FROM teams WHERE match_id = '".$this->ID."'";
+    	$arr_count = db_arr($sql);
+    	
     	$sql = "SELECT accepted FROM teams WHERE match_id = '" . $this->ID . "'";
     	$arr = db_arr($sql);
     	
@@ -142,7 +145,15 @@ class Match extends Object {
     	
     	switch($accepted) {
         	case 1:
-        	    $status = "Pending";
+        	    
+        	    if($arr_count[0]['total'] == 1) {
+          	    $status = "Accepted";
+        	    }
+        	    
+        	    if($arr_count[0]['total'] == 2) {
+        	      $status = "Pending";
+              }
+              
         	    break;
         	    
             case 2:
@@ -156,6 +167,141 @@ class Match extends Object {
     	}
     	
     	return $status;
+	}
+	
+	public static function getGameTimes() {
+  	
+  	$cache = new Cache();
+  	
+  	// Set Game Times with teams
+  	$GAME_TIMES = $cache->get('game_times');
+  	
+  	$game_times = array();
+  	
+  	foreach($GAME_TIMES as $time => $teams) {
+    	$unixtime = strtotime(date("m/d/Y", time()) . " " . $time);
+    	$cutoff_time = strtotime(date("m/d/Y", time()) . " 4:00 PM");
+    	
+    	if($unixtime < $cutoff_time) {
+      	$times['early'][] = $unixtime;
+    	} else {
+      	$times['late'][] = $unixtime;
+    	}
+    	
+    }
+    
+    sort($times['early']);
+    sort($times['late']);
+    
+  	foreach($GAME_TIMES as $time => $teams) {
+    	$unixtime = strtotime(date("m/d/Y", time()) . " " . $time);
+    	$cutoff_time = strtotime(date("m/d/Y", time()) . " 4:00 PM");
+
+    	foreach($teams['teams'] as $team) {
+        if($unixtime < $cutoff_time) {
+        	$game_times['early'][$times['early'][0]][] = $team;
+      	}	else {
+        	$game_times['late'][$times['late'][0]][] = $team;
+      	}
+      	if(isset($times['early'])) {
+          $game_times['all'][$times['early'][0]][] = $team;
+        } else {
+          $game_times['all'][$times['late'][0]][] = $team;
+        }
+          
+    	}
+  	}
+  	
+  	return $game_times;
+	}
+	
+	public static function getLobby() {
+    
+    $MATCH_PRICES = Match_Price::getPrices();
+    $GAME_TIMES = self::getGameTimes();
+    
+    foreach($GAME_TIMES as $type => $time) {
+      $key = key($time);
+      $away = $time[$key][0];
+      $home = $time[$key][1];
+      
+      $teams[$type][] = $away . " @ " . $home;
+    }
+    
+  	// Create array of match types
+    $matches = array();
+    for($i = 0; $i < 20; $i++) {
+      $rand = array_rand($MATCH_PRICES);
+      
+      if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
+        continue;
+      }
+      
+      if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
+        $all = key($GAME_TIMES['all']);
+        if($all > time()) {
+          $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $all, "type" => "all", "teams" => $teams['all']);
+        }
+      }
+    }
+    
+    // Do Early Games
+    if(isset($GAME_TIMES['early'])) {
+      for($i = 0; $i < 10; $i++) {
+        $rand = array_rand($MATCH_PRICES);
+        
+        if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
+          continue;
+        }
+        
+        if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
+          $early = key($GAME_TIMES['early']);
+          if($early > time()) {
+            $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $early, "type" => "early", "teams" => $teams['early']);
+          }
+        }
+      }
+    }
+    
+    // Do Early Games
+    if(isset($GAME_TIMES['late'])) {
+      for($i = 0; $i < 10; $i++) {
+        $rand = array_rand($MATCH_PRICES);
+        
+        if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
+          continue;
+        }
+        
+        if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
+          $late = key($GAME_TIMES['late']);
+          if($late > time()) {
+            $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $late, "type" => "late", "teams" => $teams['late']);
+          }
+        }
+      }
+    }
+    
+    return $matches;
+	}
+	
+	public static function findOpponent(Match_Price $MP, $start_time) {
+  	
+  	// Find a match
+  	$sql = "SELECT match_id FROM matches WHERE start_date = '{$start_time}' AND match_price_id = '".$MP->ID."' AND current_entrants = '1' LIMIT 1";
+  	$arr_match = db_arr($sql);
+  	
+  	if($arr_match) {
+    	$sql = "SELECT customer_id FROM teams WHERE match_id = '".$arr_match[0]['match_id']."'";
+    	$arr_team = db_arr();
+    	
+    	$return['match_id'] = $arr_match[0]['match_id'];
+    	$return['team_id'] = $arr_team[0]['team_id'];
+    	
+    	return $return;
+  	} else {
+    	return false;
+  	}
+  	
 	}
 
 }

@@ -138,20 +138,85 @@ class Match_Controller extends Controller {
     	$V->bind('MS', $MS);
 	}
 	
-	public function createMatch() {
+	public function createMatch($match_price_idAndTimeAndType = "") {
     	$this->_config(true);
     	$MS = new Message_Stack();
     	
-    	$match_price_id = post_var('match_price_id');
-    	$opponent = post_var('opponent');
-    	$friend_username = post_var('friend_username');
-    	$friend_email = post_var('friend_email');
-    	$match_time = post_var('match_time');
-    	$match_teams = post_var('match_teams');
+    	if($match_price_idAndTimeAndType == "") {
+      	$match_price_id = post_var('match_price_id');
+      	$opponent = post_var('opponent');
+      	$friend_username = post_var('friend_username');
+      	$friend_email = post_var('friend_email');
+      	$match_time = post_var('match_time');
+      	$match_teams = post_var('match_teams');
+      } else {
+        $ex = explode("-", $match_price_idAndTimeAndType);
+        $match_price_id = $ex[0];
+        $match_time = $ex[1];
+        $match_type = $ex[2];
+        $opponent = "random";
+      }
     	
     	switch($opponent) {
         	case "random":
         	    
+        	    $MP = new Match_Price($match_price_id);
+        	    
+        	    $cache = new Cache();
+  	
+              $GAME_TIMES = Match::getGameTimes();
+              
+              $teams = implode(",", $GAME_TIMES[$match_type][$match_time]);
+  	
+        	    $Opponent = Match::findOpponent($MP, $match_time);
+        	    var_dump($Opponent);
+              
+              if($Opponent) {
+                
+                $M = new Match($Opponent['match_id']);
+                $OT = new Team($Opponent['team_id']);
+                
+                $M->current_entrants = 1;
+                $M->write();
+                
+                $M = new Match($Opponent['match_id']);
+                $T = new Team();
+                $T->customer_id = $this->_user->ID;
+                $T->match_id = $M->ID;
+                $T->created_date = strtotime("Today");
+                $T->accepted = 1;
+                
+                $T->write();
+                
+                redirect("/team/view/".db_insert_id());
+                
+              } else {
+                $M = new Match();
+                $M->start_date = $match_time;
+                $M->active = 1;
+                $M->entry_fee = $MP->price;
+                $M->max_entrants = 2;
+                $M->current_entrants = 1;
+                $M->name = "H-2-H " . money_format("$%i", $MP->price) . " to win " . money_format("$%i", $MP->prize);
+                $M->match_fee = $MP->profit;
+                $M->match_teams = $teams;
+                $M->match_price_id = $MP->ID;
+                
+                $M->write();
+                
+                // Create team for creator
+                $M = new Match(db_insert_id());
+                $T = new Team();
+                $T->customer_id = $this->_user->ID;
+                $T->match_id = $M->ID;
+                $T->created_date = strtotime("Today");
+                $T->accepted = 1;
+                
+                $T->write();
+                
+                redirect("/team/view/".db_insert_id());
+              }
+              
         	    break;
         	    
             case "friend":
@@ -166,6 +231,7 @@ class Match_Controller extends Controller {
                         $M->active = 1;
                         $M->entry_fee = $MP->price;
                         $M->max_entrants = 2;
+                        $M->current_entrants = 2;
                         $M->name = $this->_user->username . " vs " . $friend_username;
                         $M->match_fee = $MP->profit;
                         $M->match_teams = $match_teams;

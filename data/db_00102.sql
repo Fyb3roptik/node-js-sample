@@ -4,5 +4,6 @@ CREATE TABLE  `matches` (
 `start_date` INT NOT NULL ,
 `active` TINYINT NOT NULL ,
 `locked` TINYINT NOT NULL ,
+`current_entrants` int(11) NOT NULL DEFAULT '0',
 PRIMARY KEY (  `match_id` )
 ) ENGINE = INNODB;

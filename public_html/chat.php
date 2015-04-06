@@ -21,7 +21,7 @@
  </div>
  
  <script type="text/javascript">
-	swfobject.embedSWF("/flash/lightIRC.swf", "chatWindow", "100%", "100%", "10.0.0", "/flash/expressInstall.swf", {host: 'chat.beastfranchise.com', nick:'<?php echo $CUSTOMER->username; ?>', autojoin: '#BeastFranchise'});
+	swfobject.embedSWF("/flash/lightIRC.swf", "chatWindow", "100%", "100%", "10.0.0", "/flash/expressInstall.swf", {host: 'chat.beastfranchise.com', nick:'<?php echo $CUSTOMER->username; ?>', autojoin: '#BeastFranchise', showInfoMessages: false, showChannelCentral: false});
  </script>
 </body>
 </html>

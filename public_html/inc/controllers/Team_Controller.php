@@ -296,6 +296,7 @@ class Team_Controller extends Controller {
       	$this->_putTeams($MATCH->ID);
       	
       	$MATCH = new Match($TEAM->match_id);
+
   	}
     	
     
@@ -568,11 +569,19 @@ class Team_Controller extends Controller {
         $sql = "SELECT * FROM teams WHERE match_id = '{$match_id}'";
         
         $results = db_arr($sql);
+        $MATCH = new Match($match_id);
+        $MP = new Match_Price($MATCH->match_price_id);
         
         foreach($results as $team) {
             $T = new Team($team['team_id']);
             
             $teams[$team['team_id']] = $T->getTeamLineupById();
+            
+            // Check if promotion eligible and put the txt/hsh file together and ftp it
+          	if($MP->promotion_eligible == 1) {
+            	$T->sendPromotionInfo();
+          	}
+            
         }
         
         $cache->set("teams", $teams, 0, 0);

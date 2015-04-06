@@ -1077,39 +1077,48 @@ $(document).ready(function() {
     <?php $U = new Customer($TEAM->customer_id); ?>
     <div class="row">
         
-        <div class="col-lg-3 col-md-3 col-sm-4">
-            <div class="box bordered-box purple-border">
-                <div class="box-header purple-background">
-                    <div class="title">LEADERBOARD</div>
-                </div>
-                <div class="box-content box-no-padding">
-                    <div class="responsive-table">
-                        <table id="leaderboard" class='data-table table table-bordered table-striped table-hover' style='margin-bottom:0;'>
-                            <thead>
-                                <tr>
-                                    <th>Place</th>
-                                    <th>User</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($LEADERBOARD as $k => $T): ?>
-                                <?php $CUST = new Customer($T->customer_id); ?>
-                                <?php $CUST_TEAM = new Team(); ?>
-                                    <tr <?php if(($k + 1) == 1): ?>class="success"<?php else: ?>class="danger"<?php endif; ?>>
-                                        <td><?php echo addOrdinalNumberSuffix(($k + 1)); ?></td>
-                                        <td><a href="/team/view/<?php echo $T->ID; ?>"><?php echo $CUST->username; ?></a></td>
-                                        <td><?php echo $T->score; ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+        <div class="col-lg-4 col-md-3 col-sm-4">
+
+            <div class="col-lg-12">
+              <div class="box bordered-box purple-border">
+                  <div class="box-header purple-background">
+                      <div class="title">LEADERBOARD</div>
+                  </div>
+                  <div class="box-content box-no-padding">
+                      <div class="responsive-table">
+                          <table id="leaderboard" class='data-table table table-bordered table-striped table-hover' style='margin-bottom:0;'>
+                              <thead>
+                                  <tr>
+                                      <th>Place</th>
+                                      <th>User</th>
+                                      <th>Score</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach($LEADERBOARD as $k => $T): ?>
+                                  <?php $CUST = new Customer($T->customer_id); ?>
+                                  <?php $CUST_TEAM = new Team(); ?>
+                                      <tr <?php if(($k + 1) == 1): ?>class="success"<?php else: ?>class="danger"<?php endif; ?>>
+                                          <td><?php echo addOrdinalNumberSuffix(($k + 1)); ?></td>
+                                          <td><a href="/team/view/<?php echo $T->ID; ?>"><?php echo $CUST->username; ?></a></td>
+                                          <td><?php echo $T->score; ?></td>
+                                      </tr>
+                                  <?php endforeach; ?>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-12">
+              <div class="field-margin">
+                <img class="svg" src="/img/field.svg" />
+              </div>
             </div>
         </div>
         
-        <div class="col-lg-6 col-md-6 col-sm-8">
+        <div class="col-lg-8 col-md-6 col-sm-8">
            <div class="box bordered-box purple-border">
                 <div class="box-header purple-background">
                     <div class="title pull-left"><?php echo strtoupper($U->username); ?>'S BOX SCORES</div>
@@ -1175,9 +1184,6 @@ $(document).ready(function() {
            </div>
         </div>
         
-        <div class="col-lg-3 col-md-4 col-sm-12 hidden-xs field-margin">
-            <img class="svg" src="/img/field.svg" />
-        </div>
         <div class="clearfix"></div>
     </div>
     

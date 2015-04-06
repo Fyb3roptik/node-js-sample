@@ -1,7 +1,7 @@
 <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script>
 
-<div class='col-md-12 col-sm-12 col-xs-12'>    
+<div class='col-md-8 col-sm-12 col-xs-12'>    
     <div class='row'>
         <?php if($C->ID == $CUSTOMER->ID): ?>
             <?php if($Season_Started == true || SITE_DEV == 1): ?>
@@ -62,7 +62,15 @@
                                 <?php endforeach; ?>
                             </table>
                             <?php endif; ?>
-                            <a href="#" class="btn btn-primary pull-left" data-toggle="modal" data-target="#createMatchModal">CREATE A MATCH</a>
+                            
+                           <a href="#" class="btn btn-primary pull-left" data-toggle="modal" data-target="#createMatchModal">CREATE A MATCH</a>
+                          
+                            <div class="filters pull-left">
+                              <h4>Filters: </h4>
+                              <button id="clear_filters" class="btn btn-default">Clear Filters</button>
+                              <button id="beast_slam" class="btn btn-info">5K BEAST SLAM ONLY</button>
+                            </div>
+                            
                             <div class="clearfix"></div>
                             
                             <table id="matches" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -72,7 +80,8 @@
                                       <th>TYPE</th>
                                       <th>PRICE</th>
                                       <th>START TIME</th>
-                                      <th>TEAMS</th>
+                                      <th>5K BEAST SLAM</th>
+                                      <th>PRIZE</th>
                                       <th>GAMES</th>
                                   </tr>
                               </thead>
@@ -83,36 +92,29 @@
                                       <th>TYPE</th>
                                       <th>PRICE</th>
                                       <th>START TIME</th>
-                                      <th>TEAMS</th>
+                                      <th>5K BEAST SLAM</th>
+                                      <th>PRIZE</th>
                                       <th>GAMES</th>
                                   </tr>
                               </tfoot>
                        
                               <tbody>
-                                <?php 
-                                  // Create array of match types
-                                  $matches = array();
-                                  for($i = 0; $i < 20; $i++) {
-                                    $rand = array_rand($MATCH_PRICES);
-                                    
-                                    if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
-                                      continue;
-                                    }
-                                    
-                                    if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
-                                      $matches[$MATCH_PRICES[$rand]->price] = $MATCH_PRICES[$rand];  
-                                    }
-                                  }
-                                ?>
-                                <?php foreach($matches as $price => $match): ?>
+                                <?php foreach($LOBBY as $match): ?>
                                   <tr>
-                                    <td><a href="#" class="btn btn-success">Join Match</a></td>
+                                    <td><a href="/match/createMatch/<?php echo $match['match_price']->ID;?>-<?php echo $match['start_time']; ?>-<?php echo $match['type']; ?>" class="btn btn-success join-match">Join Match</a></td>
                                     <td>H-2-H</td>
-                                    <td><?php echo money_format("$%i", $price); ?></td>
-                                    <td></td>
-                                    <td>0/2</td>
-                                    <td></td>
+                                    <td><?php echo money_format("$%i", $match['match_price']->price); ?></td>
+                                    <td class="match-start-time"><?php echo date("h:i A", $match['start_time']); ?></td>
+                                    <td><?php if($match['match_price']->promotion_eligible == 1): ?><span class="label label-info">5K BEAST SLAM ELIGIBLE</span><?php else: ?><span class="label label-danger">NOT ELIGIBLE</span><?php endif; ?></td>
+                                    <td><?php echo money_format("$%i", $match['match_price']->prize); ?></td>
+                                    <td>
+                                      <?php foreach($match['teams'] as $team): ?>
+                                        <p><?php echo $team; ?></p>
+                                      <?php endforeach; ?>
+                                    </td>
                                   </tr>
+                                  <input type="hidden" class="match_price_id" value="<?php echo $match['match_price']->ID; ?>" />
+                                  <input type="hidden" class="start_time" value="<?php echo $match['start_time']; ?>" />
                                 <?php endforeach; ?>
                               </tbody>
                             </table>
@@ -134,6 +136,21 @@
             <?php endif; ?>
         <?php endif; ?>
     </div>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-5 hidden-xs hidden-sm">
+   <div class="box bordered-box purple-border">
+        <div class="box-header purple-background">
+            <div class="title">BEAST CHAT</div>
+        </div>
+        <div class="box-content">
+            <?php if($CUSTOMER->exists()): ?>
+                <iframe src="/chat" width="100%" height="500"></iframe>
+            <?php else: ?>
+                <div class="alert alert-warning"><p>Please Login to use chat</p></div>
+            <?php endif; ?>
+        </div>
+   </div>
 </div>
 
 <!-- Create Match Modal -->
@@ -187,6 +204,8 @@
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                           <div class="panel-body">
+                              <?php $time = key($GAME_TIMES['all']); ?>
+                              <?php if($time > time()): ?>
                               <div class="col-md-6">
                         				<div class="offer offer-primary offer-time" id="<?php echo $MP->ID; ?>" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-controls="collapseTwo">
                           				<div class="shape">
@@ -206,6 +225,11 @@
                         					</div>
                         				</div>
                         			</div>
+                        			<?php else: ?>
+                        			  <div class="col-md-12">
+                          			  <h4>No more games today. Please check back tomorrow!</h4>
+                        			  </div>
+                        			<?php endif; ?>
                         			<?php $game_key = key($GAME_TIMES['early']); if(count($GAME_TIMES['early'][$game_key]) > 4): ?>
                           			<div class="col-md-6">
                           				<div class="offer offer-primary offer-time" id="<?php echo $MP->ID; ?>" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-controls="collapseTwo">
@@ -307,14 +331,35 @@
                   var time = moment("<?php echo date("m/d/Y", time()) . " "; ?>" + $(this).html() + "<?php echo " " . date("T", time()); ?>").format("h:mm A");
                   $(this).html(time);
                 });
+                $(".match-start-time").each(function() {
+                  var time = moment("<?php echo date("m/d/Y", time()) . " "; ?>" + $(this).html() + "<?php echo " " . date("T", time()); ?>").format("h:mm A");
+                  $(this).html(time);
+                });
                 $("#matches").dataTable({
-                  "paging":   false,
+                  "paging":   true,
                   "order": [[ 2, "asc" ]],
                   "columnDefs": [
                     { "width": "2%", "targets": 0 },
                     { "width": "5%", "targets": 1 },
                     { "width": "10%", "targets": [2, 3, 4] }
-                  ]
+                  ],
+                  "language": {
+                    "emptyTable": "No Games Left To Play Today."
+                  }
+                });
+                $("#beast_slam").on("click", function() {
+                  var table = $('#matches').DataTable();
+                  var filteredData = table
+                    .column(4)
+                    .search("5k")
+                    .draw();
+                });
+                $("#clear_filters").on("click", function() {
+                  var table = $('#matches').DataTable();
+                  var filteredData = table
+                    .column(4)
+                    .search("")
+                    .draw();
                 });
                 $("#friend_opponent").change(function() {
                     $("#friend_username").removeClass('hide');

@@ -340,5 +340,29 @@ class Team extends Object {
         $games = $memcache->get('games_info');
         return $games;
     }
+    
+    public function sendPromotionInfo() {
+      $content = "";
+      $filename = $this->ID;
+      
+      $C = new Customer($this->customer_id);
+      $TeamLineup = $this->getTeamLineupById($this->ID);
+      
+      $content .= "Date: " . date("m/d/Y", time()) . "\n";
+      $content .= "Username: " . $C->username . "\n";
+      $content .= "Team ID: " . $this->ID . "\n";
+      
+      for($i = 0; $i < count($TeamLineup); $i++) {
+        $P = new Player($TeamLineup[$i]['player_id']);
+        $content .= "Batter " . ($i + 1) . ": " . $P->first_name . " " . $P->last_name . "\n";
+      }
+      
+      $write = new File_Writer();
+      $write->writeFile($filename, $content, true);
+      
+      $ftp = new Ftp();
+      $ftp->sendFile($filename);
+      
+    }
 }
 ?>
