@@ -149,6 +149,7 @@ class Match_Controller extends Controller {
       	$friend_email = post_var('friend_email');
       	$match_time = post_var('match_time');
       	$match_teams = post_var('match_teams');
+      	$match_type = post_var('match_type');
       } else {
         $ex = explode("-", $match_price_idAndTimeAndType);
         $match_price_id = $ex[0];
@@ -166,10 +167,11 @@ class Match_Controller extends Controller {
   	
               $GAME_TIMES = Match::getGameTimes();
               
-              $teams = implode(",", $GAME_TIMES[$match_type][$match_time]);
-  	
+              if(!isset($match_teams)) {
+                $match_teams = implode(",", $GAME_TIMES[$match_type][$match_time]);
+              }
+              
         	    $Opponent = Match::findOpponent($MP, $match_time);
-        	    var_dump($Opponent);
               
               if($Opponent) {
                 
@@ -199,7 +201,7 @@ class Match_Controller extends Controller {
                 $M->current_entrants = 1;
                 $M->name = "H-2-H " . money_format("$%i", $MP->price) . " to win " . money_format("$%i", $MP->prize);
                 $M->match_fee = $MP->profit;
-                $M->match_teams = $teams;
+                $M->match_teams = $match_teams;
                 $M->match_price_id = $MP->ID;
                 
                 $M->write();
