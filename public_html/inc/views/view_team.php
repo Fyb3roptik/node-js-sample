@@ -981,7 +981,7 @@ $(document).ready(function() {
         
         <div class="col-lg-4 <?php if(empty($SELECTED_PLAYERS)): ?>hide<?php endif; ?>">
             <div class="box blue">
-                <div class="box-header">
+                <div class="box-header contrast-background">
                     <h2>Batting Order</h2>
                 </div>
                 <div class="box-content">
