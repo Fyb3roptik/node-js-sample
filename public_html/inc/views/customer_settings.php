@@ -24,7 +24,7 @@
                                 <input type="hidden" name="amount" value="2000" />
                                 <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="<?php echo STRIPE_TEST_KEY; ?>"
+                                    data-key="<?php echo STRIPE_LIVE_KEY; ?>"
                                     data-amount="2000"
                                     data-name="Beast Franchise Funds"
                                     data-description="($20.00)"
@@ -38,7 +38,7 @@
                                 <input type="hidden" name="amount" value="5000" />
                                 <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="<?php echo STRIPE_TEST_KEY; ?>"
+                                    data-key="<?php echo STRIPE_LIVE_KEY; ?>"
                                     data-amount="5000"
                                     data-name="Beast Franchise Funds"
                                     data-description="($50.00)"
@@ -52,7 +52,7 @@
                                 <input type="hidden" name="amount" value="10000" />
                                 <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="<?php echo STRIPE_TEST_KEY; ?>"
+                                    data-key="<?php echo STRIPE_LIVE_KEY; ?>"
                                     data-amount="10000"
                                     data-name="Beast Franchise Funds"
                                     data-description="($100.00)"
@@ -66,7 +66,7 @@
                                 <input type="hidden" name="amount" value="25000" />
                                 <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="<?php echo STRIPE_TEST_KEY; ?>"
+                                    data-key="<?php echo STRIPE_LIVE_KEY; ?>"
                                     data-amount="25000"
                                     data-name="Beast Franchise Funds"
                                     data-description="($250.00)"
@@ -84,7 +84,7 @@
                                 <input type="hidden" name="amount" value="50000" />
                                 <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="<?php echo STRIPE_TEST_KEY; ?>"
+                                    data-key="<?php echo STRIPE_LIVE_KEY; ?>"
                                     data-amount="50000"
                                     data-name="Beast Franchise Funds"
                                     data-description="($500.00)"
