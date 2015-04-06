@@ -219,13 +219,11 @@ class Match extends Object {
     
     $MATCH_PRICES = Match_Price::getPrices();
     $GAME_TIMES = self::getGameTimes();
-    
+
     foreach($GAME_TIMES as $type => $time) {
-      $key = key($time);
-      $away = $time[$key][0];
-      $home = $time[$key][1];
-      
-      $teams[$type][] = $away . " @ " . $home;
+      foreach($time as $team) {
+        $teams[$type] = $team;
+      }
     }
     
   	// Create array of match types
@@ -280,7 +278,7 @@ class Match extends Object {
         }
       }
     }
-    
+
     return $matches;
 	}
 	

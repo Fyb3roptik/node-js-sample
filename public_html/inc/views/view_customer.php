@@ -77,11 +77,12 @@
                               <thead>
                                   <tr>
                                       <th></th>
-                                      <th>TYPE</th>
+                                      <th>MODE</th>
                                       <th>PRICE</th>
                                       <th>START TIME</th>
                                       <th>5K BEAST SLAM</th>
                                       <th>PRIZE</th>
+                                      <th>TYPE</th>
                                       <th>GAMES</th>
                                   </tr>
                               </thead>
@@ -89,11 +90,12 @@
                               <tfoot>
                                   <tr>
                                       <th></th>
-                                      <th>TYPE</th>
+                                      <th>MODE</th>
                                       <th>PRICE</th>
                                       <th>START TIME</th>
                                       <th>5K BEAST SLAM</th>
                                       <th>PRIZE</th>
+                                      <th>TYPE</th>
                                       <th>GAMES</th>
                                   </tr>
                               </tfoot>
@@ -108,10 +110,15 @@
                                     <td><?php if($match['match_price']->promotion_eligible == 1): ?><span class="label label-info">5K BEAST SLAM ELIGIBLE</span><?php else: ?><span class="label label-danger">NOT ELIGIBLE</span><?php endif; ?></td>
                                     <td><?php echo money_format("$%i", $match['match_price']->prize); ?></td>
                                     <td>
-                                      <?php foreach($match['teams'] as $team): ?>
-                                        <p><?php echo $team; ?></p>
-                                      <?php endforeach; ?>
+                                      <?php if($match['type'] == "all"): ?>
+                                        <span class="label label-info">ALL GAMES</span>
+                                      <?php elseif($match['type'] == "early"): ?>
+                                        <span class="label label-info">EARLY ONLY GAMES</span>
+                                      <?php elseif($match['type'] == "late"): ?>
+                                        <span class="label label-info">LATE ONLY GAMES</span>
+                                      <?php endif; ?>
                                     </td>
+                                    <td><?php foreach($match['teams'] as $key => $team): ?><span class="<?php echo (++$count%2 ? "text-primary" : "text-danger"); ?>"><?php echo (++$count2%2 ? $team : '<span class="text-info">@</span>' . $team); ?></span><?php echo (++$count3%2 ? "" : ", "); ?><?php endforeach; ?></td>
                                   </tr>
                                   <input type="hidden" class="match_price_id" value="<?php echo $match['match_price']->ID; ?>" />
                                   <input type="hidden" class="start_time" value="<?php echo $match['start_time']; ?>" />
