@@ -126,7 +126,7 @@ class Customer_Controller extends Controller {
     	$V->bind('MATCH_PRICES', $MATCH_PRICES);
     	$V->bind('MATCHES', $MATCHES);
     	$V->bind('Season_Started', $Season_Started);
-      $V->bind('GAME_TIMES', $game_times);
+      $V->bind('GAME_TIMES', $GAME_TIMES);
       $V->bind('LOBBY', $LOBBY);
       
 		$V->bind('C', $C);

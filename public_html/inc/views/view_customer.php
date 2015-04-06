@@ -17,6 +17,7 @@
                                     <th>Match Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
+                                    <th>Opponent</th>
                                 </thead>
                                 <?php foreach($MATCHES as $M): ?>
                                 <?php 
@@ -47,13 +48,20 @@
                                             </td>
                                         <?php elseif($status == "Accepted" && $myStatus == 1): ?>
                                             <td>
-                                                <?php if($M->active == 1): ?>
+                                                <?php if($M->locked == 1): ?>
                                                   <a href="/team/view/<?php echo $TEAM->ID; ?>" class="btn btn-info pull-left lineup"><i class="fa fa-gamepad"></i> VIEW GAME</a>
                                                 <?php else: ?>
                                                   <a href="/team/view/<?php echo $TEAM->ID; ?>" class="btn btn-info pull-left lineup"><i class="fa fa-list"></i> SET YOUR LINEUP</a>
                                                 <?php endif; ?>
                                             </td>
                                         <?php endif; ?>
+                                        <td>
+                                          <?php if($Opponent != false): ?>
+                                            <?php echo $Opponent->username; ?>
+                                          <?php else: ?>
+                                            No opponent yet
+                                          <?php endif; ?>
+                                        </td>
                                     </tr>
                                     <input type="hidden" class="matchPrice" value="<?php echo $matchPrice; ?>" />
                                     <input type="hidden" class="myFunds" value="<?php echo $myFunds; ?>" />

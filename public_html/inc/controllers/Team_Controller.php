@@ -289,6 +289,21 @@ class Team_Controller extends Controller {
 
   	// Lock the match if it isn't locked and start time has been reached
   	if(time() > $MATCH->start_date && $MATCH->locked == 0) {
+      	
+      	// Check if they have opponent. If not then remove this game and refund if necessary
+      	$Opponent = $MATCH->getOpponent($MATCH->ID, $this->_user->ID);
+      	
+      	if(!$Opponent) {
+        	$this->_user->funds += ($MATCH->entry_fee * 100);
+        	$this->_user->write();
+          $this->_user = new Customer($this->_user->ID);
+          
+          $MATCH->delete();
+          
+          redirect("/" . $this->_user->username);
+          exit;
+      	}
+      	
       	$MATCH->locked = 1;
       	$MATCH->write();
       	

@@ -178,6 +178,12 @@ class Match_Controller extends Controller {
                 $M = new Match($Opponent['match_id']);
                 $OT = new Team($Opponent['team_id']);
                 
+                $this->_user->funds -= ($M->entry_fee * 100);
+
+      	        $this->_user->write();
+      	        
+      	        $this->_user = new Customer($this->_user->ID);
+                
                 $M->current_entrants = 1;
                 $M->write();
                 
@@ -216,6 +222,12 @@ class Match_Controller extends Controller {
                 
                 $T->write();
                 
+                $this->_user->funds -= ($M->entry_fee * 100);
+
+      	        $this->_user->write();
+      	        
+      	        $this->_user = new Customer($this->_user->ID);
+      	        
                 redirect("/team/view/".db_insert_id());
               }
               

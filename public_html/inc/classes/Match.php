@@ -124,8 +124,13 @@ class Match extends Object {
         
     	$sql = "SELECT customer_id FROM teams WHERE match_id = '{$match_id}' AND customer_id != '{$customer_id}'";
     	$arr = db_arr($sql);
+
+    	if($arr) {
+        $return = new Customer($arr[0]['customer_id']);	
+    	} else {
+      	return false;
+    	}
     	
-    	$return = new Customer($arr[0]['customer_id']);
     	return $return;
 	}
 	
@@ -211,7 +216,7 @@ class Match extends Object {
           
     	}
   	}
-  	
+
   	return $game_times;
 	}
 	
