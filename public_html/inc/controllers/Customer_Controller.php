@@ -271,6 +271,18 @@ class Customer_Controller extends Controller {
         exit;
 	}
 	
+	public function successFunds() {
+  	
+  	$C = new Customer($_REQUEST['c']);
+  	$amount = base64_decode($_REQUEST['a']);
+  	
+  	$C->funds += ($amount * 100);
+  	$C->write();
+  	
+  	redirect('/' . $C->username . "/settings");
+  	
+	}
+	
 	public function getUsernames() {
         $usernames = array();
         $q = get_var('q');

@@ -19,6 +19,37 @@
                 
                 <div class='box-content'>
                     <div class="row">
+                      <div class="col-md-12">
+                        <h3>Paypal</h3>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="8EV5XD65F3YLL">
+<table>
+<tr><td><input type="hidden" name="on0" value="Beast Franchise Funds">Beast Franchise Funds</td></tr><tr><td><select id="funds" name="os0">
+	<option value="20">20 $20.00 USD</option>
+	<option value="50">50 $50.00 USD</option>
+	<option value="100">100 $100.00 USD</option>
+	<option value="250">250 $250.00 USD</option>
+	<option value="500">500 $500.00 USD</option>
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" id="customer_id" value="<?php echo $CUSTOMER->ID; ?>" />
+<input type="hidden" id="return" name="return" value="http://dev.beastfranchise.com/customer/successFunds?a=<?php echo base64_encode(20); ?>&c=<?php echo $CUSTOMER->ID; ?>" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h3>Credit Card</h3>
+                      </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-3">
                             <form action="/<?php echo $CUSTOMER->username; ?>/addFunds" method="POST">
                                 <input type="hidden" name="amount" value="2000" />
@@ -97,6 +128,7 @@
                 </div>
             </div>
         </div>
+
         
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class='box'>
@@ -165,7 +197,7 @@
                         <input type="hidden" id="customer_id" name="customer_id" value="<?php echo $CUSTOMER->ID; ?>" />
                         <div class="form-group">
                             <label for="customer[email]">Email</label>
-                            <input type="text" class="form-control" id="customer[email]" name="customer[email]" placeholder="Email Address" value="<?php echo $CUSTOMER->email; ?>">
+                            <input type="text" class="form-control" id="customer[email]" name="customer[email]" placeholder="Email Address" disabled="disabled" value="<?php echo $CUSTOMER->email; ?>">
                         </div>
                         <div class="form-group">
                             <label for="customer[username]">Username</label>
@@ -289,6 +321,14 @@ $(function($) {
         } else {
             $("#account_message").html('<h5 class="text-danger"><i class="glyphicon glyphicon-remove"></i> Not a valid US account number</h5>');
         }
+      
+    });
+    
+    $("#funds").change(function() {
+      var val = $(this).val();
+      var customer_id = $("#customer_id").val();
+      console.log(customer_id);
+      $("#return").val("http://dev.beastfranchise.com/customer/successFunds?a=" + btoa(val) + "&c=" + customer_id);
       
     });
 });
