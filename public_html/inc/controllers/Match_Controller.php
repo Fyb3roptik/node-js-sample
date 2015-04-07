@@ -222,13 +222,15 @@ class Match_Controller extends Controller {
                 
                 $T->write();
                 
+                $team_id = db_insert_id();
+                
                 $this->_user->funds -= ($M->entry_fee * 100);
 
       	        $this->_user->write();
       	        
       	        $this->_user = new Customer($this->_user->ID);
       	        
-                redirect("/team/view/".db_insert_id());
+                redirect("/team/view/".$team_id);
               }
               
         	    break;
