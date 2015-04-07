@@ -22,8 +22,8 @@
       // turn passive mode on
       ftp_pasv($conn_id, true);
 
-     	ftp_put($conn_id, $filename . ".txt", $txtFile, FTP_BINARY);
-     	ftp_put($conn_id, $filename . ".hsh", $hashFile, FTP_BINARY);
+     	$put = ftp_put($conn_id, $filename . ".txt", $txtFile, FTP_BINARY);
+     	$put2 = ftp_put($conn_id, $filename . ".hsh", $hashFile, FTP_BINARY);
      	
      	// close the connection
       ftp_close($conn_id);

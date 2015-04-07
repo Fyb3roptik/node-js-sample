@@ -184,7 +184,7 @@ class Match_Controller extends Controller {
       	        
       	        $this->_user = new Customer($this->_user->ID);
                 
-                $M->current_entrants = 1;
+                $M->current_entrants = 2;
                 $M->write();
                 
                 $M = new Match($Opponent['match_id']);

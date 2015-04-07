@@ -6,6 +6,7 @@ bugz/
 keys/
 public_html/screen_scrape.php
 public_html/screen_scrape_script.php
+public_html/tmp
 forums/
 store/
 .buildpath
