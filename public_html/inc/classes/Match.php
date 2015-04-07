@@ -248,37 +248,39 @@ class Match extends Object {
       }
     }
     
-    // Do Early Games
-    if(isset($GAME_TIMES['early'])) {
-      for($i = 0; $i < 10; $i++) {
-        $rand = array_rand($MATCH_PRICES);
-        
-        if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
-          continue;
-        }
-        
-        if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
-          $early = key($GAME_TIMES['early']);
-          if($early > time()) {
-            $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $early, "type" => "early", "teams" => $teams['early']);
+    if(isset($GAME_TIMES['early']) && isset($GAME_TIMES['late'])) {
+      // Do Early Games
+      if(isset($GAME_TIMES['early'])) {
+        for($i = 0; $i < 10; $i++) {
+          $rand = array_rand($MATCH_PRICES);
+          
+          if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
+            continue;
+          }
+          
+          if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
+            $early = key($GAME_TIMES['early']);
+            if($early > time()) {
+              $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $early, "type" => "early", "teams" => $teams['early']);
+            }
           }
         }
       }
-    }
-    
-    // Do Early Games
-    if(isset($GAME_TIMES['late'])) {
-      for($i = 0; $i < 10; $i++) {
-        $rand = array_rand($MATCH_PRICES);
-        
-        if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
-          continue;
-        }
-        
-        if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
-          $late = key($GAME_TIMES['late']);
-          if($late > time()) {
-            $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $late, "type" => "late", "teams" => $teams['late']);
+      
+      // Do Late Games
+      if(isset($GAME_TIMES['late'])) {
+        for($i = 0; $i < 10; $i++) {
+          $rand = array_rand($MATCH_PRICES);
+          
+          if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
+            continue;
+          }
+          
+          if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
+            $late = key($GAME_TIMES['late']);
+            if($late > time()) {
+              $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $late, "type" => "late", "teams" => $teams['late']);
+            }
           }
         }
       }
