@@ -29,7 +29,7 @@
                     <div class="checkbox">
                         <label for="acknowledge">
                             <input type="checkbox" id="acknowledge" name="acknowledge" value="agreed" />
-                            I acknowledge that I do not live any of the following states.  Arizona, Illinois, Iowa, Louisiana, Maryland, Montana, North Dakota, Puerto Rico, Tennesse, Vermont, and Washington State.  Furthermore, I understand that I cannot participate in a "fee" based Beast Franchise match if I do live in one of the states listed here.  However, I understand I can play in "Free" based Beast Franchise matches, but cannot recieve any type of prizes.
+                            I acknowledge that I do not live any of the following states.  Arizona, Illinois, Iowa, Louisiana, Maryland, Montana, North Dakota, Puerto Rico, Tennesse, Vermont, and Washington State.  Furthermore, I understand that I cannot participate in a "fee" based Beast Franchise match if I do live in one of the states listed here.  However, I understand I can play in "Free" based Beast Franchise matches, but cannot recieve any type of prizes. By checking this box I also agree to the <a href="/terms" data-toggle="modal" data-target="#termsModal">terms</a>
                         </label>
                     </div>
                     <button type="submit" class="btn btn-success pull-right">Register</button>
@@ -39,3 +39,19 @@
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Beast Franchise Terms and Conditions</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

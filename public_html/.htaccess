@@ -17,6 +17,7 @@ RewriteRule ^product/?([^/.]+)?/?([^/.]+)?\.html?$ /products.php?action=view_pro
 RewriteRule ^recover_password/?$ /login_password.php?action=recover_password [QSA,L]
 RewriteRule ^reset_password/?$ /login_password.php?action=reset_password [QSA,L]
 RewriteRule ^sales/?$ /sales.php [QSA,L]
+RewriteRule ^terms/?$ /terms.php [QSA,L]
 RewriteRule ^myaccount/payment_info/edit/([^/.]+)/? /credit_card/edit/$1 [QSA,L]
 RewriteRule ^denied/?$ /denied.php [QSA,L]
 RewriteRule ^register/?$ /login/register [QSA,L]
