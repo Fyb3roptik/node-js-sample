@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2015 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="baseball" unicode="&#xe800;" d="m100 775c-63 0-100-38-100-100 0-50 100-125 150-175 100-100 265-190 425-350l150-150-25-25c0-25 25-50 50-50l50 50 50 50c0 25-25 50-50 50l-25-25-150 150c-143 143-250 325-350 425-50 50-125 150-175 150z m175-500c-41 0-75-34-75-75 0-41 34-75 75-75s75 34 75 75c0 41-34 75-75 75z" horiz-adv-x="850" />
+</font>
+</defs>
+</svg>
