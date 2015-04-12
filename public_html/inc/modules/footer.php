@@ -1,14 +1,2 @@
-<footer>
-  <p class="pull-left">&copy; <?php echo date('Y', time()); ?> Beast Fantasy Sports Inc | All Rights Reserved</p>
-  
-  <div class="pull-left companies col-lg-4">
-    <a href="http://www.rotowire.com" target="_blank"><img src="/img/roto.png" class="img-responsive pull-left" width="100" /></a>
-    <a href="http://www.fsta.org" target="_blank"><img src="/img/fsta.jpg" class="img-responsive pull-left" width="100" /></a>
-  </div>
-  
-  <div class="footer-socmed pull-right">
-		<a href="https://www.facebook.com/BeastFranchise" target="_blank"><span class="fa fa-facebook"></span></a>
-		<a href="https://www.twitter.com/beast_franchise" target="_blank"><span class="fa fa-twitter"></span></a>
-		<a href="https://instagram.com/beastfranchise" target="_blank"><span class="fa fa-instagram"></span></a>
-	</div>
-</footer>
+<img class="aligncenter wp-image-759" src="/img/beast.png" alt="rwlogo-new-500x150" width="41" height="30" /></a><a href="http://www.rotowire.com" target="_blank"><img class="aligncenter wp-image-759" src="/img/rwlogo-new-500x150.gif" alt="rwlogo-new-500x150" width="100" height="30" /></a><a href="http://www.fsta.org/" target="_blank"><img class="aligncenter wp-image-761" src="/img/hdr_logo.png" alt="hdr_logo" width="82" height="25" /></a> <img height="30" src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_secured_by_pp_2line.png" border="0" alt="Secured by PayPal"> <img src="/img/credit_cards.jpg" titile="Credit Cards Accepted" />
+<h4 style="text-align: center;">&copy; <?php echo date('Y', time()); ?> Beast Fantasy Sports Inc | All Rights Reserved</h4>

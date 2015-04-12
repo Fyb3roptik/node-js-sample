@@ -200,16 +200,6 @@ $(document).ready(function() {
       });
       
       
-      //----------------------------------------------
-      
-      
-      // Scroll Up
-      $('.scrollup, .logo a').click(function(){
-          $("html, body").animate({ scrollTop: 0 }, 1200, 'easeInOutExpo');
-          return false;
-      });
-      
-      
       //----------------------------------------------      
       
       

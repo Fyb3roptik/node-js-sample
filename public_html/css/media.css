@@ -43,7 +43,6 @@
    .icon-wrap h3 { font-size: 21px; margin-bottom: 20px; }
    .subheadline { font-size: 18px; line-height: 26px; }
    #intro { padding-top: 90px; height: 100% }
-   header { height: 600px; }
    .headline p { padding: 0 20px; }
    .top-bar.slidedown { display: none; }
    .top-bar { position: fixed; top: 0; left: 0; width: 100%; z-index: 999; padding: 0 0 10px; margin: 0; }

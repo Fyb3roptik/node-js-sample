@@ -53,7 +53,7 @@
      <?php //require_once 'modules/css.php'; ?>
       
 	</head>
-	<body>
+	<body class="overlay-gradient">
 		      
 	      <!-- Preloader -->
          <div id="loader-wrapper">
@@ -63,159 +63,19 @@
 			
          <!-- Header -->
          <header>
-         
-               <!-- Intro -->
-               <div id="intro" class="overlay-gradient" data-scroll-index="0">        
-
-                        <!-- Top Bar -->
-                      <a class="navbar-brandy" href="/"><img width="180" src="/img/shield_logo.png"></a>  
-                        <div class="top-bar">
-               
-                           <div class="container">
-                              <div class="row">
-                              
-                                 <div class="col-md-12">
-                                 
-                                       <!-- Logo -->
-                                       <div class="col-md-3">
-                                        <div class="logo"><a title="" href="#"></a></div>
-                                       </div>
-                                        
-                                       <!-- Logo End -->
-                     
-                                       <!-- Menu -->
-                                       <div class="col-md-6">
-                                         <div class="nav">
-                       
-                                            <nav class="navbar navbar-default" role="navigation">
-                                            
-                                               <!-- Mobile Button -->
-  		                                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                                                  <span class="sr-only">Toggle navigation</span>
-                                                  <span class="icon-bar"></span>
-                                                  <span class="icon-bar"></span>
-                                                  <span class="icon-bar"></span>
-                                               </button>
-                                               <!-- Mobile Button End -->
-                                            		               
-                                               <ul class="collapse navbar-collapse navbar-ex1-collapse pull-left">
-                                                  <li><a href="/register" data-scroll-nav="0" title="">Register</a></li>
-                                                  <li><a href="/login" data-scroll-nav="1" title="">Login</a></li>
-                                                  <li><a data-scroll-nav="4" title="">Rules</a></li>
-                                                  <li><a href="/terms" data-toggle="modal" data-scroll-nav="5" data-target="#termsModal">Terms</a></li>
-                                                  <li><a href="mailto:support@beastfantasysports.com" data-scroll-nav="6" title="">Contact</a></li>
-                                                  <li class="download-btn"><a href="/register" data-scroll-nav="3" title="">Play Now <i class="icon-baseball"></i></a></li>
-                                               </ul>                                   
-                                            </nav>
-                                         </div>
-                                       </div>
-                                       <!-- Menu End -->
-                                       
-                                       <div class="col-md-3">
-                                         <div class="social-icons pull-left">
-                                            <div class="social-icon facebook pull-left">
-                                              <a href="https://www.facebook.com/BeastFranchise" target="_blank" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
-                                            </div>
-                                            <div class="social-icon pull-left">
-                                              <a href="https://instagram.com/beastfranchise" target="_blank" class="instagram"><i class="fa fa-instagram"></i></a>
-                                            </div>
-                                            <div class="social-icon pull-left">
-                                              <a href="https://twitter.com/beast_franchise" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a>
-                                            </div>
-                                          </div>
-                                       </div>
-                                 </div>
-            
-                              </div><!-- .row End -->                  
-                           </div><!-- .container End -->
-                           
-                                         
-                        </div>
-                        <!-- Top Bar End -->
-                        
-                        <div class="container">
-                           <div class="row">
-                              
-                                 
-                                 <div class="col-md-12">
-
-                                       <!-- Intro Heading -->
-                                       <div class="headline">
-                                       
-                                          <h1 class="wow fadeInDown">Beast Franchise</h1>
-                                          <p class="wow fadeInDown" data-wow-delay="0.5s">BATTING ORDER
-                                          <br>
-                                       <br>DAILY FANTASY BASEBALL <sub>&trade;</sub></p>
-                                          
-                                       </div>
-                                       <!-- Intro Heading End -->
-                                      
-                                     
-                                       <!-- Phone Carousel -->
-                                       <div class="swiper-container wow fadeIn" data-wow-delay="1.5s">
-                                       
-                                          <!-- Arrows -->
-                                          <a class="arrow-left" href="#" title=""><i class="fa fa-angle-left"></i></a>
-                                          <a class="arrow-right" href="#" title=""><i class="fa fa-angle-right"></i></a>
-                                          <!-- Arrows End -->
-                                          
-                                          <div class="swiper-wrapper">   
-                                       
-                                             <!-- First Slide --> 
-                                              <div class="swiper-slide">
-                                              <br>
-                                              <center>TUTORIAL</center>
-                                              <br>
-                                                <iframe src="https://player.vimeo.com/video/124081239" width="320" height="179" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-                                             </div>  
-                                             <div class="swiper-slide">
-                                                
-                                                <img class="img-responsive" src="/img/bg/kenny_lofton.png" alt="">
-                                             </div>
-                                             
-                                             <!-- Second Slide --> 
-                                             <div class="swiper-slide">
-                                             <br>
-                                             <center>$5K Beast Slam</center>
-                                             <br>
-                                                <iframe src="https://player.vimeo.com/video/124039669" width="320" height="179" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-                                             </div>
-                                             
-                                             <!-- Thrid Slide --> 
-                                             <div class="swiper-slide">
-                                             <br>
-                                             <center>GAME MODES</center>
-                                             <br>
-                                                <img class="img-responsive" src="/img/bg/coming_soon.png" alt="">
-                                             </div>
-                                             <div class="swiper-slide">
-                                             <center>BEAST FRANCHISE
-                                             <p>
-                                             CHAMPIONSHIP</center>
-                                          
-                                                <img class="img-responsive" src="/img/bg/coming_soon.png" alt="">
-                                             </div>
-                                       
-                                          </div>      
-                                       </div>
-                                       <!-- Phone Carousel End -->
-                                       
-                                       <blockquote>
-                                        <p>"...the idea was almost retro, in its emphasis on the role of the manager in setting a batting order, rather than on efficient roster construction. No salary cap. Just choose the best lineup you can think of. The order holds your fate."</p>
-                                        <footer>Ben McGrath <cite title="The New Yorker"><a href="http://www.newyorker.com/magazine/2015/04/13/dream-teams" target="_blank">The New Yorker</a></cite></footer>
-                                      </blockquote>
-                                 </div>
-                               <center><img class="aligncenter wp-image-759" src="/img/beast.png" alt="rwlogo-new-500x150" width="41" height="30" /></a><a href="http://www.rotowire.com" target="_blank"><img class="aligncenter wp-image-759" src="/img/rwlogo-new-500x150.gif" alt="rwlogo-new-500x150" width="100" height="30" /></a><a href="http://www.fsta.org/" target="_blank"><img class="aligncenter wp-image-761" src="/img/hdr_logo.png" alt="hdr_logo" width="82" height="25" /></a></center>
-                           <h4 style="text-align: center;">© 2015 Beast Fantasy Sports Inc | All Rights Reserved</h4>
-                          
-                           </div><!-- .row End -->
-                            
-                        </div><!-- .container End -->
-               
-               </div>
-               <!-- Intro End -->
-         
+         <?php require_once 'modules/header.php'; ?>    
          </header>
+         <!-- Header -->
+         <!-- Content -->
+         <?php require_once VIEW_HANDLER; ?> 
+         <!-- Content End -->
+
+         <!-- Footer -->
+         <footer>
+           <?php require_once 'modules/footer.php'; ?>
+         </footer>
+         <!-- Footer -->
+         
          <!-- Modal -->
         <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
@@ -231,22 +91,6 @@
             </div>
           </div>
         </div>
-         <!-- Header -->
-         
-         
-         <!-- Content -->
-         
-         <!-- Content End -->
-         
-         
-         <!-- Footer -->
-         <footer>
-
-           
-         
-         </footer>
-         <!-- Footer -->
-
 	   
          <!-- Javascript Files -->
          <script type="text/javascript" src="/js/jquery-1.11.2.min.js"></script> 		
@@ -298,11 +142,5 @@
               g.src='//www.google-analytics.com/ga.js';
               s.parentNode.insertBefore(g,s)}(document,'script'));
           </script>
-				<?php //require_once 'modules/header.php'; ?>
-				
-				<?php //require_once VIEW_HANDLER; ?>
-
-        <?php //require_once 'modules/footer.php'; ?>
 	</body>
-
 </html>
