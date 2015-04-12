@@ -38,6 +38,8 @@ $(document).ready(function() {
             <th>Start Date</th>
             <th>Active</th>
             <th>Locked</th>
+            <th>Current Entrants</th>
+            <th>Max Entrants</th>
             <th>&nbsp;</th>
         </thead>
         <tbody>
@@ -59,6 +61,8 @@ $(document).ready(function() {
                             <span class="label label-default">Unlocked</span>
                         <?php endif; ?>
                     </td>
+                    <td><?php echo $MATCH->current_entrants; ?></td>
+                    <td><?php echo $MATCH->max_entrants; ?></td>
                     <td><a class="btn btn-danger delete" href="/admin/match/remove/<?php echo $MATCH->ID; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
