@@ -55,6 +55,11 @@
                   </a>
                 </li>
                 <?php endif; ?>
+                <li class="pull-left">
+                  <a href='mailto:support@beastfantasysports.com'>
+                    <span>Support</span>
+                  </a>
+                </li>
               </ul>
             </div>
         </nav>
