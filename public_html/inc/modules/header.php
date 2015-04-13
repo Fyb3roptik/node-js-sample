@@ -30,7 +30,7 @@
                 <li><a data-scroll-nav="4" title="">Rules</a></li>
                 <li><a href="/terms" data-toggle="modal" data-scroll-nav="5" data-target="#termsModal">Terms</a></li>
                 <li><a href="mailto:support@beastfantasysports.com" data-scroll-nav="6" title="">Contact</a></li>
-                <li class="download-btn"><a href="/register" data-scroll-nav="3" title="">Play Now <i class="icon-baseball"></i></a></li>
+                <li class="download-btn"><a href="/register" title="">Play Now <i class="icon-baseball"></i></a></li>
              </ul>                                   
           </nav>
        </div>
