@@ -81,23 +81,15 @@ class Customer extends User {
 	public function getSessionToken() {
 		return parent::getToken();
 	}
-
-	/**
-	 * Returns a customer's wishlists.
-	 */
-	public function getWishlists() {
-		$W = new Wishlist();
-		return $W->find('customer_id', $this->_ID, 'name');
-	}
 	
-	public function getStageName() {
-		$stage_name = $this->name;
-		
-		if($this->stage_name != "") {
-			$stage_name = $this->stage_name;
-		}
-		
-		return $stage_name;
+	public function getTeamHistory() {
+  	$history = array();
+  	
+  	$sql = "SELECT * FROM teams WHERE customer_id = '".$this->ID."' AND (inning_data != '' && inning_data != 'Tjs=') ORDER BY match_id DESC";
+  	$history = db_arr($sql);
+  	
+  	return $history;
+  	
 	}
 
 	/**

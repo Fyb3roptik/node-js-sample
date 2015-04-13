@@ -406,6 +406,24 @@ class Team_Controller extends Controller {
     $this->_setView($V);
 	}
 	
+	public function history() {
+  	
+  	$this->_config(true);
+    $MS = new Message_Stack();
+    
+    $V = new View('view_history.php');
+    
+    $HISTORY = $this->_user->getTeamHistory();
+    
+  	$LAYOUT_TITLE = "Beast Franchise | Team History";
+    $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
+  	
+  	$V->bind('HISTORY', $HISTORY);
+  	$V->bind('CUSTOMER', $this->_user);
+    	
+    $this->_setView($V);
+	}
+	
 	public function find() {
     	$this->_config(true);
     	$V = new View('find_team.php');

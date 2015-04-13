@@ -48,6 +48,13 @@
                     <span>Dashboard</span>
                   </a>
                 </li>
+                <?php if($CUSTOMER->exists()): ?>
+                <li <?php if(strtolower($_SERVER['REQUEST_URI']) == "/team/history"): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
+                  <a href='/team/history'>
+                    <span>My Games</span>
+                  </a>
+                </li>
+                <?php endif; ?>
               </ul>
             </div>
         </nav>
