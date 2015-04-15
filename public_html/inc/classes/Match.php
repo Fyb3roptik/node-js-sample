@@ -236,11 +236,11 @@ class Match extends Object {
     for($i = 0; $i < 20; $i++) {
       $rand = array_rand($MATCH_PRICES);
       
-      if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
+      if($MATCH_PRICES[$rand]->price >= 200) {
         continue;
       }
       
-      if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
+      if($MATCH_PRICES[$rand]->price < 200) {
         $all = key($GAME_TIMES['all']);
         if($all > time()) {
           $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $all, "type" => "all", "teams" => $teams['all']);
@@ -254,15 +254,20 @@ class Match extends Object {
         for($i = 0; $i < 10; $i++) {
           $rand = array_rand($MATCH_PRICES);
           
-          if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
+          if($MATCH_PRICES[$rand]->price >= 200) {
             continue;
           }
           
-          if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
+          if($MATCH_PRICES[$rand]->price < 200) {
             $early = key($GAME_TIMES['early']);
             if($early > time()) {
               $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $early, "type" => "early", "teams" => $teams['early']);
             }
+          }
+          
+          if($i >= 9 && count($matches) < 10) {
+            $i = 0;
+            continue;
           }
         }
       }
@@ -272,15 +277,20 @@ class Match extends Object {
         for($i = 0; $i < 10; $i++) {
           $rand = array_rand($MATCH_PRICES);
           
-          if($MATCH_PRICES[$rand]->price == 420 && array_key_exists(420, $matches)) {
+          if($MATCH_PRICES[$rand]->price >= 200) {
             continue;
           }
           
-          if(($MATCH_PRICES[$rand]->price == 420 && !array_key_exists(420, $matches)) || $MATCH_PRICES[$rand]->price != 420) {
+          if($MATCH_PRICES[$rand]->price < 200) {
             $late = key($GAME_TIMES['late']);
             if($late > time()) {
               $matches[] = array('match_price' => $MATCH_PRICES[$rand], "start_time" => $late, "type" => "late", "teams" => $teams['late']);
             }
+          }
+          
+          if($i >= 9 && count($matches) < 10) {
+            $i = 0;
+            continue;
           }
         }
       }
