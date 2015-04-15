@@ -326,6 +326,8 @@ class Team_Controller extends Controller {
     
     $LINEUP = $cache->get('lineups');
     
+    $WEATHER = $cache->get('weather_forecast');
+    
     if($MATCH->locked == 0) {
       $CA = Player::getCA($MATCH->match_teams);
       $FB = Player::getFB($MATCH->match_teams);
@@ -379,6 +381,7 @@ class Team_Controller extends Controller {
 		$V->bind('SCORE', $SCORE);
 		$V->bind('total', $total);
 		$V->bind('AT_BAT', $AT_BAT);
+		$V->bind('WEATHER', $WEATHER);
 		
 		$V->bind('GAME_TIMES', $GAME_TIMES);
 

@@ -27,7 +27,7 @@
              <ul class="collapse navbar-collapse navbar-ex1-collapse pull-left">
                 <li><a href="/register" title="">Register</a></li>
                 <li><a href="/login" title="">Login</a></li>
-                <li><a href="#" title="">Rules</a></li>
+                <li><a href="/img/BeastFranchiseRules.pdf" title="">Rules</a></li>
                 <li><a href="/terms" data-toggle="modal" data-target="#termsModal">Terms</a></li>
                 <li><a href="mailto:support@beastfantasysports.com" title="">Contact</a></li>
                 <li class="download-btn"><a href="/register" title="">Play Now <i class="icon-baseball"></i></a></li>

@@ -100,6 +100,10 @@ body {
     opacity: 0.6;
 }
 
+.injured {
+  cursor: pointer;
+}
+
 .filters {
   margin: -1% 5%;
 }
@@ -189,7 +193,7 @@ body {
 
 span.batting_num {
   display: inline-block;
-  padding: 15px 26px;
+  padding: 15px 20px;
   font-size: 44px;
 }
 

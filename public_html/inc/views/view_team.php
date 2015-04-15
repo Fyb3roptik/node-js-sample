@@ -1,5 +1,6 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.3.0/moment-timezone.min.js"></script>
+<script type="text/javascript" src="/js/skycons.js"></script>
 <script>
 $(document).ready(function() {    
     var start_time = moment("<?php echo date("m/d/Y g:i A T", $MATCH->start_date); ?>").format("LLL");
@@ -74,6 +75,26 @@ $(document).ready(function() {
         }
       });
     });
+    
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    
+    var icons = new Skycons({"color":"#555a92"}),
+        list  = [
+          "clear-day", "clear-night", "partly-cloudy-day",
+          "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+          "fog"
+        ],
+        i;
+    for(i = list.length; i--; ) {
+        var weatherType = list[i],
+            elements = document.getElementsByClassName( weatherType );
+        for (e = elements.length; e--;){
+            icons.set( elements[e], weatherType );
+        }
+    }
+    icons.play();
 });
 </script>
 <style>
@@ -111,6 +132,7 @@ $(document).ready(function() {
               
               if($key == "home_team" || $key == "away_team") {
                 $players_team = $GAMES_INFO[$games_keys[$g]][$key . "_abbr"];
+                $weather_team = $GAMES_INFO[$games_keys[$g]]['home_team'];
                 
                 if($key == "home_team") {
                     $is_home = true;
@@ -133,7 +155,7 @@ $(document).ready(function() {
                   $confirmed = true; 
                 }
   
-                $players_arr[$position] = array("player_id" => $P->ID, "mlb_id" => $P->mlb_id, "players_team" => $players_team, "is_home" => $is_home, "sps_team" => $sps_team, "sps" => $sps, "sp_team" => $sp_team, "sp" => $starting_pitcher, "player_name" => $player_name, "confirmed" => $confirmed);
+                $players_arr[$position] = array("player_id" => $P->ID, "mlb_id" => $P->mlb_id, "players_team" => $players_team, "is_home" => $is_home, "sps_team" => $sps_team, "sps" => $sps, "sp_team" => $sp_team, "sp" => $starting_pitcher, "player_name" => $player_name, "confirmed" => $confirmed, "weather_team" => $weather_team);
                                 
                 continue 2;
               }
@@ -175,6 +197,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -211,6 +234,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -247,6 +271,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -283,6 +308,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -319,6 +345,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -355,6 +382,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -392,6 +420,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -428,6 +457,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -464,6 +494,7 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
+                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -512,6 +543,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($Catcher->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -540,7 +572,7 @@ $(document).ready(function() {
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $Catcher->first_name . " " . $Catcher->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $Catcher->first_name . " " . $Catcher->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $Catcher->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($Catcher->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $Catcher->injury_info; ?>"><?php echo $Catcher->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -550,6 +582,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Catcher->ID; ?>-CA" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -564,6 +597,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($First->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -592,7 +626,7 @@ $(document).ready(function() {
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $First->first_name . " " . $First->last_name; ?>&nbsp;<?php if(isset($confirmed) && $confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $First->first_name . " " . $First->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $First->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($First->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $First->injury_info; ?>"><?php echo $First->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -602,6 +636,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $First->ID; ?>-FB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -616,6 +651,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($Second->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -638,13 +674,13 @@ $(document).ready(function() {
                             <?php $confirmed = false; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>
-                          <div class="well well-sm select-player-<?php echo $Second->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
+                          <div class="well well-sm select-player-<?php echo $Second->ID; ?> <?php if(in_array($Second->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
                               <img width="48" height="100%" src="/img/player-image/<?php echo $Second->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $Second->first_name . " " . $Second->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $Second->first_name . " " . $Second->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $Second->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($Second->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $Second->injury_info; ?>"><?php echo $Second->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -654,6 +690,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Second->ID; ?>-SB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -668,6 +705,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($Third->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -690,13 +728,13 @@ $(document).ready(function() {
                             <?php $confirmed = false; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>
-                          <div class="well well-sm select-player-<?php echo $Third->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
+                          <div class="well well-sm select-player-<?php echo $Third->ID; ?> <?php if(in_array($Third->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
                               <img width="48" height="100%" src="/img/player-image/<?php echo $Third->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $Third->first_name . " " . $Third->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $Third->first_name . " " . $Third->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $Third->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($Third->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $Third->injury_info; ?>"><?php echo $Third->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -706,6 +744,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Third->ID; ?>-TB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -720,6 +759,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($Shortstop->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -742,13 +782,13 @@ $(document).ready(function() {
                             <?php $confirmed = false; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>
-                          <div class="well well-sm select-player-<?php echo $Shortstop->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
+                          <div class="well well-sm select-player-<?php echo $Shortstop->ID; ?> <?php if(in_array($Shortstop->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
                               <img width="48" height="100%" src="/img/player-image/<?php echo $Shortstop->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $Shortstop->first_name . " " . $Shortstop->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $Shortstop->first_name . " " . $Shortstop->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $Shortstop->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($Shortstop->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $Shortstop->injury_info; ?>"><?php echo $Shortstop->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -758,6 +798,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Shortstop->ID; ?>-SS" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -772,6 +813,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($Outfield1->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -794,13 +836,13 @@ $(document).ready(function() {
                             <?php $confirmed = false; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>
-                          <div class="well well-sm select-player-<?php echo $Outfield1->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
+                          <div class="well well-sm select-player-<?php echo $Outfield1->ID; ?> <?php if(in_array($Outfield1->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
                               <img width="48" height="100%" src="/img/player-image/<?php echo $Outfield1->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $Outfield1->first_name . " " . $Outfield1->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $Outfield1->first_name . " " . $Outfield1->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $Outfield1->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($Outfield1->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $Outfield1->injury_info; ?>"><?php echo $Outfield1->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -810,6 +852,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Outfield1->ID; ?>-OF1" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -824,6 +867,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($Outfield2->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -846,13 +890,13 @@ $(document).ready(function() {
                             <?php $confirmed = false; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>
-                          <div class="well well-sm select-player-<?php echo $Outfield2->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
+                          <div class="well well-sm select-player-<?php echo $Outfield2->ID; ?> <?php if(in_array($Outfield2->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
                               <img width="48" height="100%" src="/img/player-image/<?php echo $Outfield2->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $Outfield2->first_name . " " . $Outfield2->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $Outfield2->first_name . " " . $Outfield2->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $Outfield2->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($Outfield2->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $Outfield2->injury_info; ?>"><?php echo $Outfield2->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -862,6 +906,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Outfield2->ID; ?>-OF2" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -876,6 +921,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($Outfield3->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -898,13 +944,13 @@ $(document).ready(function() {
                             <?php $confirmed = false; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>
-                          <div class="well well-sm select-player-<?php echo $Outfield3->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
+                          <div class="well well-sm select-player-<?php echo $Outfield3->ID; ?> <?php if(in_array($Outfield3->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
                               <img width="48" height="100%" src="/img/player-image/<?php echo $Outfield3->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $Outfield3->first_name . " " . $Outfield3->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $Outfield3->first_name . " " . $Outfield3->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $Outfield3->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($Outfield3->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $Outfield3->injury_info; ?>"><?php echo $Outfield3->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -914,6 +960,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Outfield3->ID; ?>-OF3" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -928,6 +975,7 @@ $(document).ready(function() {
                             <?php
                               $key = array_search($DesignatedHitter->player_team, $info);
                               $players_team = $GAMES[$game][$key . "_abbr"];
+                              $weather_team = $GAMES[$game]['home_team'];
                               
                               if($key == "home_team") {
                                   $is_home = true;
@@ -950,13 +998,13 @@ $(document).ready(function() {
                             <?php $confirmed = false; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>
-                          <div class="well well-sm select-player-<?php echo $DesignatedHitter->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
+                          <div class="well well-sm select-player-<?php echo $DesignatedHitter->ID; ?> <?php if(in_array($DesignatedHitter->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
                               <img width="48" height="100%" src="/img/player-image/<?php echo $DesignatedHitter->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
-                                <?php echo $DesignatedHitter->first_name . " " . $DesignatedHitter->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
+                                <?php echo $DesignatedHitter->first_name . " " . $DesignatedHitter->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php elseif($confirmed != true && $DesignatedHitter->injury_status != ''): ?><span class="label label-danger">Injured</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?> <?php if($DesignatedHitter->injury_status != ''): ?><span class="label label-warning injured" data-toggle="tooltip" data-placement="right" title="<?php echo $DesignatedHitter->injury_info; ?>"><?php echo $DesignatedHitter->injury_status; ?></span><?php endif; ?>
                               </div>
                               <div>
                                 <?php if($is_home == true): ?>
@@ -966,6 +1014,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
+                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $DesignatedHitter->ID; ?>-DH" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -1008,6 +1057,7 @@ $(document).ready(function() {
                                         <?php
                                           $key = array_search($P->player_team, $info);
                                           $players_team = $GAMES[$game][$key . "_abbr"];
+                                          $weather_team = $GAMES[$game]['home_team'];
                                           
                                           if($key == "home_team") {
                                               $is_home = true;
@@ -1044,6 +1094,7 @@ $(document).ready(function() {
                                           <?php else: ?>
                                             <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                           <?php endif; ?>
+                                          &nbsp;<?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong>
                                         </div>
                                         <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
                                       </div>
