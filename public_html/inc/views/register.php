@@ -3,7 +3,7 @@
 <div class="container">
   <section id="hero" class="hero-section hero-layout-simple hero-fullscreen section section-dark">
     <div class="row">
-        <div class="col-md-12 col-sm-10">
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Beast Franchise Registration</h3>
@@ -32,8 +32,8 @@
                       <input type="password" class="form-control" id="new_password_confirm" name="new_password_confirm" placeholder="Confirm Password">
                   </div>
                   <div class="checkbox">
-                      <label for="acknowledge">
-                          <input type="checkbox" id="acknowledge" name="acknowledge" value="agreed" />
+                      <label>
+                          <input type="checkbox" name="acknowledge" value="agreed" />
                           I acknowledge that I do not live any of the following states.  Arizona, Illinois, Iowa, Louisiana, Maryland, Montana, North Dakota, Puerto Rico, Tennesse, Vermont, and Washington State.  Furthermore, I understand that I cannot participate in a "fee" based Beast Franchise match if I do live in one of the states listed here.  However, I understand I can play in "Free" based Beast Franchise matches, but cannot recieve any type of prizes. By checking this box I also agree to the <a href="/terms" data-toggle="modal" data-target="#termsModal">terms</a>
                       </label>
                   </div>

@@ -173,7 +173,8 @@ $(document).ready(function() {
                 <div class="box-content">
                     <form role="form" action="/team/processMyTeamPlayers" method="post">
                         <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
-                        
+                        <button class="btn btn-success btn-block">Save</button>
+                        <br />
                         <div class="form-group">
                             <?php if(!empty($players_arr)): ?>
                               <?php foreach($players_arr as $position => $player): ?>
@@ -197,7 +198,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -234,7 +234,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -271,7 +270,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -308,7 +306,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -345,7 +342,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -382,7 +378,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -420,7 +415,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -457,7 +451,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -494,7 +487,6 @@ $(document).ready(function() {
                                           <?php endif; ?>
                                         </div>
                                         <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                        <div><canvas class="<?php echo $WEATHER[$player['weather_team']]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$player['weather_team']]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$player['weather_team']]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$player['weather_team']]['precipProbability'] * 100)); ?>%</strong></div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </div>
@@ -568,7 +560,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $Catcher->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $Catcher->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $Catcher->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -582,7 +574,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Catcher->ID; ?>-CA" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -622,7 +614,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $First->ID; ?> <?php if(in_array($Catcher->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $First->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $First->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -636,7 +628,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $First->ID; ?>-FB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -676,7 +668,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $Second->ID; ?> <?php if(in_array($Second->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $Second->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $Second->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -690,7 +682,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Second->ID; ?>-SB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -730,7 +722,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $Third->ID; ?> <?php if(in_array($Third->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $Third->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $Third->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -744,7 +736,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Third->ID; ?>-TB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -784,7 +776,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $Shortstop->ID; ?> <?php if(in_array($Shortstop->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $Shortstop->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $Shortstop->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -798,7 +790,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Shortstop->ID; ?>-SS" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -838,7 +830,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $Outfield1->ID; ?> <?php if(in_array($Outfield1->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $Outfield1->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $Outfield1->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -852,7 +844,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Outfield1->ID; ?>-OF1" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -892,7 +884,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $Outfield2->ID; ?> <?php if(in_array($Outfield2->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $Outfield2->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $Outfield2->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -906,7 +898,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Outfield2->ID; ?>-OF2" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -946,7 +938,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $Outfield3->ID; ?> <?php if(in_array($Outfield3->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $Outfield3->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $Outfield3->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -960,7 +952,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $Outfield3->ID; ?>-OF3" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -1000,7 +992,7 @@ $(document).ready(function() {
                         <?php endforeach; ?>
                           <div class="well well-sm select-player-<?php echo $DesignatedHitter->ID; ?> <?php if(in_array($DesignatedHitter->ID, $SELECTED_PLAYERS_LIST)): ?>hide<?php endif; ?>">
                             <div class="pull-left">
-                              <img width="48" height="100%" src="/img/player-image/<?php echo $DesignatedHitter->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
+                              <img width="72" height="100%" src="/img/player-image/<?php echo $DesignatedHitter->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="player-info pull-left">
                               <div class="playerSelect-name">
@@ -1014,7 +1006,7 @@ $(document).ready(function() {
                                 <?php endif; ?>
                               </div>
                               <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><strong><span class="text-warning">Weather Forecast:</span></strong> <canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                             </div>
                             <button id="<?php echo $DesignatedHitter->ID; ?>-DH" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
@@ -1028,7 +1020,7 @@ $(document).ready(function() {
         </div>
         
         
-        <div class="col-lg-4 <?php if(empty($SELECTED_PLAYERS)): ?>hide<?php endif; ?>">
+        <div class="col-lg-4 col-md-4 col-sm-4 <?php if(empty($SELECTED_PLAYERS)): ?>hide<?php endif; ?>">
             <div class="box blue">
                 <div class="box-header contrast-background">
                     <h2>Batting Order</h2>
@@ -1036,8 +1028,10 @@ $(document).ready(function() {
                 <div class="box-content">
                     
                     <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
+                    <button class="btn btn-success btn-block" id="saveBattingOrder">Save</button>
+                    <br />
                     <div class="form-group">
-                        <div class="pull-left col-lg-1 batting-order-numbers">
+                        <div class="pull-left col-lg-1 col-md-1 col-sm-1 batting-order-numbers">
                             <span class="label label-info batting_num">1</span>
                             <span class="label label-info batting_num">2</span>
                             <span class="label label-info batting_num">3</span>
@@ -1048,7 +1042,7 @@ $(document).ready(function() {
                             <span class="label label-info batting_num">8</span>
                             <span class="label label-info batting_num">9</span>
                         </div>
-                        <div class="col-lg-11">
+                        <div class="col-lg-11 col-md-11 col-sm-11">
                             <ul id="sortable1" class="droptrue pull-left batting-order-sort">
                                 <?php foreach($SELECTED_PLAYERS as $k => $SP): ?>
                                     <?php $P = new Player($SP['player_id']); ?>
@@ -1094,9 +1088,7 @@ $(document).ready(function() {
                                           <?php else: ?>
                                             <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                           <?php endif; ?>
-                                          &nbsp;<?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong>
                                         </div>
-                                        <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
                                       </div>
                                       <div class="clearfix"></div>
                                     </li>

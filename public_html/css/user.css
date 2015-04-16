@@ -247,10 +247,6 @@ span.batting_num:nth-child(9) {
   margin: 7px 0 !important;
 }
 
-#player_select > .tab-pane > .well-sm {
-  width: 99% !important;
-}
-
 .well {
   border: 1px solid #555A92 !important;
 }
@@ -631,10 +627,6 @@ table.table-horizontal tbody td.empty {
   margin-top: 10px;
 }
 
-.player-info {
-  margin: 0 0 0 8%;
-}
-
 .playerSelect-name {
   font-weight: bold;
 }
@@ -647,7 +639,38 @@ table.table-horizontal tbody td.empty {
 /* No media query since this is the default in Bootstrap */
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) { ... }
+@media (min-width: 768px) { 
+  .nav-tabs > li > a {
+    min-width: 0;
+    text-align: center;
+    border: 1px solid #555A92 !important;
+    border-bottom: none !important;
+    border-radius: 5px 5px 0 0 !important;
+    color: #555A92;
+  }  
+  
+  #player_select > .tab-pane > .well-sm {
+    width: 99% !important;
+  }
+  
+  .player-info {
+    margin: 0 0 0 2%;
+  }
+  
+  .batting-sort-item .player-info {
+    width: 77%;
+  }
+  
+  ul.batting-order-sort {
+    margin-left: 20px !important;
+    padding: 3px 5px !important;
+  }
+  
+  .box-content {
+    max-height: 400px;
+    overflow: scroll;
+  }
+}
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) { ... }
@@ -666,5 +689,34 @@ table.table-horizontal tbody td.empty {
     .field-margin {
         margin: 0 !important;
     }
+}
+
+@media (min-width: 1600px) {
+  .nav-tabs > li > a {
+    min-width: 60px;
+    text-align: center;
+    border: 1px solid #555A92 !important;
+    border-bottom: none !important;
+    border-radius: 5px 5px 0 0 !important;
+    color: #555A92;
+  }
+  
+  #player_select > .tab-pane > .well-sm {
+    width: 99% !important;
+  }
+  
+  .player-info {
+    margin: 0 0 0 8%;
+  }
+  
+  ul.batting-order-sort {
+    margin-left: 20px;
+    padding: 3px 5px;
+  }
+  
+  .box-content {
+    max-height: 600px;
+    overflow: scroll;
+  }
 }
 
