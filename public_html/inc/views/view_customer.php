@@ -86,7 +86,7 @@
                                                 <a href="/match/decline" class="btn btn-danger pull-left decline"><i class="fa fa-times-circle"></i> DECLINE</a>
                                                 <a href="/team/view/<?php echo $TEAM->ID; ?>" class="btn btn-info pull-left lineup hide"><i class="fa fa-list"></i> SET YOUR LINEUP</a>
                                             </td>
-                                        <?php elseif($status == "Accepted" && $myStatus == 1): ?>
+                                        <?php elseif(($status == "Accepted" && $myStatus == 1) || ($status == '')): ?>
                                             <td>
                                                 <?php if($M->locked == 1): ?>
                                                   <a href="/team/view/<?php echo $TEAM->ID; ?>" class="btn btn-info pull-left lineup"><i class="fa fa-gamepad"></i> VIEW GAME</a>

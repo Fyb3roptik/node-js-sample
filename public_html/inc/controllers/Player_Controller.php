@@ -21,7 +21,7 @@ class Player_Controller extends Controller {
         foreach($query as $player) {
             $PLAYER_LIST[] = new Player($player['player_id']);
         }
-        
+
         $LAYOUT_TITLE = "Beast Franchise | Manage Players";
         $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
         
