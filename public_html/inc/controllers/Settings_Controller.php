@@ -44,7 +44,7 @@ class Settings_Controller extends Controller {
 		$this->_setView($V);
 		$MS = new Message_Stack();
 		
-		$PRICES = Match_Price::getPrices();
+		$PRICES = Match_Price::getPrices(false);
 		$V->bind('PRICES', $PRICES);
 		
 		$LAYOUT_TITLE = "Beast Franchise | Manage Match Prices";
