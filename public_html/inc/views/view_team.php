@@ -35,7 +35,7 @@ $(document).ready(function() {
           home = '<strong>' + data['player_team'] + '</strong>@' + data['sp_team'];
         }
         
-        var html = '<div class="pull-left"><img width="48" height="100%" src="/img/player-image/'+data['mlb_id']+'.jpg" class="img-thumbnail img-responsive" /></div><div class="player-info pull-left"><div class="playerSelect-name">'+data['player']+'&nbsp;</div><div>'+confirmed+'</div><div>'+home+'</div><div>Facing: <span class="text-info"><strong>'+data['sp']+'</strong></span></div></div><div class="clearfix"></div>';
+        var html = '<div class="player-info-lineup pull-left"><div class="playerSelect-name">'+data['player']+' - '+home+'</div></div><div class="clearfix"></div>';
         
         var current_player_id = $("#team_CA").val();
 
@@ -98,10 +98,10 @@ $(document).ready(function() {
 });
 </script>
 <style>
-  #sortable1, #sortable2, #sortable3 { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; background: #CCC; padding: 5px; width: 100%;}
+  #sortable1, #sortable2, #sortable3 { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; padding: 5px; width: 100%;}
   #sortable1 li, #sortable2 li, #sortable3 li { margin: 5px; padding: 24px; font-size: 1.2em; width: 94%; cursor: move; color: #9564e2; }
   h2 {color: #333}
-  .ui-state-highlight { height: 4.5em; line-height: 1.2em; background-color: #FFFF89; }
+  .ui-state-highlight { height: 2.5em; line-height: 1.2em; background: #555a92 !important; }
 </style>
 
 <div class='col-xs-12'>
@@ -165,349 +165,6 @@ $(document).ready(function() {
       <?php endfor; ?>
     <?php endif; ?>
     <div class="row">
-        <div class="col-lg-3">
-            <div class="box blue">
-                <div class="box-header contrast-background">
-                    <h2>Lineup</h2>
-                </div>
-                <div class="box-content">
-                    <form role="form" action="/team/processMyTeamPlayers" method="post">
-                        <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
-                        <button class="btn btn-success btn-block">Save</button>
-                        <br />
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "C"): ?>
-                                    <div class="well well-sm" id="CA">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[c]" id="team_CA" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="CA">
-                                  <span class="text-muted">Select Catcher</span>
-                                </div>
-                                <input type="hidden" name="team[c]" id="team_CA" value="" />
-                            <?php endif; ?>
-                        </div>
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "1B"): ?>
-                                    <div class="well well-sm" id="FB">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[1b]" id="team_FB" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="FB">
-                                  <span class="text-muted">Select First Base</span>
-                                </div>
-                                <input type="hidden" name="team[1b]" id="team_FB" value="" />
-                            <?php endif; ?>
-                        </div>
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "2B"): ?>
-                                    <div class="well well-sm" id="SB">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[2b]" id="team_SB" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="SB">
-                                  <span class="text-muted">Select Second Base</span>
-                                </div>
-                                <input type="hidden" name="team[2b]" id="team_SB" value="" />
-                            <?php endif; ?>
-                        </div>
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "3B"): ?>
-                                    <div class="well well-sm" id="TB">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[3b]" id="team_TB" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="TB">
-                                  <span class="text-muted">Select Third Base</span>
-                                </div>
-                                <input type="hidden" name="team[3b]" id="team_TB" value="" />
-                            <?php endif; ?>
-                        </div>
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "SS"): ?>
-                                    <div class="well well-sm" id="SS">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[ss]" id="team_SS" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="SS">
-                                  <span class="text-muted">Select Shortstop</span>
-                                </div>
-                                <input type="hidden" name="team[ss]" id="team_SS" value="" />
-                            <?php endif; ?>
-                        </div>
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "OF1"): ?>
-                                    <div class="well well-sm" id="OF1">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[of1]" id="team_OF1" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="OF1">
-                                  <span class="text-muted">Select Outfield 1</span>
-                                </div>
-                                <input type="hidden" name="team[of1]" id="team_OF1" value="" />
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "OF2"): ?>
-                                    <div class="well well-sm" id="OF2">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[of2]" id="team_OF2" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="OF2">
-                                  <span class="text-muted">Select Outfield 2</span>
-                                </div>
-                                <input type="hidden" name="team[of2]" id="team_OF2" value="" />
-                            <?php endif; ?>
-                        </div>
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "OF3"): ?>
-                                    <div class="well well-sm" id="OF3">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[of3]" id="team_OF3" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="OF3">
-                                  <span class="text-muted">Select Outfield 3</span>
-                                </div>
-                                <input type="hidden" name="team[of3]" id="team_OF3" value="" />
-                            <?php endif; ?>
-                        </div>
-                        <div class="form-group">
-                            <?php if(!empty($players_arr)): ?>
-                              <?php foreach($players_arr as $position => $player): ?>
-                                <?php if($position == "DH"): ?>
-                                    <div class="well well-sm" id="DH">
-                                      <div class="pull-left">
-                                        <img width="72" height="100%" src="/img/player-image/<?php echo $player['mlb_id']; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
-                                      <div class="player-info pull-left">
-                                        <div class="playerSelect-name">
-                                          <?php echo $player['player_name']; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['confirmed'] == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
-                                          <?php if($player['is_home'] == true): ?>
-                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
-                                          <?php else: ?>
-                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
-                                          <?php endif; ?>
-                                        </div>
-                                        <div>Facing: <span class="text-info"><strong><?php echo $player['sp']; ?></strong></span></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </div>
-                                    <input type="hidden" name="team[dh]" id="team_DH" value="<?php echo $player['player_id']; ?>" />
-                                <?php endif; ?>
-                              <?php endforeach; ?>
-                            <?php else: ?>
-                                <div class="well well-sm" id="DH">
-                                  <span class="text-muted">Select DH</span>
-                                </div>
-                                <input type="hidden" name="team[dh]" id="team_DH" value="" />
-                            <?php endif; ?>
-                        </div>
-                        
-                        <button class="btn btn-success btn-block">Save</button>
-                    </form>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
-        
         <div class="col-lg-5">
             <div class="box blue">
                 <div class="box-header contrast-background">
@@ -573,11 +230,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $Catcher->ID; ?>-CA" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -627,11 +284,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $First->ID; ?>-FB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -681,11 +338,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $Second->ID; ?>-SB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -735,11 +392,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $Third->ID; ?>-TB" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -789,11 +446,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $Shortstop->ID; ?>-SS" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -843,11 +500,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $Outfield1->ID; ?>-OF1" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -897,11 +554,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $Outfield2->ID; ?>-OF2" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -951,11 +608,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $Outfield3->ID; ?>-OF3" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -1005,11 +662,11 @@ $(document).ready(function() {
                                   <strong><?php echo $players_team; ?></strong>@<?php echo $sp_team; ?>
                                 <?php endif; ?>
                               </div>
-                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span> on the mound</div>
-                              <div><canvas class="<?php echo $WEATHER[$weather_team]['icon']; ?>" width="20" height="20"></canvas> <?php echo $WEATHER[$weather_team]['summary']; ?> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
+                              <div>Facing <span class="text-info"><strong><?php echo $sp; ?></strong></span></div>
                             </div>
                             <button id="<?php echo $DesignatedHitter->ID; ?>-DH" class="btn btn-info pull-right selectPlayer">Select Player</button>
                             <div class="clearfix"></div>
+                            <div class="weather-container"><span class="weather-summary"><?php echo $WEATHER[$weather_team]['summary']; ?></span> <strong><?php echo sprintf("%.0f", $WEATHER[$weather_team]['temperature']); ?>&deg;F</strong> Chance of Precip <strong><?php echo sprintf("%.0f", ($WEATHER[$weather_team]['precipProbability'] * 100)); ?>%</strong></div>
                           </div>
                         <?php endforeach; ?>
                       </div>
@@ -1019,6 +676,265 @@ $(document).ready(function() {
             </div>
         </div>
         
+        <div class="col-lg-3">
+            <div class="box blue">
+                <div class="box-header contrast-background">
+                    <h2>Lineup</h2>
+                </div>
+                <div class="box-content">
+                    <form role="form" action="/team/processMyTeamPlayers" method="post">
+                        <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
+                        <div class="form-group lineup">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "C"): ?>
+                                    <div class="well well-sm" id="CA">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[c]" id="team_CA" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="CA">
+                                  <span class="text-muted">Select Catcher</span>
+                                </div>
+                                <input type="hidden" name="team[c]" id="team_CA" value="" />
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group lineup">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "1B"): ?>
+                                    <div class="well well-sm" id="FB">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[1b]" id="team_FB" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="FB">
+                                  <span class="text-muted">Select First Base</span>
+                                </div>
+                                <input type="hidden" name="team[1b]" id="team_FB" value="" />
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group lineup">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "2B"): ?>
+                                    <div class="well well-sm" id="SB">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[2b]" id="team_SB" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="SB">
+                                  <span class="text-muted">Select Second Base</span>
+                                </div>
+                                <input type="hidden" name="team[2b]" id="team_SB" value="" />
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group lineup ">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "3B"): ?>
+                                    <div class="well well-sm" id="TB">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[3b]" id="team_TB" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="TB">
+                                  <span class="text-muted">Select Third Base</span>
+                                </div>
+                                <input type="hidden" name="team[3b]" id="team_TB" value="" />
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group lineup">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "SS"): ?>
+                                    <div class="well well-sm" id="SS">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[ss]" id="team_SS" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="SS">
+                                  <span class="text-muted">Select Shortstop</span>
+                                </div>
+                                <input type="hidden" name="team[ss]" id="team_SS" value="" />
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group lineup">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "OF1"): ?>
+                                    <div class="well well-sm" id="OF1">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[of1]" id="team_OF1" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="OF1">
+                                  <span class="text-muted">Select Outfield 1</span>
+                                </div>
+                                <input type="hidden" name="team[of1]" id="team_OF1" value="" />
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="form-group lineup">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "OF2"): ?>
+                                    <div class="well well-sm" id="OF2">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[of2]" id="team_OF2" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="OF2">
+                                  <span class="text-muted">Select Outfield 2</span>
+                                </div>
+                                <input type="hidden" name="team[of2]" id="team_OF2" value="" />
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group lineup">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "OF3"): ?>
+                                    <div class="well well-sm" id="OF3">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[of3]" id="team_OF3" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="OF3">
+                                  <span class="text-muted">Select Outfield 3</span>
+                                </div>
+                                <input type="hidden" name="team[of3]" id="team_OF3" value="" />
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group lineup">
+                            <?php if(!empty($players_arr)): ?>
+                              <?php foreach($players_arr as $position => $player): ?>
+                                <?php if($position == "DH"): ?>
+                                    <div class="well well-sm" id="DH">
+                                      <div class="player-info-lineup pull-left">
+                                        <div class="playerSelect-name">
+                                          <?php echo $player['player_name']; ?> - 
+                                          <?php if($player['is_home'] == true): ?>
+                                            <?php echo $player['sp_team']; ?>@<strong><?php echo $player['players_team']; ?></strong>
+                                          <?php else: ?>
+                                            <strong><?php echo $player['players_team']; ?></strong>@<?php echo $player['sp_team']; ?>
+                                          <?php endif; ?>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <input type="hidden" name="team[dh]" id="team_DH" value="<?php echo $player['player_id']; ?>" />
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="well well-sm" id="DH">
+                                  <span class="text-muted">Select DH</span>
+                                </div>
+                                <input type="hidden" name="team[dh]" id="team_DH" value="" />
+                            <?php endif; ?>
+                        </div>
+                        
+                        <button class="btn btn-success btn-block">Save</button>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
         
         <div class="col-lg-4 col-md-4 col-sm-4 <?php if(empty($SELECTED_PLAYERS)): ?>hide<?php endif; ?>">
             <div class="box blue">
@@ -1028,8 +944,6 @@ $(document).ready(function() {
                 <div class="box-content">
                     
                     <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
-                    <button class="btn btn-success btn-block" id="saveBattingOrder">Save</button>
-                    <br />
                     <div class="form-group">
                         <div class="pull-left col-lg-1 col-md-1 col-sm-1 batting-order-numbers">
                             <span class="label label-info batting_num">1</span>
@@ -1075,14 +989,9 @@ $(document).ready(function() {
                                       <?php endif; ?>
                                     <?php endforeach; ?>
                                     <li class="ui-state-default batting-sort-item" id="<?php echo $SP['teams_lineup_id']; ?>">
-                                      <div class="pull-left">
-                                        <img width="60" height="100%" src="/img/player-image/<?php echo $P->mlb_id; ?>.jpg" class="img-thumbnail img-responsive" />
-                                      </div>
                                       <div class="player-info pull-left">
                                         <div class="playerSelect-name">
-                                          <?php echo $P->first_name . " " . $P->last_name; ?>&nbsp;<?php if($confirmed == true): ?><span class="label label-success">Confirmed Starter</span><?php else: ?><span class="label label-danger">Unconfirmed Starter</span><?php endif; ?>
-                                        </div>
-                                        <div>
+                                          <?php echo $P->first_name . " " . $P->last_name; ?> - 
                                           <?php if($is_home == true): ?>
                                             <?php echo $sp_team; ?>@<strong><?php echo $players_team; ?></strong>
                                           <?php else: ?>

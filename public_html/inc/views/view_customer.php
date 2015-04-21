@@ -1,7 +1,7 @@
 <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script>
 
-<div class='col-md-8 col-sm-12 col-xs-12'>    
+<div class='col-lg-8 col-md-8 col-sm-8 col-xs-12'>    
     <div class='row'>
         <?php if($C->ID == $CUSTOMER->ID): ?>
             <?php if($Season_Started == true || SITE_DEV == 1): ?>
@@ -10,9 +10,9 @@
                         <div class="box-header purple-background">
                             <div class="title"><i class="fa fa-gamepad"></i> MATCHES</div>
                         </div>
-                        <div class="box-content">
+                        <div class="box-content table-responsive">
                             <?php if(!empty($MATCHES)): ?>
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-hover table-bordered table-condensed">
                                 <thead>
                                     <th>Match Name</th>
                                     <th>Status</th>
@@ -81,58 +81,60 @@
                             
                             <div class="clearfix"></div>
                             
-                            <table id="matches" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                              <thead>
-                                  <tr>
-                                      <th></th>
-                                      <th>MODE</th>
-                                      <th>PRICE</th>
-                                      <th>START TIME</th>
-                                      <th>5K BEAST SLAM</th>
-                                      <th>PRIZE</th>
-                                      <th>TYPE</th>
-                                      <th>GAMES</th>
-                                  </tr>
-                              </thead>
-                       
-                              <tfoot>
-                                  <tr>
-                                      <th></th>
-                                      <th>MODE</th>
-                                      <th>PRICE</th>
-                                      <th>START TIME</th>
-                                      <th>5K BEAST SLAM</th>
-                                      <th>PRIZE</th>
-                                      <th>TYPE</th>
-                                      <th>GAMES</th>
-                                  </tr>
-                              </tfoot>
-                       
-                              <tbody>
-                                <?php foreach($LOBBY as $match): ?>
-                                  <tr>
-                                    <td><a href="/match/createMatch/<?php echo $match['match_price']->ID;?>-<?php echo $match['start_time']; ?>-<?php echo $match['type']; ?>" class="btn btn-success join-match">Join Match</a></td>
-                                    <td>H-2-H</td>
-                                    <td><?php echo money_format("$%i", $match['match_price']->price); ?></td>
-                                    <td class="match-start-time"><?php echo date("h:i A", $match['start_time']); ?></td>
-                                    <td><?php if($match['match_price']->promotion_eligible == 1): ?><span class="label label-info">5K BEAST SLAM ELIGIBLE</span><?php else: ?><span class="label label-danger">NOT ELIGIBLE</span><?php endif; ?></td>
-                                    <td><?php echo money_format("$%i", $match['match_price']->prize); ?></td>
-                                    <td>
-                                      <?php if($match['type'] == "all"): ?>
-                                        <span class="label label-info">ALL GAMES</span>
-                                      <?php elseif($match['type'] == "early"): ?>
-                                        <span class="label label-info">EARLY ONLY GAMES</span>
-                                      <?php elseif($match['type'] == "late"): ?>
-                                        <span class="label label-info">LATE ONLY GAMES</span>
-                                      <?php endif; ?>
-                                    </td>
-                                    <td><?php foreach($match['teams'] as $key => $team): ?><span class="<?php echo (++$count%2 ? "text-primary" : "text-danger"); ?>"><?php echo (++$count2%2 ? $team : '<span class="text-info">@</span>' . $team); ?></span><?php echo (++$count3%2 ? "" : ", "); ?><?php endforeach; ?></td>
-                                  </tr>
-                                  <input type="hidden" class="match_price_id" value="<?php echo $match['match_price']->ID; ?>" />
-                                  <input type="hidden" class="start_time" value="<?php echo $match['start_time']; ?>" />
-                                <?php endforeach; ?>
-                              </tbody>
-                            </table>
+                            <div class="table-responsive">
+                              <table id="matches" class="table table-striped table-bordered table-condensed" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>MODE</th>
+                                        <th>PRICE</th>
+                                        <th>START TIME</th>
+                                        <th>5K BEAST SLAM</th>
+                                        <th>PRIZE</th>
+                                        <th>TYPE</th>
+                                        <th>GAMES</th>
+                                    </tr>
+                                </thead>
+                         
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>MODE</th>
+                                        <th>PRICE</th>
+                                        <th>START TIME</th>
+                                        <th>5K BEAST SLAM</th>
+                                        <th>PRIZE</th>
+                                        <th>TYPE</th>
+                                        <th>GAMES</th>
+                                    </tr>
+                                </tfoot>
+                         
+                                <tbody>
+                                  <?php foreach($LOBBY as $match): ?>
+                                    <tr>
+                                      <td><a href="/match/createMatch/<?php echo $match['match_price']->ID;?>-<?php echo $match['start_time']; ?>-<?php echo $match['type']; ?>" class="btn btn-success join-match">Join Match</a></td>
+                                      <td>H-2-H</td>
+                                      <td><?php echo money_format("$%i", $match['match_price']->price); ?></td>
+                                      <td class="match-start-time"><?php echo date("h:i A", $match['start_time']); ?></td>
+                                      <td><?php if($match['match_price']->promotion_eligible == 1): ?><span class="label label-info">5K BEAST SLAM ELIGIBLE</span><?php else: ?><span class="label label-danger">NOT ELIGIBLE</span><?php endif; ?></td>
+                                      <td><?php echo money_format("$%i", $match['match_price']->prize); ?></td>
+                                      <td>
+                                        <?php if($match['type'] == "all"): ?>
+                                          <span class="label label-info">ALL GAMES</span>
+                                        <?php elseif($match['type'] == "early"): ?>
+                                          <span class="label label-info">EARLY ONLY GAMES</span>
+                                        <?php elseif($match['type'] == "late"): ?>
+                                          <span class="label label-info">LATE ONLY GAMES</span>
+                                        <?php endif; ?>
+                                      </td>
+                                      <td><?php foreach($match['teams'] as $key => $team): ?><span class="<?php echo (++$count%2 ? "text-primary" : "text-danger"); ?>"><?php echo (++$count2%2 ? $team : '<span class="text-info">@</span>' . $team); ?></span><?php echo (++$count3%2 ? "" : " <br />"); ?><?php endforeach; ?></td>
+                                    </tr>
+                                    <input type="hidden" class="match_price_id" value="<?php echo $match['match_price']->ID; ?>" />
+                                    <input type="hidden" class="start_time" value="<?php echo $match['start_time']; ?>" />
+                                  <?php endforeach; ?>
+                                </tbody>
+                              </table>
+                            </div>
                             
                         </div>
                     </div>
@@ -153,7 +155,7 @@
     </div>
 </div>
 
-<div class="col-lg-4 col-md-4 col-sm-5 hidden-xs hidden-sm">
+<div class="col-lg-4 col-md-4 hidden-sm hidden-xs">
    <div class="box bordered-box purple-border">
         <div class="box-header purple-background">
             <div class="title">BEAST CHAT</div>
