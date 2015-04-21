@@ -299,6 +299,22 @@ class Match extends Object {
     return $matches;
 	}
 	
+	public static function getFreerolls() {
+  	$matches = array();
+  	
+  	$Freeroll_ID = Match_Price::getFreerollId();
+  	
+  	$sql = "SELECT match_id FROM matches WHERE match_price_id = '".$Freeroll_ID->ID."' AND active = '1'";
+  	$arr = db_arr($sql);
+  	
+  	foreach($arr as $a) {
+    	$matches[] = new Match($a['match_id']);
+  	}
+  	
+  	return $matches;
+  	
+	}
+	
 	public static function findOpponent(Match_Price $MP, $start_time) {
   	
   	// Find a match

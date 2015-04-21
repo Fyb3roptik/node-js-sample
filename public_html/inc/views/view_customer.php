@@ -11,6 +11,46 @@
                             <div class="title"><i class="fa fa-gamepad"></i> MATCHES</div>
                         </div>
                         <div class="box-content table-responsive">
+                            
+                            <?php if(!empty($FREEROLLS)): ?>
+                            <table class="table table-striped table-bordered table-condensed" cellspacing="0" width="100%">
+                              <thead>
+                                  <tr>
+                                      <th>FREEROLLS</th>
+                                      <th>NAME</th>
+                                      <th>PRICE</th>
+                                      <th>START TIME</th>
+                                      <th>PRIZE</th>
+                                      <th>GAMES</th>
+                                  </tr>
+                              </thead>
+                       
+                              <tfoot>
+                                  <tr>
+                                      <th>FREEROLLS</th>
+                                      <th>NAME</th>
+                                      <th>PRICE</th>
+                                      <th>START TIME</th>
+                                      <th>PRIZE</th>
+                                      <th>GAMES</th>
+                                  </tr>
+                              </tfoot>
+                              <tbody>
+                                <?php foreach($FREEROLLS as $FR): ?>
+                                <?php $FRMP = new Match_Price($FR->match_price_id); ?>
+                                  <tr>
+                                    <td><a href="/match/joinMatch/<?php echo $FR->ID;?>" class="btn btn-success join-match">Join Match</a></td>
+                                    <td><?php echo $FR->name; ?></td>
+                                    <td><?php echo money_format("$%i", $FRMP->price); ?></td>
+                                    <td class="match-start-time"><?php echo date("h:i A", $FR->start_time); ?></td>
+                                    <td><?php echo money_format("$%i", $FRMP->prize); ?></td>
+                                    <td><?php foreach($FR->teams as $key => $team): ?><span class="<?php echo (++$count%2 ? "text-primary" : "text-danger"); ?>"><?php echo (++$count2%2 ? $team : '<span class="text-info">@</span>' . $team); ?></span><?php echo (++$count3%2 ? "" : " <br />"); ?><?php endforeach; ?></td>
+                                  </tr>
+                                <?php endforeach; ?>
+                              </tbody>
+                            </table>
+                            <?php endif; ?>
+                            
                             <?php if(!empty($MATCHES)): ?>
                             <table class="table table-hover table-bordered table-condensed">
                                 <thead>

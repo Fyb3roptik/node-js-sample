@@ -31,13 +31,15 @@ class Match_Controller extends Controller {
 		$this->_configure();
 		$MS = new Message_Stack();
 		$M = new Match();
+		$MATCH_PRICES = Match_Price::getPrices(false);
 		$V = new View('match_form.php');
 		
 		$LAYOUT_TITLE = "Beast Franchise | Add Match";
-        $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
+    $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
 		
 		$V->bind('TITLE', 'Add Match');
 		$V->bind('M', $M);
+		$V->bind('MATCH_PRICES', $MATCH_PRICES);
 		$this->_setView($V);
 		$V->bind('MS', $MS);
 	}
@@ -49,15 +51,17 @@ class Match_Controller extends Controller {
 		$this->_configure();
 		$MS = new Message_Stack();
 		$M = new Match($match_id);
+		$MATCH_PRICES = Match_Price::getPrices(false);
 		$V = new View('match_form.php');
 		
 		$LAYOUT_TITLE = "Beast Franchise | Edit Match";
-        $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
-        
-        $MATCH_TEAMS = explode(",", $M->match_teams);
+    $this->_template->bind('LAYOUT_TITLE', $LAYOUT_TITLE);
+    
+    $MATCH_TEAMS = explode(",", $M->match_teams);
 		
 		$V->bind('TITLE', 'Edit Match');
 		$V->bind('M', $M);
+		$V->bind('MATCH_PRICES', $MATCH_PRICES);
 		$V->bind('MATCH_TEAMS', $MATCH_TEAMS);
 		$this->_setView($V);
 		$V->bind('MS', $MS);

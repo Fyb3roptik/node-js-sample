@@ -120,6 +120,8 @@ class Customer_Controller extends Controller {
     	$cache = new Cache();
     	
       $GAME_TIMES = Match::getGameTimes();
+      
+      $FREEROLLS = Match::getFreerolls();
           	
     	$LOBBY = Match::getLobby();
 
@@ -128,6 +130,7 @@ class Customer_Controller extends Controller {
     	$V->bind('Season_Started', $Season_Started);
       $V->bind('GAME_TIMES', $GAME_TIMES);
       $V->bind('LOBBY', $LOBBY);
+      $V->bind('FREEROLLS', $FREEROLLS);
       
 		$V->bind('C', $C);
 		$V->bind('CUSTOMER', $this->_user);

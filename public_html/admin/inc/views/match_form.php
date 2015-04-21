@@ -46,40 +46,32 @@ $(document).ready(function(){
                 <div class="form-group">
                     <label for="start_time">Start Time</label>
                     <div class="controls">
-    					<div class="input-group col-sm-4 bootstrap-timepicker">
-    						<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-    						<input type="text" class="form-control timepicker" name="start_time" id="timepicker1" value="">
-    					</div>	
-    				</div>
-                </div>
-                <div class="form-group">
-                    <label for="entry_fee">Entry Fee</label>
-                    <div class="controls">
-    					<div class="input-group col-sm-4">
-    						<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-    						<input type="text" class="form-control" name="match[entry_fee]" id="entry_fee" value="<?php echo $M->entry_fee; ?>">
-    					</div>	
-    				</div>
+            					<div class="input-group col-sm-4 bootstrap-timepicker">
+            						<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+            						<input type="text" class="form-control timepicker" name="start_time" id="timepicker1" value="">
+            					</div>	
+            				</div>
                 </div>
                 <div class="form-group">
                     <label for="max_entrants">Max Extrants</label>
                     <div class="controls">
-    					<div class="input-group col-sm-4">
-    						<span class="input-group-addon"><i class="fa fa-users"></i></span>
-    						<input type="text" class="form-control" name="match[max_entrants]" id="max_entrants" value="<?php echo $M->max_entrants; ?>">
-    					</div>	
-    				</div>
+          					<div class="input-group col-sm-4">
+          						<span class="input-group-addon"><i class="fa fa-users"></i></span>
+          						<input type="text" class="form-control" name="match[max_entrants]" id="max_entrants" value="<?php echo $M->max_entrants; ?>">
+          					</div>	
+          				</div>
                 </div>
+                
+                <label>Match Price</label>
+                <select name="match[match_price_id]" class="form-control">
+                  <option>-- SELECT MATCH PRICE --</option>
+                  <?php foreach($MATCH_PRICES as $MP): ?>
+                    <option value="<?php echo $MP->ID; ?>" <?php if($M->match_price_id == $MP->ID): ?>selected<?php endif; ?>><?php if($MP->price == "0"): ?>Freeroll<?php else: ?><?php echo money_format("$%i", $MP->price); ?><?php endif; ?> to win <?php echo money_format("$%i", $MP->prize); ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <br />
                 <?php $TOTAL = $M->getTotalTeams(); ?>
-                <div class="form-group">
-                    <label for="match_fee">Match Fee - <i><strong>$<?php echo $M->getPrizePool($TOTAL); ?></strong></i></label>
-                    <div class="controls">
-    					<div class="input-group col-sm-4">
-        					<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-    						<input type="text" class="form-control" name="match[match_fee]" id="match_fee" value="<?php echo $M->match_fee; ?>">
-    					</div>
-    				</div>
-                </div>
+                
                 <div class="form-group">
                     <label class="control-label">Active Teams for Match</label>
                     <br />

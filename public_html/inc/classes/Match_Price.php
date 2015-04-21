@@ -8,10 +8,16 @@ class Match_Price extends Object {
 	protected $_table_id = 'match_price_id';
 
 
-    public static function getPrices() {
+    public static function getPrices($active_only = true) {
         $prices = array();
         
-        $sql = "SELECT match_price_id FROM match_prices WHERE active = '1' ORDER BY price ASC";
+        if($active_only == true) {
+          $active = "WHERE active = '1'";
+        } else {
+          $active = "";
+        }
+        
+        $sql = "SELECT match_price_id FROM match_prices {$active} ORDER BY price ASC";
         $results = db_arr($sql);
         
         foreach($results as $mp) {
@@ -20,5 +26,20 @@ class Match_Price extends Object {
         
         return $prices;
     }
+    
+    public static function getFreerollId() {
+      $freeroll = array();
+      
+      $sql = "SELECT match_price_id FROM match_prices WHERE price = '0' LIMIT 1";
+      $results = db_arr($sql);
+        
+      foreach($results as $mp) {
+          $freeroll = new Match_Price($mp['match_price_id']);
+      }
+      
+      return $freeroll;
+      
+    }
+
 }
 ?>
