@@ -41,7 +41,7 @@
                                   <tr>
                                     <td><a href="/match/joinMatch/<?php echo $FR->ID;?>" class="btn btn-success join-match">Join Match</a></td>
                                     <td><?php echo $FR->name; ?></td>
-                                    <td><?php echo money_format("$%i", $FRMP->price); ?></td>
+                                    <td>FREEROLL</td>
                                     <td class="match-start-time"><?php echo date("h:i A", $FR->start_time); ?></td>
                                     <td><?php echo money_format("$%i", $FRMP->prize); ?></td>
                                     <td><?php foreach($FR->teams as $key => $team): ?><span class="<?php echo (++$count%2 ? "text-primary" : "text-danger"); ?>"><?php echo (++$count2%2 ? $team : '<span class="text-info">@</span>' . $team); ?></span><?php echo (++$count3%2 ? "" : " <br />"); ?><?php endforeach; ?></td>
