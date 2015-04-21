@@ -106,13 +106,24 @@ $(document).ready(function() {
 
 <div class='col-xs-12'>
 <?php if($MATCH->locked == "0" && $CUSTOMER->ID == $TEAM->customer_id): ?>
+<?php $Opponent = $MATCH->getOpponent($MATCH->ID, $CUSTOMER->ID); ?>
     <div class="row">
-        <div class="col-lg-9">
-            <div id="message" style="display:none;"></div>
-            <div class="alert alert-success alert-dismissable">
+        <div class="col-lg-9 col-md-5 col-sm-5">
+            <div class="col-lg-6 col-md-6 alert alert-success alert-dismissable pull-left">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong class="match_start_time"></strong>
             </div>
+            <div class="col-lg-1 col-md-1 pull-left"></div>
+            <div class="col-lg-4 col-md-4 alert alert-danger alert-dismissable pull-left">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <?php if($Opponent != false): ?>
+                Opponent: <strong><?php echo $Opponent->username; ?></strong>
+              <?php else: ?>
+                Opponent: <strong>No opponent yet</strong>
+              <?php endif; ?>
+            </div>
+            <div class="clearfix"></div>
+            <div id="message" style="display:none;"></div>
         </div>
     </div>
     <?php if(!empty($SELECTED_PLAYERS)): ?>
