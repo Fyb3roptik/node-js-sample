@@ -327,6 +327,11 @@ class Match_Controller extends Controller {
     	
     	$M = new Match($match_id);
     	
+    	$M->current_entrants += 1;
+    	$M->write();
+    	
+    	$M = new Match($match_id);
+    	
     	if($M->locked == 0) {
         	if($M->getTotalTeams() < $M->max_entrants || $M->max_entrants == -1) {
         	    
