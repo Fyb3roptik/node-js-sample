@@ -67,6 +67,7 @@
                                     $myFunds = $CUSTOMER->funds;
                                     $Opponent = $M->getOpponent($M->ID, $CUSTOMER->ID);
                                     $team_id = $M->teamExists($CUSTOMER->ID);
+                                    $MP = new Match_Price($M->match_price_id);
                                     $TEAM = new Team($team_id['team_id']);
                                 ?>                                
                                     <tr class="info">
@@ -96,10 +97,14 @@
                                             </td>
                                         <?php endif; ?>
                                         <td>
-                                          <?php if($Opponent != false): ?>
-                                            <?php echo $Opponent->username; ?>
+                                          <?php if($MP->price == "0"): ?>
+                                            <?php if($M->current_entrants > 0): ?><?php echo $M->current_entrants; ?><?php else: ?>0<?php endif; ?> Opponents
                                           <?php else: ?>
-                                            No opponent yet
+                                            <?php if($Opponent != false): ?>
+                                              <?php echo $Opponent->username; ?>
+                                            <?php else: ?>
+                                              No opponent yet
+                                            <?php endif; ?>
                                           <?php endif; ?>
                                         </td>
                                     </tr>
