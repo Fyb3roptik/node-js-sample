@@ -6,17 +6,16 @@ $cache = new Cache();
 $MATCHES = Match::getActiveMatches(true, false);
 
 foreach($MATCHES as $match) {
-    if($match->entry_fee > 0) {
+    $MP = new Match_Price($match->match_price_id);
+    
+    if($MP->prize > 0) {
         
         //Find the winner
         $winner = Team::getAllTeams($match->ID, true);
-        
-        //Determine Prize Money
-        $prize = (($match->entry_fee * $match->getTotalTeams()) - $match->match_fee) * 100;
 
         //Give em ze money Lebowski
         $C = new Customer($winner[0]->customer_id);
-        $C->funds += $prize;
+        $C->funds += ($MP->prize * 100);
         $C->write();
         
     }
