@@ -1041,44 +1041,9 @@ $(document).ready(function() {
     <div class="row">
         
         <div class="col-lg-4 col-md-3 col-sm-4">
-
-            <div class="col-lg-12">
-              <div class="box bordered-box purple-border">
-                  <div class="box-header purple-background">
-                      <div class="title">LEADERBOARD</div>
-                  </div>
-                  <div class="box-content box-no-padding">
-                      <div class="responsive-table">
-                          <table id="leaderboard" class='data-table table table-bordered table-striped table-hover' style='margin-bottom:0;'>
-                              <thead>
-                                  <tr>
-                                      <th>Place</th>
-                                      <th>User</th>
-                                      <th>Score</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <?php foreach($LEADERBOARD as $k => $T): ?>
-                                  <?php $CUST = new Customer($T->customer_id); ?>
-                                  <?php $CUST_TEAM = new Team(); ?>
-                                      <tr <?php if(($k + 1) == 1): ?>class="success"<?php else: ?>class="danger"<?php endif; ?>>
-                                          <td><?php echo addOrdinalNumberSuffix(($k + 1)); ?></td>
-                                          <td><a href="/team/view/<?php echo $T->ID; ?>"><?php echo $CUST->username; ?></a></td>
-                                          <td><?php echo $T->score; ?></td>
-                                      </tr>
-                                  <?php endforeach; ?>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            
-            <div class="col-lg-12">
-              <div class="field-margin">
-                <img class="svg" src="/img/field.svg" />
-              </div>
-            </div>
+          <div class="field-margin">
+            <img class="svg" src="/img/field.svg" />
+          </div>
         </div>
         
         <div class="col-lg-8 col-md-6 col-sm-8">
@@ -1091,6 +1056,17 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="box-content">
+                  <?php $at_bat_count = 0; foreach($TEAM_LIST as $key => $lineup): ?>
+                    <?php if($lineup['order'] > 0): ?>
+                        <?php $P = new Player($lineup['player_id']); $mlb_id = $P->mlb_id; ?>
+                        
+                        <?php 
+                          if(count($SCORE['scores'][$mlb_id]['at_bat_stat']) > $at_bat_count) {
+                            $at_bat_count = count($SCORE['scores'][$mlb_id]['at_bat_stat']); 
+                          }
+                        ?>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
                     <div class="table-responsive">
                         <table id="box_score" class="table table-bordered-bottom table-striped table-hover score">
                             <thead>
@@ -1099,6 +1075,18 @@ $(document).ready(function() {
                                 <th>2nd At Bat</th>
                                 <th>3rd At Bat</th>
                                 <th>4th At Bat</th>
+                                <?php if($at_bat_count >= 5): ?>
+                                <th>5th At Bat</th>
+                                <?php endif; ?>
+                                <?php if($at_bat_count >= 6): ?>
+                                <th>6th At Bat</th>
+                                <?php endif; ?>
+                                <?php if($at_bat_count >= 7): ?>
+                                <th>7th At Bat</th>
+                                <?php endif; ?>
+                                <?php if($at_bat_count >= 8): ?>
+                                <th>8th At Bat</th>
+                                <?php endif; ?>
                                 <th>Score</th>
                             </thead>
                             <tbody>
@@ -1128,6 +1116,34 @@ $(document).ready(function() {
                                                     <span class="label <?php if(isset($at_bat_stat['third_out']) && $at_bat_stat['third_out'] === true): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat['status']; ?></span><br />
                                                 <?php endforeach; ?>
                                             </td>
+                                            <?php if($at_bat_count >= 5): ?>
+                                            <td>
+                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][5]['status'] as $at_bat_stat): ?>
+                                                    <span class="label <?php if(isset($at_bat_stat['third_out']) && $at_bat_stat['third_out'] === true): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat['status']; ?></span><br />
+                                                <?php endforeach; ?>
+                                            </td>
+                                            <?php endif; ?>
+                                            <?php if($at_bat_count >= 6): ?>
+                                            <td>
+                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][6]['status'] as $at_bat_stat): ?>
+                                                    <span class="label <?php if(isset($at_bat_stat['third_out']) && $at_bat_stat['third_out'] === true): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat['status']; ?></span><br />
+                                                <?php endforeach; ?>
+                                            </td>
+                                            <?php endif; ?>
+                                            <?php if($at_bat_count >= 7): ?>
+                                            <td>
+                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][7]['status'] as $at_bat_stat): ?>
+                                                    <span class="label <?php if(isset($at_bat_stat['third_out']) && $at_bat_stat['third_out'] === true): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat['status']; ?></span><br />
+                                                <?php endforeach; ?>
+                                            </td>
+                                            <?php endif; ?>
+                                            <?php if($at_bat_count >= 8): ?>
+                                            <td>
+                                                <?php foreach($SCORE['scores'][$mlb_id]['at_bat_stat'][8]['status'] as $at_bat_stat): ?>
+                                                    <span class="label <?php if(isset($at_bat_stat['third_out']) && $at_bat_stat['third_out'] === true): ?>label-danger<?php else: ?>label-primary<?php endif; ?>"><?php echo $at_bat_stat['status']; ?></span><br />
+                                                <?php endforeach; ?>
+                                            </td>
+                                            <?php endif; ?>
                                             <td><?php if(isset($SCORE['scores'][$mlb_id]['score'])): ?><?php echo $SCORE['scores'][$mlb_id]['score']; ?><?php else: ?>0<?php endif; ?></td>
                                         </tr>
                                     <?php endif; ?>
@@ -1139,6 +1155,18 @@ $(document).ready(function() {
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <?php if($at_bat_count >= 5): ?>
+                                <th></th>
+                                <?php endif; ?>
+                                <?php if($at_bat_count >= 6): ?>
+                                <th></th>
+                                <?php endif; ?>
+                                <?php if($at_bat_count >= 7): ?>
+                                <th></th>
+                                <?php endif; ?>
+                                <?php if($at_bat_count >= 8): ?>
+                                <th></th>
+                                <?php endif; ?>
                                 <th><?php echo $total; ?></th>
                             </tfoot>
                         </table>
@@ -1165,35 +1193,40 @@ $(document).ready(function() {
     <?php endif; ?>
 
     <div class="row">
-        
-        <div class="col-lg-3 col-md-3 col-sm-3">
-           <div class="box bordered-box purple-border">
-                <div class="box-header purple-background">
-                    <div class="title">LINEUP</div>
-                </div>
-                <div class="box-content">
-                    <div class="responsive-table">
-                        <table class="table table-bordered-bottom table-hover table-striped score">
-                            <?php foreach($TEAM_LIST as $key => $lineup): ?>
-                                <?php if($lineup['order'] > 0): ?>
-                                    <?php $P = new Player($lineup['player_id']); $mlb_id = $P->mlb_id; ?>
-                                    <tr>
-                                        <td><?php echo $lineup['position']; ?></td>
-                                        <td><?php echo $P->first_name . " " . $P->last_name; ?></td>
-                                        <td><?php echo $P->player_team; ?></td>
-                                        <?php foreach($GAME_TIMES as $time => $teams): ?>
-                                          <?php if(in_array($P->player_team, $teams['teams'])): ?><td class="game_start_time"><?php echo $time; ?></td><?php endif; ?>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
-                </div>
-           </div>
+
+        <div class="col-lg-5 col-md-2">
+            <div class="box bordered-box purple-border">
+              <div class="box-header purple-background">
+                  <div class="title">LEADERBOARD</div>
+              </div>
+              <div class="box-content box-no-padding">
+                  <div class="responsive-table">
+                      <table id="leaderboard" class='data-table table table-bordered table-striped table-hover' style='margin-bottom:0;'>
+                          <thead>
+                              <tr>
+                                  <th>Place</th>
+                                  <th>User</th>
+                                  <th>Score</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <?php foreach($LEADERBOARD as $k => $T): ?>
+                              <?php $CUST = new Customer($T->customer_id); ?>
+                              <?php $CUST_TEAM = new Team(); ?>
+                                  <tr <?php if(($k + 1) == 1): ?>class="success"<?php else: ?>class="danger"<?php endif; ?>>
+                                      <td><?php echo addOrdinalNumberSuffix(($k + 1)); ?></td>
+                                      <td><a href="/team/view/<?php echo $T->ID; ?>"><?php echo $CUST->username; ?></a></td>
+                                      <td><?php echo $T->score; ?></td>
+                                  </tr>
+                              <?php endforeach; ?>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
         </div>
         
-        <div class="col-lg-7 col-md-7 col-sm-5 hidden-xs hidden-sm">
+        <div class="col-lg-5 col-md-5 col-sm-5 hidden-xs hidden-sm">
            <div class="box bordered-box purple-border">
                 <div class="box-header purple-background">
                     <div class="title">BEAST CHAT</div>
