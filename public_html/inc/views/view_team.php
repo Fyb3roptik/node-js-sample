@@ -1275,8 +1275,20 @@ $(document).ready(function() {
                                   <td>1</td>
                               </tr>
                               <tr>
+                                  <td>Sac Fly</td>
+                                  <td>1</td>
+                              </tr>
+                              <tr>
                                   <td>Strikeout</td>
                                   <td>-.5</td>
+                              </tr>
+                              <tr>
+                                  <td>Caught Stealing</td>
+                                  <td>-1</td>
+                              </tr>
+                              <tr>
+                                  <td>Double Play</td>
+                                  <td>-1</td>
                               </tr>
                               <tr>
                                   <td>Run</td>
