@@ -8,9 +8,12 @@ db_query($sql);
 
 foreach($response['wsfb_news_injury']['queryResults']['row'] as $player) {
   $P = new Player($player['player_id'], "mlb_id");
-  $P->injury_status = $player['injury_status'];
-  $P->injury_info = $player['injury_update'];
-  $P->write();
+  
+  if($P->exists()) {
+    $P->injury_status = $player['injury_status'];
+    $P->injury_info = $player['injury_update'];
+    $P->write();
+  }
 }
   
 ?>
