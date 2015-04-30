@@ -696,7 +696,7 @@ $(document).ready(function() {
                     <form role="form" action="/team/processMyTeamPlayers" method="post">
                         <input type="hidden" id="team_id" name="team_id" value="<?php echo $TEAM->ID; ?>" />
                         <div class="form-group lineup">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['C'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "C"): ?>
                                     <div class="well well-sm" id="CA">
@@ -723,7 +723,7 @@ $(document).ready(function() {
                             <?php endif; ?>
                         </div>
                         <div class="form-group lineup">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['1B'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "1B"): ?>
                                     <div class="well well-sm" id="FB">
@@ -750,7 +750,7 @@ $(document).ready(function() {
                             <?php endif; ?>
                         </div>
                         <div class="form-group lineup">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['2B'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "2B"): ?>
                                     <div class="well well-sm" id="SB">
@@ -777,7 +777,7 @@ $(document).ready(function() {
                             <?php endif; ?>
                         </div>
                         <div class="form-group lineup ">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['3B'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "3B"): ?>
                                     <div class="well well-sm" id="TB">
@@ -804,7 +804,7 @@ $(document).ready(function() {
                             <?php endif; ?>
                         </div>
                         <div class="form-group lineup">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['SS'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "SS"): ?>
                                     <div class="well well-sm" id="SS">
@@ -831,7 +831,7 @@ $(document).ready(function() {
                             <?php endif; ?>
                         </div>
                         <div class="form-group lineup">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['OF1'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "OF1"): ?>
                                     <div class="well well-sm" id="OF1">
@@ -859,7 +859,7 @@ $(document).ready(function() {
                         </div>
 
                         <div class="form-group lineup">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['OF2'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "OF2"): ?>
                                     <div class="well well-sm" id="OF2">
@@ -886,7 +886,7 @@ $(document).ready(function() {
                             <?php endif; ?>
                         </div>
                         <div class="form-group lineup">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['OF3'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "OF3"): ?>
                                     <div class="well well-sm" id="OF3">
@@ -913,7 +913,7 @@ $(document).ready(function() {
                             <?php endif; ?>
                         </div>
                         <div class="form-group lineup">
-                            <?php if(!empty($players_arr)): ?>
+                            <?php if(!empty($players_arr['DH'])): ?>
                               <?php foreach($players_arr as $position => $player): ?>
                                 <?php if($position == "DH"): ?>
                                     <div class="well well-sm" id="DH">
