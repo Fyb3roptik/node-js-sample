@@ -177,7 +177,7 @@ class Match_Controller extends Controller {
               
         	    $Opponent = Match::findOpponent($MP, $match_time);
               
-              if($Opponent) {
+              if($Opponent && $Opponent->ID != $this->_user->ID) {
                 
                 $M = new Match($Opponent['match_id']);
                 $OT = new Team($Opponent['team_id']);
@@ -203,6 +203,7 @@ class Match_Controller extends Controller {
                 redirect("/team/view/".db_insert_id());
                 
               } else {
+                
                 $M = new Match();
                 $M->start_date = $match_time;
                 $M->active = 1;
