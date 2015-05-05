@@ -260,7 +260,7 @@ span.batting_num:nth-child(9) {
 }
 
 .nav > li.active, .nav > li:hover {
-  border-bottom: 1px solid #f1c123 !important;
+  border-bottom: none !important;
 }
 
 .nav-tabs > li > a {
@@ -298,7 +298,7 @@ nav {
 }
 
 .nav > li:hover {
-    border-bottom: 2px solid #555A92
+    border-bottom: none;
 }
 
 .nav > li.active {
@@ -339,7 +339,7 @@ header .navbar > .nav > li.first {
 
 header .navbar > .nav > li.balance {
     border-left: none;
-    margin: 6px 45px;
+    margin: 7px 16px;
     font-size: 1.3em;
     color: #FFF;
 }
@@ -362,6 +362,10 @@ header .navbar > .nav > li > a > i {
 
 header .navbar > .nav > li > a:hover {
     color: #555A92;
+}
+
+header .navbar > .nav > li > a.btn:hover {
+  color: #EFEFEF;
 }
 
 header .navbar .user-menu .dropdown-toggle img {
