@@ -46,19 +46,19 @@
               <ul class='nav'>
                 <li <?php if(strtolower($_SERVER['REQUEST_URI']) == "/".strtolower($CUSTOMER->username)): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
                   <a href='/<?php echo $CUSTOMER->username; ?>'>
-                    <span>Dashboard</span>
+                    <span>LOBBY</span>
                   </a>
                 </li>
                 <?php if($CUSTOMER->exists()): ?>
                 <li <?php if(strtolower($_SERVER['REQUEST_URI']) == "/team/history"): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
                   <a href='/team/history'>
-                    <span>My Games</span>
+                    <span>MY GAMES</span>
                   </a>
                 </li>
                 <?php endif; ?>
                 <li class="pull-left">
                   <a href='mailto:support@beastfantasysports.com'>
-                    <span>Support</span>
+                    <span>SUPPORT</span>
                   </a>
                 </li>
               </ul>
