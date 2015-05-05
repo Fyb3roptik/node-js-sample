@@ -17,6 +17,7 @@
         <!-- / bootstrap [required] -->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/fontello.css">
         <!-- / theme file [required] -->
         <link href="/css/dark-theme.css" media="all" id="color-settings-body-color" rel="stylesheet" type="text/css" />
         <!-- / coloring file [optional] (if you are going to use custom contrast color) -->

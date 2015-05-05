@@ -8,7 +8,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="box bordered-box purple-border">
                         <div class="box-header purple-background">
-                            <div class="title"><i class="fa fa-gamepad"></i> MATCHES</div>
+                            <div class="title"><i class="icon-baseball"></i> MATCHES</div>
                         </div>
                         <div class="box-content table-responsive">
                             

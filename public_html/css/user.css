@@ -48,6 +48,10 @@ body {
     to   { opacity: 1; }
 }
 
+.title {
+  font-family: 'Cinzel';
+}
+
 .spinner {
   display: inline-block;
   opacity: 0;
