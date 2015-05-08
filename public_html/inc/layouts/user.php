@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width">
         
         <link href='//d1359auewlqy3z.cloudfront.net/wp-content/uploads/SH.png' rel='shortcut icon' type='image/x-icon'>
-        <link href='//fonts.googleapis.com/css?family=Cinzel:400,900' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Cinzel:400,900|Viga' rel='stylesheet' type='text/css'>
         <!-- / START - page related stylesheets [optional] -->
         <link href="/css/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
         <link href="/css/plugins/fullcalendar/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
@@ -41,29 +41,7 @@
     <?php require_once 'modules/header_user.php'; ?>
     
     <div class="row">
-        <nav>
-            <div class='navigation'>
-              <ul class='nav'>
-                <li <?php if(strtolower($_SERVER['REQUEST_URI']) == "/".strtolower($CUSTOMER->username)): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
-                  <a href='/<?php echo $CUSTOMER->username; ?>'>
-                    <span>LOBBY</span>
-                  </a>
-                </li>
-                <?php if($CUSTOMER->exists()): ?>
-                <li <?php if(strtolower($_SERVER['REQUEST_URI']) == "/team/history"): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
-                  <a href='/team/history'>
-                    <span>MY GAMES</span>
-                  </a>
-                </li>
-                <?php endif; ?>
-                <li class="pull-left">
-                  <a href='mailto:support@beastfantasysports.com'>
-                    <span>SUPPORT</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-        </nav>
+        
     </div>
     
     <div class="clearfix"></div>

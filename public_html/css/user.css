@@ -263,10 +263,6 @@ span.batting_num:nth-child(9) {
   margin-bottom: -2px;
 }
 
-.nav > li.active, .nav > li:hover {
-  border-bottom: none !important;
-}
-
 .nav-tabs > li > a {
   min-width: 60px;
   text-align: center;
@@ -289,7 +285,6 @@ span.batting_num:nth-child(9) {
 nav {
     padding-left: 4%;
     margin-bottom: 3%;
-    border-bottom: 1px solid #DDD;
 }
 
 #main-nav-bg {
@@ -306,7 +301,7 @@ nav {
 }
 
 .nav > li.active {
-    border-bottom: 2px solid #555A92
+    border-bottom: 2px solid #f1c40f
 }
 
 batting-sort-item {
@@ -416,6 +411,14 @@ header .navbar > .nav > li.dropdown.open > .dropdown-toggle {
 
 .contrast-purple .page-header h1 [class^="icon-"] {
     color: #CCD0FF;
+}
+
+.player-name-search {
+  margin-top: 10px;
+}
+
+.table > thead > tr > th, .table > tfoot > tr > th {
+  font-family: 'Viga', sans-serif;
 }
 
 .table {

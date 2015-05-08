@@ -3,7 +3,32 @@
     <div class="pull-left logo">
         <a href-"/"><img src="/img/beast_franchise.png" width="150" height="100%" /></a>
     </div>
-    <ul class='nav'>
+    
+    <nav class="pull-left">
+        <div class='navigation'>
+          <ul class='nav'>
+            <li <?php if(strtolower($_SERVER['REQUEST_URI']) == "/".strtolower($CUSTOMER->username)): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
+              <a href='/<?php echo $CUSTOMER->username; ?>'>
+                <span>LOBBY</span>
+              </a>
+            </li>
+            <?php if($CUSTOMER->exists()): ?>
+            <li <?php if(strtolower($_SERVER['REQUEST_URI']) == "/team/history"): ?>class="active pull-left"<?php else: ?>class="pull-left"<?php endif; ?>>
+              <a href='/team/history'>
+                <span>MY GAMES</span>
+              </a>
+            </li>
+            <?php endif; ?>
+            <li class="pull-left">
+              <a href='mailto:support@beastfantasysports.com'>
+                <span>SUPPORT</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    
+    <ul class='nav pull-right'>
       <?php if($CUSTOMER->exists()): ?>  
       <li class="balance">
         <span class='user-name'>Current Balance: <span class="text-success"><a class="text-success user_balance" href="/<?php echo $CUSTOMER->username; ?>/settings"><?php echo '$' . number_format(bcdiv(floatval($CUSTOMER->funds), 100, 2), 2); ?></a></span></span>

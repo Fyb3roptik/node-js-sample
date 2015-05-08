@@ -95,6 +95,23 @@ $(document).ready(function() {
         }
     }
     icons.play();
+    
+    $("#playerNameSearch").on('keyup', function() {
+      var term = $(this).val();
+
+      $("#player_select .active .well").each(function() {
+        
+        var playerName = $(this).find('.playerSelect-name').text().trim().split(' ');
+
+        if(playerName[0].toLowerCase().indexOf(term) == -1 && playerName[1].toLowerCase().indexOf(term) == -1) {
+          $(this).addClass('hide');
+        } else if(term == "") {
+          $(this).removeClass('hide');
+        }
+        
+      });
+      
+    });
 });
 </script>
 <style>
@@ -179,7 +196,8 @@ $(document).ready(function() {
         <div class="col-lg-5">
             <div class="box blue">
                 <div class="box-header contrast-background">
-                    <h2>Player Select</h2>
+                    <h2 class="pull-left">Player Select</h2>
+                    <input type="text" class="pull-right player-name-search" id="playerNameSearch" placeholder="Player Name" value="" />
                 </div>
                 <div class="box-content">
                     <div role="tabpanel">

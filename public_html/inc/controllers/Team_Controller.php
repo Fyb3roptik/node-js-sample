@@ -353,7 +353,7 @@ class Team_Controller extends Controller {
       
       if(!empty($TEAM_LIST)) {
         $AT_BAT = $TEAM_LIST[$SCORE['at_bat']];
-        
+
         foreach($TEAM_LIST as $key => $lineup) {
             $P = new Player($lineup['player_id']); 
             $mlb_id = $P->mlb_id;
