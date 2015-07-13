@@ -9,7 +9,7 @@ class Cache {
     }
     
     public function connect() {
-        $this->_cache = memcache_connect("beastfranchise.ss1lkj.cfg.usw2.cache.amazonaws.com", 11211);
+        $this->_cache = memcache_connect("beastfranchise.hwjrez.cfg.usw2.cache.amazonaws.com", 11211);
     }
     
     public function add($object, $key, $compression, $expire) {
