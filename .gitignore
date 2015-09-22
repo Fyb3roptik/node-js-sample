@@ -13,3 +13,4 @@ store/
 .project
 
 .settings/
+node_modules
