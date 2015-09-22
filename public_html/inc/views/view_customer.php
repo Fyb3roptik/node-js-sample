@@ -1,7 +1,8 @@
 <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script>
 
-<div class='col-lg-8 col-md-8 col-sm-8 col-xs-12'>    
+<div class='col-lg-8 col-md-8 col-sm-8 col-xs-12'>  
+	<div class="row"><center><img src="/img/champ_horiz.png" /></center><br /><br /></div>  
     <div class='row'>
         <?php if($C->ID == $CUSTOMER->ID): ?>
             <?php if($Season_Started == true || SITE_DEV == 1): ?>
